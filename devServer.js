@@ -64,7 +64,7 @@ app.all('/api-mock', function(req, res){
 	})
 })
 
-app.use(express.static('./public'));
+app.use(express.static('./dist'));
 
 app.get('*', function(req, res) {
   const route = routes.find(function(r){
