@@ -1,0 +1,25 @@
+@import 'css/common';
+
+.btn-load-more{
+  border-color: $neutral-3;
+  color: $neutral-3;
+  @include border-radius(3px);
+  border-width: 2px;
+  border-style: solid;
+  text-transform: uppercase;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: all .2s;
+  &:hover{
+    //transform: translate(0,1px);
+    color: $dm-brand;
+    border-color: $dm-brand;
+  }
+  &.loading-more{
+    opacity: .7;
+    //transform: translate(0,1px);
+  }
+}

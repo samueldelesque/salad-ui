@@ -1,0 +1,135 @@
+$darkBg:          #232629;
+.utils_nav {
+  -webkit-transform: translateZ(0);
+  .cursor {
+    position: absolute;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+
+    transition: all 0.3s ease-in-out;
+    z-index: 2;
+  }
+
+  &__tabs
+  {
+    position: relative;
+  }
+
+  .tab {
+    cursor: pointer;
+    border-color: #F5F5F5;
+
+    > *
+    {
+      display: block;
+      transition: all 0.3s ease-in-out;
+      @include padding(md 0);
+      @include margin-end(lg);
+      color: #BFBFCF;
+      text-decoration: none;
+    }
+    &--active
+    {
+        > * {
+            color: #0066DC;
+        }
+
+        a:visited {
+            color: #0066DC;
+        }
+    }
+  }
+  h2 {
+    @include font-size(lg)
+  }
+
+
+  &--dark {
+    .nav__tabs
+    {
+      color: #FFF;
+      background-color: $darkBg;
+      .tab {
+        > *
+        {
+          color: #BBB;
+        }
+        &--active
+        {
+          > * {
+            color:#FFF !important;
+          }
+        }
+      }
+    }
+  }
+
+
+  &--horizontal {
+    .utils_nav__tabs {
+      @include margin-bottom(lg);
+      border-bottom-width: 4px;
+      border-bottom-color: #F5F5F5;
+      border-style: solid;
+    }
+    .tab {
+      display: inline-block;
+    }
+    .cursor {
+      bottom: -4px;
+      border-bottom-width: 4px;
+      border-color: #0066DC;
+      border-style: solid;
+    }
+  }
+  &--vertical {
+    ul {
+      z-index:2;
+    }
+    .utils_nav__tabs
+    {
+      float: left;
+      z-index: 1;
+
+      border-left-width: 4px;
+      border-left-color: #F5F5F5;
+      border-style: solid;
+    }
+    .cursor {
+      left: -4px;
+      border-left-width: 4px;
+      background-color: #F5F5F5;
+      border-color: #0066DC;
+      border-style: solid;
+      width: 100%;
+      z-index: -2;
+    }
+    &.nav--dark {
+      .utils_nav__tabs {
+        border-color: #222;
+      }
+      .cursor
+      {
+        background-color: #222;
+      }
+    }
+
+    .tab {
+      > * {
+        padding-left: 16px;
+      }
+      float: left;
+      width: 100%;
+    }
+    h2
+    {
+      float: left;
+      width: 100%;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      margin-left: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}

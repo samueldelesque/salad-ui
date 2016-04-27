@@ -1,0 +1,136 @@
+@import 'css/common.scss';
+
+$badgeSpacing: 5px;
+.utils_badge
+{
+    display: inline-block;
+    font-family: global_param('font-regular');
+    box-sizing: border-box;
+    text-transform: uppercase;
+    text-align: center;
+    color: white;
+    padding: 0 0.3rem;
+    line-height: 1.2rem;
+    height: auto;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+    vertical-align: middle;
+    letter-spacing: 0.6px;
+
+    &--top-start,
+    &--top-end,
+    &--btm-start,
+    &--btm-end {
+        position: absolute;
+        z-index: 10;
+    }
+
+    &--top-start {
+        top: $badgeSpacing;
+        left: $badgeSpacing;
+    }
+    &--top-end {
+        top: $badgeSpacing;
+        right: $badgeSpacing;
+    }
+    &--btm-start {
+        bottom: $badgeSpacing;
+        left: $badgeSpacing;
+    }
+    &--btm-end {
+        bottom: $badgeSpacing;
+        right: $badgeSpacing;
+    }
+
+    &--duration,
+    &--private,
+    &--admin-buttons,
+    &--recording
+    {
+        background-color: rgba(0,0,0,0.6);
+    }
+
+    &--recording {
+        &:before {
+            content: '';
+            margin-top: 10px;
+            float: left;
+            margin-end: 10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: $red;
+            vertical-align: middle;
+            animation: pulse 1s infinite alternate;
+        }
+    }
+
+    &--live,
+    &--count
+    {
+        letter-spacing: 1px;
+        background-color: $red;
+    }
+
+    &--sponsored {
+        color: #FFF;
+        background-color: #E09021;
+    }
+
+    &--partner
+    {
+        background-color: $green;
+        color: #FFF;
+    }
+
+    &--featured
+    {
+        background-color: $dm-brand;
+        color: #FFF;
+    }
+
+
+    &--verified
+    {
+        background-color: $dm-brand;
+        color: #FFF;
+    }
+
+    &--staff
+    {
+        background-color: $dm-brand;
+        color: #FFF;
+    }
+
+    &--substitute
+    {
+        background-color: $purple;
+
+    }
+
+    &--price
+    {
+        color: black;
+        background-color: $yellow;
+
+        .icon-key:before
+        {
+            font-size: 16px;
+        }
+
+        &.badge--sm .icon-key:before
+        {
+            font-size: 16px;
+        }
+    }
+
+    &--tag
+    {
+        background-color: $neutral-5;
+        text-transform: uppercase;
+        color: $neutral-1;
+    }
+
+
+}

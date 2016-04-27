@@ -1,0 +1,4 @@
+[
+  { "url": "/settings(/:action(/:subaction))", "bundle": "settings", "bodyClass": "settings-page" },
+  { "url": "/:username", "bundle": "channel", "text": "Channel", "bodyClass": "channel-page" }
+]

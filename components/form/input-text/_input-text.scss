@@ -1,0 +1,13 @@
+.form_input-text {
+    > span {
+        position: relative;
+
+        i {
+            position: absolute;
+            right: 10px;
+            top: 6px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+    }
+}

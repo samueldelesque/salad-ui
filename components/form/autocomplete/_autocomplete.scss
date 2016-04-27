@@ -1,0 +1,34 @@
+@import 'css/common';
+
+.autocomplete-wrapper {
+  position: relative;
+
+  .form_input input {
+    width: 100%;
+  }
+
+  .suggestions {
+    position: absolute;
+    background: white;
+    width: 100%;
+    padding: 10px 0;
+    z-index: 999;
+    @include box-shadow(1px 3px 3px rgba(0, 0, 0, 0.3));
+
+    li {
+      padding: 5px 10px;
+      cursor: pointer;
+
+      &.disabled {
+        color: $neutral-3;
+        cursor: default;
+        &:hover {
+          background: none;
+        }
+      }
+      &.active {
+        background: $neutral-4;
+      }
+    }
+  }
+}
