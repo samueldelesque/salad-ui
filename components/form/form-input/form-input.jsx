@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 
 export default class FormInput extends Component {
   render() {
-    let className = `form_input ${this.props.className} ${this.props.error ? 'form_input--error' : ''}`;
+    let className = `form_input ${this.props.className?this.props.className:''} ${this.props.error ? 'form_input--error' : ''}`;
     let showHint = this.props.hint && !this.props.disabled && !this.props.readOnly
     let error = this.props.error
 

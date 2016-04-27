@@ -1,7 +1,7 @@
 var path = require('path'),
     webpack = require('webpack'),
     _ = require('lodash'),
-    directories = [path.resolve('./components')],
+    directories = path.resolve('./components'),
     entrypoints = require('./entrypoints.js')
 
 module.exports = {
@@ -14,12 +14,12 @@ module.exports = {
     ]
   })),
   resolve: {
-    root: directories,
+    root: path.resolve('../'),
     extensions: ['', '.js', '.es6 ', '.jsx'],
   },
   output: {
-    path: '../public',
-    filename: '[name]/[name].bundle.js',
+    path: path.resolve('../public'),
+    filename: '[name]/[name].js',
     publicPath: '/dist/'
   },
   plugins: [
@@ -32,7 +32,7 @@ module.exports = {
           test: /\.jsx?|\.es6|js\/lib\/dm/,
           loaders: ['babel?presets[]=stage-0'],
           include: directories,
-          exclude: [path.resolve('./node_modules')]
+          exclude: [path.resolve('../node_modules')]
         },
         {
           test: /\.scss|\.css$/,

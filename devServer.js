@@ -4,7 +4,7 @@ var request = require('request'),
     bodyParser = require('body-parser'),
     webpackDevMiddleware = require('webpack-dev-middleware'),
     webpackHotMiddleware = require('webpack-hot-middleware'),
-    config = require('./conf/webpack.config.dev'),
+    config = require('./conf/webpack.config.demo.js'),
     routing = require('./conf/routing.json'),
     Route = require('route-parser'),
     routes = routing.map(function(r){
@@ -14,7 +14,7 @@ var request = require('request'),
     app = express(),
     compiler = webpack(config),
     useProd = false,
-    PORT = 6040,
+    PORT = 6040
 
 app.use(bodyParser.json())
 
@@ -93,23 +93,13 @@ function renderFullPage(html, initialState, bundle, bodyClass) {
   return `<!DOCTYPE html>
 <html>
   <head>
-    <title>Dailymotion Partner Page</title>
-    <link rel="stylesheet" type="text/css" href="/css/index.css">
-    <link rel="stylesheet" type="text/css" href="/css/commoncss.css">
-    <script>window.selfRender = true</script>
+    <title>SaladUI Components</title>
     <meta name="viewport" content="initial-scale=1">
   </head>
-  <body class="responsive-grid ${bodyClass}">
-    <div class="main-menu">
-      <span>Standalone Apps:</span>
-      <a href="/settings">Settings</a>
-      <a href="/${initialState.username}">My Channel</a>
-    </div>
+  <body class="${bodyClass}">
     <div id="react-root">${html}</div>
-    <script>
-      window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
-    </script>
-    <script src="/dist/${bundle}.bundle.js"></script>
+    <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}</script>
+    <script src="/${bundle}/${bundle}.js"></script>
   </body>
 </html>`
 }
@@ -120,5 +110,5 @@ app.listen(PORT, '0.0.0.0', function(err) {
     return
   }
 
-  console.log('Listening at http://0.0.0.0:3000')
+  console.log('Listening at http://0.0.0.0:' + PORT)
 })

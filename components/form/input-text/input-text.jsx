@@ -95,7 +95,7 @@ export default class InputText extends React.Component {
     }
 
     if (this.props.maxLength) {
-      return `${this.state.value.length}/${this.props.maxLength} $<Trans context={this.trans}>max_characters</Trans>`
+      return `${this.state.value.length}/${this.props.maxLength} ${this.trans.max_characters}`
     }
   }
 
