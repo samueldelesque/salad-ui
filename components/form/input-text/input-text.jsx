@@ -1,7 +1,6 @@
 import React from 'react'
-import PureComponent from 'react-pure-render/component'
 
-export default class InputText extends PureComponent {
+export default class InputText extends React.Component {
   state = {
     value: '',
     focus: false

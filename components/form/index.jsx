@@ -4,7 +4,7 @@ import FormInput from './form-input/form-input'
 import InputText from './input-text/input-text'
 import Toggle from './toggle/toggle'
 
-export defaults {
+export default {
   Autocomplete,
   Checkbox,
   FormInput,

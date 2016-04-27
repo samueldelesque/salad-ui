@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 
-import 'components/utils/tag-list/tag-list.scss'
+// import './tag-list.scss'
 
 export default class Collection extends Component {
 

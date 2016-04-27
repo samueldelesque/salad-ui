@@ -1,6 +1,6 @@
 var path = require('path'),
     webpack = require('webpack'),
-    directories = [path.resolve('../components')],
+    directories = [path.resolve('./components')],
     entrypoints = require('./entrypoints.js')
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     extensions: ['', '.js', '.es6 ', '.jsx'],
   },
   output: {
-    path: path.join('..', 'public'),
+    path: path.join('.', 'public'),
     filename: '[name]/[name].js',
     publicPath: '/dist/',
     library: true,

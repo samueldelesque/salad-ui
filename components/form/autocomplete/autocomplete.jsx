@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 
-import InputText from 'components/form/input-text/input-text'
+import InputText from '../input-text/input-text'
 
-import 'components/form/autocomplete/_autocomplete.scss'
+// import './_autocomplete.scss'
 
 export default class Autocomplete extends Component {
 

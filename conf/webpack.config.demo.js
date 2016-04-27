@@ -1,6 +1,6 @@
 var path = require('path'),
     webpack = require('webpack'),
-    directories = [path.resolve('../components')]
+    directories = [path.resolve('./components')]
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -10,7 +10,7 @@ module.exports = {
     extensions: ['', '.js', '.es6 ', '.jsx'],
   },
   output: {
-    path: path.join('..', 'public', 'demo'),
+    path: path.join('.', 'public', 'demo'),
     filename: 'demo.js',
     publicPath: '/demo/'
   },
@@ -33,7 +33,7 @@ module.exports = {
           test: /\.jsx?|\.es6/,
           loaders: ['babel?presets[]=stage-0'],
           include: directories,
-          exclude: [path.resolve('../node_modules')]
+          exclude: [path.resolve('./node_modules')]
         },
         {
             test: /\.scss|\.css$/,
