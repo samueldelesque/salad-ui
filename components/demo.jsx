@@ -6,7 +6,7 @@ class Demo extends React.Component {
   render(){
     return (
       <div>
-        <h1>This is the demo.</h1>
+        <h1>This is a demo for the salad UI.</h1>
         <div>
           <SaladUI.Form.InputText/>
         </div>
