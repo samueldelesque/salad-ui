@@ -1,5 +1,5 @@
 import React from 'react'
-import Trans from 'components/utils/trans/trans'
+import Trans from '../trans/trans'
 
 export default class TimeAndViews extends React.Component {
   trans = DM_ENV['utils/time-and-views']
@@ -52,7 +52,7 @@ export default class TimeAndViews extends React.Component {
       parts.push((<Trans context={this.trans} views={this.number(this.props.views)}>%(views)s views</Trans>))
 
     return (
-      <div className="time-and-views">
+      <div style={{fontSize: '0.875rem', color: '#BFBFBF'}}>
         {parts.map((part,i) => <span key={Math.random() + i}>{i>0?' • ':null}{part}</span>)}
       </div>
     )

@@ -1,7 +1,7 @@
 var path = require('path'),
     webpack = require('webpack'),
     _ = require('lodash'),
-    directories = path.resolve('./components'),
+    directories = [path.resolve('./components'), path.resolve('./lib')],
     entrypoints = require('./entrypoints.js')
 
 module.exports = {
@@ -29,7 +29,7 @@ module.exports = {
   module: {
     loaders: [
         {
-          test: /\.jsx?|\.es6|js\/lib\/dm/,
+          test: /\.jsx?|\.es6|lib/,
           loaders: ['babel?presets[]=stage-0'],
           include: directories,
           exclude: [path.resolve('../node_modules')]

@@ -1,6 +1,5 @@
 import React, {PropTypes, Component} from 'react'
-import store from 'store'
-import Icon from 'components/utils/icon/icon'
+import Icon from '../../icon/icon'
 
 const colorMap = {
   success: '#00C832',
@@ -13,31 +12,9 @@ export default class Alert extends Component {
   static defaultProps = {
     title: false,
     type: 'info',
-    close: false
+    close: false,
+    show: true
   }
-
-  state = {
-    shown: true
-  }
-
-  componentDidMount() {
-    if (typeof this.props.close === 'string') {
-      let alertClose = store.get('alert_close') || {};
-      if (alertClose[this.props.close]) {
-       this.setState({shown: false})
-      }
-    }
-  }
-
-  close () {
-    this.setState({shown: false})
-    if (typeof this.props.close === 'string') {
-      let alertClose = store.get('alert_close') || {};
-      alertClose[this.props.close] = true
-      store.set('alert_close', alertClose)
-    }
-  }
-
 
   render() {
     let className = `media utils_alert utils_alert--${this.props.type} ${this.props.className ? this.props.className: ''}`
@@ -48,7 +25,7 @@ export default class Alert extends Component {
       className += ' utils_alert--md'
     }
 
-    if (!this.state.shown) {
+    if (!this.props.shown) {
       return null
     }
 

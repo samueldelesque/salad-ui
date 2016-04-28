@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
 import mapObject from 'lodash.map'
-import zipObject from 'lodash.zipObject'
-import {sprintf} from 'sprintf-js'
+import zipObject from 'lodash.zipobject'
+import { sprintf } from 'sprintf-js'
 
 const DEBUG = true
 
