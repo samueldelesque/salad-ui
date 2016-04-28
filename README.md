@@ -25,11 +25,12 @@ render(){
 
 ```
 // styles.js
-import Stylesheet from 'salad-ui.stylesheet'
+import Stylesheet, { defaults } from 'salad-ui.stylesheet'
 
 export default Stylesheet.create({
   container: {
     borderRadius: 5,
+    margin: defaults.padding.md,
   }
 })
 
@@ -41,5 +42,5 @@ render(){
 
 
 // Output:
-<div style="-webkit-border-radius: 5px, border-radius: 5px [...]"></div>
+<div style="-webkit-border-radius: 5px; border-radius: 5px [...]"></div>
 ```
