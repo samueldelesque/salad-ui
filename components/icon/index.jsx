@@ -1,3 +1,6 @@
 import Icon from './icon'
 
-module.exports = Icon
+module.exports = {
+  Icon,
+  iconTypes
+}

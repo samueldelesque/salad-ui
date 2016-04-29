@@ -29,7 +29,7 @@ module.exports = {
   module: {
     loaders: [
         {
-          test: /\.jsx?|\.es6|lib/,
+          test: /\.jsx?|\.es6/,
           loaders: ['babel?presets[]=stage-0'],
           include: directories,
           exclude: [path.resolve('../node_modules')]

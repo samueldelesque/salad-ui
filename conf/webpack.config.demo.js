@@ -1,6 +1,6 @@
 var path = require('path'),
     webpack = require('webpack'),
-    directories = path.resolve('./components')
+    directories = [path.resolve('./components'), path.resolve('./lib')]
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
