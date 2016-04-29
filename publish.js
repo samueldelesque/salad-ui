@@ -16,7 +16,7 @@ const childPackage = {
   "version":"0.0.0",
   "description":
   "Reusable React UI Components Toolkit",
-  "main":"./salad-ui.chart.js",
+  "main":"./salad-ui.js",
   "repository":{
     "type":"git",
     "url":"https://github.com/dailymotion/salad-ui.git"
@@ -34,7 +34,8 @@ const childPackage = {
 }
 
 _.map(entrypoints, function(entrypoint, name){
-  var pk = _.merge(childPackage, {name, version})
+  console.log('Creating', name)
+  var pk = _.merge(childPackage, {name: name, version: version, main: './'+name+'.js'})
   fs.writeFile(distDir + name + '/package.json', JSON.stringify(pk), function(err){
     if(err){
       console.log('Could not save package.json!', err)
