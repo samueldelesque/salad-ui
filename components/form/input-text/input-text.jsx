@@ -1,25 +1,31 @@
 import React from 'react'
 
+import styles from './_stylesheet'
+
 export default class InputText extends React.Component {
+  trans = DM_ENV['form/input-text']
   state = {
     value: '',
     focus: false
   }
-  trans = DM_ENV['form/input-text']
   static defaultProps = {
     textarea: false,
     type: 'text',
     focus: false,
-    error: false
+    error: false,
+    placeholder: 'Start typing'
   }
   componentWillMount()
   {
     this.setState({
-      focus: this.props.focus
+      focus: this.props.focus,
+      value: this.props.value
     })
   }
   componentDidMount() {
-    this.setState({value: this.props.value})
+    if (this.state.focus && !this.props.readOnly){
+      this.focusInput()
+    }
   }
   componentWillReceiveProps(nextProps)
   {
@@ -48,13 +54,6 @@ export default class InputText extends React.Component {
   focusInput(){
     this.refs.input.focus()
     this.moveCursorToEnd(input)
-  }
-  componentDidMount()
-  {
-    if (this.state.focus && !this.props.readOnly)
-    {
-      this.focusInput()
-    }
   }
   handleKeyUp(e)
   {
@@ -100,7 +99,6 @@ export default class InputText extends React.Component {
   }
 
   render() {
-    let className = `form_input ${this.props.className} ${this.props.error ? 'form_input--error' : ''}`
     let hint = this.getHint()
     let showHint = hint && !this.props.disabled && !this.props.readOnly
     let value = this.state.value ? this.state.value : this.props.value
@@ -121,19 +119,19 @@ export default class InputText extends React.Component {
     }
 
     return (
-      <div className={`form_input-text ${className}`} style={style}>
+      <div style={style}>
         <span>
           {React.createElement(tag, props, null)}
           {this.props.onClear && value && <i className="icon-close" onClick={this.props.onClear} title={this.trans.clear}/>}
         </span>
         {
           showHint && !this.props.error ?
-          <div className="form_input__message" style={{display: 'block'}}>{hint}</div>
+          <div style={styles.inputError}>{hint}</div>
           : null
         }
         {
           this.props.error ?
-          <div className="form_input__message" style={{display: 'block'}}>{this.props.error}</div>
+          <div style={styles.inputError}>{this.props.error}</div>
           : null
         }
       </div>
