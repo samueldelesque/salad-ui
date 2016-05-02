@@ -6,16 +6,16 @@ import InputText from '../input-text/input-text'
 
 export default class Autocomplete extends Component {
 
-  propTypes: {
-      inputPlaceholder: React.PropTypes.string,
-      noSuggestionsText: React.PropTypes.string,
-      isLoading: React.PropTypes.bool,
-      clearOnSelect: React.PropTypes.bool,
-      latency: React.PropTypes.number,
-      limit: React.PropTypes.number,
-      suggestions: React.PropTypes.array,
-      handleSelectItem: React.PropTypes.func.isRequired,
-      requestSuggestions: React.PropTypes.func.isRequired,
+  static propTypes = {
+    inputPlaceholder: React.PropTypes.string,
+    noSuggestionsText: React.PropTypes.string,
+    isLoading: React.PropTypes.bool,
+    clearOnSelect: React.PropTypes.bool,
+    latency: React.PropTypes.number,
+    limit: React.PropTypes.number,
+    suggestions: React.PropTypes.array,
+    handleSelectItem: React.PropTypes.func.isRequired,
+    requestSuggestions: React.PropTypes.func.isRequired,
   }
 
   static defaultProps = {
