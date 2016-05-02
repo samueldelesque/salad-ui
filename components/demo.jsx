@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import SaladUI from './salad-ui'
+import { iconTypes } from './icon/icon'
 import _ from 'lodash'
 
 import './demo.scss'
@@ -56,17 +57,15 @@ class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> currencyToSymbol</h3>
               <pre>
-{`
-  currencyToSymbol('USD')
-  // $
+{`currencyToSymbol('USD')
+// $
 `}
               </pre>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> f</h3>
               <pre>
-{`
-  f.get('http://api.dailymotion.com/user/spi0n')
+{`f.get('http://api.dailymotion.com/user/spi0n')
   f.post('http://api.dailymotion.com/user/spi0n')
   f.delete('http://api.dailymotion.com/user/spi0n')
 `}
@@ -75,35 +74,31 @@ class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> glob</h3>
               <pre>
-{`
-  glob.canUseDom()
-  // true
+{`glob.canUseDom()
+// true
 `}
               </pre>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> numberToString</h3>
               <pre>
-{`
-  numberToString(10782)
-  // 11k
+{`numberToString(10782)
+// 11k
 `}
               </pre>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> polyfill</h3>
               <pre>
-{`
-  polyfill()
-  // Object.assign etc are now available in your shitty browser
+{`polyfill()
+// Object.assign etc are now available in your shitty browser
 `}
               </pre>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> sso</h3>
               <pre>
-{`
-  sso.init(SDX)
+{`sso.init(SDX)
   sso.getJWT('revshare').then(token => {
     console.log('Yay I have a token!')
   })
@@ -119,8 +114,24 @@ class Demo extends React.Component {
           <h2>Utils</h2>
         </section>
         <section>
-          <h2>Icon</h2>
-
+          <h2>Icon <SaladUI.Icon type="favorite" fill="white" width={20} height={20}/></h2>
+          <pre>
+{`<SaladUI.Icon
+    type="favorite"
+    fill="white"
+    width={20}
+    height={20}/>`}
+          </pre>
+          <div className="icon-list">
+          {
+            _.map(iconTypes, (path, icon) =>
+              <span className="icon-item">
+                <SaladUI.Icon type={icon} fill={'white'}/>
+                <span className="icon-title">{icon}</span>
+              </span>
+            )
+          }
+          </div>
         </section>
         <footer>
           Made with love at <a href="http://dailymotion.com">Dailymotion</a> in NYC.
