@@ -50,7 +50,7 @@ class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> InputText</h3>
               <pre>{'<InputText/>'}</pre>
-              <SaladUI.Form.InputText/>
+              <SaladUI.Form.InputText />
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Toggle</h3>
