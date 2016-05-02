@@ -118,7 +118,14 @@ pre{
   margin: 10px 0;
   padding: 10px;
   overflow: auto;
-  background: $dm-brand-light;
+  background: #333;
+  color: #aaa;
+  font-family: monospace;
+}
+.snippet{
+  background: #333;
+  padding: 3px;
+  color: #aaa;
   font-family: monospace;
 }
 .functionality li{
