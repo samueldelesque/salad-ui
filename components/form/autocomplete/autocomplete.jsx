@@ -1,8 +1,7 @@
 import React, {Component, PropTypes} from 'react'
-
 import InputText from '../input-text/input-text'
-
-// import './_autocomplete.scss'
+import { merge } from 'lodash'
+import styles from './_stylesheet'
 
 export default class Autocomplete extends Component {
 
@@ -178,18 +177,19 @@ export default class Autocomplete extends Component {
   }
 
   renderSuggestions() {
-    var items;
+    let items
+    let activeStyle = merge({}, styles.suggItem, {background:'#E5E5E5'})
     items = this.props.suggestions.map((item, index) => {
     return <li
         key={'suggestion.' + index}
         onMouseEnter={e=>this.setState({currentIndex: index})}
-        className={(this.state.currentIndex === index)?'active':''}
-        onClick={()=>this.onSelect(item)}>
+        onClick={()=>this.onSelect(item)}
+        style={(this.state.currentIndex === index)? activeStyle : styles.suggItem}>
         {item}
       </li>
     }, this);
 
-    return <ul className="suggestions">
+    return <ul style={styles.suggestions} className="suggestions">
       { items }
     </ul>
   }
@@ -202,7 +202,6 @@ export default class Autocomplete extends Component {
     let inputProps = {
       placeholder: this.props.inputPlaceholder,
       value: this.state.inputText,
-      className: 'ac_input',
       //onBlur: ()=>setTimeout(()=>this.setState({showSuggestions: false}), 50),
       onClick: ::this.handleInputClick,
       onChange: ::this.handleInputChange,
@@ -213,7 +212,7 @@ export default class Autocomplete extends Component {
       inputProps['error'] = this.props.apiError;
     }
 
-    return <div className="autocomplete-wrapper">
+    return <div style={{position:'relative'}}>
       <InputText ref="inputBox" {...inputProps} />
       {(this.state.showSuggestions && !this.props.isLoading && this.props.suggestions.length > 0) ? this.renderSuggestions() : null }
     </div>

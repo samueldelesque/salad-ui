@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import SaladUI from './salad-ui'
 import { iconTypes } from './icon/icon'
+import DemoAutocomplete from './form/autocomplete/demo-autocomplete'
 import _ from 'lodash'
 
 import './demo.scss'
@@ -35,7 +36,7 @@ class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Autocomplete</h3>
               <pre>{'<Autocomplete/>'}</pre>
-              <SaladUI.Form.Autocomplete/>
+              <DemoAutocomplete/>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Checkbox</h3>
