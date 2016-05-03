@@ -7,7 +7,8 @@
     "build": "NODE_ENV=production webpack --config ./conf/webpack.config.prod.js",
     "start": "node devServer.js",
     "lint": "eslint src",
-    "pub": "npm run build && node ./publish.js"
+    "publish": "npm run build && node ./publish.js",
+    "pub": "npm run publish"
   },
   "repository": {
     "type": "git",

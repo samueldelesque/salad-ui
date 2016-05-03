@@ -7,7 +7,7 @@ import TextClamp from './text-clamp/text-clamp'
 import TimeAndViews from './time-and-views/time-and-views'
 import Trans from './trans/trans'
 
-export {
+export default {
   Alert,
   Anchor,
   Buttons,

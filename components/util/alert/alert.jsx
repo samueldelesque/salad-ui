@@ -12,8 +12,7 @@ export default class Alert extends Component {
   static defaultProps = {
     title: false,
     type: 'info',
-    close: false,
-    show: true
+    onClose: false
   }
 
   render() {
@@ -25,10 +24,6 @@ export default class Alert extends Component {
       className += ' utils_alert--md'
     }
 
-    if (!this.props.shown) {
-      return null
-    }
-
     return (
       <div className={className}>
         <div style={{float:'left',marginRight:'10px'}}>
@@ -36,8 +31,8 @@ export default class Alert extends Component {
         </div>
         <div className="media-block">
             {
-              this.props.close ?
-              <div className="utils_alert__close icon-close" onClick={::this.close}></div> :
+              this.props.onClose ?
+              <div className="utils_alert__close icon-close" onClick={::this.props.onClose}></div> :
               null
             }
             {
