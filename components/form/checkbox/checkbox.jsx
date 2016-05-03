@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react'
-import classNames from 'classnames'
+import Icon from '../../icon/icon'
+import styles from './_stylesheet'
+
 
 export default class Checkbox extends Component {
   state = {
@@ -10,7 +12,7 @@ export default class Checkbox extends Component {
     checked: false
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.setState({checked: this.props.checked})
   }
 
@@ -27,18 +29,18 @@ export default class Checkbox extends Component {
   }
 
   toggleState() {
+    console.log('this.state.checked: ', this.state.checked)
     this.setState({checked: !this.state.checked})
     this.handleChange(!this.state.checked)
   }
 
   render() {
     return (
-      <div className={classNames('multi-choice', this.props.className)}>
-        <input
-          type="checkbox"
-          checked={this.state.checked}/>
-        <label onClick={::this.toggleState}>
-          <i className="checkbox_icon"></i>
+      <div style={{margin: '10px 0', position:'relative'}}>
+        <input type="checkbox" checked={this.state.checked} style={{display:'none'}} />
+        {this.state.checked ? <Icon onClick={::this.toggleState} type="check" style={styles.checkmark} fill="#0066DC"/> : null}
+        <label onClick={::this.toggleState} style={{cursor:'pointer'}}>
+          <i style={styles.checkboxIcon}></i>
           {this.props.children}
         </label>
       </div>
