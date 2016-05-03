@@ -80,16 +80,14 @@ export default class Icon extends React.Component {
     width: 24,
     height: 24,
     fill: '#000000',
-    viewbox: '0 0 500 500',
+    viewBox: '0 0 500 500',
     style: {}
   }
 
   render(){
     return(
-      <svg width={this.props.width} style={this.props.style} height={this.props.height} viewBox={this.props.viewbox} {...this.props}>
-        <g fill={this.props.fill}>
-          <path d={iconTypes[this.props.type]}></path>
-        </g>
+      <svg width={this.props.width} style={this.props.style} height={this.props.height} viewBox={this.props.viewBox}>
+        <path d={iconTypes[this.props.type]} fill={this.props.fill}></path>
       </svg>
     )
   }

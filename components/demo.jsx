@@ -18,6 +18,10 @@ const chartData = [
 ];
 
 export default class Demo extends React.Component {
+  state = {
+    selectedRadio: 'radio1'
+  }
+
   render(){
     return (
       <div className="demo">
@@ -43,8 +47,9 @@ export default class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Radio</h3>
               <pre>{'<RadioGroup/><Radio></RadioGroup>'}</pre>
-              <SaladUI.Form.RadioGroup name="radiotest" selected="radio1">
+              <SaladUI.Form.RadioGroup name="radiotest" onChange={val=>this.setState({selectedRadio: val})} selected={this.state.selectedRadio}>
                 <SaladUI.Form.Radio value="radio1">This is a Radio element</SaladUI.Form.Radio>
+                <SaladUI.Form.Radio value="radio2">This is another Radio element</SaladUI.Form.Radio>
               </SaladUI.Form.RadioGroup>
             </li>
             <li>

@@ -5,8 +5,8 @@
   "scripts": {
     "build:demo": "webpack --config ./conf/webpack.config.demo.js",
     "build": "NODE_ENV=production webpack --config ./conf/webpack.config.prod.js",
-    "start": "node devServer.js",
-    "devserver": "nodemon server.js --exec babel-node --presets es2015,stage-0,react",
+    "dev-client": "node devClient.js",
+    "dev": "nodemon devServer.js --exec babel-node --presets es2015,stage-0,react",
     "lint": "eslint src",
     "publish": "npm run build && node ./publish.js",
     "pub": "npm run publish"
