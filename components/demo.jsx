@@ -3,13 +3,9 @@ import ReactDOM from 'react-dom'
 import SaladUI from './salad-ui'
 import { iconTypes } from './icon/icon'
 import _ from 'lodash'
-
-import './demo.scss'
+import glob from '../lib/glob.js'
 
 console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for 🍻 Friday 6pm.')
-
-console.log(SaladUI)
-
 
 const chartData = [
   {time:1422766800000, value: 0, label: "{{value}} active users"},
@@ -20,7 +16,7 @@ const chartData = [
   {time:1423198800000, value: 13, label: "{{value}} active users"},
 ];
 
-class Demo extends React.Component {
+export default class Demo extends React.Component {
   render(){
     return (
       <div className="demo">
@@ -28,6 +24,7 @@ class Demo extends React.Component {
           <h1>Salad-UI 🚀</h1>
           <p>Salad-UI can be enjoyed as a complete salad using <i className="snippet">import SaladUI from 'salad-ui'</i> or as its separate ingredients using <i className="snippet">import Chart from 'salad-ui.chart'</i>.</p>
           <p>Salad-UI is composed of: Form, Chart, Utils, Lib, Icon.</p>
+          <p>Salad-UI will work both in Browser and Server environment - use it in your universal apps!</p>
         </section>
         <section>
           <h2>Form</h2>
@@ -183,12 +180,9 @@ sso.getJWT('revshare').then(token => {
   }
 }
 
-if(typeof(DM_ENV) === 'undefined'){
-  window.DM_ENV = {}
-  DM_ENV['form/input-text'] = {
-    clear: 'Clear',
-    max_characters: 'Max characters',
-  }
+if(glob.canUseDom()){
+  require('./demo.scss')
+  if(!glob.DM_ENV) glob.DM_ENV = {}
+  glob.DM_ENV['form/input-text'] = {}
+  ReactDOM.render(<Demo/>, document.getElementById('react-root'));
 }
-
-ReactDOM.render(<Demo/>, document.getElementById('react-root'));

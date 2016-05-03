@@ -6,6 +6,7 @@
     "build:demo": "webpack --config ./conf/webpack.config.demo.js",
     "build": "NODE_ENV=production webpack --config ./conf/webpack.config.prod.js",
     "start": "node devServer.js",
+    "devserver": "nodemon server.js --exec babel-node --presets es2015,stage-0,react",
     "lint": "eslint src",
     "publish": "npm run build && node ./publish.js",
     "pub": "npm run publish"
@@ -23,7 +24,7 @@
     "charting"
   ],
   "devDependencies": {
-    "babel-cli": "^6.6.5",
+    "babel-cli": "^6.8.0",
     "babel-core": "^6.5.2",
     "babel-eslint": "^6.0.0-beta.5",
     "babel-loader": "^6.2.3",
@@ -55,6 +56,7 @@
   "dependencies": {
     "clamp-js": "^0.7.0",
     "es6-promise": "^3.1.2",
+    "isomorphic-fetch": "^2.2.1",
     "lodash.map": "^4.3.0",
     "lodash.merge": "^4.3.5",
     "lodash.zipobject": "^4.1.3",

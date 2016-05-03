@@ -166,12 +166,12 @@ pre{
       display: block;
       letter-spacing: 1px;
       opacity: 0;
-      font-size: 10px;
+      font-size: 8px;
       transition: all .4s;
     }
     &:hover{
       border: 4px solid $dm-brand-light;
-      transform: scale(1.2);
+      transform: scale(1.4);
       .icon-title{
         visibility: visible;
         opacity: 1;
