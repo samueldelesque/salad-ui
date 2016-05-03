@@ -1,4 +1,5 @@
 import React from 'react'
+import {merge} from 'lodash'
 
 import styles from './_stylesheet'
 
@@ -103,13 +104,13 @@ export default class InputText extends React.Component {
     let showHint = hint && !this.props.disabled && !this.props.readOnly
     let value = this.state.value ? this.state.value : this.props.value
     let tag = this.props.textarea ? 'textarea' : 'input'
-
-    let {style, ...other} = this.props
+    let inputStyle = merge({}, styles.inputStyle, this.props.style)
 
     let props = {
       ref: 'input',
       type: this.props.type,
-      ...other,
+      ...this.props,
+      style: inputStyle,
       placeholder: this.props.placeholder,
       onClick: ::this.handleClick,
       value: value,
@@ -119,7 +120,7 @@ export default class InputText extends React.Component {
     }
 
     return (
-      <div style={style}>
+      <div>
         <span>
           {React.createElement(tag, props, null)}
           {this.props.onClear && value && <i className="icon-close" onClick={this.props.onClear} title={this.trans.clear}/>}

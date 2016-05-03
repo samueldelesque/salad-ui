@@ -1,5 +1,5 @@
 import React from 'react';
-import Radio from 'components/form/radio/radio.jsx';
+import Radio from '../radio/radio.jsx';
 
 export default class RadioGroup extends React.Component {
   static defaultProps = {selected: null}
@@ -11,7 +11,7 @@ export default class RadioGroup extends React.Component {
         return child;
       });
     return (
-      <div className="multi-choice">
+      <div>
         {renderedChildren}
       </div>
     );

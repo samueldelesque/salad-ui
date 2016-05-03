@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import SaladUI from './salad-ui'
 import { iconTypes } from './icon/icon'
+import DemoAutocomplete from './form/autocomplete/demo-autocomplete'
 import _ from 'lodash'
 import glob from '../lib/glob.js'
 
@@ -32,12 +33,19 @@ export default class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Autocomplete</h3>
               <pre>{'<Autocomplete/>'}</pre>
-              <SaladUI.Form.Autocomplete/>
+              <DemoAutocomplete/>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Checkbox</h3>
               <pre>{'<Checkbox/>'}</pre>
-              <SaladUI.Form.Checkbox/>
+              <SaladUI.Form.Checkbox>This is a checkbox</SaladUI.Form.Checkbox>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Radio</h3>
+              <pre>{'<RadioGroup/><Radio></RadioGroup>'}</pre>
+              <SaladUI.Form.RadioGroup name="radiotest" selected="radio1">
+                <SaladUI.Form.Radio value="radio1">This is a Radio element</SaladUI.Form.Radio>
+              </SaladUI.Form.RadioGroup>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> FormInput</h3>
@@ -47,7 +55,7 @@ export default class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> InputText</h3>
               <pre>{'<InputText/>'}</pre>
-              <SaladUI.Form.InputText />
+              <SaladUI.Form.InputText/>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Toggle</h3>
