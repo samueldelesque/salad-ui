@@ -9,9 +9,6 @@ import './demo.scss'
 
 console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for 🍻 Friday 6pm.')
 
-console.log(SaladUI)
-
-
 const chartData = [
   {time:1422766800000, value: 0, label: "{{value}} active users"},
   {time:1422853200000, value: 9, label: "{{value}} active users"},
@@ -44,6 +41,13 @@ class Demo extends React.Component {
               <SaladUI.Form.Checkbox>This is a checkbox</SaladUI.Form.Checkbox>
             </li>
             <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Radio</h3>
+              <pre>{'<RadioGroup/><Radio></RadioGroup>'}</pre>
+              <SaladUI.Form.RadioGroup name="radiotest" selected="radio1">
+                <SaladUI.Form.Radio value="radio1">This is a Radio element</SaladUI.Form.Radio>
+              </SaladUI.Form.RadioGroup>
+            </li>
+            <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> FormInput</h3>
               <pre>{'<FormInput/>'}</pre>
               <SaladUI.Form.FormInput><p>My Input</p></SaladUI.Form.FormInput>
@@ -51,7 +55,7 @@ class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> InputText</h3>
               <pre>{'<InputText/>'}</pre>
-              <SaladUI.Form.InputText />
+              <SaladUI.Form.InputText/>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Toggle</h3>

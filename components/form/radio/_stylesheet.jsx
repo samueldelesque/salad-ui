@@ -1,7 +1,7 @@
 import Stylesheet from '../../../lib/stylesheet/stylesheet'
 
 let styles = {
-  checkboxIcon: {
+  radioIcon: {
     position: 'relative',
     display: 'inline-block',
     width: '16px',
@@ -11,18 +11,19 @@ let styles = {
     position: 'relative',
     backgroundColor: '#F5F5F5',
     border: 'solid 1px #E5E5E5',
-    borderRadius: '3px',
+    borderRadius: '50%',
   },
 
-  checkmark: {
+  disc: {
     cursor: 'pointer',
     position: 'absolute',
-    top: '7px',
-    left: '2px',
-    width: '13px',
-    height: '13px',
-    fontSize: '12px',
+    top: '8px',
+    left: '3px',
+    width: '10px',
+    height: '10px',
     zIndex: '10',
+    backgroundColor: '#0066DC',
+    borderRadius: '50%',
   },
 }
 

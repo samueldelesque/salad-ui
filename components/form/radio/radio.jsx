@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import styles from './_stylesheet'
 
 export default class Radio extends React.Component {
   onChange(e) {
@@ -27,13 +28,12 @@ export default class Radio extends React.Component {
     }
 
     return (
-      <div className={`form_input__radio ${this.props.className}`}>
-        <input type="radio" {...props} />
-        <label htmlFor={id}>
-          <i className="radio_icon" style={{float: 'left'}}></i>
-          <span style={{display: 'block', overflow: 'hidden'}}>
-            {this.renderChildren()}
-          </span>
+      <div style={{margin: '10px 0', position:'relative'}}>
+        <input type="radio" {...props} style={{display:'none'}} />
+        {this.props.selected? <span style={styles.disc}/> : null}
+        <label htmlFor={id} style={{cursor:'pointer'}}>
+          <i style={styles.radioIcon}></i>
+          {this.renderChildren()}
         </label>
       </div>
     );
