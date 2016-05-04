@@ -8,7 +8,6 @@ let styles = {
   },
 
   alertIcon: {
-    float:'left',
     marginRight:'15px',
     display: 'flex',
   },
@@ -19,8 +18,7 @@ let styles = {
   },
 
   closeBtn: {
-    float:'left',
-    marginLeft: '10px',
+    marginLeft: 'auto',
     cursor: 'pointer',
   },
 

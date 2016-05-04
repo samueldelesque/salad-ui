@@ -4,6 +4,7 @@ import Icon from '../../icon/icon'
 import styles from './_stylesheet'
 
 export default class Alert extends Component {
+
   static defaultProps = {
     title: false,
     type: 'info',
@@ -17,7 +18,7 @@ export default class Alert extends Component {
         <div style={styles.alertIcon}>
           <Icon type={this.props.type} style={{alignSelf:'center'}} fill={styles.colorMap[this.props.type].iconColor} />
         </div>
-        <div style={{float:'left'}}>
+        <div style={{marginRight: '5px'}}>
           {
             this.props.title
             ? <h2 style={styles.title}>{this.props.title}</h2>

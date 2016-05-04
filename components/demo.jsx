@@ -153,7 +153,7 @@ sso.getJWT('revshare').then(token => {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Alert</h3>
               <pre>{'<Alert type="info/error/success/warning">Hello World</Alert>'}</pre>
-              <SaladUI.Util.Alert type="error">
+              <SaladUI.Util.Alert type="error" onClose={()=>alert("don't close me!")}>
                 Hello World
               </SaladUI.Util.Alert>
             </li>
