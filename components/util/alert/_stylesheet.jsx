@@ -2,7 +2,7 @@ import Stylesheet, { defaults } from '../../../lib/stylesheet/stylesheet'
 
 let styles = {
   alertBox: {
-    padding: defaults.padding.sm,
+    padding: '15px 20px',
     fontSize: '14px',
     display: 'flex',
   },
@@ -13,22 +13,21 @@ let styles = {
   },
 
   title: {
-    fontSize: '20px',
+    fontSize: '18px',
     marginBottom: '5px',
   },
 
   closeBtn: {
     marginLeft: 'auto',
     cursor: 'pointer',
+    display: 'flex',
   },
 
-  closeIcon: defaults.colors.gray2,
-
   colorMap: {
-    info: {iconColor: defaults.colors.blue, bgColor: '#ebf4ff'},
-    error: {iconColor: defaults.colors.red, bgColor: '#fff0f3'},
-    warning: {iconColor: defaults.colors.orange, bgColor: '#fff3e5'},
-    success: {iconColor: defaults.colors.green, bgColor: '#e2ffe9'}
+    info: '#ebf4ff',
+    error: '#fff0f3',
+    warning: '#fff3e5',
+    success: '#e2ffe9'
   }
 }
 
