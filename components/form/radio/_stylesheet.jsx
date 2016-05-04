@@ -1,4 +1,4 @@
-import Stylesheet from '../../../lib/stylesheet/stylesheet'
+import Stylesheet, {defaults} from '../../../lib/stylesheet/stylesheet'
 
 let styles = {
   radioIcon: {

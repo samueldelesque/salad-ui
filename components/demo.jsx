@@ -53,11 +53,6 @@ export default class Demo extends React.Component {
               </SaladUI.Form.RadioGroup>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> FormInput</h3>
-              <pre>{'<FormInput/>'}</pre>
-              <SaladUI.Form.FormInput><p>My Input</p></SaladUI.Form.FormInput>
-            </li>
-            <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> InputText</h3>
               <pre>{'<InputText/>'}</pre>
               <SaladUI.Form.InputText/>
@@ -162,6 +157,13 @@ sso.getJWT('revshare').then(token => {
               <pre>{`<Button onPress={()=>alert('ay ay captain')}>Press Me</Button>`}</pre>
               <SaladUI.Util.Button onPress={()=>alert('ay ay captain')}>Press Me</SaladUI.Util.Button>
               <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} type="primary">Press Me too!</SaladUI.Util.Button>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> ProfilePicture</h3>
+              <pre>{`<ProfilePicture size={50}/>`}</pre>
+              <SaladUI.Util.ProfilePicture/>
+              <SaladUI.Util.ProfilePicture src="https://lh6.googleusercontent.com/-2lJYGtfXKwQ/AAAAAAAAAAI/AAAAAAAB15E/JDAoqjtUysE/s0-c-k-no-ns/photo.jpg"/>
+              <SaladUI.Util.ProfilePicture src="http://s2.dmcdn.net/JWg8h/118x118-Os1.png"/>
             </li>
           </ul>
         </section>
