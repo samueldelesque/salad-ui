@@ -1,13 +1,13 @@
-import Stylesheet from '../../../lib/stylesheet/stylesheet'
+import Stylesheet, { defaults } from '../../../lib/stylesheet/stylesheet'
 
 let styles = {
   inputStyle: {
     width: '100%',
     lineHeight: '32px',
     height: '32px',
-    border: 'solid 1px #E5E5E5',
+    border: 'solid 1px ' + defaults.colors.gray5,
     borderRadius: '3px',
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     padding: '0 0 0 10px',
     fontSize: '14px',
   },
@@ -17,7 +17,7 @@ let styles = {
     whiteSpace: 'no-wrap',
     textAlign: 'right',
     fontSize: '13px',
-    color: '#ff003c'
+    color: defaults.colors.red,
   },
 }
 

@@ -1,12 +1,7 @@
 import React, {PropTypes, Component} from 'react'
 import Icon from '../../icon/icon'
 
-const colorMap = {
-  success: '#00C832',
-  error:   '#FF003C',
-  warning: '#FF8200',
-  info:    '#0066DC',
-}
+import styles from './_stylesheet'
 
 export default class Alert extends Component {
   static defaultProps = {
@@ -16,32 +11,26 @@ export default class Alert extends Component {
   }
 
   render() {
-    let className = `media utils_alert utils_alert--${this.props.type} ${this.props.className ? this.props.className: ''}`
-    if (this.props.title) {
-      className += ' utils_alert--lg'
-    }
-    else {
-      className += ' utils_alert--md'
-    }
-
     return (
-      <div className={className}>
-        <div style={{float:'left',marginRight:'10px'}}>
-          <Icon type={this.props.type} fill={colorMap[this.props.type]} />
+      <div style={styles.alertBox}>
+        <div style={styles.alertIcon}>
+          <Icon type={this.props.type} style={{alignSelf:'center'}} fill='#FF003C' />
         </div>
-        <div className="media-block">
-            {
-              this.props.onClose ?
-              <div className="utils_alert__close icon-close" onClick={::this.props.onClose}></div> :
-              null
-            }
-            {
-              this.props.title
-              ? <h2 className="utils_alert__title">{this.props.title}</h2>
-              : null
-            }
-            {this.props.children}
+        <div style={{float:'left'}}>
+          {
+            this.props.title
+            ? <h2 style={styles.title}>{this.props.title}</h2>
+            : null
+          }
+          {this.props.children}
         </div>
+        {
+          this.props.onClose
+          ? <div style={styles.closeBtn}>
+              <Icon width='14' height='14' type="close" fill='#FF003C' onClick={::this.props.onClose} style={{alignSelf:'center'}} />
+            </div>
+          : null
+        }
       </div>
     )
   }

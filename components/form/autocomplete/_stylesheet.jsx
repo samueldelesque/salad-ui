@@ -1,4 +1,4 @@
-import Stylesheet from '../../../lib/stylesheet/stylesheet'
+import Stylesheet, { defaults } from '../../../lib/stylesheet/stylesheet'
 
 let styles = {
   suggestions: {
@@ -14,7 +14,7 @@ let styles = {
     padding: '5px 10px',
     cursor: 'pointer',
     margin: '0',
-    color: '#000',
+    color: 'black',
   },
 }
 

@@ -9,8 +9,8 @@ let styles = {
     verticalAlign: 'middle',
     margin: '-2px 10px 0 0',
     position: 'relative',
-    backgroundColor: '#F5F5F5',
-    border: 'solid 1px #E5E5E5',
+    backgroundColor: defaults.colors.gray5,
+    border: 'solid 1px ' + defaults.colors.gray5,
     borderRadius: '50%',
   },
 
@@ -22,7 +22,7 @@ let styles = {
     width: '10px',
     height: '10px',
     zIndex: '10',
-    backgroundColor: '#0066DC',
+    backgroundColor: defaults.colors.dmBrand,
     borderRadius: '50%',
   },
 }
