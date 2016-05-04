@@ -69,6 +69,23 @@ export default class Demo extends React.Component {
               <pre>{'<Toggle/>'}</pre>
               <SaladUI.Form.Toggle/>
             </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Select</h3>
+              <pre>
+{`let options = [
+    {name: 'bacon', value: 'bacon'},
+    {name: 'eggs', value: 'eggs'},
+    {name: 'roasted chicken', value: 'chicken'},
+    {name: 'steak', value: 'steak'}
+  ]
+<Select options={options} width='200' handleClick={(o)=>alert(o.name + o.value)}>Pick one</Select>`
+}
+              </pre>
+              <SaladUI.Form.Select
+                options={selectOptions}
+                width="200"
+                handleClick={(o)=>{if(o.value!==null) alert('You picked ' + o.name + '!')}}>Pick a protein</SaladUI.Form.Select>
+            </li>
           </ul>
         </section>
         <section>
@@ -166,28 +183,11 @@ sso.getJWT('revshare').then(token => {
               <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} type="primary">Press Me too!</SaladUI.Util.Button>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span>Select</h3>
-              <pre>
-{`let options = [
-    {name: 'bacon', value: 'bacon'},
-    {name: 'eggs', value: 'eggs'},
-    {name: 'roasted chicken', value: 'chicken'},
-    {name: 'steak', value: 'steak'}
-  ]
-<Select options={options} width='200' handleClick={(o)=>alert(o.name + o.value)}>Pick one</Select>`
-}
-              </pre>
-              <SaladUI.Form.Select
-                options={selectOptions}
-                width="200"
-                handleClick={(o)=>{if(o.value!==null) alert('You picked ' + o.name + '!')}}>Pick a protein</SaladUI.Form.Select>
-            </li>
-            <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> ProfilePicture</h3>
               <pre>{`<ProfilePicture size={50}/>`}</pre>
               <SaladUI.Util.ProfilePicture/>
               <SaladUI.Util.ProfilePicture src="https://lh6.googleusercontent.com/-2lJYGtfXKwQ/AAAAAAAAAAI/AAAAAAAB15E/JDAoqjtUysE/s0-c-k-no-ns/photo.jpg"/>
-              <SaladUI.Util.ProfilePicture src="http://s2.dmcdn.net/JWg8h/118x118-Os1.png"/>              
+              <SaladUI.Util.ProfilePicture src="http://s2.dmcdn.net/JWg8h/118x118-Os1.png"/>
             </li>
           </ul>
         </section>
