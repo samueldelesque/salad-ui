@@ -11,10 +11,11 @@ export default class Alert extends Component {
   }
 
   render() {
+    styles.alertBox.backgroundColor = styles.colorMap[this.props.type].bgColor
     return (
       <div style={styles.alertBox}>
         <div style={styles.alertIcon}>
-          <Icon type={this.props.type} style={{alignSelf:'center'}} fill='#FF003C' />
+          <Icon type={this.props.type} style={{alignSelf:'center'}} fill={styles.colorMap[this.props.type].iconColor} />
         </div>
         <div style={{float:'left'}}>
           {
@@ -27,7 +28,7 @@ export default class Alert extends Component {
         {
           this.props.onClose
           ? <div style={styles.closeBtn}>
-              <Icon width='14' height='14' type="close" fill='#FF003C' onClick={::this.props.onClose} style={{alignSelf:'center'}} />
+              <Icon width='14' height='14' type="close" fill={styles.closeIcon} onClick={::this.props.onClose} />
             </div>
           : null
         }

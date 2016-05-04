@@ -1,15 +1,15 @@
-import Stylesheet from '../../../lib/stylesheet/stylesheet'
+import Stylesheet, { defaults } from '../../../lib/stylesheet/stylesheet'
 
 let styles = {
   alertBox: {
-    padding: '10px',
+    padding: defaults.padding.sm,
     fontSize: '14px',
     display: 'flex',
   },
 
   alertIcon: {
     float:'left',
-    marginRight:'10px',
+    marginRight:'15px',
     display: 'flex',
   },
 
@@ -22,7 +22,15 @@ let styles = {
     float:'left',
     marginLeft: '10px',
     cursor: 'pointer',
-    display: 'flex',
+  },
+
+  closeIcon: defaults.colors.gray2,
+
+  colorMap: {
+    info: {iconColor: defaults.colors.blue, bgColor: '#ebf4ff'},
+    error: {iconColor: defaults.colors.red, bgColor: '#fff0f3'},
+    warning: {iconColor: defaults.colors.orange, bgColor: '#fff3e5'},
+    success: {iconColor: defaults.colors.green, bgColor: '#e2ffe9'}
   }
 }
 
