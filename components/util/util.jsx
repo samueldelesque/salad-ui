@@ -1,6 +1,7 @@
 import Alert from './alert/alert'
 import Anchor from './anchor/anchor'
 import Buttons from './buttons'
+import Button from './button/button'
 import FormatNumber from './format-number/format-number'
 import TagList from './tag-list/tag-list'
 import TextClamp from './text-clamp/text-clamp'
@@ -11,6 +12,7 @@ export default {
   Alert,
   Anchor,
   Buttons,
+  Button,
   FormatNumber,
   TagList,
   TextClamp,

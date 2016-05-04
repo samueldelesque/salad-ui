@@ -25,12 +25,12 @@ export default class Demo extends React.Component {
   render(){
     return (
       <div className="demo">
-        <section>
+        <header>
           <h1>Salad-UI 🚀</h1>
           <p>Salad-UI can be enjoyed as a complete salad using <i className="snippet">import SaladUI from 'salad-ui'</i> or as its separate ingredients using <i className="snippet">import Chart from 'salad-ui.chart'</i>.</p>
           <p>Salad-UI is composed of: Form, Chart, Utils, Lib, Icon.</p>
           <p>Salad-UI will work both in Browser and Server environment - use it in your universal apps!</p>
-        </section>
+        </header>
         <section>
           <h2>Form</h2>
           <ul className="functionality">
@@ -138,21 +138,13 @@ sso.getJWT('revshare').then(token => {
   width={900}
   height={300}
   data={chartData} width={560}
-  labelTextShadow="none"
-  labelColor="white"
-  gridColor="rgba(230,230,230,.1)"
-  yLabelsPosition="right"
   />`}
           </pre>
           <div>
             <SaladUI.Chart.Area
               width={900}
               height={300}
-              data={chartData} width={560}
-              labelTextShadow="none"
-              labelColor="white"
-              gridColor="rgba(230,230,230,.1)"
-              yLabelsPosition={"right"} />
+              data={chartData} width={600}/>
           </div>
         </section>
         <section>
@@ -162,6 +154,12 @@ sso.getJWT('revshare').then(token => {
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Alert</h3>
               <pre>{'<Alert>Hello World</Alert>'}</pre>
               <SaladUI.Util.Alert type="error">Hello World</SaladUI.Util.Alert>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Button</h3>
+              <pre>{`<Button onPress={()=>alert('ay ay captain')}>Press Me</Button>`}</pre>
+              <SaladUI.Util.Button onPress={()=>alert('ay ay captain')}>Press Me</SaladUI.Util.Button>
+              <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} type="primary">Press Me too!</SaladUI.Util.Button>
             </li>
           </ul>
         </section>

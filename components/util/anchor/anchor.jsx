@@ -32,7 +32,8 @@ export default class Anchor extends Component {
     }
   }
 
-  handleClick(){
+  handleClick(e){
+    e.preventDefault()
     if(this.props.handleClick)
       this.props.handleClick()
   }
@@ -41,6 +42,7 @@ export default class Anchor extends Component {
     return <a
       onMouseOver={() => this.setState({ hovered:true })}
       onMouseOut={() => this.setState({ hovered:false })}
+      onClick={e => this.handleClick(e)}
       {...this.props}
       style={this.getStyle()}>
       {this.props.children}
