@@ -155,8 +155,17 @@ sso.getJWT('revshare').then(token => {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Button</h3>
               <pre>{`<Button onPress={()=>alert('ay ay captain')}>Press Me</Button>`}</pre>
-              <SaladUI.Util.Button onPress={()=>alert('ay ay captain')}>Press Me</SaladUI.Util.Button>
-              <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} type="primary">Press Me too!</SaladUI.Util.Button>
+              <div style={{padding: 10}}>
+                <SaladUI.Util.Button onPress={()=>alert('ay ay captain')}>Press Me</SaladUI.Util.Button>{' '}
+                <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} type="primary">Press Me too!</SaladUI.Util.Button>
+              </div>
+              <div style={{padding: 10}}>
+                <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} type="primary" size="lg">I am bigger.</SaladUI.Util.Button>
+              </div>
+              <div style={{padding: 10}}>
+                <p>And a fullWidth:</p>
+                <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} type="primary" fullWidth={true}>I am even bigger.</SaladUI.Util.Button>
+              </div>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> ProfilePicture</h3>

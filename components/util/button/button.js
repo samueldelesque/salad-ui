@@ -10,12 +10,16 @@ export default class Anchor extends Component {
   static defaultProps = {
     onPress: () => console.warn('Button has no onPress action.'),
     type: 'default',
+    size: 'sm',
+    fullWidth: false,
   }
 
   render(){
-    let s = [{}, styles.button, styles[this.props.type]]
+    let s = [{}, styles.button, styles[this.props.type], styles[this.props.size]]
     if(this.state.hovered)
       s = s.concat(styles.buttonHover, styles[this.props.type + 'Hover'])
+    if(this.props.fullWidth)
+      s = s.concat(styles.fullWidth)
     const buttonStyle = Object.assign(...s)
     return <div
       onMouseOver={() => this.setState({ hovered:true })}

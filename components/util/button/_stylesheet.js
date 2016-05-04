@@ -3,14 +3,13 @@ import StyleSheet, { defaults } from '../../../lib/stylesheet/stylesheet'
 const styles = {
   button: {
     cursor: 'pointer',
-    padding: '6px 12px',
-    margin: '0 3px',
     color: 'white',
     boxShadow: '0 0 20px 0 rgba(0,0,0,0.06)',
     position: 'relative',
     display: 'inline-block',
     borderWidth: 2,
     borderStyle: 'solid',
+    textAlign: 'center',
     borderRadius: 3,
     top: 0
   },
@@ -31,6 +30,18 @@ const styles = {
   },
   defaultHover: {
     backgroundColor: 'fefefe',
+  },
+  sm: {
+    padding: '4px 10px',
+  },
+  md: {
+    padding: '6px 14px',
+  },
+  lg: {
+    padding: '10px 22px',
+  },
+  fullWidth: {
+    display: 'block'
   },
 }
 export const mergeStyles = StyleSheet.all
