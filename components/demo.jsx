@@ -147,9 +147,9 @@ sso.getJWT('revshare').then(token => {
           <ul className="functionality">
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Alert</h3>
-              <pre>{'<Alert>Hello World</Alert>'}</pre>
-              <SaladUI.Util.Alert type="error">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
+              <pre>{'<Alert type="info/error/success/warning">Hello World</Alert>'}</pre>
+              <SaladUI.Util.Alert type="error" onClose={()=>alert("don't close me!")}>
+                Hello World
               </SaladUI.Util.Alert>
             </li>
             <li>
