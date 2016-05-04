@@ -17,6 +17,13 @@ const chartData = [
   {time:1423198800000, value: 13, label: "{{value}} active users"},
 ];
 
+const selectOptions = [
+  {name: 'tofu', value: 'tofu'},
+  {name: 'bacon', value: 'bacon'},
+  {name: 'roasted chicken', value: 'chicken'},
+  {name: 'steak', value: 'steak'}
+]
+
 export default class Demo extends React.Component {
   state = {
     selectedRadio: 'radio1'
@@ -153,7 +160,7 @@ sso.getJWT('revshare').then(token => {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Alert</h3>
               <pre>{'<Alert type="info/error/success/warning">Hello World</Alert>'}</pre>
-              <SaladUI.Util.Alert type="error" onClose={()=>alert("don't close me!")}>
+              <SaladUI.Util.Alert type="info" onClose={()=>alert("don't close me!")} title="title eh">
                 Hello World
               </SaladUI.Util.Alert>
             </li>
@@ -162,6 +169,23 @@ sso.getJWT('revshare').then(token => {
               <pre>{`<Button onPress={()=>alert('ay ay captain')}>Press Me</Button>`}</pre>
               <SaladUI.Util.Button onPress={()=>alert('ay ay captain')}>Press Me</SaladUI.Util.Button>
               <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} type="primary">Press Me too!</SaladUI.Util.Button>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span>Select</h3>
+              <pre>
+{`let options = [
+    {name: 'bacon', value: 'bacon'},
+    {name: 'eggs', value: 'eggs'},
+    {name: 'roasted chicken', value: 'chicken'},
+    {name: 'steak', value: 'steak'}
+  ]
+<Select options={options} width='200' handleClick={(o)=>alert(o.name + o.value)}>Pick one</Select>`
+}
+              </pre>
+              <SaladUI.Form.Select
+                options={selectOptions}
+                width="200"
+                handleClick={(o)=>{if(o.value!==null) alert('You picked ' + o.name + '!')}}>Pick a protein</SaladUI.Form.Select>
             </li>
           </ul>
         </section>
