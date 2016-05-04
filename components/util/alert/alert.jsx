@@ -12,16 +12,16 @@ export default class Alert extends Component {
   }
 
   render() {
-    styles.alertBox.backgroundColor = styles.colorMap[this.props.type].bgColor
+    styles.alertBox.backgroundColor = styles.colorMap[this.props.type]
     return (
       <div style={styles.alertBox}>
         <div style={styles.alertIcon}>
-          <Icon type={this.props.type} style={{alignSelf:'center'}} fill={styles.colorMap[this.props.type].iconColor} />
+          <Icon width='18' height='18' type={this.props.type} style={{alignSelf:'center'}} />
         </div>
         <div style={{marginRight: '5px'}}>
           {
             this.props.title
-            ? <h2 style={styles.title}>{this.props.title}</h2>
+            ? <p style={styles.title}>{this.props.title}</p>
             : null
           }
           {this.props.children}
@@ -29,7 +29,7 @@ export default class Alert extends Component {
         {
           this.props.onClose
           ? <div style={styles.closeBtn}>
-              <Icon width='14' height='14' type="close" fill={styles.closeIcon} onClick={::this.props.onClose} />
+              <Icon width='10' height='10' type="close" onClick={::this.props.onClose} style={{alignSelf:'center'}} />
             </div>
           : null
         }
