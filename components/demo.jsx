@@ -83,7 +83,6 @@ export default class Demo extends React.Component {
               </pre>
               <SaladUI.Form.Select
                 options={selectOptions}
-                width="200"
                 handleClick={(o)=>{if(o.value!==null) alert('You picked ' + o.name + '!')}}>Pick a protein</SaladUI.Form.Select>
             </li>
           </ul>
