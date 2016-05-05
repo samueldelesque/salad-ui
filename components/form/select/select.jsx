@@ -32,7 +32,26 @@ export default class Select extends Component {
     })
   }
 
-  selectClick(){
+  handleOutsideClick(e){
+    if(React.findDOMNode(this).contains(e.target))
+      return
+    else {
+      this.setState({
+        open: false
+      })
+    }
+  }
+
+  componentDidMount(){
+    this.handleOutsideClick = this.handleOutsideClick.bind(this)
+    document.addEventListener('click', this.handleOutsideClick)
+  }
+
+  componentWillUnmount(){
+    document.removeEventListener('click', this.handleOutsideClick);
+  }
+
+  selectClick(e){
     this.setState({
       open: true
     })
@@ -90,7 +109,7 @@ export default class Select extends Component {
 
     return (
       <div style={{position: 'relative',width: width}}>
-        <div style={styles.selectBox} onClick={() => this.selectClick()}>
+        <div style={styles.selectBox} onClick={(e) => this.selectClick(e)}>
           <Icon type="arrow-left" width="10" height="10" style={styles.dropdownIcon} />
           <div>
             {this.state.currentOption.name}
