@@ -1,3 +1,3 @@
-import * as Chart from 'react-simple-charts'
+import * as Chart from './chart'
 
 module.exports = Chart
