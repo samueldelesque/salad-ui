@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import ReactDOM from 'react-dom'
 
 import Autocomplete from './autocomplete'
 
@@ -27,6 +26,7 @@ export default class DemoAutocomplete extends Component {
 
   render() {
     let acProps = {
+      handleSelectItem: val => console.log('You have selected', val),
       inputPlaceholder: 'Start typing a country name',
       requestSuggestions: ::this.requestSuggestions,
       suggestions: this.state.suggestions,

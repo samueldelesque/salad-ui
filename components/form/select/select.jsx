@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import {merge, filter} from 'lodash'
 import Icon from '../../icon/icon'
 import styles from './_stylesheet'
@@ -33,7 +34,7 @@ export default class Select extends Component {
   }
 
   handleOutsideClick(e){
-    if(React.findDOMNode(this).contains(e.target))
+    if(ReactDOM.findDOMNode(this).contains(e.target))
       return
     else {
       this.setState({
@@ -110,7 +111,7 @@ export default class Select extends Component {
     return (
       <div style={{position: 'relative',width: width}}>
         <div style={styles.selectBox} onClick={(e) => this.selectClick(e)}>
-          <Icon type="arrow-left" width="10" height="10" style={styles.dropdownIcon} />
+          <Icon type="arrow-left" width={10} height={10} style={styles.dropdownIcon} />
           <div>
             {this.state.currentOption.name}
           </div>

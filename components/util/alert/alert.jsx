@@ -16,9 +16,9 @@ export default class Alert extends Component {
     return (
       <div style={styles.alertBox}>
         <div style={styles.alertIcon}>
-          <Icon width='18' height='18' type={this.props.type} style={{alignSelf:'center'}} />
+          <Icon width={18} height={18} type={this.props.type} style={{alignSelf:'center'}} />
         </div>
-        <div style={{marginRight: '5px'}}>
+        <div style={{marginRight: 5}}>
           {
             this.props.title
             ? <p style={styles.title}>{this.props.title}</p>
@@ -29,7 +29,7 @@ export default class Alert extends Component {
         {
           this.props.onClose
           ? <div style={styles.closeBtn}>
-              <Icon width='10' height='10' type="close" onClick={::this.props.onClose} style={{alignSelf:'center'}} />
+              <Icon width={10} height={10} type="close" onClick={::this.props.onClose} style={{alignSelf:'center'}} />
             </div>
           : null
         }

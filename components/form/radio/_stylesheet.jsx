@@ -10,7 +10,7 @@ let styles = {
     margin: '-2px 10px 0 0',
     position: 'relative',
     backgroundColor: defaults.colors.gray5,
-    border: 'solid 1px ' + defaults.colors.gray5,
+    border: 'solid 1px ' + defaults.colors.gray3,
     borderRadius: '50%',
   },
 

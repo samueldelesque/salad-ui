@@ -4,28 +4,28 @@ var path = require('path'),
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
-  entry: path.resolve('./components/demo.jsx'),
+  entry: path.resolve('./components/demo/entry.jsx'),
   resolve: {
-    root: directories,
+    root: path.resolve('../'),
     extensions: ['', '.js', '.es6 ', '.jsx'],
   },
   output: {
-    path: path.resolve('../dist/demo'),
+    path: path.resolve('dist/demo'),
     filename: 'demo.js',
     publicPath: '/demo/'
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
-    })
+    // new webpack.optimize.OccurenceOrderPlugin(),
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     'NODE_ENV': JSON.stringify('production')
+    //   }
+    // }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compressor: {
+    //     warnings: false
+    //   }
+    // })
   ],
   module: {
     loaders: [

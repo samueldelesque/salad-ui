@@ -6,7 +6,7 @@ let styles = {
   selectBox: {
     marginTop: '10px',
     padding: '5px 10px',
-    border: '1px solid ' + defaults.colors.gray4,
+    border: '1px solid ' + defaults.colors.gray3,
     borderRadius: '3px',
     cursor: 'pointer',
     overflow: 'hidden',
@@ -26,7 +26,7 @@ let styles = {
     zIndex: '999',
     width: '100%',
     top: '0',
-    border: '1px solid ' + defaults.colors.gray4,
+    border: '1px solid ' + defaults.colors.gray3,
   },
 
   dropdownItem: {
@@ -40,7 +40,7 @@ let styles = {
   },
 
   selected: {
-    backgroundColor: defaults.colors.gray4,
+    backgroundColor: defaults.colors.gray5,
   }
 }
 
