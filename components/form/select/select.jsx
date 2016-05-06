@@ -101,15 +101,8 @@ export default class Select extends Component {
   }
 
   render() {
-    let width = '100%'
-    if(this.props.width){
-      width = parseInt(this.props.width) + 30
-      styles.selectBox.width = width
-      styles.dropdown.width = width
-    }
-
     return (
-      <div style={{position: 'relative',width: width}}>
+      <div style={{position: 'relative'}}>
         <div style={styles.selectBox} onClick={(e) => this.selectClick(e)}>
           <Icon type="arrow-left" width={10} height={10} style={styles.dropdownIcon} />
           <div>
