@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fromCharCode(55356, 57211) + ' Friday 6pm.')
 
-console.log(SaladUI.Chart, SaladUI.Util, Chart)
+console.log(SaladUI.Form)
 
 const chartData = [
   {time:1422766800000, value: 0, label: "{{value}} active users"},
