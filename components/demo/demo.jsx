@@ -3,6 +3,11 @@ import SaladUI from '../salad-ui'
 import Chart from '../chart/chart'
 import { iconTypes } from '../icon/icon'
 import _ from 'lodash'
+import glob from '../../lib/glob.js'
+
+
+if(!glob.DM_ENV) glob.DM_ENV = {}
+glob.DM_ENV['form/input-text'] = {}
 
 console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fromCharCode(55356, 57211) + ' Friday 6pm.')
 
