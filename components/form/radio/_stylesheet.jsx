@@ -3,22 +3,22 @@ import Stylesheet, { defaults } from '../../../lib/stylesheet/stylesheet'
 let styles = {
   radioIcon: {
     position: 'relative',
-    display: 'inline-block',
+    display: 'block',
     width: '16px',
     height: '16px',
-    verticalAlign: 'middle',
-    margin: '-2px 10px 0 0',
+    margin: '5px 10px 0 0',
     position: 'relative',
     backgroundColor: defaults.colors.gray5,
     border: 'solid 1px ' + defaults.colors.gray3,
     borderRadius: '50%',
+    float: 'left',
   },
 
   disc: {
     cursor: 'pointer',
     position: 'absolute',
-    top: '8px',
-    left: '3px',
+    top: '2px',
+    left: '2px',
     width: '10px',
     height: '10px',
     zIndex: '10',
