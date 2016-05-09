@@ -30,10 +30,11 @@ export default class Radio extends React.Component {
     return (
       <div style={{margin: '10px 0', position:'relative'}}>
         <input type="radio" {...props} style={{display:'none'}} />
-        {this.props.selected? <span style={styles.disc}/> : null}
-        <label htmlFor={id} style={{cursor:'pointer'}}>
-          <i style={styles.radioIcon}></i>
-          {this.renderChildren()}
+        <label htmlFor={id} style={{cursor:'pointer',display:'block'}}>
+          <i style={styles.radioIcon}>
+            {this.props.selected? <span style={styles.disc}/> : null}
+          </i>
+          <div style={{display:'block', overflow:'hidden'}}>{this.renderChildren()}</div>
         </label>
       </div>
     );
