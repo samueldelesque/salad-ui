@@ -3,6 +3,9 @@ import styles from './_stylesheet'
 
 export default class Radio extends React.Component {
   onChange(e) {
+    if(this.props.disabled){
+      return;
+    }
     this.props.onChange && this.props.onChange(e.target.value)
   }
 
@@ -20,15 +23,23 @@ export default class Radio extends React.Component {
       name: this.props.name,
       value: this.props.value,
       id: id,
-      onChange: ::this.onChange
-    }
-    if (this.props.selected)
-    {
-      props.checked = true;
+      onChange: ::this.onChange,
+      checked: this.props.selected,
     }
 
+    let radioStyle = {
+      margin: '10px 0',
+      position:'relative'
+    }
+    let discColor = styles.disc.backgroundColor;
+    if(this.props.disabled){
+      radioStyle.color = '#BFBFBF';
+      discColor = '#BFBFBF';
+    }
+    styles.disc.backgroundColor = discColor;
+
     return (
-      <div style={{margin: '10px 0', position:'relative'}}>
+      <div style={radioStyle}>
         <input type="radio" {...props} style={{display:'none'}} />
         <label htmlFor={id} style={{cursor:'pointer',display:'block'}}>
           <i style={styles.radioIcon}>

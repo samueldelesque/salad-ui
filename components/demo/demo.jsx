@@ -89,7 +89,7 @@ export default class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Checkbox</h3>
               <pre>{'<Checkbox/>'}</pre>
-              <SaladUI.Form.Checkbox>This is a checkbox</SaladUI.Form.Checkbox>
+              <SaladUI.Form.Checkbox checked>This is a checkbox</SaladUI.Form.Checkbox>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Radio</h3>
