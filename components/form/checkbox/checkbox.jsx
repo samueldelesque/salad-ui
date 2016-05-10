@@ -29,17 +29,30 @@ export default class Checkbox extends Component {
   }
 
   toggleState() {
-    this.setState({checked: !this.state.checked})
-    this.handleChange(!this.state.checked)
+    if(this.props.disabled){
+      return
+    }
+    else {
+      this.setState({checked: !this.state.checked})
+      this.handleChange(!this.state.checked)
+    }
   }
 
   render() {
+    let checkStyle = {
+      margin: '10px 0',
+      position:'relative'
+    }
+    if(this.props.disabled){
+      checkStyle.color = '#BFBFBF;';
+    }
+
     return (
-      <div style={{margin: '10px 0', position:'relative'}}>
+      <div style={checkStyle}>
         <input type="checkbox" checked={this.state.checked} style={{display:'none'}} />
         <div onClick={::this.toggleState} style={{cursor:'pointer'}}>
           <i style={styles.checkboxIcon}>
-            {this.state.checked ? <Icon onClick={::this.toggleState} type="check" style={styles.checkmark} fill="#0066DC"/> : null}
+            {this.state.checked ? <Icon onClick={::this.toggleState} type="check" style={styles.checkmark} fill={this.props.disabled?'#BFBFBF':'#0066DC'}/> : null}
           </i>
           <div style={{display:'block', overflow:'hidden'}}>{this.props.children}</div>
         </div>
