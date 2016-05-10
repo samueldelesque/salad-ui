@@ -85,8 +85,11 @@ export default class Icon extends React.Component {
   }
 
   render(){
+    let props = this.props
+    props.style.width = props.width
+    props.style.height = props.height
     return(
-      <svg {...this.props}>
+      <svg {...props}>
         <path d={iconTypes[this.props.type]} fill={this.props.fill}></path>
       </svg>
     )

@@ -5,13 +5,10 @@ import { iconTypes } from '../icon/icon'
 import _ from 'lodash'
 import glob from '../../lib/glob.js'
 
-
 if(!glob.DM_ENV) glob.DM_ENV = {}
 glob.DM_ENV['form/input-text'] = {}
 
 console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fromCharCode(55356, 57211) + ' Friday 6pm.')
-
-console.log(SaladUI.Form)
 
 const chartData = [
   {time:1422766800000, value: 0, label: "{{value}} active users"},
@@ -267,6 +264,16 @@ sso.getJWT('revshare').then(token => {
             )
           }
           </div>
+        </section>
+        <section>
+          <h2>Video</h2>
+          <ul className="functionality">
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Grid</h3>
+              <pre>{'<SaladUI.Video.Grid/>'}</pre>
+              <SaladUI.Video.Grid apiURL="https://api.dailymotion.com" endpoint="/videos"/>
+            </li>
+          </ul>
         </section>
         <footer>
           Made with love at <a href="http://dailymotion.com">Dailymotion</a> in NYC.
