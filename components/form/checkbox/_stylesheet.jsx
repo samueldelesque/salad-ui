@@ -15,10 +15,7 @@ let styles = {
   },
 
   checkmark: {
-    cursor: 'pointer',
     position: 'absolute',
-    width: '14px',
-    height: '14px',
     fontSize: '12px',
     zIndex: '10',
   },

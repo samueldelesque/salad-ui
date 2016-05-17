@@ -49,9 +49,18 @@ export default class Checkbox extends Component {
 
     return (
       <div style={checkStyle}>
-        <div onClick={::this.toggleState} style={{cursor:'pointer'}}>
+        <div onClick={::this.toggleState} style={{cursor:(this.props.disabled?'default':'pointer')}}>
           <i style={styles.checkboxIcon}>
-            {this.state.checked ? <Icon onClick={::this.toggleState} type="check" style={styles.checkmark} fill={this.props.disabled?'#BFBFBF':'#0066DC'}/> : null}
+            {this.state.checked ?
+              <Icon
+                onClick={::this.toggleState}
+                type="check"
+                style={styles.checkmark}
+                fill={this.props.disabled?'#BFBFBF':'#0066DC'}
+                width="14"
+                height="14">
+              </Icon>
+            : null}
           </i>
           <div style={{display:'block', overflow:'hidden'}}>{this.props.children}</div>
         </div>
