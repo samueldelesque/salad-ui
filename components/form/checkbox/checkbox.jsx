@@ -49,7 +49,6 @@ export default class Checkbox extends Component {
 
     return (
       <div style={checkStyle}>
-        <input type="checkbox" checked={this.state.checked} style={{display:'none'}} />
         <div onClick={::this.toggleState} style={{cursor:'pointer'}}>
           <i style={styles.checkboxIcon}>
             {this.state.checked ? <Icon onClick={::this.toggleState} type="check" style={styles.checkmark} fill={this.props.disabled?'#BFBFBF':'#0066DC'}/> : null}

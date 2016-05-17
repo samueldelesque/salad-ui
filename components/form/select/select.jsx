@@ -75,8 +75,9 @@ export default class Select extends Component {
 
   renderOptions() {
     let selectedItemStyle = merge({}, styles.dropdownItem, styles.selected)
-    let options = this.props.options.map((item) => {
+    let options = this.props.options.map((item, index) => {
       return <li
+        key = {'select_' + index}
         style={(item.value === this.state.currentOption.value) ? selectedItemStyle : styles.dropdownItem}
         value={item.value}
         onMouseEnter={() => this.itemMouseEnter(item)}

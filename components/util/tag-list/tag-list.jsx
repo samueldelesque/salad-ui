@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-
-// import './tag-list.scss'
+import Icon from '../../icon/icon'
+import styles from './_stylesheet'
 
 export default class Collection extends Component {
 
@@ -16,19 +16,17 @@ export default class Collection extends Component {
     items: [],
   }
 
-  removeItem(item) {
+  removeItem(i) {
     if(this.props.handleRemoveItem) {
-      this.props.handleRemoveItem(item)
+      this.props.handleRemoveItem(i)
     }
   }
 
   renderItems() {
     let lis = this.props.items.map((item, index) => {
-      return <li
-                key = {'tags.' + index}
-                onClick={this.removeItem.bind(this, item)}
-                className={this.props.itemClassname}>
-              <span>{item}</span><span className="close-icon"></span>
+      return <li style={styles.pill} key = {'tags.' + index}>
+                <span style={{paddingRight: '10px'}}>{item}</span>
+                <Icon width={10} height={10} type="close" onClick={() => this.removeItem(item)} />
              </li>
     })
 
@@ -38,10 +36,8 @@ export default class Collection extends Component {
   }
 
   render() {
-    let className = `collection-wrapper ${this.props.classname}`;
-
     return (
-      <div className={className}>
+      <div style={styles.tagBox}>
         {this.renderItems(this.props.items)}
       </div>
     )
