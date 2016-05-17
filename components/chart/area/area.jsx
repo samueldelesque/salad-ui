@@ -237,10 +237,10 @@ export default class Area extends Component{
       else
         label.x = 20
     }
-    if(!label.ref) label.ref = Math.random() + '.' + Math.random()
+    if(!label.ref) label.ref = `label.${index},${label.x},${label.y}`
     return (
       <text
-        key={`graph.xAxis.label.${index||Math.random()}`}
+        key={`graph.xAxis.label.${label.ref}`}
         x={label.x}
         y={label.y}
         ref={label.ref}

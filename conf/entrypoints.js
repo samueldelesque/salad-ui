@@ -6,4 +6,5 @@ module.exports = {
     'salad-ui.icon': './components/icon/index.jsx',
     'salad-ui.form': './components/form/index.jsx',
     'salad-ui.util': './components/util/index.jsx',
+    'salad-ui.video': './components/video/index.jsx',
 }

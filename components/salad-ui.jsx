@@ -4,6 +4,7 @@ import * as Chart from './chart/chart'
 import Icon from './icon/icon'
 import Stylesheet from '../lib/stylesheet/stylesheet'
 import * as Lib from '../lib/lib'
+import Video from './video/video'
 
 export default {
   Form,
@@ -12,4 +13,5 @@ export default {
   Stylesheet,
   Lib,
   Icon,
+  Video,
 }

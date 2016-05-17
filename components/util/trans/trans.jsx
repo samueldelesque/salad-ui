@@ -5,7 +5,7 @@ import mapObject from 'lodash.map'
 import zipObject from 'lodash.zipobject'
 import { sprintf } from 'sprintf-js'
 
-const DEBUG = true
+const DEBUG = false
 
 export default class Trans extends React.Component {
   static defaultProps = {
