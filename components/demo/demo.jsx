@@ -26,13 +26,12 @@ const selectOptions = [
   {name: 'steak', value: 'steak', calories: 700}
 ]
 
-
 class DemoAutocomplete extends React.Component {
 
   constCountryNames = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
 
   state = {
-    suggestions: [],
+    suggestions: []
   }
 
   requestSuggestions(keyword) {
@@ -68,7 +67,19 @@ class DemoAutocomplete extends React.Component {
 export default class Demo extends React.Component {
   state = {
     selectedRadio: 'radio1',
-    protein: {name: null, value: null, calories: 0}
+    protein: {name: null, value: null, calories: 0},
+    tagsAdded: ['tag1','tag2','tag3','tag4','tag5','tag6'],
+  }
+
+  handleRemoveTag(tag){
+    console.log('item to remove: ', tag)
+    let tags = this.state.tagsAdded,
+        index = this.state.tagsAdded.indexOf(tag);
+
+    tags.splice(index, 1);
+    this.setState({
+      tagsAdded: tags
+    })
   }
 
   render(){
@@ -91,7 +102,7 @@ export default class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Checkbox</h3>
               <pre>{'<Checkbox/>'}</pre>
-              <SaladUI.Form.Checkbox checked>This is a checkbox</SaladUI.Form.Checkbox>
+              <SaladUI.Form.Checkbox>This is a checkbox</SaladUI.Form.Checkbox>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Radio</h3>
@@ -242,6 +253,11 @@ sso.getJWT('revshare').then(token => {
               <SaladUI.Util.ProfilePicture/>
               <SaladUI.Util.ProfilePicture src="https://lh6.googleusercontent.com/-2lJYGtfXKwQ/AAAAAAAAAAI/AAAAAAAB15E/JDAoqjtUysE/s0-c-k-no-ns/photo.jpg"/>
               <SaladUI.Util.ProfilePicture src="http://s2.dmcdn.net/JWg8h/118x118-Os1.png"/>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Tag List</h3>
+              <pre>{`<TagList items=['tag1','tag2','tag3','tag4','tag5','tag6']/>`}</pre>
+              <SaladUI.Util.TagList items={this.state.tagsAdded} handleRemoveItem={(t) => this.handleRemoveTag(t)} />
             </li>
           </ul>
         </section>
