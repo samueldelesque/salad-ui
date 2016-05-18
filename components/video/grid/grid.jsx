@@ -15,7 +15,7 @@ export default class VideosGrid extends React.Component {
   hasMore = false
 
   state = {
-    videos: [{a:2},{b:3}],
+    videos: [],
     failed: false,
     hasMore: false,
     loading: false,
@@ -33,7 +33,7 @@ export default class VideosGrid extends React.Component {
 
   static defaultProps = {
     sortBy: 'recent',
-    limit: 8,
+    limit: 3,
     flags: [],
     endpoint: '/videos',
     colSize: 3,
@@ -126,9 +126,13 @@ export default class VideosGrid extends React.Component {
         <div className="no-results"><Trans context={this.trans}>noVideosFound</Trans></div>
       )
     }
+    const containerWidth = this.refs.videoResults.getBoundingClientRect().width
     return this.state.videos.map((video,index) =>
       <div key={'vid.'+index} style={{
-          width: (100 / this.props.colSize) - 1.5 + '%',
+          width: (containerWidth / this.props.colSize) - 20,
+          marginRight: (index+1) % this.props.colSize !== 0 ? 20 : 0,
+          marginBottom: 20,
+          flexGrow: 'grow',
         }}> {/*className={`col-sm-3 col-md-${this.props.colSize} mrg-btm-lg grid-item`}*/}
         <Preview {...video} className="mrg-btm-md"/>
         <div className="video-meta">
@@ -177,7 +181,7 @@ export default class VideosGrid extends React.Component {
           </div>}
         {
           this.state.hasMore?
-          <Button loading={this.state.loading} onPress={()=>this.loadMore()}>Load more</Button>:
+          <Button fullWidth={true} loading={this.state.loading} onPress={()=>this.loadMore()}>Load more</Button>:
           null
         }
       </div>
