@@ -38,29 +38,27 @@ export default class Checkbox extends Component {
   }
 
   render() {
-    let checkStyle = {
-      margin: '10px 0',
-      position:'relative'
-    }
+    let s = styles.checkbox
     if(this.props.disabled){
-      checkStyle.color = '#BFBFBF;';
+      s = Object.assign({}, s, styles.checkboxDisabled)
     }
 
     return (
-      <div style={checkStyle}>
-        <div onClick={::this.toggleState} style={{cursor:'pointer'}}>
+      <div>
+        <div onClick={::this.toggleState} style={s}>
           <i style={styles.checkboxIcon}>
             {
               this.state.checked ?
               <Icon
                 onClick={::this.toggleState}
                 type="check"
+                fill={this.props.disabled?styles.gray:styles.blue}
                 style={styles.checkmark}
                 width={styles.checkmark.width}
                 height={styles.checkmark.height}
                 fill={this.props.disabled?'#BFBFBF':'#0066DC'}/>:
               null
-            }
+          }
           </i>
           <div style={{display:'block', overflow:'hidden'}}>{this.props.children}</div>
         </div>

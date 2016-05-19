@@ -1,6 +1,14 @@
 import Stylesheet, { defaults } from '../../../lib/stylesheet/stylesheet'
 
 let styles = {
+  checkbox: {
+    display: 'inline-block',
+    cursor: 'pointer',
+  },
+  checkboxDisabled: {
+    color: defaults.colors.gray3,
+    cursor: 'not-allowed',
+  },
   checkboxIcon: {
     position: 'relative',
     display: 'block',
@@ -15,7 +23,6 @@ let styles = {
   },
 
   checkmark: {
-    cursor: 'pointer',
     position: 'absolute',
     width: 14,
     height: 14,
@@ -26,6 +33,8 @@ let styles = {
     fontSize: 12,
     zIndex: 2,
   },
+  gray: defaults.colors.gray3,
+  blue: defaults.colors.dmBrand,
 }
 
 export default styles

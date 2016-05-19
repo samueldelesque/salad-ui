@@ -116,7 +116,7 @@ export default class InputText extends React.Component {
       value: value,
       onBlur: ::this.handleBlur,
       onChange: ::this.handleChange,
-      onKeyUp: ::this.handleKeyUp
+      onKeyUp: ::this.handleKeyUp,
     }
 
     return (
