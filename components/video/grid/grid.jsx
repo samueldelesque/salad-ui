@@ -1,6 +1,6 @@
 import React from 'react'
 import { get } from '../../../lib/fetch-methods'
-import Preview from '../preview/preview'
+import GridPreview from '../grid-preview/grid-preview'
 import TextClamp from '../../util/text-clamp/text-clamp'
 import Button from '../../util/button/button'
 import TimeAndViews from '../../util/time-and-views/time-and-views'
@@ -79,7 +79,7 @@ export default class VideosGrid extends React.Component {
   loadVideos(cb, props){
     if(this.refs.videoResults) this.refs.videoResults.style.opacity = .4
     let data = {
-      fields: Preview.apiFields.join(','),
+      fields: GridPreview.apiFields.join(','),
       page: this.currentPage,
       thumbnail_ratio: 'widescreen',
       sort: props.sortSelection || props.sortBy,
@@ -134,7 +134,7 @@ export default class VideosGrid extends React.Component {
           marginBottom: 20,
           flexGrow: 'grow',
         }}> {/*className={`col-sm-3 col-md-${this.props.colSize} mrg-btm-lg grid-item`}*/}
-        <Preview {...video} className="mrg-btm-md"/>
+        <GridPreview {...video} className="mrg-btm-md"/>
         <div className="video-meta">
           <h4>
             <a href={video.uri} className="link">
