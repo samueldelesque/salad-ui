@@ -17,6 +17,10 @@ const styles = {
     top: 1,
     boxShadow: 'inset 0 0 20px 0 rgba(0,0,0,0.03)',
   },
+  buttonDisabled: {
+    cursor: 'not-allowed',
+    opacity: '0.5',
+  },
   primary: {
     backgroundColor: defaults.colors.dmBrand,
     border: '2px solid ' + defaults.colors.dmBrand,

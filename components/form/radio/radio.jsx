@@ -2,11 +2,11 @@ import React from 'react'
 import styles from './_stylesheet'
 
 export default class Radio extends React.Component {
-  onChange(e) {
+  onChange(val) {
     if(this.props.disabled){
       return;
     }
-    this.props.onChange && this.props.onChange(e.target.value)
+    this.props.onChange && this.props.onChange(val)
   }
 
   renderChildren() {
@@ -27,26 +27,24 @@ export default class Radio extends React.Component {
       checked: this.props.selected,
     }
 
-    let s = {
-      margin: '10px 0',
-      position:'relative'
-    }
-    let ds = styles.disc.backgroundColor;
+    let s = styles.radio
+    let ds = styles.disc
     if(this.props.disabled){
-      s.color = '#BFBFBF';
-      ds = '#BFBFBF';
+      s = Object.assign({}, s, styles.radioDisabled)
+      ds = Object.assign({}, ds, styles.discDisabled)
     }
-    styles.disc.backgroundColor = ds;
 
     return (
-      <div style={s}>
-        <input type="radio" {...props} style={{display:'none'}} />
-        <label htmlFor={id} style={{cursor:'pointer',display:'block'}}>
-          <i style={styles.radioIcon}>
-            {this.props.selected? <span style={styles.disc}/> : null}
-          </i>
-          <div style={{display:'block', overflow:'hidden'}}>{this.renderChildren()}</div>
-        </label>
+      <div>
+        <div style={s} onClick={()=>this.onChange(this.props.value)}>
+          <input type="radio" {...props} style={{display:'none'}} />
+          <div htmlFor={id}>
+            <i style={styles.radioIcon}>
+              {this.props.selected? <span style={ds}/> : null}
+            </i>
+            <div style={{display:'block', overflow:'hidden'}}>{this.renderChildren()}</div>
+          </div>
+        </div>
       </div>
     );
   }

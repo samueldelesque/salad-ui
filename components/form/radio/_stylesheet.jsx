@@ -1,6 +1,14 @@
 import Stylesheet, { defaults } from '../../../lib/stylesheet/stylesheet'
 
 let styles = {
+  radio: {
+    display: 'inline-block',
+    cursor: 'pointer',
+  },
+  radioDisabled: {
+    cursor: 'not-allowed',
+    color: defaults.colors.gray3,
+  },
   radioIcon: {
     position: 'relative',
     display: 'block',
@@ -25,6 +33,9 @@ let styles = {
     backgroundColor: defaults.colors.dmBrand,
     borderRadius: '50%',
   },
+  discDisabled: {
+    backgroundColor: defaults.colors.gray3,
+  }
 }
 
 export default styles

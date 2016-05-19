@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react'
 import Icon from '../../icon/icon'
 import styles from './_stylesheet'
 
-
 export default class Checkbox extends Component {
   state = {
     checked: false
@@ -39,24 +38,21 @@ export default class Checkbox extends Component {
   }
 
   render() {
-    let s = {
-      margin: '10px 0',
-      position:'relative'
-    }
+    let s = styles.checkbox
     if(this.props.disabled){
-      s.color = '#BFBFBF;';
+      s = Object.assign({}, s, styles.checkboxDisabled)
     }
 
     return (
-      <div style={s}>
-        <div onClick={::this.toggleState} style={{cursor:(this.props.disabled?'default':'pointer')}}>
+      <div>
+        <div onClick={::this.toggleState} style={s}>
           <i style={styles.checkboxIcon}>
             {this.state.checked ?
               <Icon
                 onClick={::this.toggleState}
                 type="check"
                 style={styles.checkmark}
-                fill={this.props.disabled?'#BFBFBF':'#0066DC'}
+                fill={this.props.disabled?styles.gray:styles.blue}
                 width="14"
                 height="14">
               </Icon>
