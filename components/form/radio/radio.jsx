@@ -27,19 +27,19 @@ export default class Radio extends React.Component {
       checked: this.props.selected,
     }
 
-    let radioStyle = {
+    let s = {
       margin: '10px 0',
       position:'relative'
     }
-    let discColor = styles.disc.backgroundColor;
+    let ds = styles.disc.backgroundColor;
     if(this.props.disabled){
-      radioStyle.color = '#BFBFBF';
-      discColor = '#BFBFBF';
+      s.color = '#BFBFBF';
+      ds = '#BFBFBF';
     }
-    styles.disc.backgroundColor = discColor;
+    styles.disc.backgroundColor = ds;
 
     return (
-      <div style={radioStyle}>
+      <div style={s}>
         <input type="radio" {...props} style={{display:'none'}} />
         <label htmlFor={id} style={{cursor:'pointer',display:'block'}}>
           <i style={styles.radioIcon}>

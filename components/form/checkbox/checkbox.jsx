@@ -39,16 +39,16 @@ export default class Checkbox extends Component {
   }
 
   render() {
-    let checkStyle = {
+    let s = {
       margin: '10px 0',
       position:'relative'
     }
     if(this.props.disabled){
-      checkStyle.color = '#BFBFBF;';
+      s.color = '#BFBFBF;';
     }
 
     return (
-      <div style={checkStyle}>
+      <div style={s}>
         <div onClick={::this.toggleState} style={{cursor:(this.props.disabled?'default':'pointer')}}>
           <i style={styles.checkboxIcon}>
             {this.state.checked ?
