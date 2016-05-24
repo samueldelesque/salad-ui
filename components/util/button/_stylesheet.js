@@ -4,18 +4,23 @@ const styles = {
   button: {
     cursor: 'pointer',
     color: 'white',
-    boxShadow: '0 0 20px 0 rgba(0,0,0,0.06)',
+    boxShadow: '1px 1px 0 1px rgba(0,0,0,0.02)',
     position: 'relative',
+    verticalAlign: 'middle',
     display: 'inline-block',
-    borderWidth: 2,
-    borderStyle: 'solid',
+    lineHeight: 1,
+    borderWidth: 0,
+    outline: 'none',
     textAlign: 'center',
     borderRadius: 3,
     top: 0
   },
   buttonHover: {
     top: 1,
-    boxShadow: 'inset 0 0 20px 0 rgba(0,0,0,0.03)',
+    boxShadow: 'inset 1px 1px 0 1px rgba(0,0,0,0.02)',
+  },
+  buttonLoading: {
+
   },
   buttonDisabled: {
     cursor: 'not-allowed',
@@ -23,26 +28,35 @@ const styles = {
   },
   primary: {
     backgroundColor: defaults.colors.dmBrand,
-    border: '2px solid ' + defaults.colors.dmBrand,
   },
   primaryHover: {
   },
+  success: {
+    backgroundColor: defaults.colors.green,
+  },
+  successHover: {
+  },
   default: {
     color: defaults.colors.gray2,
-    borderColor: defaults.colors.gray2,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: defaults.colors.gray4,
     backgroundColor: 'white',
   },
   defaultHover: {
     backgroundColor: 'fefefe',
   },
   sm: {
-    padding: '4px 10px',
+    padding: '3px 10px',
+    height: 29,
   },
   md: {
-    padding: '6px 14px',
+    padding: '8px 14px',
+    height: 36,
   },
   lg: {
-    padding: '10px 22px',
+    padding: '15px 22px',
+    height: 50,
   },
   fullWidth: {
     display: 'block'

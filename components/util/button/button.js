@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import styles from './_stylesheet.js'
+import Spinner from 'react-spinjs'
 import merge from 'lodash.merge'
 
 export default class Anchor extends Component {
@@ -10,8 +11,10 @@ export default class Anchor extends Component {
   static defaultProps = {
     onPress: () => console.warn('Button has no onPress action.'),
     type: 'default',
-    size: 'sm',
+    size: 'md',
     fullWidth: false,
+    style: {},
+    loading: false
   }
 
   onPress(e){
@@ -22,7 +25,7 @@ export default class Anchor extends Component {
   }
 
   render(){
-    let s = [{}, styles.button, styles[this.props.type], styles[this.props.size]]
+    let s = [{}, this.props.style, styles.button, styles[this.props.type], styles[this.props.size]]
     if(this.state.hovered && !this.props.disabled)
       s = s.concat(styles.buttonHover, styles[this.props.type + 'Hover'])
     if(this.props.fullWidth)
@@ -36,7 +39,13 @@ export default class Anchor extends Component {
       onMouseOut={() => this.setState({ hovered:false })}
       onClick={(e) => this.onPress(e)}
       style={buttonStyle}>
-      {this.props.children}
+      {
+        this.props.loading ?
+        <Spinner config={{scale: 0.4}}/>:
+        this.state.hovered && this.props.mouseOverText ?
+        this.props.mouseOverText :
+        this.props.children
+      }
     </div>
   }
 }

@@ -5,6 +5,7 @@
   "scripts": {
     "build:demo": "webpack --config ./conf/webpack.config.demo.js",
     "build": "NODE_ENV=production webpack --config ./conf/webpack.config.prod.js",
+    "build:dev": "NODE_ENV=development webpack --config ./conf/webpack.config.prod.js",
     "dev-client": "node devClient.js",
     "dev": "nodemon devServer.js --exec babel-node --presets es2015,stage-0,react",
     "lint": "eslint src",
@@ -65,6 +66,8 @@
     "radium": "^0.17.1",
     "react-image-responsive": "^1.0.18",
     "react-simple-charts": "0.0.19",
-    "sprintf-js": "^1.0.3"
+    "react-spinjs": "^3.0.0",
+    "sprintf-js": "^1.0.3",
+    "velocity-react": "^1.1.5"
   }
 }

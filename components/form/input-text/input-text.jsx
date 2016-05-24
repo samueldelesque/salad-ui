@@ -71,17 +71,15 @@ export default class InputText extends React.Component {
       e.target.select()
     }
   }
-  handleChange(e)
-  {
+  handleChange(e){
     let value = e.target.value
     this.setState({value: value})
-    if (this.props.onChange)
-    {
+    if (this.props.onChange){
       this.props.onChange(value)
     }
   }
-  handleBlur(e)
-  {
+
+  handleBlur(e){
     this.setState({focus: false})
     if (this.props.onBlur)
     {

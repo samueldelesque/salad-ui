@@ -13,6 +13,10 @@ let styles = {
     width: '100%',
   },
 
+  noBorder: {
+    border: 'none',
+  },
+
   dropdownIcon: {
     position: 'absolute',
     right: '10px',

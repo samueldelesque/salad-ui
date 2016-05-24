@@ -1,18 +1,18 @@
 import React, {Component, PropTypes} from 'react'
 import Grid from '../grid/grid'
-import ListPreview from '../list-preview/list-preview'
+import Preview from '../preview/preview'
 
 export default class Playlist extends Grid {
   static defaultProps = {
-    sort: 'recent',
-    limit: 5,
+    sortBy: 'recent',
+    limit: 2,
     page: 1,
   }
 
   renderVideos() {
     return this.state.videos.map((video, index) => {
       return (
-        <ListPreview key={`ListPreview.${index}`} {...video}/>
+        <Preview type="list" key={`Preview.${index}`} {...video}/>
       )
     })
   }

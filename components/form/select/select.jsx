@@ -4,11 +4,14 @@ import {merge, filter} from 'lodash'
 import Icon from '../../icon/icon'
 import styles from './_stylesheet'
 
-
 export default class Select extends Component {
   state = {
     currentOption: null,
     open: false,
+  }
+
+  static defaultProps = {
+    noBorder: false,
   }
 
   componentWillMount() {
@@ -102,6 +105,9 @@ export default class Select extends Component {
   }
 
   render() {
+    let selectBoxStyles = styles.selectBox
+    if(this.props.noBorder) selectBoxStyles = Object.assign({}, selectBoxStyles, styles.noBorder)
+    console.log(selectBoxStyles, this.props.noBorder)
     return (
       <div style={{position: 'relative'}}>
         <div style={styles.selectBox} onClick={(e) => this.selectClick(e)}>

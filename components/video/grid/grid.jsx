@@ -1,10 +1,7 @@
 import React from 'react'
 import { get } from '../../../lib/fetch-methods'
-import GridPreview from '../grid-preview/grid-preview'
-import TextClamp from '../../util/text-clamp/text-clamp'
+import Preview from '../preview/preview'
 import Button from '../../util/button/button'
-import TimeAndViews from '../../util/time-and-views/time-and-views'
-import ButtonMore from '../../util/buttons/load-more'
 import Trans from '../../util/trans/trans'
 
 export default class VideosGrid extends React.Component {
@@ -41,13 +38,13 @@ export default class VideosGrid extends React.Component {
   }
 
   componentDidMount(){
-    // console.log('Mounting grid with', this.props)
     this.loadVideos('setInitialVideos', this.props)
   }
 
   componentWillReceiveProps(nextProps){
     if(this.hasPropsChanged(this.props, nextProps)){
       this.currentPage = 1
+      if(this.refs.videoResults) this.refs.videoResults.style.opacity = .4
       this.loadVideos('replaceVideos', nextProps)
     }
   }
@@ -77,9 +74,9 @@ export default class VideosGrid extends React.Component {
   }
 
   loadVideos(cb, props){
-    if(this.refs.videoResults) this.refs.videoResults.style.opacity = .4
+    this.setState({loading: true})
     let data = {
-      fields: GridPreview.apiFields.join(','),
+      fields: Preview.apiFields.join(','),
       page: this.currentPage,
       thumbnail_ratio: 'widescreen',
       sort: props.sortSelection || props.sortBy,
@@ -127,22 +124,15 @@ export default class VideosGrid extends React.Component {
       )
     }
     const containerWidth = this.refs.videoResults.getBoundingClientRect().width
+    const width = (containerWidth / this.props.colSize) - 20
     return this.state.videos.map((video,index) =>
       <div key={'vid.'+index} style={{
-          width: (containerWidth / this.props.colSize) - 20,
+          width: width,
           marginRight: (index+1) % this.props.colSize !== 0 ? 20 : 0,
           marginBottom: 20,
           flexGrow: 'grow',
-        }}> {/*className={`col-sm-3 col-md-${this.props.colSize} mrg-btm-lg grid-item`}*/}
-        <GridPreview {...video} className="mrg-btm-md"/>
-        <div className="video-meta">
-          <h4>
-            <a href={video.uri} className="link">
-              <TextClamp clamp="2">{video.title}</TextClamp>
-            </a>
-          </h4>
-          <TimeAndViews noUploadLabel={true} time={video.created_time} views={video.views_total}/>
-        </div>
+        }}>
+        <Preview type="grid" {...video} imageHeight={width/1.77}/>
       </div>
     )
   }
@@ -163,9 +153,6 @@ export default class VideosGrid extends React.Component {
   }
 
   render() {
-    let css = ['video-list']
-    if(this.state.searching) css.push('searching')
-    if(this.state.loading) css.push('loading')
     return (
       <div ref="videoResults">
         {this.state.searchTerm ? this.searchTermSection() : null}

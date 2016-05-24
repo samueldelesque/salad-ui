@@ -37,16 +37,16 @@ module.exports = {
   ],
   module: {
     loaders: [
-        {
-          test: /\.jsx?|\.es6/,
-          loaders: ['babel?presets[]=stage-0'],
-          include: directories,
-          exclude: [path.resolve('../node_modules')]
-        },
-        {
-            test: /\.scss|\.css$/,
-            loader: "style!css!sass"
-        }
+      {
+        test: /\.jsx?|\.es6/,
+        loaders: ['babel?presets[]=stage-0'],
+        include: directories,
+        exclude: [path.resolve('../node_modules')]
+      },
+      {
+        test: /\.scss|\.css$/,
+        loader: "style!css!sass"
+      }
     ]
   }
 };
