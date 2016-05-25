@@ -47,16 +47,16 @@ const styles = {
     backgroundColor: 'fefefe',
   },
   sm: {
-    padding: '3px 10px',
-    height: 29,
+    padding: '5px 10px',
+    height: 28,
   },
   md: {
-    padding: '8px 14px',
+    padding: '10px 14px',
     height: 36,
   },
   lg: {
-    padding: '15px 22px',
-    height: 50,
+    padding: '16px 22px',
+    height: 48,
   },
   fullWidth: {
     display: 'block'

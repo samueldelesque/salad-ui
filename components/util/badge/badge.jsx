@@ -48,6 +48,12 @@ export default class Badge extends Component {
   }
 
   positionBadge(position, styles){
+    if(this.props.position === 'inline'){
+      styles.display = 'inline-block'
+      styles.marginLeft = 5
+      styles.marginRight = 5
+      return styles
+    }
     styles.position = 'absolute'
     styles.zIndex = '2'
 
@@ -145,14 +151,13 @@ export default class Badge extends Component {
   }
 
   render() {
-    // let position = this.props.position ? `utils_badge--${this.props.position}` : false
     let badgeStyles = styles
     badgeStyles = this.colorizeBadge(this.props.type, badgeStyles)
     if(this.props.position) badgeStyles = this.positionBadge(this.props.position, badgeStyles)
     return (
-      <div style={styles}> {/*className={classNames('utils_badge', `utils_badge--${this.props.type}`, position)}>*/}
+      <span style={styles}>
         {this.props.children}
-      </div>
+      </span>
     )
   }
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 import SaladUI from '../salad-ui'
-import Chart from '../chart/chart'
 import { iconTypes } from '../icon/icon'
 import _ from 'lodash'
 import glob from '../../lib/glob.js'
@@ -143,7 +142,7 @@ export default class Demo extends React.Component {
                 <SaladUI.Form.Select
                   options={selectOptions}
                   handleClick={(protein)=>this.setState({protein})}
-                  border={'none'}>Borderless</SaladUI.Form.Select>
+                  noBorder={true}>Borderless</SaladUI.Form.Select>
                 <p style={{padding: 10}}>Protein: <b style={{fontWeight: 'bold'}}>{this.state.protein.value} ({this.state.protein.calories}cal)</b></p>
               </div>
             </li>
@@ -265,6 +264,13 @@ sso.getJWT('revshare').then(token => {
               <pre>{`<TagList items=['tag1','tag2','tag3','tag4','tag5','tag6']/>`}</pre>
               <SaladUI.Util.TagList items={this.state.tagsAdded} handleRemoveItem={(t) => this.handleRemoveTag(t)} />
             </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Badges</h3>
+              <pre>{`<SaladUI.Util.Badge type='live'>Live</SaladUI.Util.Badge>`}</pre>
+              <SaladUI.Util.Badge position="inline" type="live">Live</SaladUI.Util.Badge>
+              <SaladUI.Util.Badge position="inline" type="duration">00:23</SaladUI.Util.Badge>
+              <SaladUI.Util.Badge position="inline" type="verified"><SaladUI.Icon type="check" fill="white" width={12} height={12}/></SaladUI.Util.Badge>
+            </li>
           </ul>
         </section>
         <section>
@@ -294,6 +300,11 @@ sso.getJWT('revshare').then(token => {
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Grid</h3>
               <pre>{'<SaladUI.Video.Grid/>'}</pre>
               <SaladUI.Video.Grid apiURL="https://api.dailymotion.com" endpoint="/videos"/>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Grid</h3>
+              <pre>{'<SaladUI.Video.Grid/>'}</pre>
+              <SaladUI.Video.Grid apiURL="https://api.dailymotion.com" mediaType="playlist" endpoint="/user/spi0n/playlists"/>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> List</h3>

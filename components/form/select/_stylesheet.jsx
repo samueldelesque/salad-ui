@@ -4,7 +4,8 @@ let itemHeight = '35px'
 
 let styles = {
   selectBox: {
-    padding: '5px 10px',
+    padding: 10,
+    lineHeight: 1.1,
     border: '1px solid ' + defaults.colors.gray3,
     borderRadius: '3px',
     cursor: 'pointer',
@@ -35,7 +36,8 @@ let styles = {
 
   dropdownItem: {
     margin: '0',
-    padding: '5px 10px',
+    padding: 10,
+    lineHeight: 1.1,
     cursor: 'pointer',
     height: itemHeight,
     overflow: 'hidden',

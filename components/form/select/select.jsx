@@ -107,10 +107,9 @@ export default class Select extends Component {
   render() {
     let selectBoxStyles = styles.selectBox
     if(this.props.noBorder) selectBoxStyles = Object.assign({}, selectBoxStyles, styles.noBorder)
-    console.log(selectBoxStyles, this.props.noBorder)
     return (
       <div style={{position: 'relative'}}>
-        <div style={styles.selectBox} onClick={(e) => this.selectClick(e)}>
+        <div style={selectBoxStyles} onClick={(e) => this.selectClick(e)}>
           <Icon type="arrow-left" width={10} height={10} style={styles.dropdownIcon} />
           <div>
             {this.state.currentOption.name}

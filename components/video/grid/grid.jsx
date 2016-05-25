@@ -1,6 +1,6 @@
 import React from 'react'
 import { get } from '../../../lib/fetch-methods'
-import Preview from '../preview/preview'
+import Preview, {mediaTypes} from '../preview/preview'
 import Button from '../../util/button/button'
 import Trans from '../../util/trans/trans'
 
@@ -26,6 +26,7 @@ export default class VideosGrid extends React.Component {
     flags: React.PropTypes.array,
     endpoint: React.PropTypes.string,
     searchTerm: React.PropTypes.string,
+    mediaType: React.PropTypes.oneOf(['video', 'playlist']),
   }
 
   static defaultProps = {
@@ -34,17 +35,29 @@ export default class VideosGrid extends React.Component {
     flags: [],
     endpoint: '/videos',
     colSize: 3,
-    searchTerm: null
+    searchTerm: null,
+    mediaType: 'video'
   }
 
   componentDidMount(){
     this.loadVideos('setInitialVideos', this.props)
+    this.onResize = this.onResize.bind(this)
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.onResize)
+  }
+
+  onResize(){
+    this.setState({width: this.refs.container.getBoundingClientRect().width})
   }
 
   componentWillReceiveProps(nextProps){
     if(this.hasPropsChanged(this.props, nextProps)){
       this.currentPage = 1
-      if(this.refs.videoResults) this.refs.videoResults.style.opacity = .4
+      if(this.refs.container) this.refs.container.style.opacity = .4
       this.loadVideos('replaceVideos', nextProps)
     }
   }
@@ -74,9 +87,10 @@ export default class VideosGrid extends React.Component {
   }
 
   loadVideos(cb, props){
+    if(!this.props.mediaType) console.error('No mediaType provided to Grid.')
     this.setState({loading: true})
     let data = {
-      fields: Preview.apiFields.join(','),
+      fields: mediaTypes[this.props.mediaType].fields.join(','),
       page: this.currentPage,
       thumbnail_ratio: 'widescreen',
       sort: props.sortSelection || props.sortBy,
@@ -84,12 +98,8 @@ export default class VideosGrid extends React.Component {
       localization: 'en_ZH' //must pass a non-existent language in order to have sort working in current API (lol)
     }
     let endpoint = props.endpoint ? props.endpoint : '/videos'
-
-    if(props.searchTerm)
-      data.search = props.searchTerm
-
-    if(props.flags && props.flags.length)
-      data.flags = props.flags.join(',')
+    if(props.searchTerm) data.search = props.searchTerm
+    if(props.flags && props.flags.length) data.flags = props.flags.join(',')
 
     get(this.props.apiURL + endpoint, {data})
     .then(res => this[cb](res.list, res.has_more))
@@ -101,13 +111,13 @@ export default class VideosGrid extends React.Component {
 
   appendVideos(videos, hasMore){
     this.setState({hasMore, videos: this.state.videos.concat(videos), failed: false, loading: false})
-    this.refs.videoResults.style.opacity = 1
+    this.refs.container.style.opacity = 1
     this.currentPage++
   }
 
   replaceVideos(videos, hasMore){
     this.setState({hasMore, videos, loading: false, failed: false})
-    this.refs.videoResults.style.opacity = 1
+    this.refs.container.style.opacity = 1
     this.currentPage++
   }
 
@@ -123,8 +133,8 @@ export default class VideosGrid extends React.Component {
         <div className="no-results"><Trans context={this.trans}>noVideosFound</Trans></div>
       )
     }
-    const containerWidth = this.refs.videoResults.getBoundingClientRect().width
-    const width = (containerWidth / this.props.colSize) - 20
+    const containerWidth = this.state.width
+    const width = (containerWidth - (20 * (this.props.colSize - 1))) / this.props.colSize
     return this.state.videos.map((video,index) =>
       <div key={'vid.'+index} style={{
           width: width,
@@ -132,7 +142,7 @@ export default class VideosGrid extends React.Component {
           marginBottom: 20,
           flexGrow: 'grow',
         }}>
-        <Preview type="grid" {...video} imageHeight={width/1.77}/>
+        <Preview type="grid" {...this.props} {...video} imageHeight={width/1.77}/>
       </div>
     )
   }
@@ -154,14 +164,14 @@ export default class VideosGrid extends React.Component {
 
   render() {
     return (
-      <div ref="videoResults">
+      <div ref="container">
         {this.state.searchTerm ? this.searchTermSection() : null}
         {
           this.state.failed ?
           this.onLoadError():
           <div style={{
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: 'flex-start',
               flexWrap: 'wrap',
             }}>
             {this.renderVideos()}
