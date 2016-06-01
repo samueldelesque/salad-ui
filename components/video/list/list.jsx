@@ -111,8 +111,6 @@ export default class List extends React.Component {
   }
 
   loadMore(){
-    if(typeof(DM_Events) !== 'undefined')
-      DM_Events.trigger('channel_load_more', {ga: {label: this.props.id.charAt(0).toUpperCase() + this.props.id.substr(1)}})
     this.loadVideos('appendVideos', this.props)
   }
 

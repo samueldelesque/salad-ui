@@ -93,7 +93,8 @@ export default class Preview extends Component {
         <div style={{
           height: this.props.imageHeight || previewStyles.image.height,
           width: this.props.imageWidth || previewStyles.image.width,
-          position: 'relative'
+          position: 'relative',
+          display: 'inline-block', //non flex fallback
         }}>
           <a href={this.props.uri} style={{display: 'block', overflow: 'hidden'}}>
             <VelocityComponent animation={{
@@ -122,7 +123,8 @@ export default class Preview extends Component {
         <div style={previewStyles.text}>
           <h4 style={previewStyles.title}>
             <a href={this.props.uri} style={{
-              textDecoration: this.state.hovered ? 'underline' : 'none'
+              textDecoration: this.state.hovered ? 'underline' : 'none',
+              color: styles.link.color
             }}>
               <TextClamp clamp="2">
                 {

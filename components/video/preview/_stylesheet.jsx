@@ -5,19 +5,24 @@ const styles = {
     preview: {
       marginBottom: 20,
       display: 'flex',
+      position: 'relative',
     },
     image: {
       width: 162,
-      height: 90,
+      height: 93,
     },
     text: {
       flex: 1,
+      display: 'inline-block', //non flex fallback
       paddingLeft: 20,
       lineHeight: 1.2,
       height: '2.4rem'
     },
     title: {
       marginBottom: 10,
+      lineHeight: 1.2,
+      height: '2.4rem',
+      overflow: 'hidden',
     },
   },
   grid: {
@@ -34,12 +39,16 @@ const styles = {
       marginTop: 10,
       marginBottom: 10,
       lineHeight: 1.2,
-      height: '2.4rem'
+      height: '2.4rem',
+      overflow: 'hidden',
     },
   },
   after: {
     clear: 'both',
     display: 'table',
+  },
+  link: {
+    color: defaults.colors.dmBrand
   }
 }
 

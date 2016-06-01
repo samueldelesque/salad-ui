@@ -4,7 +4,6 @@ import {merge} from 'lodash'
 import styles from './_stylesheet'
 
 export default class InputText extends React.Component {
-  trans = DM_ENV['form/input-text']
   state = {
     value: '',
     focus: false
@@ -12,6 +11,7 @@ export default class InputText extends React.Component {
   static defaultProps = {
     textarea: false,
     type: 'text',
+    style: {},
     focus: false,
     error: false,
     placeholder: 'Start typing'
@@ -93,7 +93,7 @@ export default class InputText extends React.Component {
     }
 
     if (this.props.maxLength) {
-      return `${this.state.value.length}/${this.props.maxLength} ${this.trans.max_characters}`
+      return `${this.state.value.length}/${this.props.maxLength} characters`
     }
   }
 
@@ -121,7 +121,7 @@ export default class InputText extends React.Component {
       <div>
         <span>
           {React.createElement(tag, props, null)}
-          {this.props.onClear && value && <i className="icon-close" onClick={this.props.onClear} title={this.trans.clear}/>}
+          {this.props.onClear && value && <i className="icon-close" onClick={this.props.onClear}/>}
         </span>
         {
           showHint && !this.props.error ?

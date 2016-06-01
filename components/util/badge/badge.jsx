@@ -1,4 +1,5 @@
 import React, {PropTypes, Component} from 'react'
+import Icon from '../../icon/icon'
 import {defaults} from '../../../lib/stylesheet/stylesheet'
 
 const styles = {
@@ -47,7 +48,8 @@ export default class Badge extends Component {
     position: 'btm-end'
   }
 
-  positionBadge(position, styles){
+  positionBadge(position){
+    let styles = {}
     if(this.props.position === 'inline'){
       styles.display = 'inline-block'
       styles.marginLeft = 5
@@ -78,7 +80,8 @@ export default class Badge extends Component {
     return styles
   }
 
-  colorizeBadge(type, styles){
+  colorizeBadge(type){
+    let styles = {}
     switch(type){
       case 'duration':
       case 'private':
@@ -124,6 +127,9 @@ export default class Badge extends Component {
 
       case 'verified':
         styles.backgroundColor = defaults.colors.dmBrand
+        styles.width = 16
+        styles.height = 16
+        styles.transform = 'rotate(-45deg)'
         styles.color = '#FFF'
         break
 
@@ -151,12 +157,14 @@ export default class Badge extends Component {
   }
 
   render() {
-    let badgeStyles = styles
-    badgeStyles = this.colorizeBadge(this.props.type, badgeStyles)
-    if(this.props.position) badgeStyles = this.positionBadge(this.props.position, badgeStyles)
+    let badgeStyles = Object.assign({}, styles, this.props.styles, this.colorizeBadge(this.props.type), this.positionBadge(this.props.position))
     return (
-      <span style={styles}>
-        {this.props.children}
+      <span style={badgeStyles}>
+        {
+          this.props.type === 'verified' ?
+          <Icon type="check" fill="white" height={10} width={10} style={{transform: 'rotate(45deg)', position: 'relative', left: -1, top: 1}}/>:
+          this.props.children
+        }
       </span>
     )
   }

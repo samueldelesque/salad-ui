@@ -74,6 +74,9 @@ export default class Select extends Component {
 
     if(this.props.handleClick)
       this.props.handleClick(this.state.currentOption)
+
+    if(this.props.onChange)
+      this.props.onChange(this.state.currentOption)
   }
 
   renderOptions() {
