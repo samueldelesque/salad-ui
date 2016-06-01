@@ -68,6 +68,7 @@ export default class Demo extends React.Component {
     selectedRadio: 'radio1',
     protein: {name: null, value: null, calories: 0},
     tagsAdded: ['tag1','tag2','tag3','tag4','tag5','tag6'],
+    showOverlay: false,
   }
 
   handleRemoveTag(tag){
@@ -78,6 +79,18 @@ export default class Demo extends React.Component {
     tags.splice(index, 1);
     this.setState({
       tagsAdded: tags
+    })
+  }
+
+  showOverlay(){
+    this.setState({
+      showOverlay: true
+    })
+  }
+
+  closeOverlay(){
+    this.setState({
+      showOverlay: false
     })
   }
 
@@ -310,6 +323,26 @@ sso.getJWT('revshare').then(token => {
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> List</h3>
               <pre>{'<SaladUI.Video.List/>'}</pre>
               <SaladUI.Video.List apiURL="https://api.dailymotion.com" endpoint="/videos"/>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Overlay</h2>
+          <ul className="functionality">
+            <li>
+              <SaladUI.Util.Button type="primary" onPress={()=>this.showOverlay()}>Click me!</SaladUI.Util.Button>
+              <SaladUI.Util.Overlay
+                show={this.state.showOverlay}
+                header="Overlay title"
+                onClose={()=>this.closeOverlay()}>
+                <overlayContent>
+                  This is overlay's content
+                </overlayContent>
+                <overlayFooter>
+                  <SaladUI.Util.Button onPress={()=>this.closeOverlay()} style={{marginRight: '10px'}}>Cancel</SaladUI.Util.Button>
+                  <SaladUI.Util.Button type="primary" onPress={()=>this.closeOverlay()}>Save</SaladUI.Util.Button>
+                </overlayFooter>
+              </SaladUI.Util.Overlay>
             </li>
           </ul>
         </section>
