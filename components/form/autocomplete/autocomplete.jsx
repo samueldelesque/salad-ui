@@ -12,6 +12,7 @@ export default class Autocomplete extends Component {
     clearOnSelect: React.PropTypes.bool,
     latency: React.PropTypes.number,
     limit: React.PropTypes.number,
+    style: React.PropTypes.object,
     suggestions: React.PropTypes.array,
     handleSelectItem: React.PropTypes.func.isRequired,
     requestSuggestions: React.PropTypes.func.isRequired,
@@ -20,6 +21,7 @@ export default class Autocomplete extends Component {
   static defaultProps = {
     latency: 300,
     limit: 15,
+    style: {},
     inputPlaceholder: 'Start typing',
     noSuggestionsText: 'No results',
     isLoading: false,
@@ -202,6 +204,7 @@ export default class Autocomplete extends Component {
     let inputProps = {
       placeholder: this.props.inputPlaceholder,
       value: this.state.inputText,
+      style: this.props.style,
       //onBlur: ()=>setTimeout(()=>this.setState({showSuggestions: false}), 50),
       onClick: ::this.handleInputClick,
       onChange: ::this.handleInputChange,

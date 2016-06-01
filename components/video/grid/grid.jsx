@@ -122,8 +122,6 @@ export default class VideosGrid extends React.Component {
   }
 
   loadMore(){
-    if(typeof(DM_Events) !== 'undefined')
-      DM_Events.trigger('channel_load_more', {ga: {label: this.props.id.charAt(0).toUpperCase() + this.props.id.substr(1)}})
     this.loadVideos('appendVideos', this.props)
   }
 
@@ -141,6 +139,7 @@ export default class VideosGrid extends React.Component {
           marginRight: (index+1) % this.props.colSize !== 0 ? 20 : 0,
           marginBottom: 20,
           flexGrow: 'grow',
+          display: 'inline-block', //non flex fallback
         }}>
         <Preview type="grid" {...this.props} {...video} imageHeight={width/1.77}/>
       </div>
@@ -178,7 +177,7 @@ export default class VideosGrid extends React.Component {
           </div>}
         {
           this.state.hasMore?
-          <Button fullWidth={true} loading={this.state.loading} onPress={()=>this.loadMore()}>Load more</Button>:
+          <Button fullWidth={true} loading={this.state.loading} onPress={()=>this.loadMore()}><Trans context={this.trans}>Load more</Trans></Button>:
           null
         }
       </div>

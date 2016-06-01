@@ -57,6 +57,8 @@
   },
   "dependencies": {
     "clamp-js": "^0.7.0",
+    "console-polyfill": "^0.2.2",
+    "es5-shim": "^4.5.8",
     "es6-promise": "^3.1.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash.map": "^4.3.0",

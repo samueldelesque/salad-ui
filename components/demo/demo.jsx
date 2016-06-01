@@ -4,8 +4,15 @@ import { iconTypes } from '../icon/icon'
 import _ from 'lodash'
 import glob from '../../lib/glob.js'
 
-if(!glob.DM_ENV) glob.DM_ENV = {}
-glob.DM_ENV['form/input-text'] = {}
+// Sadly this is still required... Let's try to get rid of it soon.
+glob.DM_ENV = {
+  'video/grid': {
+    noVideosFound: "No videos found",
+    loadErrorMsg: "Failed to load videos.",
+    searchingFor: "Searching for:",
+    "Load more": "Load more"
+  }
+}
 
 console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fromCharCode(55356, 57211) + ' Friday 6pm.')
 
@@ -53,6 +60,11 @@ class DemoAutocomplete extends React.Component {
       inputPlaceholder: 'Start typing a country name',
       requestSuggestions: ::this.requestSuggestions,
       suggestions: this.state.suggestions,
+      // style: {
+      //   border: 'none',
+      //   color: 'white',
+      //   background: 'transparent'
+      // }
     }
 
     return (
@@ -280,6 +292,7 @@ sso.getJWT('revshare').then(token => {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Badges</h3>
               <pre>{`<SaladUI.Util.Badge type='live'>Live</SaladUI.Util.Badge>`}</pre>
+              <pre>{`<SaladUI.Util.Badge type='verified'></SaladUI.Util.Badge>`}</pre>
               <SaladUI.Util.Badge position="inline" type="live">Live</SaladUI.Util.Badge>
               <SaladUI.Util.Badge position="inline" type="duration">00:23</SaladUI.Util.Badge>
               <SaladUI.Util.Badge position="inline" type="verified"><SaladUI.Icon type="check" fill="white" width={12} height={12}/></SaladUI.Util.Badge>
