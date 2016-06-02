@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import {VelocityComponent} from 'velocity-react'
+import Icon from '../../icon/icon'
 import styles from './_stylesheet'
 
 export default class Overlay extends Component {
@@ -13,21 +14,23 @@ export default class Overlay extends Component {
   }
 
   onClose(e){
-    if(e.keyCode === 27)
-      this.props.onClose()
+    if(e.keyCode && e.keyCode != 27)
+      return
+
+    this.props.onClose()
   }
 
   render() {
+    let hasTitle = false
     var renderChildren = React.Children.map(this.props.children, (child) => {
-      if(child.type === 'overlayFooter')
-        return <div style={styles.action}>
-          {child}
-        </div>
-
-      else
-        return <div style={styles.content}>
-          {child}
-        </div>
+      if(child.type === 'overlayHeader') hasTitle = true
+      let s = styles[child.type]
+      if(child.props.style){
+        s = Object.assign({}, s, child.props.style)
+      }
+      return <div style={s}>
+          {child.props.children}
+      </div>
     })
 
     let animationProps = {
@@ -37,19 +40,22 @@ export default class Overlay extends Component {
     }
 
     return (
-      <div>
-        <VelocityComponent animation={animationProps} duration={200}>
-          <div style={styles.wrapper}>
-            {this.props.header?
-              <div style={styles.heading}>
-                {this.props.header}
-              </div>
-              : null
-            }
-            {renderChildren}
-          </div>
-        </VelocityComponent>
-      </div>
+      <VelocityComponent animation={animationProps} duration={200}>
+        <div style={styles.wrapper}>
+          {this.props.closeButton?
+            <Icon
+              type="close"
+              width="12"
+              height="12"
+              fill={hasTitle?'white':'black'}
+              style={{float:'right', cursor:'pointer', margin: '20px 20px 0 10px'}}
+              onClick={e=>this.onClose(e)} />
+            : null
+          }
+
+          {renderChildren}
+        </div>
+      </VelocityComponent>
     )
   }
 }

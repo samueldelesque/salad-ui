@@ -4,7 +4,6 @@ let styles = {
   wrapper: {
     position: 'fixed',
     width: '600px',
-    minHeight: '200px',
     maxHeight: '600px',
     top: '10%',
     left: '50%',
@@ -15,22 +14,20 @@ let styles = {
     borderRadius: '5px'
   },
 
-  heading: {
+  overlayHeader: {
     padding: '15px 20px',
     fontSize: '20px',
     color: 'white',
     background: defaults.colors.dmBrand,
   },
 
-  content: {
+  overlayContent: {
     padding: '20px',
     backgroundColor: 'white',
   },
 
-  action: {
+  overlayFooter: {
     padding: '15px 20px',
-    position: 'absolute',
-    bottom: 0,
     width: '100%',
     backgroundColor: defaults.colors.gray4,
   },

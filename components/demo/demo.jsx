@@ -341,15 +341,36 @@ sso.getJWT('revshare').then(token => {
         </section>
         <section>
           <h2>Overlay</h2>
+          <pre>
+{`<SaladUI.Util.Overlay
+    show=true
+    onClose={()}
+    closeButton={true}>
+    <overlayHeader style={{backgroundColor:'blue'}}>
+      This is the header section and the overlay's title
+    </overlayHeader>
+    <overlayContent>
+      This is overlay's content This is overlay's content This is overlay's content This is overlay's content
+    </overlayContent>
+    <overlayFooter>
+      <SaladUI.Util.Button onPress={()=>this.closeOverlay()} style={{marginRight: '10px'}}>Cancel</SaladUI.Util.Button>
+      <SaladUI.Util.Button type="primary" onPress={()=>this.closeOverlay()}>Save</SaladUI.Util.Button>
+    </overlayFooter>
+  </SaladUI.Util.Overlay>
+`}
+          </pre>
           <ul className="functionality">
             <li>
               <SaladUI.Util.Button type="primary" onPress={()=>this.showOverlay()}>Click me!</SaladUI.Util.Button>
               <SaladUI.Util.Overlay
                 show={this.state.showOverlay}
-                header="Overlay title"
-                onClose={()=>this.closeOverlay()}>
+                onClose={()=>this.closeOverlay()}
+                closeButton={true}>
+                <overlayHeader>
+                  This is the header section and the overlay's title
+                </overlayHeader>
                 <overlayContent>
-                  This is overlay's content
+                  This is overlay's content This is overlay's content This is overlay's content This is overlay's content
                 </overlayContent>
                 <overlayFooter>
                   <SaladUI.Util.Button onPress={()=>this.closeOverlay()} style={{marginRight: '10px'}}>Cancel</SaladUI.Util.Button>
