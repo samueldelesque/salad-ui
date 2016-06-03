@@ -29,7 +29,7 @@ export default class Overlay extends Component {
         s = Object.assign({}, s, child.props.style)
       }
       return <div style={s}>
-          {child.props.children}
+        {child.props.children}
       </div>
     })
 
@@ -45,8 +45,8 @@ export default class Overlay extends Component {
           {this.props.closeButton?
             <Icon
               type="close"
-              width="12"
-              height="12"
+              width={12}
+              height={12}
               fill={hasTitle?'white':'black'}
               style={{float:'right', cursor:'pointer', margin: '20px 20px 0 10px'}}
               onClick={e=>this.onClose(e)} />

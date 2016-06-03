@@ -102,7 +102,7 @@ export default class InputText extends React.Component {
     let showHint = hint && !this.props.disabled && !this.props.readOnly
     let value = this.state.value ? this.state.value : this.props.value
     let tag = this.props.textarea ? 'textarea' : 'input'
-    let inputStyle = merge({}, styles.inputStyle, this.props.style)
+    let inputStyle = merge({}, styles.inputStyle, this.props.textarea ? styles.textareaStyle : null, this.props.style)
 
     let props = {
       ref: 'input',
