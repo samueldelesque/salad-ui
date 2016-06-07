@@ -191,7 +191,7 @@ export default class Autocomplete extends Component {
       </li>
     }, this);
 
-    return <ul style={styles.suggestions} className="suggestions">
+    return <ul style={styles.suggestions} className="transition transition-sm fadeIn">
       { items }
     </ul>
   }

@@ -3,6 +3,8 @@ import {VelocityComponent} from 'velocity-react'
 import Icon from '../../icon/icon'
 import styles from './_stylesheet'
 
+import '../../../lib/stylesheet/transitions.scss'
+
 export default class Overlay extends Component {
 
   componentWillMount(){
@@ -33,29 +35,23 @@ export default class Overlay extends Component {
       </div>
     })
 
-    let animationProps = {
-      opacity: (this.props.show? 1 : 0),
-      scaleX: (this.props.show? 1 : 0),
-      scaleY: (this.props.show? 1 : 0),
-    }
+    let className = `transition transition-xsm zoomIn${this.props.show? ' active': '' }`
 
     return (
-      <VelocityComponent animation={animationProps} duration={200}>
-        <div style={styles.wrapper}>
-          {this.props.closeButton?
-            <Icon
-              type="close"
-              width="12"
-              height="12"
-              fill={hasTitle?'white':'black'}
-              style={{float:'right', cursor:'pointer', margin: '20px 20px 0 10px'}}
-              onClick={e=>this.onClose(e)} />
-            : null
-          }
+      <div style={styles.wrapper} className={className}>
+        {this.props.closeButton?
+          <Icon
+            type="close"
+            width="12"
+            height="12"
+            fill={hasTitle?'white':'black'}
+            style={{float:'right', cursor:'pointer', margin: '20px 20px 0 10px'}}
+            onClick={e=>this.onClose(e)} />
+          : null
+        }
 
-          {renderChildren}
-        </div>
-      </VelocityComponent>
+        {renderChildren}
+      </div>
     )
   }
 }

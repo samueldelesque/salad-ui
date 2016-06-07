@@ -9,9 +9,9 @@ let styles = {
     left: '50%',
     marginLeft: '-300px',
     background: 'white',
-    zIndex: '9999',
+    zIndex: 9999,
     boxShadow: '0 0 0 20038px rgba(0,0,0,.5)',
-    borderRadius: '5px'
+    borderRadius: '5px',
   },
 
   overlayHeader: {
