@@ -14,6 +14,9 @@ glob.DM_ENV = {
   }
 }
 
+
+// Let's try to inject GA for shits and giggles
+
 console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fromCharCode(55356, 57211) + ' Friday 6pm.')
 
 const chartData = [
@@ -38,6 +41,18 @@ class DemoAutocomplete extends React.Component {
 
   state = {
     suggestions: []
+  }
+
+  componentDidMount(){
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-78769010-1', 'auto');
+
+    console.log('Lets track this pageview...')
+    SaladUI.Lib.tracking.trackPage('SaladUI Demo')
   }
 
   requestSuggestions(keyword) {
@@ -138,8 +153,9 @@ export default class Demo extends React.Component {
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> InputText</h3>
-              <pre>{'<InputText/>'}</pre>
+              <pre>{'<InputText/><InputText textarea/>'}</pre>
               <SaladUI.Form.InputText/>
+              <SaladUI.Form.InputText textarea/>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Toggle</h3>
@@ -228,6 +244,13 @@ f.delete('http://api.dailymotion.com/user/spi0n')`}
 sso.getJWT('revshare').then(token => {
   console.log('Yay I have a token!')
 })`}
+              </pre>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> tracking</h3>
+              <pre>
+{`tracking.trackPage('SaladUI Demo')
+tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
               </pre>
             </li>
           </ul>

@@ -31,7 +31,7 @@ export default class Overlay extends Component {
         s = Object.assign({}, s, child.props.style)
       }
       return <div style={s}>
-          {child.props.children}
+        {child.props.children}
       </div>
     })
 
