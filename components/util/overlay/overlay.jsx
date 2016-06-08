@@ -2,12 +2,15 @@ import React, {PropTypes, Component} from 'react'
 import {VelocityComponent} from 'velocity-react'
 import Icon from '../../icon/icon'
 import styles from './_stylesheet'
+import glob from '../../../lib/glob'
 
-import '../../../lib/stylesheet/transitions.scss'
+if(glob.canUseDom()){
+  require('../../../lib/stylesheet/transitions.scss')
+}
 
 export default class Overlay extends Component {
 
-  componentWillMount(){
+  componentDidMount(){
     document.addEventListener("keydown", this.onClose.bind(this), false);
   }
 
@@ -38,7 +41,7 @@ export default class Overlay extends Component {
     let className = `transition transition-xsm zoomIn${this.props.show? ' active': '' }`
 
     return (
-      <div style={styles.wrapper} className={className}>
+      <div style={Object.assign({}, styles.wrapper, {display: this.props.show?'':'none'})} className={className}>
         {this.props.closeButton?
           <Icon
             type="close"

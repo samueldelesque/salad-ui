@@ -24,6 +24,7 @@ export default class Autocomplete extends Component {
     style: {},
     inputPlaceholder: 'Start typing',
     noSuggestionsText: 'No results',
+    allowCustomText: true,
     isLoading: false,
     clearOnSelect: false,
     suggestions: [],
@@ -98,8 +99,11 @@ export default class Autocomplete extends Component {
     switch(e.which){
 
       case ENTER:
-      if(this.timer) clearTimeout(this.timer);
-        this.onSelect(e.target.value);
+        if(this.timer) clearTimeout(this.timer);
+        // Try to find selected item from index
+        // otherwise return textbox text
+        if(this.props.allowCustomText) this.onSelect(this.props.suggestions[this.state.currentIndex] || e.target.value)
+        else this.onSelect(this.props.suggestions[this.state.currentIndex])
         break;
 
       case DOWN:
@@ -147,7 +151,7 @@ export default class Autocomplete extends Component {
   extractTextFromSelection(index){
     let text = this.props.suggestions[index]
     if(typeof text === 'object' && this.props.suggestionTextKey){
-      text = text.props[this.props.suggestionTextKey]
+      text = text[this.props.suggestionTextKey]
     }
     return text;
   }
@@ -187,7 +191,11 @@ export default class Autocomplete extends Component {
         onMouseEnter={e=>this.setState({currentIndex: index})}
         onClick={()=>this.onSelect(item)}
         style={(this.state.currentIndex === index)? activeStyle : styles.suggItem}>
-        {item}
+        {
+          typeof(item) === 'object' && !React.Component.isPrototypeOf(item)?
+          this.extractTextFromSelection(index):
+          item
+        }
       </li>
     }, this);
 

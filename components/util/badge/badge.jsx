@@ -14,6 +14,7 @@ const styles = {
   fontSize: '12px',
   whiteSpace: 'nowrap',
   zIndex: '2',
+  position: 'relative',
   verticalAlign: 'middle',
   letterSpacing: '0.6px',
 }
@@ -162,7 +163,7 @@ export default class Badge extends Component {
       <span style={badgeStyles}>
         {
           this.props.type === 'verified' ?
-          <Icon type="check" fill="white" height={10} width={10} style={{transform: 'rotate(45deg)', position: 'relative', left: -1, top: 1}}/>:
+          <Icon type="check" fill="white" height={10} width={10} style={{transform: 'rotate(45deg)', position: 'absolute', left: 3, top: 3}}/>:
           this.props.children
         }
       </span>
