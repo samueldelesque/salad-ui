@@ -29,10 +29,10 @@ const chartData = [
 ];
 
 const selectOptions = [
-  {name: 'tofu', value: 'tofu', calories: 400},
-  {name: 'bacon', value: 'bacon', calories: 900},
-  {name: 'roasted chicken', value: 'chicken', calories: 600},
-  {name: 'steak', value: 'steak', calories: 700}
+  {name: 'tofu', value: -2, calories: 400},
+  {name: 'bacon', value: -1, calories: 900},
+  {name: 'roasted chicken', value: 0, calories: 600},
+  {name: 'steak', value: 1, calories: 700}
 ]
 
 class DemoAutocomplete extends React.Component {
@@ -180,17 +180,19 @@ export default class Demo extends React.Component {
 ]
 <Select
   options={options}
-  handleClick={(protein)=>this.setState({protein})}>Pick one</Select>`
+  onChange={(protein)=>this.setState({protein})}>Pick one</Select>`
 }
               </pre>
               <div style={{width: 300}}>
                 <SaladUI.Form.Select
                   options={selectOptions}
-                  handleClick={(protein)=>this.setState({protein})}>Pick a protein</SaladUI.Form.Select>
+                  onChange={(protein)=>this.setState({protein})}>Pick a protein</SaladUI.Form.Select>
+
+                <p style={{margin: '10px 0'}}>{'Select without border'}</p>
                 <SaladUI.Form.Select
                   options={selectOptions}
                   value={selectOptions[2].value}
-                  handleClick={(protein)=>this.setState({protein})}
+                  onChange={(protein)=>this.setState({protein})}
                   noBorder={true}>Borderless</SaladUI.Form.Select>
                 <p style={{padding: 10}}>Protein: <b style={{fontWeight: 'bold'}}>{this.state.protein.value} ({this.state.protein.calories}cal)</b></p>
               </div>

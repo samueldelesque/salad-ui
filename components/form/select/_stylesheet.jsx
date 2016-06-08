@@ -28,14 +28,19 @@ let styles = {
   dropdown: {
     position: 'absolute',
     background: 'white',
-    zIndex: '999',
+    zIndex: 999,
     width: '100%',
-    top: '0',
+    top: 0,
     border: '1px solid ' + defaults.colors.gray3,
   },
 
+  dropdownHidden: {
+    opacity: 0,
+    visibility: 'hidden',
+  },
+
   dropdownItem: {
-    margin: '0',
+    margin: 0,
     padding: 10,
     lineHeight: 1.1,
     cursor: 'pointer',

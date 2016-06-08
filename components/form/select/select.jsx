@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom'
 import {merge, filter} from 'lodash'
 import Icon from '../../icon/icon'
 import styles from './_stylesheet'
+import glob from '../../../lib/glob'
+
+if(glob.canUseDom()){
+  require('../../../lib/stylesheet/transitions.scss')
+}
 
 export default class Select extends Component {
   state = {
@@ -16,7 +21,8 @@ export default class Select extends Component {
 
   componentWillMount() {
     let obj = {}
-    if(this.props.value){
+
+    if(this.props.value !== undefined && this.props.value !== null){
       let value = this.props.value
       obj = filter(this.props.options, function(o){ return o.value === value })[0]
     }
@@ -36,6 +42,15 @@ export default class Select extends Component {
     })
   }
 
+  componentDidMount(){
+    this.handleOutsideClick = this.handleOutsideClick.bind(this)
+    document.addEventListener('click', this.handleOutsideClick)
+  }
+
+  componentWillUnmount(){
+    document.removeEventListener('click', this.handleOutsideClick);
+  }
+
   handleOutsideClick(e){
     if(ReactDOM.findDOMNode(this).contains(e.target))
       return
@@ -44,15 +59,6 @@ export default class Select extends Component {
         open: false
       })
     }
-  }
-
-  componentDidMount(){
-    this.handleOutsideClick = this.handleOutsideClick.bind(this)
-    document.addEventListener('click', this.handleOutsideClick)
-  }
-
-  componentWillUnmount(){
-    document.removeEventListener('click', this.handleOutsideClick);
   }
 
   selectClick(e){
@@ -72,16 +78,27 @@ export default class Select extends Component {
       open: false
     })
 
-    if(this.props.handleClick)
-      this.props.handleClick(this.state.currentOption)
-
     if(this.props.onChange)
       this.props.onChange(this.state.currentOption)
   }
 
   renderOptions() {
     let selectedItemStyle = merge({}, styles.dropdownItem, styles.selected)
-    let options = this.props.options.map((item, index) => {
+    let options = []
+
+    if(this.props.children){
+      options = options.concat(
+        <li
+          style={(this.state.currentOption.value === null) ? selectedItemStyle : styles.dropdownItem}
+          value={null}
+          onMouseEnter={() => this.itemMouseEnter({name: this.props.children, value: null})}
+          onClick={() => this.itemClick()}>
+          {this.props.children}
+        </li>
+      )
+    }
+
+    options = options.concat(this.props.options.map((item, index) => {
       return <li
         key = {'select_' + index}
         style={(item.value === this.state.currentOption.value) ? selectedItemStyle : styles.dropdownItem}
@@ -90,26 +107,26 @@ export default class Select extends Component {
         onClick={() => this.itemClick()}>
         {item.name}
       </li>
-    });
+    }));
 
-    if(this.props.children){
-      let defaultOption = {name: this.props.children, value: null}
-      return <ul><li
-        style={(this.state.currentOption.value === null) ? selectedItemStyle : styles.dropdownItem}
-        value={null}
-        onMouseEnter={() => this.itemMouseEnter(defaultOption)}
-        onClick={() => this.itemClick()}>
-        {this.props.children}
-      </li>{ options }</ul>
-    }
-    else {
-      return <ul>{ options }</ul>
-    }
+    let s = styles.dropdown
+    if(!this.state.open)
+      s = Object.assign({}, s, styles.dropdownHidden)
+    let className = `transition transition-xsm fadeIn${this.state.open? ' active': '' }`
+
+    return (
+      <div style={s} className={className}>
+        <ul>
+          { options }
+        </ul>
+      </div>
+    )
   }
 
   render() {
     let selectBoxStyles = styles.selectBox
     if(this.props.noBorder) selectBoxStyles = Object.assign({}, selectBoxStyles, styles.noBorder)
+
     return (
       <div style={{position: 'relative'}}>
         <div style={selectBoxStyles} onClick={(e) => this.selectClick(e)}>
@@ -118,11 +135,7 @@ export default class Select extends Component {
             {this.state.currentOption.name}
           </div>
         </div>
-        {
-          this.state.open
-          ? <div style={styles.dropdown}>{this.renderOptions()}</div>
-          : null
-        }
+        {this.renderOptions()}
       </div>
     )
   }

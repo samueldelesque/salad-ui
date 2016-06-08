@@ -52,8 +52,6 @@
   &.fadeIn {
     @include transition-property(opacity, visibility);
     @include transition-timing-function(linear);
-    opacity: 0;
-    visibility: hidden;
     &.active {
       opacity: 1;
       visibility: visible;
@@ -63,8 +61,6 @@
   &.fadeOut {
     @include transition-property(opacity, visibility);
     @include transition-timing-function(linear);
-    opacity: 1;
-    visibility: visible;
     &.active {
       opacity: 0;
       visibility: hidden;
@@ -74,9 +70,6 @@
   &.zoomIn {
     @include transition-property(opacity, transform, visibility);
     @include transition-timing-function(linear);
-    opacity: 0;
-    transform: scale(0.7);
-    visibility: hidden;
     &.active {
       opacity: 1;
       transform: scale(1);

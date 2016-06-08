@@ -39,14 +39,17 @@ export default class Overlay extends Component {
     })
 
     let className = `transition transition-xsm zoomIn${this.props.show? ' active': '' }`
+    let s = styles.wrapper
+    if(!this.props.show)
+      s = Object.assign({}, s, { opacity: 0, transform: 'scale(0.7)', visibility: 'hidden' })
 
     return (
-      <div style={Object.assign({}, styles.wrapper, {display: this.props.show?'':'none'})} className={className}>
+      <div style={s} className={className}>
         {this.props.closeButton?
           <Icon
             type="close"
-            width="12"
-            height="12"
+            width={12}
+            height={12}
             fill={hasTitle?'white':'black'}
             style={{float:'right', cursor:'pointer', margin: '20px 20px 0 10px'}}
             onClick={e=>this.onClose(e)} />
