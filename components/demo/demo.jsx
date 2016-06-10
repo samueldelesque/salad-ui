@@ -295,6 +295,11 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
               </SaladUI.Util.Alert>
             </li>
             <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Trans</h3>
+              <pre>{'<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>'}</pre>
+              <SaladUI.Util.Trans context={{"Hello": "Bonjour"}}>Hello</SaladUI.Util.Trans>
+            </li>
+            <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Button</h3>
               <pre>{`<Button onPress={()=>alert('ay ay captain')}>Press Me</Button>`}</pre>
               <div style={{padding: 10}}>

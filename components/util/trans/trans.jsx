@@ -14,7 +14,7 @@ export default class Trans extends React.Component {
   }
 
   allowedElements = [
-    'a','b','p','span','br', 'img'
+    'a','b', 'i','p','span','br', 'img'
   ]
 
   translate(key, args){
@@ -38,10 +38,21 @@ export default class Trans extends React.Component {
     })))
   }
 
+  safe_translate(key,args){
+    let translation = key
+    try{
+      translation = this.translate(key,args)
+    }
+    catch (e){
+      console.warn('Failed to produce translation of ',k,e)
+    }
+    return translation
+  }
+
   render() {
     // console.log(this.trans)
     return (
-      <span dangerouslySetInnerHTML={{__html: this.translate(this.props.children, this.props)}}></span>
+      <span dangerouslySetInnerHTML={{__html: this.safe_translate(this.props.children, this.props)}}></span>
     )
   }
 }
