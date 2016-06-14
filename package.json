@@ -3,14 +3,15 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build:demo": "webpack --config ./conf/webpack.config.demo.js",
-    "build": "NODE_ENV=production webpack --config ./conf/webpack.config.prod.js",
-    "build:dev": "NODE_ENV=development webpack --config ./conf/webpack.config.prod.js",
-    "dev-client": "node devClient.js",
-    "dev": "nodemon devServer.js --exec babel-node --presets es2015,stage-0,react",
+    "distribute": "NODE_ENV=production webpack --config ./conf/webpack.config.prod.js",
+    "dist": "npm run distribute",
+    "distribute:demo": "NODE_ENV=production webpack --config ./conf/webpack.config.demo.prod.js",
+    "dist:demo": "npm run distribute:demo",
+    "dev": "nodemon build/server.js",
     "lint": "eslint src",
     "publish": "npm run build && node ./publish.js",
-    "pub": "npm run publish"
+    "pub": "npm run publish",
+    "build": "babel src --watch -d build"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 var path = require('path'),
     webpack = require('webpack'),
-    directories = [path.resolve('./components'), path.resolve('./lib')],
+    directories = [path.resolve('./src')],
     entrypoints = require('./entrypoints.js')
 
 module.exports = {
@@ -38,7 +38,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?|\.es6/,
+        test: /\.jsx?|\.es6|src/,
         loaders: ['babel?presets[]=stage-0'],
         include: directories,
         exclude: [path.resolve('../node_modules')]

@@ -1,0 +1,168 @@
+import React from 'react'
+import ReactServer from 'react-dom/server'
+import Demo from './demo'
+
+module.exports = function(){
+  return `<!DOCTYPE html>
+<html>
+  <head>
+    <title>SaladUI Components</title>
+    <meta name="viewport" content="initial-scale=1">
+      <style type="text/css">* {
+  box-sizing: border-box; }
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.5; }
+
+header {
+  background-color: #0066DC;
+  color: white;
+  padding: 100px 0; }
+  header p, header h1 {
+    width: 600px;
+    margin: 20px auto; }
+  header h1 {
+    font-size: 68px;
+    font-weight: bold;
+    text-shadow: 5px 5px #000;
+    padding: 0 0 50px 0; }
+
+h1 {
+  font-size: 2.4rem; }
+
+h2 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #7F7F7F; }
+
+h3 {
+  font-size: 1.2rem; }
+
+section {
+  margin: 20px auto;
+  width: 600px;
+  padding: 20px 0;
+  border-bottom: 5px solid #7F7F7F; }
+
+footer {
+  text-align: center;
+  padding: 20px 0;
+  font-weight: 100;
+  letter-spacing: 1px; }
+  footer a {
+    color: #0066DC; }
+
+pre {
+  margin: 10px 0;
+  padding: 10px;
+  overflow: auto;
+  background: #333;
+  color: #aaa;
+  font-family: monospace; }
+
+.snippet {
+  background: #333;
+  padding: 3px;
+  color: #aaa;
+  font-family: monospace; }
+
+.functionality li {
+  margin: 20px 0; }
+
+.icon-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; }
+  .icon-list .icon-item {
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #0066DC;
+    display: inline-block;
+    transition: all .4s;
+    transform: scale(1);
+    position: relative; }
+    .icon-list .icon-item svg {
+      vertical-align: middle; }
+      .icon-list .icon-item svg path {
+        transition: all .4s; }
+    .icon-list .icon-item .icon-title {
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: white;
+      vertical-align: middle;
+      padding-top: 20px;
+      font-weight: 100;
+      top: 0;
+      text-align: center;
+      display: block;
+      letter-spacing: 1px;
+      opacity: 0;
+      font-size: 8px;
+      transition: all .4s; }
+    .icon-list .icon-item:hover {
+      transform: scale(1.4); }
+      .icon-list .icon-item:hover .icon-title {
+        visibility: visible;
+        opacity: 1; }
+      .icon-list .icon-item:hover svg path {
+        fill: transparent; }
+</style>
+  </head>
+  <body class="salad-ui-demo">
+    <div id="react-root">${ReactServer.renderToString(<Demo/>)}</div>
+    <script src="/salad-ui.demo/salad-ui.demo.js"></script>
+  </body>
+</html>`
+}
