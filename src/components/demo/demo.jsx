@@ -14,12 +14,6 @@ import glob from '../../lib/glob.js'
 //   }
 // }
 
-// if(glob.canUseDom()){
-//   require('./demo.scss')
-// }
-
-
-// Let's try to inject GA for shits and giggles
 
 console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fromCharCode(55356, 57211) + ' Friday 6pm.')
 
@@ -137,6 +131,11 @@ export default class Demo extends React.Component {
       <div className="demo">
         <header>
           <h1>Salad-UI {String.fromCharCode(55357, 56960)}</h1>
+          <h2>
+            <pre>npm i --save salad-ui</pre>
+            <pre>import SaladUI from 'salad-ui'</pre>
+            <pre>{`<SaladUI.Chart.Area/>`}</pre>  
+          </h2>
           <p>Salad-UI can be enjoyed as a complete salad using <i className="snippet">import SaladUI from 'salad-ui'</i> or as its separate ingredients using <i className="snippet">import Chart from 'salad-ui.chart'</i>.</p>
           <p>Salad-UI is composed of: Form, Chart, Utils, Lib, Icon.</p>
           <p>Salad-UI will work both in Browser and Server environment - use it in your universal apps!</p>
@@ -367,17 +366,17 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Grid</h3>
               <pre>{'<SaladUI.Video.Grid/>'}</pre>
-              <SaladUI.Video.Grid apiURL="https://api.dailymotion.com" endpoint="/videos"/>
+              <SaladUI.Video.Grid apiURL="https://api.dailymotion.com" limit={10} endpoint="/videos"/>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Grid</h3>
               <pre>{'<SaladUI.Video.Grid/>'}</pre>
-              <SaladUI.Video.Grid apiURL="https://api.dailymotion.com" mediaType="playlist" endpoint="/user/spi0n/playlists"/>
+              <SaladUI.Video.Grid apiURL="https://api.dailymotion.com" mediaType="playlist" limit={5} endpoint="/user/spi0n/playlists"/>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> List</h3>
               <pre>{'<SaladUI.Video.List/>'}</pre>
-              <SaladUI.Video.List apiURL="https://api.dailymotion.com" endpoint="/videos"/>
+              <SaladUI.Video.List apiURL="https://api.dailymotion.com" limit={3} endpoint="/videos"/>
             </li>
           </ul>
         </section>

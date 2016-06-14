@@ -1,12 +1,13 @@
 var path = require('path'),
     webpack = require('webpack'),
-    directories = [path.resolve('./components'), path.resolve('./lib')]
+    ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    directories = [path.resolve('./src')]
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  entry: path.resolve('./build/components/demo/entry.js'),
+  devtool: 'source-map',
+  entry: path.resolve('./src/components/demo/entry'),
   resolve: {
-    root: path.resolve('../'),
+    root: directories,
     extensions: ['', '.js', '.es6 ', '.jsx'],
   },
   output: {
@@ -16,19 +17,21 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin("styles.css")
   ],
   module: {
     loaders: [
         {
-          test: /\.jsx?|\.es6/,
+          test: /\.jsx?|\.es6|src/,
           loaders: ['babel?presets[]=stage-0'],
           include: directories,
           exclude: [path.resolve('../node_modules')]
         },
-        {
-            test: /\.scss|\.css$/,
-            loader: "style!css!sass"
-        }
+        // {
+        //     test: /\.scss|\.css$/,
+        //     loader: "style!css!sass"
+        // }
+        { test: /\.scss|\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'sass-loader')},
     ]
   }
 };

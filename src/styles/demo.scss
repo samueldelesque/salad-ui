@@ -88,8 +88,9 @@ header{
   background-color: $dm-brand;
   color: white;
   padding: 100px 0;
-  p,h1{
+  p,h1,h2,h3{
     width: 90%;
+    max-width: 1000px;
     margin: 20px auto;
   }
   h1{
@@ -97,6 +98,16 @@ header{
     font-weight: bold;
     text-shadow: 5px 5px #000;
     padding: 0 0 50px 0;
+  }
+  h2{
+    font-size: 20px;
+    padding: 20px 20px;
+    font-family: monospace;
+    color: rgb(207, 207, 207);
+    background-color: rgba(0,0,0,.2);
+  }
+  p{
+    font-size: 20px;
   }
 }
 
@@ -114,6 +125,7 @@ h3{
 section{
   margin: 20px auto;
   width: 90%;
+  max-width: 1000px;
   padding: 20px 0;
   border-bottom: 5px solid $neutral-2;
 }

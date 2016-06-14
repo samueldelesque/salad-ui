@@ -44,12 +44,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 //   }
 // }
 
-// if(glob.canUseDom()){
-//   require('./demo.scss')
-// }
-
-// Let's try to inject GA for shits and giggles
-
 console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fromCharCode(55356, 57211) + ' Friday 6pm.');
 
 var chartData = [{ time: 1422766800000, value: 0, label: "{{value}} active users" }, { time: 1422853200000, value: 9, label: "{{value}} active users" }, { time: 1422939600000, value: 5, label: "{{value}} active users" }, { time: 1423026000000, value: 15, label: "{{value}} active users" }, { time: 1423112400000, value: 7, label: "{{value}} active users" }, { time: 1423198800000, value: 13, label: "{{value}} active users" }];
@@ -226,6 +220,25 @@ var Demo = function (_React$Component2) {
             null,
             'Salad-UI ',
             String.fromCharCode(55357, 56960)
+          ),
+          _react2.default.createElement(
+            'h2',
+            null,
+            _react2.default.createElement(
+              'pre',
+              null,
+              'npm i --save salad-ui'
+            ),
+            _react2.default.createElement(
+              'pre',
+              null,
+              'import SaladUI from \'salad-ui\''
+            ),
+            _react2.default.createElement(
+              'pre',
+              null,
+              '<SaladUI.Chart.Area/>'
+            )
           ),
           _react2.default.createElement(
             'p',
@@ -924,7 +937,7 @@ var Demo = function (_React$Component2) {
                 null,
                 '<SaladUI.Video.Grid/>'
               ),
-              _react2.default.createElement(_saladUi2.default.Video.Grid, { apiURL: 'https://api.dailymotion.com', endpoint: '/videos' })
+              _react2.default.createElement(_saladUi2.default.Video.Grid, { apiURL: 'https://api.dailymotion.com', limit: 10, endpoint: '/videos' })
             ),
             _react2.default.createElement(
               'li',
@@ -944,7 +957,7 @@ var Demo = function (_React$Component2) {
                 null,
                 '<SaladUI.Video.Grid/>'
               ),
-              _react2.default.createElement(_saladUi2.default.Video.Grid, { apiURL: 'https://api.dailymotion.com', mediaType: 'playlist', endpoint: '/user/spi0n/playlists' })
+              _react2.default.createElement(_saladUi2.default.Video.Grid, { apiURL: 'https://api.dailymotion.com', mediaType: 'playlist', limit: 5, endpoint: '/user/spi0n/playlists' })
             ),
             _react2.default.createElement(
               'li',
@@ -964,7 +977,7 @@ var Demo = function (_React$Component2) {
                 null,
                 '<SaladUI.Video.List/>'
               ),
-              _react2.default.createElement(_saladUi2.default.Video.List, { apiURL: 'https://api.dailymotion.com', endpoint: '/videos' })
+              _react2.default.createElement(_saladUi2.default.Video.List, { apiURL: 'https://api.dailymotion.com', limit: 3, endpoint: '/videos' })
             )
           )
         ),
