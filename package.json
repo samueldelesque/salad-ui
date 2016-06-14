@@ -61,6 +61,7 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "dependencies": {
+    "body-parser": "^1.15.1",
     "clamp-js": "^0.7.0",
     "console-polyfill": "^0.2.2",
     "es5-shim": "^4.5.8",
@@ -74,6 +75,7 @@
     "react-image-responsive": "^1.0.18",
     "react-simple-charts": "0.0.19",
     "react-spinjs": "^3.0.0",
+    "route-parser": "0.0.5",
     "sprintf-js": "^1.0.3",
     "velocity-react": "^1.1.5"
   }
