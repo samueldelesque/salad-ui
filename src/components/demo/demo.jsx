@@ -159,10 +159,12 @@ export default class Demo extends React.Component {
           <p>
             <a href="https://npmjs.com/package/salad-ui" target="_blank"><img src="https://badge.fury.io/js/salad-ui.svg"/></a>
           </p>
-          <p>Salad-UI can be enjoyed as a complete salad using <i className="snippet">import SaladUI from 'salad-ui'</i> or as its separate ingredients using <i className="snippet">import Chart from 'salad-ui.chart'</i>.</p>
-          <p>Salad-UI is composed of: Form, Chart, Utils, Lib, Icon.</p>
+          <p>Salad-UI can be enjoyed as a complete salad using <i className="snippet">import SaladUI from 'salad-ui'</i> or as its separate ingredients using <i className="snippet">{`import {Area} from 'salad-ui.chart'`}</i>. You can install separate ingredients as <i className="snippet">npm i --save salad-ui.chart</i>.</p>
           <p>Salad-UI will work both in Browser and Server environment - use it in your universal apps!</p>
         </header>
+        <section className="warning-mobile">
+          <SaladUI.Util.Alert type="error">Code snippets not shown on mobile!</SaladUI.Util.Alert>
+        </section>
         <section ref="firstSection">
           <h2>Form</h2>
           <ul className="functionality">

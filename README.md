@@ -39,7 +39,10 @@ class myComponent extends React.Component{
 
 If you would like to contribute, feel free to submite pull requests/contact us directly. Salad-UI intends to develop simple, lightweight components that can be re-used accross various applications and environents.
 
-## Commands
+Requirements:
+Sass `gem install sass`
+Node (tested in latest)
+Npm (tested in latest)
 
 Developing? run `npm run build` in one terminal tab, and then `npm run dev` in another.
 Production? run `npm run pub` to directly publish to NPM, or `npm run dist` to only generate files.

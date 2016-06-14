@@ -32,23 +32,36 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// if(glob.canUseDom()){
-//   require('../../../lib/stylesheet/transitions.scss')
-// }
+if (_glob2.default.canUseDom()) {
+  require('../../../lib/stylesheet/transitions.scss');
+}
 
 var Overlay = function (_Component) {
   _inherits(Overlay, _Component);
 
   function Overlay() {
+    var _Object$getPrototypeO;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Overlay);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Overlay).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Overlay)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+      responsive: false
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Overlay, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       document.addEventListener("keydown", this.onClose.bind(this), false);
+      if (window.innerWidth < 600) {
+        this.setState({ responsive: true });
+      }
     }
   }, {
     key: 'componentWillUnmount',
@@ -70,24 +83,20 @@ var Overlay = function (_Component) {
       var hasTitle = false;
       var renderChildren = _react2.default.Children.map(this.props.children, function (child) {
         if (child.type === 'overlayHeader') hasTitle = true;
-        var s = _stylesheet2.default[child.type];
-        if (child.props.style) {
-          s = Object.assign({}, s, child.props.style);
-        }
+        var childStyles = Object.assign({}, _stylesheet2.default[child.type], child.props.style);
         return _react2.default.createElement(
           'div',
-          { style: s },
+          { style: childStyles },
           child.props.children
         );
       });
 
       var className = 'transition transition-xsm zoomIn' + (this.props.show ? ' active' : '');
-      var s = _stylesheet2.default.wrapper;
-      if (!this.props.show) s = Object.assign({}, s, { opacity: 0, transform: 'scale(0.7)', visibility: 'hidden' });
+      var overlayStyles = Object.assign({}, _stylesheet2.default.wrapper, this.state.responsive ? _stylesheet2.default.wrapperResponsive : null, this.props.show ? null : { opacity: 0, transform: 'scale(0.7)', visibility: 'hidden' });
 
       return _react2.default.createElement(
         'div',
-        { style: s, className: className },
+        { style: overlayStyles, className: className },
         this.props.closeButton ? _react2.default.createElement(_icon2.default, {
           type: 'close',
           width: 12,

@@ -52,6 +52,9 @@ header {
   background-color: #0066DC;
   color: white;
   padding: 100px 0; }
+  @media (max-width: 600px) {
+    header {
+      padding: 40px 0; } }
   header .github-corner .octo-arm {
     transform-origin: 130px 106px; }
   header .github-corner:hover .octo-arm {
@@ -84,14 +87,24 @@ header {
     font-weight: bold;
     text-shadow: 5px 5px #000;
     padding: 0 0 50px 0; }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 34px;
+        padding: 0; } }
   header h2 {
     font-size: 20px;
     padding: 20px 20px;
     font-family: monospace;
     color: #cfcfcf;
     background-color: rgba(0, 0, 0, 0.2); }
+    @media (max-width: 600px) {
+      header h2 {
+        display: none; } }
   header p {
     font-size: 20px; }
+    @media (max-width: 600px) {
+      header p {
+        font-size: 16px; } }
 
 h1 {
   font-size: 2.4rem; }
@@ -119,6 +132,10 @@ footer {
   footer a {
     color: #0066DC; }
 
+@media (min-width: 600px) {
+  .warning-mobile {
+    display: none; } }
+
 pre {
   margin: 10px 0;
   padding: 10px;
@@ -126,6 +143,9 @@ pre {
   background: #333;
   color: #aaa;
   font-family: monospace; }
+  @media (max-width: 600px) {
+    pre {
+      display: none; } }
 
 .snippet {
   background: #333;

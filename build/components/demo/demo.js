@@ -286,19 +286,29 @@ var Demo = function (_React$Component2) {
             _react2.default.createElement(
               'i',
               { className: 'snippet' },
-              'import Chart from \'salad-ui.chart\''
+              'import {Area} from \'salad-ui.chart\''
+            ),
+            '. You can install separate ingredients as ',
+            _react2.default.createElement(
+              'i',
+              { className: 'snippet' },
+              'npm i --save salad-ui.chart'
             ),
             '.'
           ),
           _react2.default.createElement(
             'p',
             null,
-            'Salad-UI is composed of: Form, Chart, Utils, Lib, Icon.'
-          ),
-          _react2.default.createElement(
-            'p',
-            null,
             'Salad-UI will work both in Browser and Server environment - use it in your universal apps!'
+          )
+        ),
+        _react2.default.createElement(
+          'section',
+          { className: 'warning-mobile' },
+          _react2.default.createElement(
+            _saladUi2.default.Util.Alert,
+            { type: 'error' },
+            'Code snippets not shown on mobile!'
           )
         ),
         _react2.default.createElement(

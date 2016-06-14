@@ -24,6 +24,12 @@ var styles = {
     borderRadius: '5px'
   },
 
+  wrapperResponsive: {
+    width: '95%',
+    left: '2.5%',
+    marginLeft: 0
+  },
+
   overlayHeader: {
     padding: '15px 20px',
     fontSize: '20px',
