@@ -86,21 +86,34 @@ class DemoAutocomplete extends React.Component {
 }
 
 export default class Demo extends React.Component {
-  componentDidMount(){
+  state = {
+    selectedRadio: 'radio1',
+    protein: {name: null, value: null, calories: 0},
+    tagsAdded: ['tag1','tag2','tag3','tag4','tag5','tag6'],
+    showOverlay: false,
+    sectionWidth: 720,
+  }
 
+  componentDidMount(){
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-78769010-1', 'auto');
     SaladUI.Lib.tracking.trackPage('SaladUI Demo')
+
+    this.onResize = this.onResize.bind(this)
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
   }
 
-  state = {
-    selectedRadio: 'radio1',
-    protein: {name: null, value: null, calories: 0},
-    tagsAdded: ['tag1','tag2','tag3','tag4','tag5','tag6'],
-    showOverlay: false,
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.onResize)
+  }
+
+  onResize(){
+    const sectionWidth = this.refs.firstSection.getBoundingClientRect().width
+    this.setState({sectionWidth})
   }
 
   handleRemoveTag(tag){
@@ -128,19 +141,29 @@ export default class Demo extends React.Component {
 
   render(){
     return (
-      <div className="demo">
+      <div className="demo" ref="container">
         <header>
+          <a href="https://github.com/dailymotion/salad-ui" target="_blank" className="github-corner">
+            <svg width="80" height="80" viewBox="0 0 250 250">
+              <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+              <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" className="octo-arm"></path>
+              <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" className="octo-body"></path>
+            </svg>
+          </a>
           <h1>Salad-UI {String.fromCharCode(55357, 56960)}</h1>
           <h2>
             <pre>npm i --save salad-ui</pre>
             <pre>import SaladUI from 'salad-ui'</pre>
-            <pre>{`<SaladUI.Chart.Area/>`}</pre>  
+            <pre>{`<SaladUI.Chart.Area/>`}</pre>
           </h2>
+          <p>
+            <a href="https://npmjs.com/package/salad-ui" target="_blank"><img src="https://badge.fury.io/js/salad-ui.svg"/></a>
+          </p>
           <p>Salad-UI can be enjoyed as a complete salad using <i className="snippet">import SaladUI from 'salad-ui'</i> or as its separate ingredients using <i className="snippet">import Chart from 'salad-ui.chart'</i>.</p>
           <p>Salad-UI is composed of: Form, Chart, Utils, Lib, Icon.</p>
           <p>Salad-UI will work both in Browser and Server environment - use it in your universal apps!</p>
         </header>
-        <section>
+        <section ref="firstSection">
           <h2>Form</h2>
           <ul className="functionality">
             <li>
@@ -282,9 +305,9 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
           </pre>
           <div>
             <SaladUI.Chart.Area
-              width={900}
-              height={300}
-              data={chartData} width={600}/>
+              width={this.state.sectionWidth}
+              height={this.state.sectionWidth*0.6}
+              data={chartData}/>
           </div>
         </section>
         <section>
