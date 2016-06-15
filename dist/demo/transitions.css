@@ -1,11 +1,10 @@
-/* transitions */
 .transition-xs {
   transition-duration: 0.1s;
   -webkit-transition-duration: 0.1s;
   -moz-transition-duration: 0.1s;
   -o-transition-duration: 0.1s; }
 
-.transition-sm {
+.transition-sm, .transition {
   transition-duration: 0.2s;
   -webkit-transition-duration: 0.2s;
   -moz-transition-duration: 0.2s;
@@ -29,58 +28,66 @@
   -moz-transition-duration: 0.6s;
   -o-transition-duration: 0.6s; }
 
-.faded {
+.transition-timing-linear {
+  transition-timing-function: linear;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  -o-transition-timing-function: linear; }
+
+.transition-timing-ease, .transition {
+  transition-timing-function: ease;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -o-transition-timing-function: ease; }
+
+.transition-timing-ease-in-out {
+  transition-timing-function: ease-in-out;
+  -webkit-transition-timing-function: ease-in-out;
+  -moz-transition-timing-function: ease-in-out;
+  -o-transition-timing-function: ease-in-out; }
+
+.transition-timing-bezier {
+  transition-timing-function: cubic-bezier(0, 0.89, 0.44, 1);
+  -webkit-transition-timing-function: cubic-bezier(0, 0.89, 0.44, 1);
+  -moz-transition-timing-function: cubic-bezier(0, 0.89, 0.44, 1);
+  -o-transition-timing-function: cubic-bezier(0, 0.89, 0.44, 1); }
+
+.fade-out {
   opacity: 0;
+  -webkit-opacity: 0;
+  -moz-opacity: 0;
+  -o-opacity: 0;
   visibility: 0; }
 
-.zoom-sm {
+.fade-in {
+  opacity: 1;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  -o-opacity: 1;
+  visibility: visible; }
+
+.scale-in-sm {
   transform: scale(1.05); }
 
-.zoom-md {
+.scale-in-md {
   transform: scale(1.1); }
 
-.zoom-lg {
+.scale-in-lg {
   transform: scale(1.2); }
 
-.zoom-xl {
+.scale-in-xl {
   transform: scale(1.4); }
 
-.transition.fadeIn {
-  transition-property: opacity, visibility;
-  -webkit-transition-property: opacity, visibility;
-  -moz-transition-property: opacity, visibility;
-  -o-transition-property: opacity, visibility;
-  transition-timing-function: linear;
-  -webkit-transition-timing-function: linear;
-  -moz-transition-timing-function: linear;
-  -o-transition-timing-function: linear; }
-  .transition.fadeIn.active {
-    opacity: 1;
-    visibility: visible; }
-.transition.fadeOut {
-  transition-property: opacity, visibility;
-  -webkit-transition-property: opacity, visibility;
-  -moz-transition-property: opacity, visibility;
-  -o-transition-property: opacity, visibility;
-  transition-timing-function: linear;
-  -webkit-transition-timing-function: linear;
-  -moz-transition-timing-function: linear;
-  -o-transition-timing-function: linear; }
-  .transition.fadeOut.active {
-    opacity: 0;
-    visibility: hidden; }
-.transition.zoomIn {
-  transition-property: opacity, transform, visibility;
-  -webkit-transition-property: opacity, transform, visibility;
-  -moz-transition-property: opacity, transform, visibility;
-  -o-transition-property: opacity, transform, visibility;
-  transition-timing-function: linear;
-  -webkit-transition-timing-function: linear;
-  -moz-transition-timing-function: linear;
-  -o-transition-timing-function: linear; }
-  .transition.zoomIn.active {
-    opacity: 1;
-    transform: scale(1);
-    visibility: visible; }
+.scale-out-sm {
+  transform: scale(0.95); }
+
+.scale-out-md {
+  transform: scale(0.9); }
+
+.scale-out-lg {
+  transform: scale(0.8); }
+
+.scale-out-xl {
+  transform: scale(0.7); }
 
 /*# sourceMappingURL=transitions.css.map */
