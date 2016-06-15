@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -13,6 +11,10 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 var _fetchMethods = require('../../../lib/fetch-methods');
+
+var _grid = require('../../util/grid/grid');
+
+var _grid2 = _interopRequireDefault(_grid);
 
 var _preview = require('../preview/preview');
 
@@ -48,7 +50,7 @@ var List = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(List)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.trans = DM_ENV['video/grid'], _this.currentPage = 1, _this.lastQuery = null, _this.videos = [], _this.hasMore = false, _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(List)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.currentPage = 1, _this.lastQuery = null, _this.videos = [], _this.hasMore = false, _this.state = {
       videos: [],
       failed: false,
       hasMore: false,
@@ -145,62 +147,71 @@ var List = function (_React$Component) {
     value: function loadMore() {
       this.loadVideos('appendVideos', this.props);
     }
-  }, {
-    key: 'renderVideos',
-    value: function renderVideos() {
-      var _this3 = this;
 
-      if (this.state.videos.length === 0) {
-        return _react2.default.createElement(
-          'div',
-          { className: 'no-results' },
-          _react2.default.createElement(
-            _trans2.default,
-            { context: this.trans },
-            'noVideosFound'
-          )
-        );
-      }
-      return this.state.videos.map(function (video, index) {
-        return _react2.default.createElement(
-          'div',
-          { key: 'vid.' + index, style: {
-              marginBottom: 20
-            } },
-          _react2.default.createElement(_preview2.default, _extends({ type: 'list' }, _this3.props, video))
-        );
-      });
-    }
-  }, {
-    key: 'onLoadError',
-    value: function onLoadError() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'h3',
-          { className: 'font-lg' },
-          _react2.default.createElement(
-            _trans2.default,
-            { context: this.trans },
-            'loadErrorMsg'
-          )
-        )
-      );
-    }
+    // renderVideos() {
+    //   return this.state.videos.map((video,index) =>
+    //     <Preview
+    //       key={'vid.item.'+index}
+    //       type="grid"
+    //       {...this.props}
+    //       {...video}
+    //     />
+    //   )
+    // }
+
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       return _react2.default.createElement(
         'div',
-        { ref: 'container' },
-        this.state.failed ? this.onLoadError() : this.renderVideos()
+        { className: 'video-list' },
+        _react2.default.Children.map(this.props.children, function (item, index) {
+          return _react2.default.cloneElement(item, Object.assign({}, _this3.props, _this3.state, item.props, { loadMore: function loadMore() {
+              return _this3.loadMore();
+            } }));
+        })
       );
     }
   }]);
 
   return List;
 }(_react2.default.Component);
+
+// Example use:
+
+// class GridArea extends React.Component{
+//   render(){
+//     return (
+//       <Grid>
+//         {this.props.videos.map((video,index)=><Preview key={`video.${index}`} type="grid" {...video}/>)}
+//       </Grid>
+//     )
+//   }
+// }
+// class LoadMore extends React.Component{
+//   render(){
+//     return (
+//       <Button onPress={()=>this.props.loadMore()}>
+//         Load More
+//       </Button>
+//     )
+//   }
+// }
+// class Page extends React.Component{
+//   render(){
+//     return (
+//       <View style={{border: '2px solid'}}>
+//         <VideoList>
+//           <GridArea/>
+//           <LoadMore/>
+//         </VideoList>
+//       </View>
+//     )
+//   }
+// }
+
 
 List.propTypes = {
   sortBy: _react2.default.PropTypes.string,

@@ -4,10 +4,6 @@ import Icon from '../../icon/icon'
 import styles from './_stylesheet'
 import glob from '../../../lib/glob'
 
-if(glob.canUseDom()){
-  require('../../../lib/stylesheet/transitions.scss')
-}
-
 export default class Overlay extends Component {
   state = {
     responsive: false

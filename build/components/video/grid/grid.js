@@ -4,13 +4,31 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _fetchMethods = require('../../../lib/fetch-methods');
+
+var _grid = require('../../util/grid/grid');
+
+var _grid2 = _interopRequireDefault(_grid);
+
+var _preview = require('../preview/preview');
+
+var _preview2 = _interopRequireDefault(_preview);
+
+var _button = require('../../util/button/button');
+
+var _button2 = _interopRequireDefault(_button);
+
+var _trans = require('../../util/trans/trans');
+
+var _trans2 = _interopRequireDefault(_trans);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20,127 +38,221 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Grid = function (_React$Component) {
-  _inherits(Grid, _React$Component);
+var VideosGrid = function (_React$Component) {
+  _inherits(VideosGrid, _React$Component);
 
-  function Grid() {
+  function VideosGrid() {
     var _Object$getPrototypeO;
 
     var _temp, _this, _ret;
 
-    _classCallCheck(this, Grid);
+    _classCallCheck(this, VideosGrid);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Grid)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-      items: [],
-      width: 660,
-      breakPoint: { columns: 3, width: 660 }
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(VideosGrid)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.trans = DM_ENV['video/grid'], _this.currentPage = 1, _this.lastQuery = null, _this.videos = [], _this.hasMore = false, _this.state = {
+      videos: [],
+      failed: false,
+      hasMore: false,
+      loading: false,
+      searching: false,
+      err: null
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(Grid, [{
-    key: 'getBreakPoint',
-    value: function getBreakPoint(breakPoints, width) {
-      var breakPoint = breakPoints[0];
-      var diff = Math.abs(breakPoint.width - width);
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = breakPoints.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var _step$value = _slicedToArray(_step.value, 2);
-
-          var index = _step$value[0];
-          var bp = _step$value[1];
-
-          var newdiff = Math.abs(bp.width - width);
-          if (newdiff < diff) {
-            breakPoint = bp;
-            diff = newdiff;
-          }
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
-      return breakPoint;
-    }
-  }, {
+  _createClass(VideosGrid, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.onResize = this.onResize.bind(this);
-      this.onResize();
-      window.addEventListener('resize', this.onResize);
+      this.loadVideos('setInitialVideos', this.props);
     }
   }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      window.removeEventListener('resize', this.onResize);
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.hasPropsChanged(this.props, nextProps)) {
+        this.currentPage = 1;
+        if (this.refs.container) this.refs.container.style.opacity = .4;
+        this.loadVideos('replaceVideos', nextProps);
+      }
     }
   }, {
-    key: 'onResize',
-    value: function onResize() {
-      var width = this.refs.container.getBoundingClientRect().width;
-      var breakPoint = this.getBreakPoint(this.props.breakPoints, width);
-      this.setState({ width: width, breakPoint: breakPoint });
+    key: 'hasPropsChanged',
+    value: function hasPropsChanged(oldProps, nextProps) {
+      return JSON.stringify({
+        sortBy: oldProps.sortBy,
+        limit: oldProps.limit,
+        flags: (oldProps.flags || []).join(','),
+        endpoint: oldProps.endpoint,
+        searchTerm: oldProps.searchTerm
+      }) !== JSON.stringify({
+        sortBy: nextProps.sortBy,
+        limit: nextProps.limit,
+        flags: (nextProps.flags || []).join(','),
+        endpoint: nextProps.endpoint,
+        searchTerm: nextProps.searchTerm
+      });
+    }
+
+    // Allow us to store the first set of videos to avoid hitting API after a search
+
+  }, {
+    key: 'setInitialVideos',
+    value: function setInitialVideos(videos, hasMore) {
+      if (videos.length === 0 && this.props.ifEmpty) this.props.ifEmpty();
+      this.videos = videos;
+      this.hasMore = hasMore;
+      this.replaceVideos(videos, hasMore);
     }
   }, {
-    key: 'renderItems',
-    value: function renderItems(items) {
+    key: 'loadVideos',
+    value: function loadVideos(cb, props) {
       var _this2 = this;
 
-      var containerWidth = this.state.width,
-          width = (containerWidth - 20 * (this.state.breakPoint.columns - 1)) / this.state.breakPoint.columns;
+      if (!this.props.mediaType) console.error('No mediaType provided to Grid.');
+      this.setState({ loading: true });
+      var data = {
+        fields: _preview.mediaTypes[this.props.mediaType].fields.join(','),
+        page: this.currentPage,
+        thumbnail_ratio: 'widescreen',
+        sort: props.sortSelection || props.sortBy,
+        limit: props.limit,
+        localization: 'en_ZH' //must pass a non-existent language in order to have sort working in current API (lol)
+      };
+      var endpoint = props.endpoint ? props.endpoint : '/videos';
+      if (props.searchTerm) data.search = props.searchTerm;
+      if (props.flags && props.flags.length) data.flags = props.flags.join(',');
 
-      return _react2.default.Children.map(items, function (item, index) {
-        var itemStyles = Object.assign({}, item.props.styles, {
-          width: width,
-          marginRight: (index + 1) % _this2.state.breakPoint.columns !== 0 ? 20 : 0,
-          marginBottom: 20,
-          flexGrow: 'grow',
-          display: 'inline-block' });
-        //non flex fallback
-        return _react2.default.createElement(
-          'div',
-          { key: 'vid.' + index, style: itemStyles },
-          _react2.default.cloneElement(item, Object.assign({}, item.props, { width: width }))
-        );
+      (0, _fetchMethods.get)(this.props.apiURL + endpoint, { data: data }).then(function (res) {
+        return _this2[cb](res.list, res.has_more);
+      }).catch(function (err) {
+        console.error('Failed to fetch videos', query, err);
+        _this2.setState({ failed: _this2.currentPage === 1, hasMore: false, searching: false, loading: false });
+      });
+    }
+  }, {
+    key: 'appendVideos',
+    value: function appendVideos(videos, hasMore) {
+      this.setState({ hasMore: hasMore, videos: this.state.videos.concat(videos), failed: false, loading: false });
+      this.refs.container.style.opacity = 1;
+      this.currentPage++;
+    }
+  }, {
+    key: 'replaceVideos',
+    value: function replaceVideos(videos, hasMore) {
+      this.setState({ hasMore: hasMore, videos: videos, loading: false, failed: false });
+      this.refs.container.style.opacity = 1;
+      this.currentPage++;
+    }
+  }, {
+    key: 'searchTermSection',
+    value: function searchTermSection() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'search-term' },
+        _react2.default.createElement(
+          'span',
+          { className: 'label' },
+          _react2.default.createElement(
+            _trans2.default,
+            { context: this.trans },
+            'searchingFor'
+          )
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'value' },
+          this.state.searchTerm
+        )
+      );
+    }
+  }, {
+    key: 'loadMore',
+    value: function loadMore() {
+      this.loadVideos('appendVideos', this.props);
+    }
+  }, {
+    key: 'renderVideos',
+    value: function renderVideos() {
+      var _this3 = this;
+
+      return this.state.videos.map(function (video, index) {
+        return _react2.default.createElement(_preview2.default, _extends({
+          key: 'vid.item.' + index,
+          type: 'grid'
+        }, _this3.props, video));
       });
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this4 = this;
+
       return _react2.default.createElement(
         'div',
-        { ref: 'container', style: {
-            display: 'flex',
-            justifyContent: 'flex-start',
-            flexWrap: 'wrap'
-          } },
-        this.renderItems(this.props.children)
+        { ref: 'container' },
+        this.state.searchTerm ? this.searchTermSection() : null,
+        this.state.failed ? _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'h3',
+            { className: 'font-lg' },
+            _react2.default.createElement(
+              _trans2.default,
+              { context: this.trans },
+              'loadErrorMsg'
+            )
+          )
+        ) : this.state.videos.length === 0 ? _react2.default.createElement(
+          'div',
+          { className: 'no-results' },
+          _react2.default.createElement(
+            _trans2.default,
+            { context: this.trans },
+            'noVideosFound'
+          )
+        ) : _react2.default.createElement(
+          _grid2.default,
+          null,
+          this.renderVideos()
+        ),
+        this.state.hasMore ? _react2.default.createElement(
+          _button2.default,
+          {
+            fullWidth: true,
+            loading: this.state.loading,
+            onPress: function onPress() {
+              return _this4.loadMore();
+            } },
+          _react2.default.createElement(
+            _trans2.default,
+            { context: this.trans },
+            'Load more'
+          )
+        ) : null
       );
     }
   }]);
 
-  return Grid;
+  return VideosGrid;
 }(_react2.default.Component);
 
-Grid.defaultProps = {
-  breakPoints: [{ columns: 1, width: 220 }, { columns: 2, width: 440 }, { columns: 3, width: 660 }, { columns: 4, width: 880 }, { columns: 5, width: 1100 }, { columns: 6, width: 1320 }, { columns: 7, width: 1540 }, { columns: 8, width: 1760 }, { columns: 9, width: 1980 }, { columns: 10, width: 2200 }]
+VideosGrid.propTypes = {
+  sortBy: _react2.default.PropTypes.string,
+  limit: _react2.default.PropTypes.number,
+  flags: _react2.default.PropTypes.array,
+  endpoint: _react2.default.PropTypes.string,
+  searchTerm: _react2.default.PropTypes.string,
+  mediaType: _react2.default.PropTypes.oneOf(['video', 'playlist'])
 };
-exports.default = Grid;
+VideosGrid.defaultProps = {
+  sortBy: 'recent',
+  limit: 3,
+  flags: [],
+  endpoint: '/videos',
+  colSize: 3,
+  searchTerm: null,
+  mediaType: 'video'
+};
+exports.default = VideosGrid;

@@ -35,6 +35,11 @@ class myComponent extends React.Component{
 ```
 
 
+### Documentation
+
+[Salad-UI.com](https://salad-ui.com)
+
+
 ### Development
 
 If you would like to contribute, feel free to submite pull requests/contact us directly. Salad-UI intends to develop simple, lightweight components that can be re-used accross various applications and environents.

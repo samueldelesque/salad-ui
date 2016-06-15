@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "distribute": "webpack --config ./conf/webpack.config.prod.js",
+    "dist:css": "sass ./src/styles/transitions.scss:./dist/salad-ui.transitions/transitions.css --style compressed",
+    "distribute": "sass ./src/styles/transitions.scss -f ./dist/salad-ui.transitions/transitions.css; webpack --config ./conf/webpack.config.prod.js",
     "dist": "npm run distribute",
-    "distribute:demo": "sass ./src/styles/demo.scss -f ./dist/demo/demo.css; webpack --config ./conf/webpack.config.demo.prod.js",
+    "distribute:demo": "sass ./src/styles/demo.scss -f ./dist/demo/demo.css; sass ./src/styles/transitions.scss -f ./dist/demo/transitions.css; webpack --config ./conf/webpack.config.demo.prod.js",
     "dist:demo": "npm run distribute:demo",
     "lint": "eslint src",
     "publish": "npm run dist; node ./publish.js",

@@ -11,6 +11,9 @@ var fs = require('fs-extra'),
 console.log('Attempt to publish all entrypoints... version: ', version)
 console.log('Please verify /usr/local/bin/npm is available')
 
+// manually add non JS Components
+entrypoints['salad-ui.transitions'] = 'transitions.css'
+
 const childPackage = {
   "name":"salad-ui",
   "version":"0.0.0",

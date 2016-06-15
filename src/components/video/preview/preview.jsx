@@ -4,7 +4,6 @@ import Badge from '../../util/badge/badge'
 import Trans from '../../util/trans/trans'
 import TextClamp from '../../util/text-clamp/text-clamp'
 import TimeAndViews from '../../util/time-and-views/time-and-views'
-import {VelocityComponent} from 'velocity-react'
 
 import styles from './_stylesheet'
 
@@ -102,17 +101,12 @@ export default class Preview extends Component {
           width,
         }}>
           <a href={this.props.uri} style={{display: 'block', overflow: 'hidden'}}>
-            <VelocityComponent animation={{
-              scaleX: this.state.hovered ? 1.1 : 1,
-              scaleY: this.state.hovered ? 1.1 : 1
-            }} duration={300}>
-              <div style={{
-                backgroundImage: `url(${this.props.thumbnail_240_url})`,
-                backgroundSize: 'cover',
-                height,
-                width,
-              }}/>
-            </VelocityComponent>
+            <div className={`transition-md ${this.state.hovered?'zoom-md':''}`} style={{
+              backgroundImage: `url(${this.props.thumbnail_240_url})`,
+              backgroundSize: 'cover',
+              height,
+              width,
+            }}/>
             <div style={{
               position: 'absolute',
               top: 0,

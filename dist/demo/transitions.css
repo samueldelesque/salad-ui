@@ -1,0 +1,86 @@
+/* transitions */
+.transition-xs {
+  transition-duration: 0.1s;
+  -webkit-transition-duration: 0.1s;
+  -moz-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s; }
+
+.transition-sm {
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s; }
+
+.transition-md {
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s; }
+
+.transition-lg {
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s; }
+
+.transition-xl {
+  transition-duration: 0.6s;
+  -webkit-transition-duration: 0.6s;
+  -moz-transition-duration: 0.6s;
+  -o-transition-duration: 0.6s; }
+
+.faded {
+  opacity: 0;
+  visibility: 0; }
+
+.zoom-sm {
+  transform: scale(1.05); }
+
+.zoom-md {
+  transform: scale(1.1); }
+
+.zoom-lg {
+  transform: scale(1.2); }
+
+.zoom-xl {
+  transform: scale(1.4); }
+
+.transition.fadeIn {
+  transition-property: opacity, visibility;
+  -webkit-transition-property: opacity, visibility;
+  -moz-transition-property: opacity, visibility;
+  -o-transition-property: opacity, visibility;
+  transition-timing-function: linear;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  -o-transition-timing-function: linear; }
+  .transition.fadeIn.active {
+    opacity: 1;
+    visibility: visible; }
+.transition.fadeOut {
+  transition-property: opacity, visibility;
+  -webkit-transition-property: opacity, visibility;
+  -moz-transition-property: opacity, visibility;
+  -o-transition-property: opacity, visibility;
+  transition-timing-function: linear;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  -o-transition-timing-function: linear; }
+  .transition.fadeOut.active {
+    opacity: 0;
+    visibility: hidden; }
+.transition.zoomIn {
+  transition-property: opacity, transform, visibility;
+  -webkit-transition-property: opacity, transform, visibility;
+  -moz-transition-property: opacity, transform, visibility;
+  -o-transition-property: opacity, transform, visibility;
+  transition-timing-function: linear;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  -o-transition-timing-function: linear; }
+  .transition.zoomIn.active {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible; }
+
+/*# sourceMappingURL=transitions.css.map */

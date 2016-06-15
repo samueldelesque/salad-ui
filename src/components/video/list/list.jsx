@@ -1,11 +1,11 @@
 import React from 'react'
 import { get } from '../../../lib/fetch-methods'
+import Grid from '../../util/grid/grid'
 import Preview, {mediaTypes} from '../preview/preview'
 import Button from '../../util/button/button'
 import Trans from '../../util/trans/trans'
 
 export default class List extends React.Component {
-  trans = DM_ENV['video/grid']
   currentPage = 1
   lastQuery = null
   videos = []
@@ -114,36 +114,92 @@ export default class List extends React.Component {
     this.loadVideos('appendVideos', this.props)
   }
 
-  renderVideos() {
-    if(this.state.videos.length === 0){
-      return (
-        <div className="no-results"><Trans context={this.trans}>noVideosFound</Trans></div>
-      )
-    }
-    return this.state.videos.map((video,index) =>
-      <div key={'vid.'+index} style={{
-          marginBottom: 20,
-        }}>
-        <Preview type="list" {...this.props} {...video}/>
-      </div>
-    )
-  }
-
-  onLoadError(){
-    return (
-      <div><h3 className="font-lg"><Trans context={this.trans}>loadErrorMsg</Trans></h3></div>
-    )
-  }
+  // renderVideos() {
+  //   return this.state.videos.map((video,index) =>
+  //     <Preview
+  //       key={'vid.item.'+index}
+  //       type="grid"
+  //       {...this.props}
+  //       {...video}
+  //     />
+  //   )
+  // }
 
   render() {
     return (
-      <div ref="container">
-        {
-          this.state.failed ?
-          this.onLoadError():
-          this.renderVideos()
-        }
+      <div className="video-list">
+        {React.Children.map(this.props.children, (item, index) =>
+          React.cloneElement(item, Object.assign({}, this.props, this.state, item.props, {loadMore: () => this.loadMore()}))
+        )}
+        {/*
+            <div ref="container">
+              {
+                this.state.searchTerm ?
+                this.searchTermSection() :
+                null
+              }
+              {
+                this.state.failed ?
+                <div>
+                  <h3 className="font-lg">
+                    <Trans context={this.trans}>loadErrorMsg</Trans>
+                  </h3>
+                </div>:
+                this.state.videos.length === 0 ?
+                <div className="no-results">
+                  <Trans context={this.trans}>noVideosFound</Trans>
+                </div> :
+                <Grid>
+                  {this.renderVideos()}
+                </Grid>
+              }
+              {
+                this.state.hasMore?
+                <Button
+                  fullWidth={true}
+                  loading={this.state.loading}
+                  onPress={()=>this.loadMore()}>
+                  <Trans context={this.trans}>Load more</Trans>
+                </Button> :
+                null
+              }
+            </div>
+        */}
       </div>
     )
   }
 }
+
+
+// Example use:
+
+// class GridArea extends React.Component{
+//   render(){
+//     return (
+//       <Grid>
+//         {this.props.videos.map((video,index)=><Preview key={`video.${index}`} type="grid" {...video}/>)}
+//       </Grid>
+//     )
+//   }
+// }
+// class LoadMore extends React.Component{
+//   render(){
+//     return (
+//       <Button onPress={()=>this.props.loadMore()}>
+//         Load More
+//       </Button>
+//     )
+//   }
+// }
+// class Page extends React.Component{
+//   render(){
+//     return (
+//       <View style={{border: '2px solid'}}>
+//         <VideoList>
+//           <GridArea/>
+//           <LoadMore/>
+//         </VideoList>
+//       </View>
+//     )
+//   }
+// }

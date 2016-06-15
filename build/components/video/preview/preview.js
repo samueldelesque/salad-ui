@@ -31,8 +31,6 @@ var _timeAndViews = require('../../util/time-and-views/time-and-views');
 
 var _timeAndViews2 = _interopRequireDefault(_timeAndViews);
 
-var _velocityReact = require('velocity-react');
-
 var _stylesheet = require('./_stylesheet');
 
 var _stylesheet2 = _interopRequireDefault(_stylesheet);
@@ -142,19 +140,12 @@ var Preview = function (_Component) {
           _react2.default.createElement(
             'a',
             { href: this.props.uri, style: { display: 'block', overflow: 'hidden' } },
-            _react2.default.createElement(
-              _velocityReact.VelocityComponent,
-              { animation: {
-                  scaleX: this.state.hovered ? 1.1 : 1,
-                  scaleY: this.state.hovered ? 1.1 : 1
-                }, duration: 300 },
-              _react2.default.createElement('div', { style: {
-                  backgroundImage: 'url(' + this.props.thumbnail_240_url + ')',
-                  backgroundSize: 'cover',
-                  height: height,
-                  width: width
-                } })
-            ),
+            _react2.default.createElement('div', { className: 'transition-md ' + (this.state.hovered ? 'zoom-md' : ''), style: {
+                backgroundImage: 'url(' + this.props.thumbnail_240_url + ')',
+                backgroundSize: 'cover',
+                height: height,
+                width: width
+              } }),
             _react2.default.createElement('div', { style: {
                 position: 'absolute',
                 top: 0,
