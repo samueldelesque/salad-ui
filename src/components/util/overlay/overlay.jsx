@@ -1,5 +1,4 @@
 import React, {PropTypes, Component} from 'react'
-import {VelocityComponent} from 'velocity-react'
 import Icon from '../../icon/icon'
 import styles from './_stylesheet'
 import glob from '../../../lib/glob'
@@ -37,7 +36,7 @@ export default class Overlay extends Component {
       </div>
     })
 
-    let className = `transition transition-xsm zoomIn${this.props.show? ' active': '' }`
+    let className = `transition ${this.props.show? 'fade-in': 'fade-out scale-out-lg' }`
     let overlayStyles = Object.assign(
       {},
       styles.wrapper,

@@ -91,7 +91,7 @@ var LoadMore = exports.LoadMore = function (_React$Component3) {
 
       return _react2.default.createElement(
         _saladUi2.default.Util.Button,
-        { fullWidth: true, onPress: function onPress() {
+        { loading: this.props.loading, fullWidth: true, onPress: function onPress() {
             return _this4.props.loadMore();
           } },
         'Load More'

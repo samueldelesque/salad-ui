@@ -101,7 +101,7 @@ export default class Preview extends Component {
           width,
         }}>
           <a href={this.props.uri} style={{display: 'block', overflow: 'hidden'}}>
-            <div className={`transition-md ${this.state.hovered?'zoom-md':''}`} style={{
+            <div className={`transition-md transition-timing-ease-in-out ${this.state.hovered?'scale-in-md':''}`} style={{
               backgroundImage: `url(${this.props.thumbnail_240_url})`,
               backgroundSize: 'cover',
               height,

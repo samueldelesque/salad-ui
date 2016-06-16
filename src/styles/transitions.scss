@@ -5,6 +5,13 @@
   -o-transition: $t;
 }
 
+@mixin animation($t...){
+  animation: $t;
+  -webkit-animation: $t;
+  -moz-animation: $t;
+  -o-animation: $t;
+}
+
 @mixin transition-duration($s){
   transition-duration: $s;
   -webkit-transition-duration: $s;
@@ -109,3 +116,12 @@
 .scale-out-xl{
   transform: scale(0.7);
 }
+
+// spin
+.animation-spin{
+  @include animation(spin 2s linear infinite);
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

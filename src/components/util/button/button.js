@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import styles from './_stylesheet.js'
-import Spinner from 'react-spinjs'
+import Spinner from '../../spinner/spinner'
 import merge from 'lodash.merge'
 
 export default class Anchor extends Component {
@@ -41,7 +41,7 @@ export default class Anchor extends Component {
       style={buttonStyle}>
       {
         this.props.loading ?
-        <Spinner config={{scale: 0.4}}/>:
+        <Spinner/>:
         this.state.hovered && this.props.mouseOverText ?
         this.props.mouseOverText :
         this.props.children

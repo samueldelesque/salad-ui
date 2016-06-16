@@ -10,8 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _velocityReact = require('velocity-react');
-
 var _icon = require('../../icon/icon');
 
 var _icon2 = _interopRequireDefault(_icon);
@@ -87,7 +85,7 @@ var Overlay = function (_Component) {
         );
       });
 
-      var className = 'transition transition-xsm zoomIn' + (this.props.show ? ' active' : '');
+      var className = 'transition ' + (this.props.show ? 'fade-in' : 'fade-out scale-out-lg');
       var overlayStyles = Object.assign({}, _stylesheet2.default.wrapper, this.state.responsive ? _stylesheet2.default.wrapperResponsive : null, this.props.show ? null : { opacity: 0, transform: 'scale(0.7)', visibility: 'hidden' });
 
       return _react2.default.createElement(

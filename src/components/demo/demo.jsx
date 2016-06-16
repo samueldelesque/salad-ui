@@ -132,11 +132,6 @@ export default class Demo extends React.Component {
               <SaladUI.Form.InputText textarea/>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Toggle</h3>
-              <pre>{'<Toggle/>'}</pre>
-              <SaladUI.Form.Toggle/>
-            </li>
-            <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Select</h3>
               <pre>
 {`let options = [
@@ -257,8 +252,12 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Alert</h3>
               <pre>{'<Alert type="info/error/success/warning">Hello World</Alert>'}</pre>
-              <SaladUI.Util.Alert type="info" onClose={()=>alert("don't close me!")} title="title eh">
-                Hello World
+              <SaladUI.Util.Alert type="info" onClose={()=>alert("don't close me!")} title="This is an alert.">
+                This is the body of the alert.
+                <div style={{marginTop: 10}}>
+                  <SaladUI.Util.Button type="primary">Accept</SaladUI.Util.Button>
+                  <SaladUI.Util.Button style={{marginLeft: 10}}>Cancel</SaladUI.Util.Button>
+                </div>
               </SaladUI.Util.Alert>
             </li>
             <li>
@@ -328,16 +327,73 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
           <h2>Video</h2>
           <ul className="functionality">
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Grid</h3>
-              <pre>{'<SaladUI.Video.Grid/>'}</pre>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> List</h3>
+              <pre>
+{`class GridArea extends React.Component{
+  render(){
+    return (
+      <SaladUI.Util.Grid>
+        // The videos property is passed down from the Video.List Component
+        {
+          this.props.videos.map((video,index) =>
+            <SaladUI.Video.Preview key={\`video.\${index}\`} type="grid" {...video}/>
+          )
+        }
+      </SaladUI.Util.Grid>
+    )
+  }
+}
+
+export class LoadMore extends React.Component{
+  render(){
+    return (
+      // The loadMore property is passed down from the Video.List Component
+      <SaladUI.Util.Button fullWidth={true} onPress={()=>this.props.loadMore()}>
+        Load More
+      </SaladUI.Util.Button>
+    )
+  }
+}
+
+<SaladUI.Video.List
+  apiURL="https://api.dailymotion.com"
+  limit={10}
+  endpoint="/videos"
+>
+  <GridArea/>
+  <LoadMore/>
+</SaladUI.Video.List>`}
+              </pre>
               <SaladUI.Video.List apiURL="https://api.dailymotion.com" limit={10} endpoint="/videos">
                 <videoComponents.GridArea/>
                 <videoComponents.LoadMore/>
               </SaladUI.Video.List>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> List</h3>
-              <pre>{'<SaladUI.Video.List/>'}</pre>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> List with Preview</h3>
+              <pre>
+{`class ListArea extends React.Component{
+    render(){
+      return (
+        <div className="video-list-area">
+          {
+            this.props.videos.map((video,index) =>
+              <SaladUI.Video.Preview key={\`video.\${index}\`} width={220} type="list" {...video}/>
+            )
+          }
+        </div>
+      )
+    }
+  }
+<SaladUI.Video.List
+  apiURL="https://api.dailymotion.com"
+  limit={3}
+  endpoint="/videos"
+>
+  <ListArea/>
+  <LoadMore/>
+</SaladUI.Video.List>`}
+              </pre>
               <SaladUI.Video.List apiURL="https://api.dailymotion.com" limit={3} endpoint="/videos">
                 <videoComponents.ListArea/>
                 <videoComponents.LoadMore/>
@@ -383,6 +439,53 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
                   <SaladUI.Util.Button type="primary" onPress={()=>this.closeOverlay()}>Save</SaladUI.Util.Button>
                 </overlayFooter>
               </SaladUI.Util.Overlay>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Transitions</h2>
+          <pre>{`import 'salad-ui.transitions'`}</pre>
+          <ul className="functionality">
+            <li>
+              <h3>Transition Duration</h3>
+              <ol>
+                <li>transition (default transition)</li>
+                <li>transition-xs</li>
+                <li>transition-sm</li>
+                <li>transition-md</li>
+                <li>transition-lg</li>
+                <li>transition-xl</li>
+              </ol>
+            </li>
+            <li>
+              <h3>Transition Timing</h3>
+              <ol>
+                <li>transition-timing-linear</li>
+                <li>transition-timing-bezier</li>
+                <li>transition-timing-ease</li>
+                <li>transition-timing-ease-in-out</li>
+              </ol>
+            </li>
+            <li>
+              <h3>Scale Effects</h3>
+              <ol>
+                <li>scale-in-sm</li>
+                <li>scale-in-md</li>
+                <li>scale-in-lg</li>
+                <li>scale-in-xl</li>
+                <li>scale-out-sm</li>
+                <li>scale-out-md</li>
+                <li>scale-out-lg</li>
+                <li>scale-out-xl</li>
+              </ol>
+            </li>
+            <li>
+              <h3>Fade Effects</h3>
+              <ol>
+                <li>fade-in</li>
+                <li>fade-out</li>
+              </ol>
             </li>
           </ul>
         </section>

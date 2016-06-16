@@ -31,8 +31,9 @@ const childPackage = {
     "react-graph"
   ],
   "peerDependencies":{
-    "react":">=0.14.0",
-    "react-dom":">=0.14.0"
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-router": "^2.4.1",
   }
 }
 

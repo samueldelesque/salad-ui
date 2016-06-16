@@ -140,7 +140,7 @@ var Preview = function (_Component) {
           _react2.default.createElement(
             'a',
             { href: this.props.uri, style: { display: 'block', overflow: 'hidden' } },
-            _react2.default.createElement('div', { className: 'transition-md ' + (this.state.hovered ? 'zoom-md' : ''), style: {
+            _react2.default.createElement('div', { className: 'transition-md transition-timing-ease-in-out ' + (this.state.hovered ? 'scale-in-md' : ''), style: {
                 backgroundImage: 'url(' + this.props.thumbnail_240_url + ')',
                 backgroundSize: 'cover',
                 height: height,

@@ -32,11 +32,11 @@ var _routeParser = require('route-parser');
 
 var _routeParser2 = _interopRequireDefault(_routeParser);
 
-var _index = require('./components/demo/index');
-
-var _index2 = _interopRequireDefault(_index);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var renderFullPage = function renderFullPage(html, initialState, bundle, bodyClass) {
+  return '<!DOCTYPE html>\n<html>\n  <head>\n    <title>Salad-UI Components</title>\n    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">\n    <link rel="stylesheet" href="/demo/demo.css"/>\n    <link rel="stylesheet" href="/demo/transitions.css"/>\n  </head>\n  <body class="' + bodyClass + '">\n    <div id="react-root">' + html + '</div>\n    <script>__INITIAL_STATE__ = ' + JSON.stringify(initialState) + '</script>\n    <script src="/' + bundle + '/' + bundle + '.js"></script>\n  </body>\n</html>';
+};
 
 var routes = _routing2.default.map(function (r) {
   r.route = (0, _routeParser2.default)(r.url);
@@ -124,7 +124,7 @@ app.get('*', function (req, res) {
   if (!argv['is-client']) html = _server2.default.renderToString(_react2.default.createElement(_demo2.default, initialState));
 
   // Send the rendered page back to the client
-  res.send((0, _index2.default)(html, initialState, route.bundle, route.bodyClass || ''));
+  res.send(renderFullPage(html, initialState, route.bundle, route.bodyClass || ''));
 });
 
 app.listen(PORT, '0.0.0.0', function (err) {

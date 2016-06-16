@@ -14,9 +14,9 @@ var _stylesheet = require('./_stylesheet.js');
 
 var _stylesheet2 = _interopRequireDefault(_stylesheet);
 
-var _reactSpinjs = require('react-spinjs');
+var _spinner = require('../../spinner/spinner');
 
-var _reactSpinjs2 = _interopRequireDefault(_reactSpinjs);
+var _spinner2 = _interopRequireDefault(_spinner);
 
 var _lodash = require('lodash.merge');
 
@@ -82,7 +82,7 @@ var Anchor = function (_Component) {
             return _this2.onPress(e);
           },
           style: buttonStyle },
-        this.props.loading ? _react2.default.createElement(_reactSpinjs2.default, { config: { scale: 0.4 } }) : this.state.hovered && this.props.mouseOverText ? this.props.mouseOverText : this.props.children
+        this.props.loading ? _react2.default.createElement(_spinner2.default, null) : this.state.hovered && this.props.mouseOverText ? this.props.mouseOverText : this.props.children
       );
     }
   }]);

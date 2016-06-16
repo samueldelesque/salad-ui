@@ -6,17 +6,17 @@ import Button from '../../util/button/button'
 import Trans from '../../util/trans/trans'
 
 export default class List extends React.Component {
-  currentPage = 1
-  lastQuery = null
-  videos = []
-  hasMore = false
-
   state = {
     videos: [],
     failed: false,
+    currentPage: 1,
     hasMore: false,
     loading: false,
     searching: false,
+    initialVideos: {
+      videos: [],
+      hasMore: false
+    },
     err: null
   }
 
@@ -45,9 +45,10 @@ export default class List extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if(this.hasPropsChanged(this.props, nextProps)){
-      this.currentPage = 1
-      if(this.refs.container) this.refs.container.style.opacity = .4
-      this.loadVideos('replaceVideos', nextProps)
+    if(this.refs.container) this.refs.container.style.opacity = .4
+      this.setState({currentPage: 1}, () => {
+        this.loadVideos('replaceVideos', nextProps)
+      })
     }
   }
 
@@ -70,9 +71,9 @@ export default class List extends React.Component {
   // Allow us to store the first set of videos to avoid hitting API after a search
   setInitialVideos(videos, hasMore){
     if(videos.length === 0 && this.props.ifEmpty) this.props.ifEmpty()
-    this.videos = videos
-    this.hasMore = hasMore
-    this.replaceVideos(videos, hasMore)
+    this.setState({initialVideos: {videos,hasMore}}, () => {
+      this.replaceVideos(videos, hasMore)
+    })
   }
 
   loadVideos(cb, props){
@@ -80,7 +81,7 @@ export default class List extends React.Component {
     this.setState({loading: true})
     let data = {
       fields: mediaTypes[this.props.mediaType].fields.join(','),
-      page: this.currentPage,
+      page: this.state.currentPage,
       thumbnail_ratio: 'widescreen',
       sort: props.sortSelection || props.sortBy,
       limit: props.limit,
@@ -94,77 +95,30 @@ export default class List extends React.Component {
     .then(res => this[cb](res.list, res.has_more))
     .catch(err => {
       console.error('Failed to fetch videos', query, err)
-      this.setState({failed: this.currentPage === 1, hasMore: false, searching: false, loading: false})
+      this.setState({failed: this.state.currentPage === 1, hasMore: false, searching: false, loading: false})
     })
   }
 
   appendVideos(videos, hasMore){
-    this.setState({hasMore, videos: this.state.videos.concat(videos), failed: false, loading: false})
+    this.setState({hasMore, videos: this.state.videos.concat(videos), failed: false, loading: false, currentPage: this.state.currentPage + 1})
     this.refs.container.style.opacity = 1
-    this.currentPage++
   }
 
   replaceVideos(videos, hasMore){
-    this.setState({hasMore, videos, loading: false, failed: false})
+    this.setState({hasMore, videos, loading: false, failed: false, currentPage: this.state.currentPage + 1})
     this.refs.container.style.opacity = 1
-    this.currentPage++
   }
 
   loadMore(){
     this.loadVideos('appendVideos', this.props)
   }
 
-  // renderVideos() {
-  //   return this.state.videos.map((video,index) =>
-  //     <Preview
-  //       key={'vid.item.'+index}
-  //       type="grid"
-  //       {...this.props}
-  //       {...video}
-  //     />
-  //   )
-  // }
-
   render() {
     return (
-      <div className="video-list">
+      <div className="video-list" ref="container">
         {React.Children.map(this.props.children, (item, index) =>
           React.cloneElement(item, Object.assign({}, this.props, this.state, item.props, {loadMore: () => this.loadMore()}))
         )}
-        {/*
-            <div ref="container">
-              {
-                this.state.searchTerm ?
-                this.searchTermSection() :
-                null
-              }
-              {
-                this.state.failed ?
-                <div>
-                  <h3 className="font-lg">
-                    <Trans context={this.trans}>loadErrorMsg</Trans>
-                  </h3>
-                </div>:
-                this.state.videos.length === 0 ?
-                <div className="no-results">
-                  <Trans context={this.trans}>noVideosFound</Trans>
-                </div> :
-                <Grid>
-                  {this.renderVideos()}
-                </Grid>
-              }
-              {
-                this.state.hasMore?
-                <Button
-                  fullWidth={true}
-                  loading={this.state.loading}
-                  onPress={()=>this.loadMore()}>
-                  <Trans context={this.trans}>Load more</Trans>
-                </Button> :
-                null
-              }
-            </div>
-        */}
       </div>
     )
   }

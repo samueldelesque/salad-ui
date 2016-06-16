@@ -60,7 +60,7 @@ export default class Toggle extends Component {
         <span ref="choice-0" className="form_toggle__choice">{data0.label}</span>
         <span ref="choice-1" className="form_toggle__choice">{data1.label}</span>
         <div className="form_toggle__slider" style={this.state.cursorStyle}/>
-        <input ref="input" type="hidden" name={this.props.name} defaultValue={this.props.data[this.props.selectedIndex].value} value={this.state.value}/>
+        <input ref="input" type="hidden" name={this.props.name} value={this.state.value}/>
       </div>
     )
   }

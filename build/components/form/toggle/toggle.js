@@ -94,7 +94,7 @@ var Toggle = function (_Component) {
           data1.label
         ),
         _react2.default.createElement('div', { className: 'form_toggle__slider', style: this.state.cursorStyle }),
-        _react2.default.createElement('input', { ref: 'input', type: 'hidden', name: this.props.name, defaultValue: this.props.data[this.props.selectedIndex].value, value: this.state.value })
+        _react2.default.createElement('input', { ref: 'input', type: 'hidden', name: this.props.name, value: this.state.value })
       );
     }
   }]);

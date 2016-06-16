@@ -50,12 +50,17 @@ var List = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(List)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.currentPage = 1, _this.lastQuery = null, _this.videos = [], _this.hasMore = false, _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(List)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
       videos: [],
       failed: false,
+      currentPage: 1,
       hasMore: false,
       loading: false,
       searching: false,
+      initialVideos: {
+        videos: [],
+        hasMore: false
+      },
       err: null
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -68,10 +73,13 @@ var List = function (_React$Component) {
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
+      var _this2 = this;
+
       if (this.hasPropsChanged(this.props, nextProps)) {
-        this.currentPage = 1;
         if (this.refs.container) this.refs.container.style.opacity = .4;
-        this.loadVideos('replaceVideos', nextProps);
+        this.setState({ currentPage: 1 }, function () {
+          _this2.loadVideos('replaceVideos', nextProps);
+        });
       }
     }
   }, {
@@ -97,21 +105,23 @@ var List = function (_React$Component) {
   }, {
     key: 'setInitialVideos',
     value: function setInitialVideos(videos, hasMore) {
+      var _this3 = this;
+
       if (videos.length === 0 && this.props.ifEmpty) this.props.ifEmpty();
-      this.videos = videos;
-      this.hasMore = hasMore;
-      this.replaceVideos(videos, hasMore);
+      this.setState({ initialVideos: { videos: videos, hasMore: hasMore } }, function () {
+        _this3.replaceVideos(videos, hasMore);
+      });
     }
   }, {
     key: 'loadVideos',
     value: function loadVideos(cb, props) {
-      var _this2 = this;
+      var _this4 = this;
 
       if (!this.props.mediaType) console.error('No mediaType provided to Grid.');
       this.setState({ loading: true });
       var data = {
         fields: _preview.mediaTypes[this.props.mediaType].fields.join(','),
-        page: this.currentPage,
+        page: this.state.currentPage,
         thumbnail_ratio: 'widescreen',
         sort: props.sortSelection || props.sortBy,
         limit: props.limit,
@@ -122,54 +132,40 @@ var List = function (_React$Component) {
       if (props.flags && props.flags.length) data.flags = props.flags.join(',');
 
       (0, _fetchMethods.get)(this.props.apiURL + endpoint, { data: data }).then(function (res) {
-        return _this2[cb](res.list, res.has_more);
+        return _this4[cb](res.list, res.has_more);
       }).catch(function (err) {
         console.error('Failed to fetch videos', query, err);
-        _this2.setState({ failed: _this2.currentPage === 1, hasMore: false, searching: false, loading: false });
+        _this4.setState({ failed: _this4.state.currentPage === 1, hasMore: false, searching: false, loading: false });
       });
     }
   }, {
     key: 'appendVideos',
     value: function appendVideos(videos, hasMore) {
-      this.setState({ hasMore: hasMore, videos: this.state.videos.concat(videos), failed: false, loading: false });
+      this.setState({ hasMore: hasMore, videos: this.state.videos.concat(videos), failed: false, loading: false, currentPage: this.state.currentPage + 1 });
       this.refs.container.style.opacity = 1;
-      this.currentPage++;
     }
   }, {
     key: 'replaceVideos',
     value: function replaceVideos(videos, hasMore) {
-      this.setState({ hasMore: hasMore, videos: videos, loading: false, failed: false });
+      this.setState({ hasMore: hasMore, videos: videos, loading: false, failed: false, currentPage: this.state.currentPage + 1 });
       this.refs.container.style.opacity = 1;
-      this.currentPage++;
     }
   }, {
     key: 'loadMore',
     value: function loadMore() {
       this.loadVideos('appendVideos', this.props);
     }
-
-    // renderVideos() {
-    //   return this.state.videos.map((video,index) =>
-    //     <Preview
-    //       key={'vid.item.'+index}
-    //       type="grid"
-    //       {...this.props}
-    //       {...video}
-    //     />
-    //   )
-    // }
-
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this5 = this;
 
       return _react2.default.createElement(
         'div',
-        { className: 'video-list' },
+        { className: 'video-list', ref: 'container' },
         _react2.default.Children.map(this.props.children, function (item, index) {
-          return _react2.default.cloneElement(item, Object.assign({}, _this3.props, _this3.state, item.props, { loadMore: function loadMore() {
-              return _this3.loadMore();
+          return _react2.default.cloneElement(item, Object.assign({}, _this5.props, _this5.state, item.props, { loadMore: function loadMore() {
+              return _this5.loadMore();
             } }));
         })
       );

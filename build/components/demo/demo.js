@@ -339,26 +339,6 @@ var Demo = function (_React$Component) {
                   { style: { fontStyle: 'italic', opacity: .3 } },
                   'React Component'
                 ),
-                ' Toggle'
-              ),
-              _react2.default.createElement(
-                'pre',
-                null,
-                '<Toggle/>'
-              ),
-              _react2.default.createElement(_saladUi2.default.Form.Toggle, null)
-            ),
-            _react2.default.createElement(
-              'li',
-              null,
-              _react2.default.createElement(
-                'h3',
-                null,
-                _react2.default.createElement(
-                  'span',
-                  { style: { fontStyle: 'italic', opacity: .3 } },
-                  'React Component'
-                ),
                 ' Select'
               ),
               _react2.default.createElement(
@@ -640,8 +620,22 @@ var Demo = function (_React$Component) {
                 _saladUi2.default.Util.Alert,
                 { type: 'info', onClose: function onClose() {
                     return alert("don't close me!");
-                  }, title: 'title eh' },
-                'Hello World'
+                  }, title: 'This is an alert.' },
+                'This is the body of the alert.',
+                _react2.default.createElement(
+                  'div',
+                  { style: { marginTop: 10 } },
+                  _react2.default.createElement(
+                    _saladUi2.default.Util.Button,
+                    { type: 'primary' },
+                    'Accept'
+                  ),
+                  _react2.default.createElement(
+                    _saladUi2.default.Util.Button,
+                    { style: { marginLeft: 10 } },
+                    'Cancel'
+                  )
+                )
               )
             ),
             _react2.default.createElement(
@@ -879,12 +873,12 @@ var Demo = function (_React$Component) {
                   { style: { fontStyle: 'italic', opacity: .3 } },
                   'React Component'
                 ),
-                ' Grid'
+                ' List'
               ),
               _react2.default.createElement(
                 'pre',
                 null,
-                '<SaladUI.Video.Grid/>'
+                'class GridArea extends React.Component{\n  render(){\n    return (\n      <SaladUI.Util.Grid>\n        // The videos property is passed down from the Video.List Component\n        {\n          this.props.videos.map((video,index) =>\n            <SaladUI.Video.Preview key={`video.${index}`} type="grid" {...video}/>\n          )\n        }\n      </SaladUI.Util.Grid>\n    )\n  }\n}\n\nexport class LoadMore extends React.Component{\n  render(){\n    return (\n      // The loadMore property is passed down from the Video.List Component\n      <SaladUI.Util.Button fullWidth={true} onPress={()=>this.props.loadMore()}>\n        Load More\n      </SaladUI.Util.Button>\n    )\n  }\n}\n\n<SaladUI.Video.List\n  apiURL="https://api.dailymotion.com"\n  limit={10}\n  endpoint="/videos"\n>\n  <GridArea/>\n  <LoadMore/>\n</SaladUI.Video.List>'
               ),
               _react2.default.createElement(
                 _saladUi2.default.Video.List,
@@ -904,12 +898,12 @@ var Demo = function (_React$Component) {
                   { style: { fontStyle: 'italic', opacity: .3 } },
                   'React Component'
                 ),
-                ' List'
+                ' List with Preview'
               ),
               _react2.default.createElement(
                 'pre',
                 null,
-                '<SaladUI.Video.List/>'
+                'class ListArea extends React.Component{\n    render(){\n      return (\n        <div className="video-list-area">\n          {\n            this.props.videos.map((video,index) =>\n              <SaladUI.Video.Preview key={`video.${index}`} width={220} type="list" {...video}/>\n            )\n          }\n        </div>\n      )\n    }\n  }\n<SaladUI.Video.List\n  apiURL="https://api.dailymotion.com"\n  limit={3}\n  endpoint="/videos"\n>\n  <ListArea/>\n  <LoadMore/>\n</SaladUI.Video.List>'
               ),
               _react2.default.createElement(
                 _saladUi2.default.Video.List,
@@ -981,6 +975,176 @@ var Demo = function (_React$Component) {
                       } },
                     'Save'
                   )
+                )
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'section',
+          null,
+          _react2.default.createElement(
+            'h2',
+            null,
+            'Transitions'
+          ),
+          _react2.default.createElement(
+            'pre',
+            null,
+            'import \'salad-ui.transitions\''
+          ),
+          _react2.default.createElement(
+            'ul',
+            { className: 'functionality' },
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Transition Duration'
+              ),
+              _react2.default.createElement(
+                'ol',
+                null,
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'transition (default transition)'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'transition-xs'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'transition-sm'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'transition-md'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'transition-lg'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'transition-xl'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Transition Timing'
+              ),
+              _react2.default.createElement(
+                'ol',
+                null,
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'transition-timing-linear'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'transition-timing-bezier'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'transition-timing-ease'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'transition-timing-ease-in-out'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Scale Effects'
+              ),
+              _react2.default.createElement(
+                'ol',
+                null,
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'scale-in-sm'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'scale-in-md'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'scale-in-lg'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'scale-in-xl'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'scale-out-sm'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'scale-out-md'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'scale-out-lg'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'scale-out-xl'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Fade Effects'
+              ),
+              _react2.default.createElement(
+                'ol',
+                null,
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'fade-in'
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  'fade-out'
                 )
               )
             )

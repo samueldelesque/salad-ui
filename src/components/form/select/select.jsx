@@ -106,13 +106,9 @@ export default class Select extends Component {
       </li>
     }));
 
-    let s = styles.dropdown
-    if(!this.state.open)
-      s = Object.assign({}, s, styles.dropdownHidden)
-    let className = `transition transition-xsm fadeIn${this.state.open? ' active': '' }`
-
+    const dropdownStyles = Object.assign({}, styles.dropdown, !this.state.open ? styles.dropdownHidden : null)
     return (
-      <div style={s} className={className}>
+      <div style={dropdownStyles} className={`transition ${this.state.open?'fade-in':'fade-out'}`}>
         <ul>
           { options }
         </ul>
@@ -121,9 +117,7 @@ export default class Select extends Component {
   }
 
   render() {
-    let selectBoxStyles = styles.selectBox
-    if(this.props.noBorder) selectBoxStyles = Object.assign({}, selectBoxStyles, styles.noBorder)
-
+    const selectBoxStyles = Object.assign({}, styles.selectBox, this.props.noBorder?styles.noBorder:null)
     return (
       <div style={{position: 'relative'}}>
         <div style={selectBoxStyles} onClick={(e) => this.selectClick(e)}>

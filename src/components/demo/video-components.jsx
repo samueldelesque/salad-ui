@@ -30,7 +30,7 @@ export class ListArea extends React.Component{
 export class LoadMore extends React.Component{
   render(){
     return (
-      <SaladUI.Util.Button fullWidth={true} onPress={()=>this.props.loadMore()}>
+      <SaladUI.Util.Button loading={this.props.loading} fullWidth={true} onPress={()=>this.props.loadMore()}>
         Load More
       </SaladUI.Util.Button>
     )

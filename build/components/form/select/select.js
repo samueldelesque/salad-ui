@@ -168,13 +168,10 @@ var Select = function (_Component) {
         );
       }));
 
-      var s = _stylesheet2.default.dropdown;
-      if (!this.state.open) s = Object.assign({}, s, _stylesheet2.default.dropdownHidden);
-      var className = 'transition transition-xsm fadeIn' + (this.state.open ? ' active' : '');
-
+      var dropdownStyles = Object.assign({}, _stylesheet2.default.dropdown, !this.state.open ? _stylesheet2.default.dropdownHidden : null);
       return _react2.default.createElement(
         'div',
-        { style: s, className: className },
+        { style: dropdownStyles, className: 'transition ' + (this.state.open ? 'fade-in' : 'fade-out') },
         _react2.default.createElement(
           'ul',
           null,
@@ -187,9 +184,7 @@ var Select = function (_Component) {
     value: function render() {
       var _this4 = this;
 
-      var selectBoxStyles = _stylesheet2.default.selectBox;
-      if (this.props.noBorder) selectBoxStyles = Object.assign({}, selectBoxStyles, _stylesheet2.default.noBorder);
-
+      var selectBoxStyles = Object.assign({}, _stylesheet2.default.selectBox, this.props.noBorder ? _stylesheet2.default.noBorder : null);
       return _react2.default.createElement(
         'div',
         { style: { position: 'relative' } },

@@ -1,11 +1,20 @@
 var path = require('path'),
     webpack = require('webpack'),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
-    directories = [path.resolve('./src')]
+    directories = [path.resolve('./build')]
 
 module.exports = {
   devtool: 'source-map',
-  entry: path.resolve('./src/components/demo/entry'),
+  entry:  {
+    demo: [
+      'webpack-dev-server/client?http://localhost:6041',
+      'webpack/hot/only-dev-server',
+      path.resolve('./build/components/demo/entry')
+      // 'eventsource-polyfill', // necessary for hot reloading with IE
+      // 'webpack-hot-middleware/client',
+      // path.resolve('./build/components/demo/entry')
+    ],
+  },
   resolve: {
     root: directories,
     extensions: ['', '.js', '.es6 ', '.jsx'],
@@ -17,21 +26,16 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin("styles.css")
+    // new ExtractTextPlugin("styles.css")
   ],
   module: {
     loaders: [
         {
-          test: /\.jsx?|\.es6|src/,
-          loaders: ['babel?presets[]=stage-0'],
+          test: /\.jsx|\.js/,
+          loaders: ['react-hot'],//, 'babel?presets[]=stage-0'
           include: directories,
-          exclude: [path.resolve('../node_modules')]
         },
-        // {
-        //     test: /\.scss|\.css$/,
-        //     loader: "style!css!sass"
-        // }
-        { test: /\.scss|\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'sass-loader')},
+        // { test: /\.scss|\.cs s$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'sass-loader')},
     ]
   }
 };

@@ -11,6 +11,7 @@
     "lint": "eslint src",
     "publish": "npm run dist; node ./publish.js",
     "pub": "npm run publish",
+    "webpack": "node build/webpack-server.js",
     "dev": "nodemon build/server.js --local",
     "dev-client": "node build/server.js --is-client --local",
     "build": "babel src --watch -d build"
@@ -53,12 +54,14 @@
     "react": "^0.14.7",
     "react-daterange-picker": "^1.0.0",
     "react-dom": "^0.14.7",
+    "react-hot-loader": "^1.3.0",
     "rimraf": "^2.4.3",
     "sass": "^0.5.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.4.0",
+    "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.6.0"
   },
   "dependencies": {
@@ -72,12 +75,10 @@
     "lodash.merge": "^4.3.5",
     "lodash.zipobject": "^4.1.3",
     "numeral": "^1.5.3",
-    "radium": "^0.17.1",
-    "react-image-responsive": "^1.0.18",
-    "react-simple-charts": "0.0.19",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
     "react-spinjs": "^3.0.0",
     "route-parser": "0.0.5",
-    "sprintf-js": "^1.0.3",
-    "velocity-react": "^1.1.5"
+    "sprintf-js": "^1.0.3"
   }
 }
