@@ -10,9 +10,6 @@ module.exports = {
       'webpack-dev-server/client?http://localhost:6041',
       'webpack/hot/only-dev-server',
       path.resolve('./build/components/demo/entry')
-      // 'eventsource-polyfill', // necessary for hot reloading with IE
-      // 'webpack-hot-middleware/client',
-      // path.resolve('./build/components/demo/entry')
     ],
   },
   resolve: {
