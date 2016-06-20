@@ -94,6 +94,7 @@ export default class Icon extends React.Component {
   }
 
   static defaultProps = {
+    type: null,
     width: 24,
     height: 24,
     x: 0,
