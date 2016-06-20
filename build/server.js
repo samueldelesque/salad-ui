@@ -118,7 +118,7 @@ app.get('*', function (req, res) {
 
   var html = '';
   if (!argv['is-client']) {
-    var DemoPage = require('./components/demo/demo');
+    var DemoPage = require('./components/demo/demo').default;
     html = _server2.default.renderToString(_react2.default.createElement(DemoPage, initialState));
   }
 

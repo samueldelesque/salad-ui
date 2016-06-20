@@ -110,7 +110,7 @@ app.get('*', function(req, res) {
 
   let html = ''
   if(!argv['is-client']){
-    const DemoPage = require('./components/demo/demo')
+    const DemoPage = require('./components/demo/demo').default
     html = ReactServer.renderToString(<DemoPage {...initialState}/>)
   }
 
