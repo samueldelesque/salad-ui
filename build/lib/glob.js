@@ -15,15 +15,11 @@ if (CANUSEDOM) {
 if (!glob.DM_ENV) glob.DM_ENV = {};
 
 glob.canUseDom = function () {
-  return CANUSEDOM;
+  return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 };
 
 String.prototype.trans = function () {
   return this;
 };
 
-exports.default = {
-  canUseDom: function canUseDom() {
-    return false;
-  }
-};
+exports.default = glob;

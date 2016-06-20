@@ -120,7 +120,7 @@ export default class Preview extends Component {
           </a>
         </div>
         <div style={previewStyles.text}>
-          <h4 style={previewStyles.title}>
+          <h3 style={previewStyles.title}>
             <a href={this.props.uri} style={{
               textDecoration: this.state.hovered ? 'underline' : 'none',
               color: styles.link.color
@@ -133,7 +133,7 @@ export default class Preview extends Component {
                 }
               </TextClamp>
             </a>
-          </h4>
+          </h3>
         {
           this.props.mediaType === 'video' ?
           <TimeAndViews noUploadLabel={true} time={this.props.created_time} views={this.props.views_total}/>:

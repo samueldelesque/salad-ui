@@ -32,7 +32,8 @@ var styles = {
       marginBottom: 10,
       lineHeight: 1.2,
       height: '2.4rem',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      maxWidth: '210px'
     }
   },
   grid: {
@@ -47,7 +48,8 @@ var styles = {
       marginBottom: 10,
       lineHeight: 1.2,
       height: '2.4rem',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      maxWidth: '210px'
     }
   },
   after: {

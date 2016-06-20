@@ -174,7 +174,7 @@ var Preview = function (_Component) {
           'div',
           { style: previewStyles.text },
           _react2.default.createElement(
-            'h4',
+            'h3',
             { style: previewStyles.title },
             _react2.default.createElement(
               'a',

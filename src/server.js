@@ -3,7 +3,6 @@ import request from 'request'
 import express from 'express'
 import ReactServer from 'react-dom/server'
 import bodyParser from 'body-parser'
-import DemoPage from './components/demo/demo'
 import routing from '../conf/routing.json'
 import Route from 'route-parser'
 
@@ -110,8 +109,10 @@ app.get('*', function(req, res) {
   }
 
   let html = ''
-  if(!argv['is-client'])
+  if(!argv['is-client']){
+    const DemoPage = require('./components/demo/demo')
     html = ReactServer.renderToString(<DemoPage {...initialState}/>)
+  }
 
   // Send the rendered page back to the client
   res.send(renderFullPage(html, initialState, route.bundle, route.bodyClass || ''))

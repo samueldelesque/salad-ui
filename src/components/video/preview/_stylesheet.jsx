@@ -23,6 +23,7 @@ const styles = {
       lineHeight: 1.2,
       height: '2.4rem',
       overflow: 'hidden',
+      maxWidth: '210px',
     },
   },
   grid: {
@@ -41,6 +42,7 @@ const styles = {
       lineHeight: 1.2,
       height: '2.4rem',
       overflow: 'hidden',
+      maxWidth: '210px',
     },
   },
   after: {

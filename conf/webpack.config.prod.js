@@ -1,6 +1,6 @@
 var path = require('path'),
     webpack = require('webpack'),
-    directories = [path.resolve('./src')],
+    directories = [path.resolve('./build')],
     entrypoints = require('./entrypoints.js')
 
 module.exports = {
@@ -43,10 +43,10 @@ module.exports = {
         include: directories,
         exclude: [path.resolve('../node_modules')]
       },
-      {
-        test: /\.scss|\.css$/,
-        loader: "style!css!sass"
-      }
+      // {
+      //   test: /\.scss|\.css$/,
+      //   loader: "style!css!sass"
+      // }
     ]
   }
 };

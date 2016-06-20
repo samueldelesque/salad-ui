@@ -14,10 +14,12 @@ else {
 }
 if(!glob.DM_ENV) glob.DM_ENV = {}
 
-glob.canUseDom = function(){return CANUSEDOM}
+glob.canUseDom = () => !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+)
 
 String.prototype.trans = function(){return this}
 
-export default {
-  canUseDom: () => false
-}
+export default glob

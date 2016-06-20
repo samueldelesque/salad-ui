@@ -20,10 +20,6 @@ var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _demo = require('./components/demo/demo');
-
-var _demo2 = _interopRequireDefault(_demo);
-
 var _routing = require('../conf/routing.json');
 
 var _routing2 = _interopRequireDefault(_routing);
@@ -121,7 +117,10 @@ app.get('*', function (req, res) {
   };
 
   var html = '';
-  if (!argv['is-client']) html = _server2.default.renderToString(_react2.default.createElement(_demo2.default, initialState));
+  if (!argv['is-client']) {
+    var DemoPage = require('./components/demo/demo');
+    html = _server2.default.renderToString(_react2.default.createElement(DemoPage, initialState));
+  }
 
   // Send the rendered page back to the client
   res.send(renderFullPage(html, initialState, route.bundle, route.bodyClass || ''));
