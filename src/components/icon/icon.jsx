@@ -120,7 +120,7 @@ export default class Icon extends React.Component {
       }
     )
 
-    // console.log(props, fill, type, width, height)
+    console.log(props)
     return(
       <svg x={x} y={y} viewBox={viewBox} {...props}>
         <path d={iconTypes[type]} fill={fill}></path>
