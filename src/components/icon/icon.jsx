@@ -101,7 +101,9 @@ export default class Icon extends React.Component {
     y: 0,
     fill: '#000000',
     viewBox: '0 0 500 500',
-    style: {},
+    style: {
+      opacity: 1,
+    },
   }
 
   render(){
