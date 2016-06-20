@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.iconTypes = undefined;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -12,6 +14,8 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -116,16 +120,33 @@ var Icon = function (_React$Component) {
   _createClass(Icon, [{
     key: 'render',
     value: function render() {
-      var props = Object.assign({}, this.props, {
+      // For some funny reason, react can't match client and server
+      // code when the properties are not specified individually
+
+      var _Object$assign = Object.assign({}, this.props, {
         style: Object.assign({}, this.props.style, {
           width: this.props.width,
           height: this.props.height
         })
       });
+
+      var type = _Object$assign.type;
+      var width = _Object$assign.width;
+      var height = _Object$assign.height;
+      var fill = _Object$assign.fill;
+      var x = _Object$assign.x;
+      var y = _Object$assign.y;
+      var viewBox = _Object$assign.viewBox;
+
+      var props = _objectWithoutProperties(_Object$assign, ['type', 'width', 'height', 'fill', 'x', 'y', 'viewBox']);
+
+      // console.log(props, fill, type, width, height)
+
+
       return _react2.default.createElement(
         'svg',
-        props,
-        _react2.default.createElement('path', { d: iconTypes[this.props.type], fill: this.props.fill })
+        _extends({ x: x, y: y, viewBox: viewBox }, props),
+        _react2.default.createElement('path', { d: iconTypes[type], fill: fill })
       );
     }
   }]);

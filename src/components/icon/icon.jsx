@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 export const iconTypes = {
@@ -103,7 +104,9 @@ export default class Icon extends React.Component {
   }
 
   render(){
-    const props = Object.assign(
+    // For some funny reason, react can't match client and server
+    // code when the properties are not specified individually
+    const {type, width, height, fill, x, y, viewBox, ...props} = Object.assign(
       {},
       this.props,
       {
@@ -113,9 +116,11 @@ export default class Icon extends React.Component {
         })
       }
     )
+
+    // console.log(props, fill, type, width, height)
     return(
-      <svg {...props}>
-        <path d={iconTypes[this.props.type]} fill={this.props.fill}></path>
+      <svg x={x} y={y} viewBox={viewBox} {...props}>
+        <path d={iconTypes[type]} fill={fill}></path>
       </svg>
     )
   }
