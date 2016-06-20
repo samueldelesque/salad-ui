@@ -140,9 +140,6 @@ var Icon = function (_React$Component) {
 
       var props = _objectWithoutProperties(_Object$assign, ['type', 'width', 'height', 'fill', 'x', 'y', 'viewBox']);
 
-      // console.log(props, fill, type, width, height)
-
-
       return _react2.default.createElement(
         'svg',
         _extends({ x: x, y: y, viewBox: viewBox }, props),
@@ -161,12 +158,15 @@ Icon.propTypes = {
   viewbox: _react2.default.PropTypes.string
 };
 Icon.defaultProps = {
+  type: null,
   width: 24,
   height: 24,
   x: 0,
   y: 0,
   fill: '#000000',
   viewBox: '0 0 500 500',
-  style: {}
+  style: {
+    opacity: 1
+  }
 };
 exports.default = Icon;
