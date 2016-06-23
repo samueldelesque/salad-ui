@@ -18,22 +18,22 @@ export default class TimeAndViews extends React.Component {
     else if(diff > 17520)
       return <Trans context={this.trans} years={Math.round(diff/8760)} isPlural={Math.round(diff/8760)!==1}>%(years)s years ago</Trans>
     else if(diff > 8760)
-      return this.trans['last year']
+      return <Trans context={this.trans}>last year</Trans>
     else if(diff > 1440)
       return <Trans context={this.trans} month={this.trans.months[date.getMonth()]}>last %(month)s</Trans>
     else if(diff > 720)
-      return this.trans['last month']
+      return <Trans context={this.trans}>last month</Trans>
     else if(diff > 336)
       return <Trans context={this.trans} weeks={Math.round(diff/168)} isPlural={Math.round(diff/168)!==1}>%(weeks)s weeks ago</Trans>
     else if(diff > 168)
-      return this.trans['a week ago']
+      return <Trans context={this.trans}>a week ago</Trans>
     else if(diff > 48)
       return <Trans context={this.trans} day={this.trans.days[date.getDay()]}>last %(day)s</Trans>
     else if(diff > 24)
-      return this.trans['yesterday']
+      return <Trans context={this.trans}>yesterday</Trans>
     else if(diff > 1)
       return <Trans context={this.trans} hours={Math.round(diff)} isPlural={diff!==1}>%(hours)s hours ago</Trans>
-    return <Trans>a few minutes ago</Trans>
+    return <Trans context={this.trans}>a few minutes ago</Trans>
   }
 
   number(val){

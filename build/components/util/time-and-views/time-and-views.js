@@ -54,26 +54,42 @@ var TimeAndViews = function (_React$Component) {
         _trans2.default,
         { context: this.trans, years: Math.round(diff / 8760), isPlural: Math.round(diff / 8760) !== 1 },
         '%(years)s years ago'
-      );else if (diff > 8760) return this.trans['last year'];else if (diff > 1440) return _react2.default.createElement(
+      );else if (diff > 8760) return _react2.default.createElement(
+        _trans2.default,
+        { context: this.trans },
+        'last year'
+      );else if (diff > 1440) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans, month: this.trans.months[date.getMonth()] },
         'last %(month)s'
-      );else if (diff > 720) return this.trans['last month'];else if (diff > 336) return _react2.default.createElement(
+      );else if (diff > 720) return _react2.default.createElement(
+        _trans2.default,
+        { context: this.trans },
+        'last month'
+      );else if (diff > 336) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans, weeks: Math.round(diff / 168), isPlural: Math.round(diff / 168) !== 1 },
         '%(weeks)s weeks ago'
-      );else if (diff > 168) return this.trans['a week ago'];else if (diff > 48) return _react2.default.createElement(
+      );else if (diff > 168) return _react2.default.createElement(
+        _trans2.default,
+        { context: this.trans },
+        'a week ago'
+      );else if (diff > 48) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans, day: this.trans.days[date.getDay()] },
         'last %(day)s'
-      );else if (diff > 24) return this.trans['yesterday'];else if (diff > 1) return _react2.default.createElement(
+      );else if (diff > 24) return _react2.default.createElement(
+        _trans2.default,
+        { context: this.trans },
+        'yesterday'
+      );else if (diff > 1) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans, hours: Math.round(diff), isPlural: diff !== 1 },
         '%(hours)s hours ago'
       );
       return _react2.default.createElement(
         _trans2.default,
-        null,
+        { context: this.trans },
         'a few minutes ago'
       );
     }
