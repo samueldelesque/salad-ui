@@ -55,7 +55,7 @@ var List = function (_React$Component) {
       failed: false,
       currentPage: 1,
       hasMore: false,
-      loading: false,
+      isLoading: false,
       searching: false,
       initialVideos: {
         videos: [],
@@ -76,7 +76,6 @@ var List = function (_React$Component) {
       var _this2 = this;
 
       if (this.hasPropsChanged(this.props, nextProps)) {
-        if (this.refs.container) this.refs.container.style.opacity = .4;
         this.setState({ currentPage: 1 }, function () {
           _this2.loadVideos('replaceVideos', nextProps);
         });
@@ -118,7 +117,7 @@ var List = function (_React$Component) {
       var _this4 = this;
 
       if (!this.props.mediaType) console.error('No mediaType provided to Grid.');
-      this.setState({ loading: true });
+      this.setState({ isLoading: true });
       var data = {
         fields: _preview.mediaTypes[this.props.mediaType].fields.join(','),
         page: this.state.currentPage,
@@ -135,19 +134,19 @@ var List = function (_React$Component) {
         return _this4[cb](res.list, res.has_more);
       }).catch(function (err) {
         console.error('Failed to fetch videos', query, err);
-        _this4.setState({ failed: _this4.state.currentPage === 1, hasMore: false, searching: false, loading: false });
+        _this4.setState({ failed: _this4.state.currentPage === 1, hasMore: false, searching: false, isLoading: false });
       });
     }
   }, {
     key: 'appendVideos',
     value: function appendVideos(videos, hasMore) {
-      this.setState({ hasMore: hasMore, videos: this.state.videos.concat(videos), failed: false, loading: false, currentPage: this.state.currentPage + 1 });
+      this.setState({ hasMore: hasMore, videos: this.state.videos.concat(videos), failed: false, isLoading: false, currentPage: this.state.currentPage + 1 });
       this.refs.container.style.opacity = 1;
     }
   }, {
     key: 'replaceVideos',
     value: function replaceVideos(videos, hasMore) {
-      this.setState({ hasMore: hasMore, videos: videos, loading: false, failed: false, currentPage: this.state.currentPage + 1 });
+      this.setState({ hasMore: hasMore, videos: videos, isLoading: false, failed: false, currentPage: this.state.currentPage + 1 });
       this.refs.container.style.opacity = 1;
     }
   }, {
@@ -162,7 +161,7 @@ var List = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'video-list', ref: 'container' },
+        { className: 'video-list' },
         _react2.default.Children.map(this.props.children, function (item, index) {
           return _react2.default.cloneElement(item, Object.assign({}, _this5.props, _this5.state, item.props, { loadMore: function loadMore() {
               return _this5.loadMore();
@@ -174,40 +173,6 @@ var List = function (_React$Component) {
 
   return List;
 }(_react2.default.Component);
-
-// Example use:
-
-// class GridArea extends React.Component{
-//   render(){
-//     return (
-//       <Grid>
-//         {this.props.videos.map((video,index)=><Preview key={`video.${index}`} type="grid" {...video}/>)}
-//       </Grid>
-//     )
-//   }
-// }
-// class LoadMore extends React.Component{
-//   render(){
-//     return (
-//       <Button onPress={()=>this.props.loadMore()}>
-//         Load More
-//       </Button>
-//     )
-//   }
-// }
-// class Page extends React.Component{
-//   render(){
-//     return (
-//       <View style={{border: '2px solid'}}>
-//         <VideoList>
-//           <GridArea/>
-//           <LoadMore/>
-//         </VideoList>
-//       </View>
-//     )
-//   }
-// }
-
 
 List.propTypes = {
   sortBy: _react2.default.PropTypes.string,

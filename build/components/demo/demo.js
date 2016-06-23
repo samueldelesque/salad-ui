@@ -43,6 +43,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fromCharCode(55356, 57211) + ' Friday 6pm.');
+if (_glob2.default.canUseDom()) {
+  console.log('Test SaladUI functions directly using window.SaladUI');
+  window.SaladUI = _saladUi2.default;
+}
 
 var chartData = [{ time: 1422766800000, value: 0, label: "{{value}} active users" }, { time: 1422853200000, value: 9, label: "{{value}} active users" }, { time: 1422939600000, value: 5, label: "{{value}} active users" }, { time: 1423026000000, value: 15, label: "{{value}} active users" }, { time: 1423112400000, value: 7, label: "{{value}} active users" }, { time: 1423198800000, value: 13, label: "{{value}} active users" }];
 
@@ -660,6 +664,30 @@ var Demo = function (_React$Component) {
                 _saladUi2.default.Util.Trans,
                 { context: { "Hello": "Bonjour" } },
                 'Hello'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'React Component'
+                ),
+                ' TextClamp'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                '<TextClamp>\nThis is a long long long long long long long long\nlong long long long long long long long long long\nlong long long long long long text.\n</TextClamp>'
+              ),
+              _react2.default.createElement(
+                _saladUi2.default.Util.TextClamp,
+                { clamp: 1 },
+                'This is a long long long long long long long long long long long long long long long long long long long long long long long long text.'
               )
             ),
             _react2.default.createElement(

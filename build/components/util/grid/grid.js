@@ -95,7 +95,7 @@ var Grid = function (_React$Component) {
   }, {
     key: 'onResize',
     value: function onResize() {
-      var width = this.refs.container.getBoundingClientRect().width;
+      var width = this.container.getBoundingClientRect().width;
       var breakPoint = this.getBreakPoint(this.props.breakPoints, width);
       this.setState({ width: width, breakPoint: breakPoint });
     }
@@ -125,9 +125,13 @@ var Grid = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       return _react2.default.createElement(
         'div',
-        { ref: 'container', style: {
+        { ref: function ref(_ref) {
+            return _this3.container = _ref;
+          }, style: {
             display: 'flex',
             justifyContent: 'flex-start',
             flexWrap: 'wrap'

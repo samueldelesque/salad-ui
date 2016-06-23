@@ -1,15 +1,15 @@
-import Q  from 'q'
-import 'isomorphic-fetch'
+import Q from 'q'
 import merge from 'lodash.merge'
+import glob from './glob'
 
 let debug = false
 let mockApi = false
 
-export const enableMock = function(){
-  mockApi = true
+export const enableMock = function(enable = true){
+  mockApi = enable
 }
-export const enableDebug = function(){
-  debug = true
+export const enableDebug = function(enable = true){
+  debug = enable
 }
 
 export const serialize = function (obj){

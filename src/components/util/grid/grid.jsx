@@ -46,7 +46,7 @@ export default class Grid extends React.Component {
   }
 
   onResize(){
-    const width = this.refs.container.getBoundingClientRect().width
+    const width = this.container.getBoundingClientRect().width
     const breakPoint = this.getBreakPoint(this.props.breakPoints, width)
     this.setState({width, breakPoint})
   }
@@ -73,7 +73,7 @@ export default class Grid extends React.Component {
 
   render() {
     return (
-      <div ref="container" style={{
+      <div ref={ref => this.container = ref} style={{
         display: 'flex',
         justifyContent: 'flex-start',
         flexWrap: 'wrap',

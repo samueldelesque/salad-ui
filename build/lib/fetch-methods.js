@@ -11,11 +11,13 @@ var _q = require('q');
 
 var _q2 = _interopRequireDefault(_q);
 
-require('isomorphic-fetch');
-
 var _lodash = require('lodash.merge');
 
 var _lodash2 = _interopRequireDefault(_lodash);
+
+var _glob = require('./glob');
+
+var _glob2 = _interopRequireDefault(_glob);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23,10 +25,14 @@ var debug = false;
 var mockApi = false;
 
 var enableMock = exports.enableMock = function enableMock() {
-  mockApi = true;
+  var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
+  mockApi = enable;
 };
 var enableDebug = exports.enableDebug = function enableDebug() {
-  debug = true;
+  var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
+  debug = enable;
 };
 
 var serialize = exports.serialize = function serialize(obj) {

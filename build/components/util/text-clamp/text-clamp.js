@@ -32,6 +32,11 @@ var TextClamp = function (_Component) {
   }
 
   _createClass(TextClamp, [{
+    key: 'makeId',
+    value: function makeId() {
+      return;
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
@@ -42,12 +47,20 @@ var TextClamp = function (_Component) {
           clampOptions[option] = _this2.props[option];
         }
       });
-      (0, _clampJs2.default)(this.refs.text, clampOptions);
+      (0, _clampJs2.default)(this.text, clampOptions);
     }
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('div', { ref: 'text', className: 'utils_text-clamp', dangerouslySetInnerHTML: { __html: this.props.children } });
+      var _this3 = this;
+
+      return _react2.default.createElement('div', {
+        ref: function ref(_ref) {
+          return _this3.text = _ref;
+        },
+        className: 'utils_text-clamp',
+        dangerouslySetInnerHTML: { __html: this.props.children }
+      });
     }
   }]);
 

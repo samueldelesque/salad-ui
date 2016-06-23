@@ -5,6 +5,10 @@ import ReactServer from 'react-dom/server'
 import bodyParser from 'body-parser'
 import routing from '../conf/routing.json'
 import Route from 'route-parser'
+import fetch from 'node-fetch'
+
+// fetch polyfill must be available natively...
+global.fetch = fetch
 
 const renderFullPage = function(html, initialState, bundle, bodyClass){
   return `<!DOCTYPE html>

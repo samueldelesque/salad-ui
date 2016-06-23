@@ -82,7 +82,7 @@ var Anchor = function (_Component) {
             return _this2.onPress(e);
           },
           style: buttonStyle },
-        this.props.loading ? _react2.default.createElement(_spinner2.default, null) : this.state.hovered && this.props.mouseOverText ? this.props.mouseOverText : this.props.children
+        this.props.isLoading ? _react2.default.createElement(_spinner2.default, null) : this.state.hovered && this.props.mouseOverText ? this.props.mouseOverText : this.props.children
       );
     }
   }]);
@@ -98,6 +98,6 @@ Anchor.defaultProps = {
   size: 'md',
   fullWidth: false,
   style: {},
-  loading: false
+  isLoading: false
 };
 exports.default = Anchor;

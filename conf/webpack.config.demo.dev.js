@@ -32,6 +32,7 @@ module.exports = {
           loaders: ['react-hot'],//, 'babel?presets[]=stage-0'
           include: directories,
         },
+        { test: /\.json/, loaders: ['json-loader']},
         // { test: /\.scss|\.cs s$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'sass-loader')},
     ]
   }

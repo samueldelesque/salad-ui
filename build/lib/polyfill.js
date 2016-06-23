@@ -6,11 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function () {
   // execute me when I land in a browser
-
+  console.log('Adding support for console, promises, fetch, object.assign.');
   require('es5-shim');
   require('es5-shim/es5-sham');
   require('console-polyfill');
-  require('isomorphic-fetch');
+  require('universal-fetch');
 
   if (!window.Promise && !window.hasOwnProperty('Promise')) {
     window.Promise = require('es6-promise').Promise;
@@ -42,7 +42,6 @@ exports.default = function () {
   }
 
   if (!Array.prototype.findIndex) {
-    console.log('Adding findIndex polyfill.');
     Array.prototype.findIndex = function (predicate) {
       if (this === null) {
         throw new TypeError('Array.prototype.findIndex called on null or undefined');

@@ -7,6 +7,10 @@ import DemoAutocomplete from './demo-autocomplete'
 import * as videoComponents from './video-components'
 
 console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fromCharCode(55356, 57211) + ' Friday 6pm.')
+if(glob.canUseDom()){
+  console.log('Test SaladUI functions directly using window.SaladUI')
+  window.SaladUI = SaladUI
+}
 
 const chartData = [
   {time:1422766800000, value: 0, label: "{{value}} active users"},
@@ -264,6 +268,21 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Trans</h3>
               <pre>{'<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>'}</pre>
               <SaladUI.Util.Trans context={{"Hello": "Bonjour"}}>Hello</SaladUI.Util.Trans>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> TextClamp</h3>
+              <pre>
+{`<TextClamp>
+This is a long long long long long long long long
+long long long long long long long long long long
+long long long long long long text.
+</TextClamp>`}
+              </pre>
+              <SaladUI.Util.TextClamp clamp={1}>
+                This is a long long long long long long long long
+                long long long long long long long long long long
+                long long long long long long text.
+              </SaladUI.Util.TextClamp>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Button</h3>

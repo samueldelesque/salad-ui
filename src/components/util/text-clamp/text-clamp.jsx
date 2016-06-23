@@ -12,6 +12,9 @@ export default class TextClamp extends Component {
   static defaultProps = {
     useNativeClamp: false
   }
+  makeId(){
+    return
+  }
   componentDidMount() {
     let clampOptions = ['clamp', 'useNativeClamp', 'truncationChar', 'truncationHTML', 'useNativeClamp', 'splitOnChars']
     let options = clampOptions.forEach((option) => {
@@ -19,11 +22,15 @@ export default class TextClamp extends Component {
         clampOptions[option] = this.props[option]
       }
     })
-    clamp(this.refs.text, clampOptions)
+    clamp(this.text, clampOptions)
   }
   render() {
     return (
-      <div ref="text" className="utils_text-clamp" dangerouslySetInnerHTML={{__html: this.props.children}}></div>
+      <div
+        ref={(ref) => this.text = ref}
+        className="utils_text-clamp"
+        dangerouslySetInnerHTML={{__html: this.props.children}}
+      />
     )
   }
 }

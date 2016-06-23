@@ -1,10 +1,12 @@
-export default function(){
-  // execute me when I land in a browser
 
+
+export default function(){
+// execute me when I land in a browser
+  console.log('Adding support for console, promises, fetch, object.assign.')
   require('es5-shim')
   require('es5-shim/es5-sham')
   require('console-polyfill')
-  require('isomorphic-fetch')
+  require('universal-fetch')
 
   if(!window.Promise && !window.hasOwnProperty('Promise')){
     window.Promise = require('es6-promise').Promise;
@@ -34,27 +36,26 @@ export default function(){
     })();
   }
 
-    if (!Array.prototype.findIndex) {
-      console.log('Adding findIndex polyfill.')
-      Array.prototype.findIndex = function(predicate) {
-        if (this === null) {
-          throw new TypeError('Array.prototype.findIndex called on null or undefined');
-        }
-        if (typeof predicate !== 'function') {
-          throw new TypeError('predicate must be a function');
-        }
-        var list = Object(this);
-        var length = list.length >>> 0;
-        var thisArg = arguments[1];
-        var value;
+  if (!Array.prototype.findIndex) {
+    Array.prototype.findIndex = function(predicate) {
+      if (this === null) {
+        throw new TypeError('Array.prototype.findIndex called on null or undefined');
+      }
+      if (typeof predicate !== 'function') {
+        throw new TypeError('predicate must be a function');
+      }
+      var list = Object(this);
+      var length = list.length >>> 0;
+      var thisArg = arguments[1];
+      var value;
 
-        for (var i = 0; i < length; i++) {
-          value = list[i];
-          if (predicate.call(thisArg, value, i, list)) {
-            return i;
-          }
+      for (var i = 0; i < length; i++) {
+        value = list[i];
+        if (predicate.call(thisArg, value, i, list)) {
+          return i;
         }
-        return -1;
-      };
-    }
+      }
+      return -1;
+    };
+  }
 }

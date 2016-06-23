@@ -11,7 +11,7 @@ export default class List extends React.Component {
     failed: false,
     currentPage: 1,
     hasMore: false,
-    loading: false,
+    isLoading: false,
     searching: false,
     initialVideos: {
       videos: [],
@@ -45,7 +45,6 @@ export default class List extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if(this.hasPropsChanged(this.props, nextProps)){
-    if(this.refs.container) this.refs.container.style.opacity = .4
       this.setState({currentPage: 1}, () => {
         this.loadVideos('replaceVideos', nextProps)
       })
@@ -78,7 +77,7 @@ export default class List extends React.Component {
 
   loadVideos(cb, props){
     if(!this.props.mediaType) console.error('No mediaType provided to Grid.')
-    this.setState({loading: true})
+    this.setState({isLoading: true})
     let data = {
       fields: mediaTypes[this.props.mediaType].fields.join(','),
       page: this.state.currentPage,
@@ -95,17 +94,17 @@ export default class List extends React.Component {
     .then(res => this[cb](res.list, res.has_more))
     .catch(err => {
       console.error('Failed to fetch videos', query, err)
-      this.setState({failed: this.state.currentPage === 1, hasMore: false, searching: false, loading: false})
+      this.setState({failed: this.state.currentPage === 1, hasMore: false, searching: false, isLoading: false})
     })
   }
 
   appendVideos(videos, hasMore){
-    this.setState({hasMore, videos: this.state.videos.concat(videos), failed: false, loading: false, currentPage: this.state.currentPage + 1})
+    this.setState({hasMore, videos: this.state.videos.concat(videos), failed: false, isLoading: false, currentPage: this.state.currentPage + 1})
     this.refs.container.style.opacity = 1
   }
 
   replaceVideos(videos, hasMore){
-    this.setState({hasMore, videos, loading: false, failed: false, currentPage: this.state.currentPage + 1})
+    this.setState({hasMore, videos, isLoading: false, failed: false, currentPage: this.state.currentPage + 1})
     this.refs.container.style.opacity = 1
   }
 
@@ -115,7 +114,7 @@ export default class List extends React.Component {
 
   render() {
     return (
-      <div className="video-list" ref="container">
+      <div className="video-list">
         {React.Children.map(this.props.children, (item, index) =>
           React.cloneElement(item, Object.assign({}, this.props, this.state, item.props, {loadMore: () => this.loadMore()}))
         )}
@@ -123,37 +122,3 @@ export default class List extends React.Component {
     )
   }
 }
-
-
-// Example use:
-
-// class GridArea extends React.Component{
-//   render(){
-//     return (
-//       <Grid>
-//         {this.props.videos.map((video,index)=><Preview key={`video.${index}`} type="grid" {...video}/>)}
-//       </Grid>
-//     )
-//   }
-// }
-// class LoadMore extends React.Component{
-//   render(){
-//     return (
-//       <Button onPress={()=>this.props.loadMore()}>
-//         Load More
-//       </Button>
-//     )
-//   }
-// }
-// class Page extends React.Component{
-//   render(){
-//     return (
-//       <View style={{border: '2px solid'}}>
-//         <VideoList>
-//           <GridArea/>
-//           <LoadMore/>
-//         </VideoList>
-//       </View>
-//     )
-//   }
-// }

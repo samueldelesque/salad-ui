@@ -14,7 +14,7 @@ export default class Anchor extends Component {
     size: 'md',
     fullWidth: false,
     style: {},
-    loading: false
+    isLoading: false
   }
 
   onPress(e){
@@ -40,7 +40,7 @@ export default class Anchor extends Component {
       onClick={(e) => this.onPress(e)}
       style={buttonStyle}>
       {
-        this.props.loading ?
+        this.props.isLoading ?
         <Spinner/>:
         this.state.hovered && this.props.mouseOverText ?
         this.props.mouseOverText :
