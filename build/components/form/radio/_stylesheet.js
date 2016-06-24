@@ -17,7 +17,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var styles = {
   radio: {
     display: 'inline-block',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    marginBottom: 10
   },
   radioDisabled: {
     cursor: 'not-allowed',
@@ -25,11 +26,12 @@ var styles = {
   },
   radioIcon: (_radioIcon = {
     position: 'relative',
-    display: 'block',
+    display: 'inline-block',
+    verticalAlign: 'middle',
     width: '16px',
     height: '16px',
-    margin: '5px 10px 0 0'
-  }, _defineProperty(_radioIcon, 'position', 'relative'), _defineProperty(_radioIcon, 'backgroundColor', _stylesheet.defaults.colors.gray5), _defineProperty(_radioIcon, 'border', 'solid 1px ' + _stylesheet.defaults.colors.gray3), _defineProperty(_radioIcon, 'borderRadius', '50%'), _defineProperty(_radioIcon, 'float', 'left'), _radioIcon),
+    marginRight: 10
+  }, _defineProperty(_radioIcon, 'position', 'relative'), _defineProperty(_radioIcon, 'backgroundColor', _stylesheet.defaults.colors.gray5), _defineProperty(_radioIcon, 'border', 'solid 1px ' + _stylesheet.defaults.colors.gray3), _defineProperty(_radioIcon, 'borderRadius', '50%'), _radioIcon),
 
   disc: {
     cursor: 'pointer',

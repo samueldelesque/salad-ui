@@ -42,7 +42,7 @@ export default class Radio extends React.Component {
             <i style={styles.radioIcon}>
               {this.props.selected? <span style={ds}/> : null}
             </i>
-            <div style={{display:'block', overflow:'hidden'}}>{this.renderChildren()}</div>
+            {this.renderChildren()}
           </div>
         </div>
       </div>

@@ -329,8 +329,16 @@ var Demo = function (_React$Component) {
                 null,
                 '<InputText/><InputText textarea/>'
               ),
-              _react2.default.createElement(_saladUi2.default.Form.InputText, null),
-              _react2.default.createElement(_saladUi2.default.Form.InputText, { textarea: true })
+              _react2.default.createElement(
+                'div',
+                { style: { marginTop: 10 } },
+                _react2.default.createElement(_saladUi2.default.Form.InputText, { prefix: 'https://dailymotion.', placeholder: 'yoursubdomain', suffix: '.com', label: 'Input with label, prefix and suffix' })
+              ),
+              _react2.default.createElement(
+                'div',
+                { style: { marginTop: 10 } },
+                _react2.default.createElement(_saladUi2.default.Form.InputText, { textarea: true, label: 'Input type textarea' })
+              )
             ),
             _react2.default.createElement(
               'li',
@@ -661,10 +669,48 @@ var Demo = function (_React$Component) {
                 '<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>'
               ),
               _react2.default.createElement(
-                _saladUi2.default.Util.Trans,
-                { context: { "Hello": "Bonjour" } },
-                'Hello'
+                'h3',
+                null,
+                _react2.default.createElement(
+                  _saladUi2.default.Util.Trans,
+                  { context: { "Hello": "Bonjour" } },
+                  'Hello'
+                )
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  _saladUi2.default.Util.Trans,
+                  { elephants: 24, n: 24, context: {
+                      "There are %(elephants)s elephants.": {
+                        singular: "Il y a %(elephants)s elephant.",
+                        plural: "Il y a %(elephants)s elephants."
+                      }
+                    } },
+                  'There are %(elephants)s elephants.'
+                )
               )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'React Component'
+                ),
+                ' TimeAndViews'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                '<SaladUI.Util.TimeAndViews time={new Date(\'2010-04-01\')} views={40123}/>'
+              ),
+              _react2.default.createElement(_saladUi2.default.Util.TimeAndViews, { time: new Date('2016-06-21'), views: 40123 })
             ),
             _react2.default.createElement(
               'li',
@@ -682,12 +728,12 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                '<TextClamp>\nThis is a long long long long long long long long\nlong long long long long long long long long long\nlong long long long long long text.\n</TextClamp>'
+                '<TextClamp>\nThis is a long long long long long long long long\nlong long long long long long long long long long\nlong long long long long long long long long long\nlong long long long long long long long long long\nlong long long long long long long long long long\nlong long long long long long text.\n</TextClamp>'
               ),
               _react2.default.createElement(
                 _saladUi2.default.Util.TextClamp,
                 { clamp: 1 },
-                'This is a long long long long long long long long long long long long long long long long long long long long long long long long text.'
+                'This is a long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long text.'
               )
             ),
             _react2.default.createElement(
@@ -740,8 +786,15 @@ var Demo = function (_React$Component) {
                   _saladUi2.default.Util.Button,
                   { onPress: function onPress() {
                       return alert('ay ay captain');
-                    }, size: 'lg', mouseOverText: 'Way fatter.', loading: true },
+                    }, size: 'lg', mouseOverText: 'Way fatter.', isLoading: true },
                   'I am bigger.'
+                ),
+                _react2.default.createElement(
+                  _saladUi2.default.Util.Button,
+                  { onPress: function onPress() {
+                      return alert('ay ay captain');
+                    }, size: 'lg', type: 'primary', style: { backgroundColor: 'rgb(218, 33, 0)', marginLeft: 10 } },
+                  'DANGER'
                 ),
                 _react2.default.createElement(
                   _saladUi2.default.Util.Button,

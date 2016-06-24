@@ -132,8 +132,12 @@ export default class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> InputText</h3>
               <pre>{'<InputText/><InputText textarea/>'}</pre>
-              <SaladUI.Form.InputText/>
-              <SaladUI.Form.InputText textarea/>
+              <div style={{marginTop: 10}}>
+                <SaladUI.Form.InputText prefix="https://dailymotion." placeholder="yoursubdomain" suffix=".com" label="Input with label, prefix and suffix"/>
+              </div>
+              <div style={{marginTop: 10}}>
+                <SaladUI.Form.InputText textarea label="Input type textarea"/>
+              </div>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Select</h3>
@@ -267,7 +271,24 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Trans</h3>
               <pre>{'<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>'}</pre>
-              <SaladUI.Util.Trans context={{"Hello": "Bonjour"}}>Hello</SaladUI.Util.Trans>
+              <h3>
+                <SaladUI.Util.Trans context={{"Hello": "Bonjour"}}>Hello</SaladUI.Util.Trans>
+              </h3>
+              <p>
+                <SaladUI.Util.Trans elephants={24} n={24} context={{
+                    "There are %(elephants)s elephants.": {
+                      singular: "Il y a %(elephants)s elephant.",
+                      plural: "Il y a %(elephants)s elephants.",
+                    }
+                  }}>
+                  There are %(elephants)s elephants.
+                </SaladUI.Util.Trans>
+              </p>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> TimeAndViews</h3>
+              <pre>{'<SaladUI.Util.TimeAndViews time={new Date(\'2010-04-01\')} views={40123}/>'}</pre>
+              <SaladUI.Util.TimeAndViews time={new Date('2016-06-21')} views={40123}/>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> TextClamp</h3>
@@ -275,11 +296,17 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
 {`<TextClamp>
 This is a long long long long long long long long
 long long long long long long long long long long
+long long long long long long long long long long
+long long long long long long long long long long
+long long long long long long long long long long
 long long long long long long text.
 </TextClamp>`}
               </pre>
               <SaladUI.Util.TextClamp clamp={1}>
                 This is a long long long long long long long long
+                long long long long long long long long long long
+                long long long long long long long long long long
+                long long long long long long long long long long
                 long long long long long long long long long long
                 long long long long long long text.
               </SaladUI.Util.TextClamp>
@@ -293,7 +320,8 @@ long long long long long long text.
                 <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} size="sm" style={{marginLeft: 10}}>Size small</SaladUI.Util.Button>
               </div>
               <div style={{padding: 10}}>
-                <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} size="lg" mouseOverText="Way fatter." loading={true}>I am bigger.</SaladUI.Util.Button>
+                <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} size="lg" mouseOverText="Way fatter." isLoading={true}>I am bigger.</SaladUI.Util.Button>
+                <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} size="lg" type="primary" style={{backgroundColor: 'rgb(218, 33, 0)', marginLeft: 10}}>DANGER</SaladUI.Util.Button>
                 <SaladUI.Util.Button onPress={()=>alert('ay ay captain')} style={{marginLeft:10}} size="lg" type="success" mouseOverText="Unfollow">Following</SaladUI.Util.Button>
               </div>
               <div style={{padding: 10}}>

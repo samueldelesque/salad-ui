@@ -4,6 +4,7 @@ let styles = {
   radio: {
     display: 'inline-block',
     cursor: 'pointer',
+    marginBottom: 10,
   },
   radioDisabled: {
     cursor: 'not-allowed',
@@ -11,15 +12,15 @@ let styles = {
   },
   radioIcon: {
     position: 'relative',
-    display: 'block',
+    display: 'inline-block',
+    verticalAlign: 'middle',
     width: '16px',
     height: '16px',
-    margin: '5px 10px 0 0',
+    marginRight: 10,
     position: 'relative',
     backgroundColor: defaults.colors.gray5,
     border: 'solid 1px ' + defaults.colors.gray3,
     borderRadius: '50%',
-    float: 'left',
   },
 
   disc: {

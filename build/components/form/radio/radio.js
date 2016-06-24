@@ -86,11 +86,7 @@ var Radio = function (_React$Component) {
               { style: _stylesheet2.default.radioIcon },
               this.props.selected ? _react2.default.createElement('span', { style: ds }) : null
             ),
-            _react2.default.createElement(
-              'div',
-              { style: { display: 'block', overflow: 'hidden' } },
-              this.renderChildren()
-            )
+            this.renderChildren()
           )
         )
       );

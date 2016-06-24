@@ -144,28 +144,44 @@ var InputText = function (_React$Component) {
       var showHint = hint && !this.props.disabled && !this.props.readOnly;
       var value = this.state.value ? this.state.value : this.props.value;
       var tag = this.props.textarea ? 'textarea' : 'input';
-      var inputStyle = (0, _lodash.merge)({}, _stylesheet2.default.inputStyle, this.props.textarea ? _stylesheet2.default.textareaStyle : null, this.props.style);
+      var id = Date.now();
 
       var props = _extends({
         ref: 'input',
         type: this.props.type
       }, this.props, {
-        style: inputStyle,
+        style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null),
         placeholder: this.props.placeholder,
         onClick: this.handleClick.bind(this),
-        value: value,
         onBlur: this.handleBlur.bind(this),
         onChange: this.handleChange.bind(this),
-        onKeyUp: this.handleKeyUp.bind(this)
+        onKeyUp: this.handleKeyUp.bind(this),
+        value: value,
+        id: id
       });
 
       return _react2.default.createElement(
         'div',
         null,
+        this.props.label ? _react2.default.createElement(
+          'label',
+          { 'for': id, style: { fontSize: 14, color: '#888' } },
+          this.props.label
+        ) : null,
         _react2.default.createElement(
-          'span',
-          null,
+          'div',
+          { style: Object.assign({}, _stylesheet2.default.inputContainer, this.props.textarea ? _stylesheet2.default.textareaContainer : null, this.props.style) },
+          this.props.prefix ? _react2.default.createElement(
+            'span',
+            { style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null, _stylesheet2.default.inputPrefix) },
+            this.props.prefix
+          ) : null,
           _react2.default.createElement(tag, props, null),
+          this.props.suffix ? _react2.default.createElement(
+            'span',
+            { style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null, _stylesheet2.default.inputPrefix) },
+            this.props.suffix
+          ) : null,
           this.props.onClear && value && _react2.default.createElement('i', { className: 'icon-close', onClick: this.props.onClear })
         ),
         showHint && !this.props.error ? _react2.default.createElement(
@@ -190,6 +206,8 @@ InputText.defaultProps = {
   type: 'text',
   style: {},
   focus: false,
+  prefix: false,
+  suffix: false,
   error: false,
   placeholder: 'Start typing'
 };

@@ -24,8 +24,6 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -63,12 +61,7 @@ var Anchor = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var s = [{}, this.props.style, _stylesheet2.default.button, _stylesheet2.default[this.props.type], _stylesheet2.default[this.props.size]];
-      if (this.state.hovered && !this.props.disabled) s = s.concat(_stylesheet2.default.buttonHover, _stylesheet2.default[this.props.type + 'Hover']);
-      if (this.props.fullWidth) s = s.concat(_stylesheet2.default.fullWidth);
-      if (this.props.disabled) s = s.concat(_stylesheet2.default.buttonDisabled);
-
-      var buttonStyle = Object.assign.apply(Object, _toConsumableArray(s));
+      var buttonStyle = Object.assign({}, _stylesheet2.default.button, _stylesheet2.default[this.props.type], _stylesheet2.default[this.props.size], this.state.hovered && !this.props.disabled ? Object.assign({}, _stylesheet2.default.buttonHover, _stylesheet2.default[this.props.type + 'Hover']) : null, this.props.fullWidth ? _stylesheet2.default.fullWidth : null, this.props.disabled ? _stylesheet2.default.buttonDisabled : null, this.props.style);
       return _react2.default.createElement(
         'div',
         {

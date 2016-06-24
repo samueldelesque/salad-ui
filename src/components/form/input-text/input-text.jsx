@@ -13,6 +13,8 @@ export default class InputText extends React.Component {
     type: 'text',
     style: {},
     focus: false,
+    prefix: false,
+    suffix: false,
     error: false,
     placeholder: 'Start typing'
   }
@@ -102,27 +104,47 @@ export default class InputText extends React.Component {
     let showHint = hint && !this.props.disabled && !this.props.readOnly
     let value = this.state.value ? this.state.value : this.props.value
     let tag = this.props.textarea ? 'textarea' : 'input'
-    let inputStyle = merge({}, styles.inputStyle, this.props.textarea ? styles.textareaStyle : null, this.props.style)
+    let id = Date.now()
 
     let props = {
       ref: 'input',
       type: this.props.type,
       ...this.props,
-      style: inputStyle,
+      style: Object.assign({}, styles.inputContent, this.props.textarea ? styles.textareaContent : null),
       placeholder: this.props.placeholder,
       onClick: ::this.handleClick,
-      value: value,
       onBlur: ::this.handleBlur,
       onChange: ::this.handleChange,
       onKeyUp: ::this.handleKeyUp,
+      value,
+      id
     }
 
     return (
       <div>
-        <span>
+        {
+          this.props.label ?
+          <label for={id} style={{fontSize: 14, color: '#888'}}>{this.props.label}</label> :
+          null
+        }
+        <div style={Object.assign({}, styles.inputContainer, this.props.textarea ? styles.textareaContainer : null, this.props.style)}>
+          {
+            this.props.prefix ?
+            <span style={Object.assign({}, styles.inputContent, this.props.textarea ? styles.textareaContent : null, styles.inputPrefix)}>
+              {this.props.prefix}
+            </span> :
+            null
+          }
           {React.createElement(tag, props, null)}
+          {
+            this.props.suffix ?
+            <span style={Object.assign({}, styles.inputContent, this.props.textarea ? styles.textareaContent : null, styles.inputPrefix)}>
+              {this.props.suffix}
+            </span> :
+            null
+          }
           {this.props.onClear && value && <i className="icon-close" onClick={this.props.onClear}/>}
-        </span>
+        </div>
         {
           showHint && !this.props.error ?
           <div style={styles.inputError}>{hint}</div>

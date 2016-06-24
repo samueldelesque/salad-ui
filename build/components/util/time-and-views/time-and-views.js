@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -38,53 +40,79 @@ var TimeAndViews = function (_React$Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(TimeAndViews)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.trans = DM_ENV['utils/time-and-views'], _this.defaultProps = {
       views: null,
-      uploaded: null
+      time: null
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(TimeAndViews, [{
     key: 'timesince',
     value: function timesince(val) {
-      var date = new Date(val * 1000);
+      var date = typeof val === 'number' ? new Date(val * 1000) : (typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' ? val : new Date();
       var now = new Date();
 
       var diff = (now - date) / 36e5;
 
-      if (!val || typeof val !== 'number') return null;else if (diff > 17520) return _react2.default.createElement(
+      if (diff > 17520) return _react2.default.createElement(
         _trans2.default,
-        { context: this.trans, years: Math.round(diff / 8760), isPlural: Math.round(diff / 8760) !== 1 },
+        { context: this.trans, years: Math.round(diff / 8760), n: Math.round(diff / 8760) },
         '%(years)s years ago'
       );else if (diff > 8760) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans },
         'last year'
-      );else if (diff > 1440) return _react2.default.createElement(
-        _trans2.default,
-        { context: this.trans, month: this.trans.months[date.getMonth()] },
-        'last %(month)s'
-      );else if (diff > 720) return _react2.default.createElement(
+      );else if (diff > 1440) {
+        var monthName = "";
+        try {
+          monthName = this.trans.months[date.getMonth()];
+        } catch (e) {
+          console.warn('Trans error: ', e);
+          return _react2.default.createElement(
+            _trans2.default,
+            { context: this.trans },
+            'A few months ago'
+          );
+        }
+        return _react2.default.createElement(
+          _trans2.default,
+          { context: this.trans, month: monthName },
+          'last %(month)s'
+        );
+      } else if (diff > 720) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans },
         'last month'
       );else if (diff > 336) return _react2.default.createElement(
         _trans2.default,
-        { context: this.trans, weeks: Math.round(diff / 168), isPlural: Math.round(diff / 168) !== 1 },
+        { context: this.trans, weeks: Math.round(diff / 168), n: Math.round(diff / 168) },
         '%(weeks)s weeks ago'
       );else if (diff > 168) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans },
         'a week ago'
-      );else if (diff > 48) return _react2.default.createElement(
-        _trans2.default,
-        { context: this.trans, day: this.trans.days[date.getDay()] },
-        'last %(day)s'
-      );else if (diff > 24) return _react2.default.createElement(
+      );else if (diff > 48) {
+        var dayName = "";
+        try {
+          dayName = this.trans.days[date.getDay()];
+        } catch (e) {
+          console.warn('Trans error: ', e);
+          return _react2.default.createElement(
+            _trans2.default,
+            { context: this.trans },
+            'A few days ago'
+          );
+        }
+        return _react2.default.createElement(
+          _trans2.default,
+          { context: this.trans, day: this.trans.days[date.getDay()] },
+          'last %(day)s'
+        );
+      } else if (diff > 24) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans },
         'yesterday'
       );else if (diff > 1) return _react2.default.createElement(
         _trans2.default,
-        { context: this.trans, hours: Math.round(diff), isPlural: diff !== 1 },
+        { context: this.trans, hours: Math.round(diff), n: Math.round(diff) },
         '%(hours)s hours ago'
       );
       return _react2.default.createElement(

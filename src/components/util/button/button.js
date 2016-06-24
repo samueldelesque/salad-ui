@@ -25,15 +25,16 @@ export default class Anchor extends Component {
   }
 
   render(){
-    let s = [{}, this.props.style, styles.button, styles[this.props.type], styles[this.props.size]]
-    if(this.state.hovered && !this.props.disabled)
-      s = s.concat(styles.buttonHover, styles[this.props.type + 'Hover'])
-    if(this.props.fullWidth)
-      s = s.concat(styles.fullWidth)
-    if(this.props.disabled)
-      s = s.concat(styles.buttonDisabled)
-
-    const buttonStyle = Object.assign(...s)
+    const buttonStyle = Object.assign(
+      {},
+      styles.button,
+      styles[this.props.type],
+      styles[this.props.size],
+      this.state.hovered && !this.props.disabled ? Object.assign({}, styles.buttonHover, styles[this.props.type + 'Hover']) : null,
+      this.props.fullWidth ? styles.fullWidth : null,
+      this.props.disabled ? styles.buttonDisabled : null,
+      this.props.style
+    )
     return <div
       onMouseOver={() => this.setState({ hovered:true })}
       onMouseOut={() => this.setState({ hovered:false })}

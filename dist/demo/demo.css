@@ -18,7 +18,8 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
+  line-height: 1.4;
+  font-family: "Hind", "Heletica Neue", Helvetica, Arial, sans-serif;
   vertical-align: baseline; }
 
 /* HTML5 display-role reset for older browsers */
@@ -26,8 +27,13 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block; }
 
-body {
-  line-height: 1; }
+input, textarea {
+  line-height: 1;
+  font-family: "Hind", "Heletica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1em; }
+
+a {
+  text-decoration: none; }
 
 ol, ul {
   list-style: none; }
@@ -44,10 +50,28 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  line-height: 1.5; }
+* {
+  box-sizing: border-box; }
 
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0; }
+
+.clearfix {
+  display: inline-block; }
+
+/* start commented backslash hack \*/
+* html .clearfix {
+  height: 1%; }
+
+.clearfix {
+  display: block; }
+
+/* close commented backslash hack */
 header {
   background-color: #0066DC;
   color: white;
