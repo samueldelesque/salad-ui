@@ -11,9 +11,14 @@ exports.default = function () {
   require('es5-shim/es5-sham');
   require('console-polyfill');
   require('universal-fetch');
+  var entries = require('object.entries');
 
   if (!window.Promise && !window.hasOwnProperty('Promise')) {
     window.Promise = require('es6-promise').Promise;
+  }
+
+  if (!Object.entries) {
+    entries.shim();
   }
 
   if (typeof Object.assign != 'function') {

@@ -48,6 +48,8 @@ if (_glob2.default.canUseDom()) {
   window.SaladUI = _saladUi2.default;
 }
 
+_saladUi2.default.Lib.polyfill();
+
 var chartData = [{ time: 1422766800000, value: 0, label: "{{value}} active users" }, { time: 1422853200000, value: 9, label: "{{value}} active users" }, { time: 1422939600000, value: 5, label: "{{value}} active users" }, { time: 1423026000000, value: 15, label: "{{value}} active users" }, { time: 1423112400000, value: 7, label: "{{value}} active users" }, { time: 1423198800000, value: 13, label: "{{value}} active users" }];
 
 var selectOptions = [{ name: 'tofu', value: -2, calories: 400 }, { name: 'bacon', value: -1, calories: 900 }, { name: 'roasted chicken', value: 0, calories: 600 }, { name: 'steak', value: 1, calories: 700 }];
@@ -666,7 +668,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                '<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>'
+                '<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>\n\n  <SaladUI.Util.Trans elephants={24} n={24} context={{\n      "There are %(elephants)s elephants.": {\n        singular: "Il y a %(elephants)s elephant.",\n        plural: "Il y a %(elephants)s elephants.",\n      }\n    }}>\n    There are %(elephants)s elephants.\n  </SaladUI.Util.Trans>'
               ),
               _react2.default.createElement(
                 'h3',

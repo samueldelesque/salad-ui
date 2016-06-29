@@ -10,6 +10,7 @@ console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fr
 if(glob.canUseDom()){
   console.log('Test SaladUI functions directly using window.SaladUI')
   window.SaladUI = SaladUI
+  SaladUI.Lib.polyfill()
 }
 
 const chartData = [
@@ -270,7 +271,17 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Trans</h3>
-              <pre>{'<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>'}</pre>
+              <pre>
+{`<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>
+
+  <SaladUI.Util.Trans elephants={24} n={24} context={{
+      "There are %(elephants)s elephants.": {
+        singular: "Il y a %(elephants)s elephant.",
+        plural: "Il y a %(elephants)s elephants.",
+      }
+    }}>
+    There are %(elephants)s elephants.
+  </SaladUI.Util.Trans>`}</pre>
               <h3>
                 <SaladUI.Util.Trans context={{"Hello": "Bonjour"}}>Hello</SaladUI.Util.Trans>
               </h3>

@@ -68,7 +68,7 @@ export default class TimeAndViews extends React.Component {
       parts.push(this.timesince(this.props.time))
 
     if(this.props.views !== null)
-      parts.push((<Trans context={this.trans} views={this.number(this.props.views)}>%(views)s views</Trans>))
+      parts.push((<Trans context={this.trans} views={this.number(this.props.views)} n={this.props.views}>%(views)s views</Trans>))
 
     return (
       <div style={{fontSize: '0.875rem', color: '#BFBFBF'}}>

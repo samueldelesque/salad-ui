@@ -22,7 +22,7 @@ export default class InputText extends React.Component {
   {
     this.setState({
       focus: this.props.focus,
-      value: this.props.value
+      value: this.props.value || ""
     })
   }
   componentDidMount() {

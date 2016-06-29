@@ -137,7 +137,7 @@ var TimeAndViews = function (_React$Component) {
 
       if (this.props.views !== null) parts.push(_react2.default.createElement(
         _trans2.default,
-        { context: this.trans, views: this.number(this.props.views) },
+        { context: this.trans, views: this.number(this.props.views), n: this.props.views },
         '%(views)s views'
       ));
 
