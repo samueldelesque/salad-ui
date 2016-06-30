@@ -18,8 +18,7 @@ export default class InputText extends React.Component {
     error: false,
     placeholder: 'Start typing'
   }
-  componentWillMount()
-  {
+  componentWillMount(){
     this.setState({
       focus: this.props.focus,
       value: this.props.value || ""
@@ -58,14 +57,12 @@ export default class InputText extends React.Component {
     this.refs.input.focus()
     this.moveCursorToEnd(input)
   }
-  handleKeyUp(e)
-  {
+  handleKeyUp(e){
     if (this.props.onKeyUp) {
       this.props.onKeyUp(e)
     }
   }
-  handleClick(e)
-  {
+  handleClick(e){
     if (this.props.onClick) {
       this.props.onClick(e)
     }
@@ -74,6 +71,7 @@ export default class InputText extends React.Component {
     }
   }
   handleChange(e){
+    e.persist()
     let value = e.target.value
     this.setState({value: value})
     if (this.props.onChange){

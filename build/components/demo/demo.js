@@ -46,9 +46,8 @@ console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fr
 if (_glob2.default.canUseDom()) {
   console.log('Test SaladUI functions directly using window.SaladUI');
   window.SaladUI = _saladUi2.default;
+  _saladUi2.default.Lib.polyfill();
 }
-
-_saladUi2.default.Lib.polyfill();
 
 var chartData = [{ time: 1422766800000, value: 0, label: "{{value}} active users" }, { time: 1422853200000, value: 9, label: "{{value}} active users" }, { time: 1422939600000, value: 5, label: "{{value}} active users" }, { time: 1423026000000, value: 15, label: "{{value}} active users" }, { time: 1423112400000, value: 7, label: "{{value}} active users" }, { time: 1423198800000, value: 13, label: "{{value}} active users" }];
 

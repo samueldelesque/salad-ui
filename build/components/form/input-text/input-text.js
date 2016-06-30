@@ -20,8 +20,6 @@ var _stylesheet2 = _interopRequireDefault(_stylesheet);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -32,15 +30,34 @@ var InputText = function (_React$Component) {
   _inherits(InputText, _React$Component);
 
   function InputText() {
+    var _Object$getPrototypeO;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, InputText);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(InputText).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(InputText)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+      value: '',
+      focus: false
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(InputText, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.setState({
+        focus: this.props.focus,
+        value: this.props.value || ""
+      });
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      if (this.props.focus && !this.props.readOnly) {
+      if (this.state.focus && !this.props.readOnly) {
         this.focusInput();
       }
     }
@@ -95,8 +112,11 @@ var InputText = function (_React$Component) {
   }, {
     key: 'handleChange',
     value: function handleChange(e) {
+      e.persist();
+      var value = e.target.value;
+      this.setState({ value: value });
       if (this.props.onChange) {
-        this.props.onChange(e.target.value);
+        this.props.onChange(value);
       }
     }
   }, {
@@ -123,47 +143,45 @@ var InputText = function (_React$Component) {
     value: function render() {
       var hint = this.getHint();
       var showHint = hint && !this.props.disabled && !this.props.readOnly;
+      var value = this.state.value ? this.state.value : this.props.value;
       var tag = this.props.textarea ? 'textarea' : 'input';
-      var _props = this.props;
-      var prefix = _props.prefix;
-      var suffix = _props.suffix;
-      var style = _props.style;
-      var value = _props.value;
-
-      var otherProps = _objectWithoutProperties(_props, ['prefix', 'suffix', 'style', 'value']);
+      var id = Date.now();
 
       var props = _extends({
         ref: 'input',
-        type: this.props.type,
-        style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null, style),
+        type: this.props.type
+      }, this.props, {
+        style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null),
         placeholder: this.props.placeholder,
         onClick: this.handleClick.bind(this),
         onBlur: this.handleBlur.bind(this),
         onChange: this.handleChange.bind(this),
-        onKeyUp: this.handleKeyUp.bind(this)
-      }, otherProps);
+        onKeyUp: this.handleKeyUp.bind(this),
+        value: value,
+        id: id
+      });
 
       return _react2.default.createElement(
         'div',
         null,
         this.props.label ? _react2.default.createElement(
           'label',
-          { style: { fontSize: 14, color: '#888' } },
+          { 'for': id, style: { fontSize: 14, color: '#888' } },
           this.props.label
         ) : null,
         _react2.default.createElement(
           'div',
           { style: Object.assign({}, _stylesheet2.default.inputContainer, this.props.textarea ? _stylesheet2.default.textareaContainer : null, this.props.style) },
-          prefix ? _react2.default.createElement(
+          this.props.prefix ? _react2.default.createElement(
             'span',
             { style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null, _stylesheet2.default.inputPrefix) },
-            prefix
+            this.props.prefix
           ) : null,
           _react2.default.createElement(tag, props, null),
-          suffix ? _react2.default.createElement(
+          this.props.suffix ? _react2.default.createElement(
             'span',
             { style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null, _stylesheet2.default.inputPrefix) },
-            suffix
+            this.props.suffix
           ) : null,
           this.props.onClear && value && _react2.default.createElement('i', { className: 'icon-close', onClick: this.props.onClear })
         ),
