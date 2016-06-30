@@ -35,6 +35,9 @@ export const fetchJSON = function (url, method = 'GET', params = null){
   }, params)
 
   if(method === 'GET' && params.data){
+    if(debug){
+      console.log('serialize GET params', JSON.stringify(params.data))
+    }
     url += (!~url.indexOf('?') ? '?' : '&') + serialize(params.data)
     delete params.data
   }

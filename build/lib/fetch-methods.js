@@ -61,6 +61,9 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
   }, params);
 
   if (method === 'GET' && params.data) {
+    if (debug) {
+      console.log('serialize GET params', JSON.stringify(params.data));
+    }
     url += (! ~url.indexOf('?') ? '?' : '&') + serialize(params.data);
     delete params.data;
   }
