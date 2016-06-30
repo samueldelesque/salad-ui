@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import InputText from '../input-text/input-text'
-import { merge } from 'lodash'
 import styles from './_stylesheet'
 
 export default class Autocomplete extends Component {
@@ -184,7 +183,7 @@ export default class Autocomplete extends Component {
 
   renderSuggestions() {
     let items
-    let activeStyle = merge({}, styles.suggItem, {background:'#E5E5E5'})
+    let activeStyle = Object.assign({}, styles.suggItem, {background:'#E5E5E5'})
     items = this.props.suggestions.map((item, index) => {
     return <li
         key={'suggestion.' + index}

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import styles from './_stylesheet.js'
 import Spinner from '../../spinner/spinner'
-import merge from 'lodash.merge'
 
 export default class Anchor extends Component {
   state = {

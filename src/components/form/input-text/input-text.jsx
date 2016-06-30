@@ -1,89 +1,95 @@
 import React from 'react'
-import {merge} from 'lodash'
-
 import styles from './_stylesheet'
+
+let ids = 1
 
 export default class InputText extends React.Component {
   state = {
     value: '',
     focus: false
   }
+
   static defaultProps = {
     textarea: false,
     type: 'text',
     style: {},
+    value: '',
     focus: false,
     prefix: false,
     suffix: false,
     error: false,
     placeholder: 'Start typing'
   }
+
   componentWillMount(){
     this.setState({
       focus: this.props.focus,
-      value: this.props.value || ""
+      value: this.props.value
     })
   }
+
   componentDidMount() {
     if (this.state.focus && !this.props.readOnly){
       this.focusInput()
     }
   }
-  componentWillReceiveProps(nextProps)
-  {
+
+  componentWillReceiveProps(nextProps){
     this.setState({value: nextProps.value})
-    if (nextProps.focus !== this.props.focus)
-    {
+    if (nextProps.focus !== this.props.focus){
       this.setState({
         focus: nextProps.focus
       })
-      if (nextProps.focus === true)
-      {
+      if (nextProps.focus === true){
         this.focusInput()
       }
     }
   }
+
   moveCursorToEnd(el) {
-    if (typeof el.selectionStart == "number") {
+    if (typeof(el.selectionStart) == "number") {
       el.selectionStart = el.selectionEnd = el.value.length
-    } else if (typeof el.createTextRange != "undefined") {
+    }
+    else if (typeof(el.createTextRange) != "undefined") {
       el.focus()
       var range = el.createTextRange()
       range.collapse(false)
       range.select()
     }
   }
+
   focusInput(){
     this.refs.input.focus()
     this.moveCursorToEnd(input)
   }
-  handleKeyUp(e){
-    if (this.props.onKeyUp) {
-      this.props.onKeyUp(e)
-    }
-  }
-  handleClick(e){
-    if (this.props.onClick) {
-      this.props.onClick(e)
-    }
-    if (this.props.selectOnClick) {
-      e.target.select()
-    }
-  }
-  handleChange(e){
-    e.persist()
-    let value = e.target.value
-    this.setState({value: value})
-    if (this.props.onChange){
-      this.props.onChange(value)
+
+  handleKeyUp(){
+    if(this.props.onKeyUp){
+      this.props.onKeyUp()
     }
   }
 
-  handleBlur(e){
+  handleClick(){
+    if (this.props.onClick) {
+      this.props.onClick()
+    }
+    // Hmmm what's the use?
+    // if (this.props.selectOnClick) {
+    //   e.target.select()
+    // }
+  }
+
+  handleChange(e){
+    this.setState({value: e.target.value})
+    if (this.props.onChange){
+      this.props.onChange(e.target.value)
+    }
+  }
+
+  handleBlur(){
     this.setState({focus: false})
-    if (this.props.onBlur)
-    {
-      this.props.onBlur(e)
+    if (this.props.onBlur){
+      this.props.onBlur()
     }
   }
 
@@ -102,7 +108,7 @@ export default class InputText extends React.Component {
     let showHint = hint && !this.props.disabled && !this.props.readOnly
     let value = this.state.value ? this.state.value : this.props.value
     let tag = this.props.textarea ? 'textarea' : 'input'
-    let id = Date.now()
+    let id = `input.${ids++}`
 
     let props = {
       ref: 'input',
@@ -122,7 +128,7 @@ export default class InputText extends React.Component {
       <div>
         {
           this.props.label ?
-          <label for={id} style={{fontSize: 14, color: '#888'}}>{this.props.label}</label> :
+          <label htmlFor={id} style={{fontSize: 14, color: '#888'}}>{this.props.label}</label> :
           null
         }
         <div style={Object.assign({}, styles.inputContainer, this.props.textarea ? styles.textareaContainer : null, this.props.style)}>

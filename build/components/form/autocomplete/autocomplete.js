@@ -18,8 +18,6 @@ var _inputText = require('../input-text/input-text');
 
 var _inputText2 = _interopRequireDefault(_inputText);
 
-var _lodash = require('lodash');
-
 var _stylesheet = require('./_stylesheet');
 
 var _stylesheet2 = _interopRequireDefault(_stylesheet);
@@ -219,7 +217,7 @@ var Autocomplete = function (_Component) {
       var _this5 = this;
 
       var items = void 0;
-      var activeStyle = (0, _lodash.merge)({}, _stylesheet2.default.suggItem, { background: '#E5E5E5' });
+      var activeStyle = Object.assign({}, _stylesheet2.default.suggItem, { background: '#E5E5E5' });
       items = this.props.suggestions.map(function (item, index) {
         return _react2.default.createElement(
           'li',

@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
-import {merge, filter} from 'lodash'
 import Icon from '../../icon/icon'
 import styles from './_stylesheet'
 import glob from '../../../lib/glob'
@@ -19,8 +18,7 @@ export default class Select extends Component {
     let obj = {}
 
     if(this.props.value !== undefined && this.props.value !== null){
-      let value = this.props.value
-      obj = filter(this.props.options, function(o){ return o.value === value })[0]
+      obj = this.props.options.find(o => o.value === this.props.value)
     }
 
     else if(this.props.children){
@@ -79,7 +77,7 @@ export default class Select extends Component {
   }
 
   renderOptions() {
-    let selectedItemStyle = merge({}, styles.dropdownItem, styles.selected)
+    let selectedItemStyle = Object.assign({}, styles.dropdownItem, styles.selected)
     let options = []
 
     if(this.props.children){

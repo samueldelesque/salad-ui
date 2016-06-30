@@ -14,8 +14,6 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _lodash = require('lodash');
-
 var _icon = require('../../icon/icon');
 
 var _icon2 = _interopRequireDefault(_icon);
@@ -64,12 +62,9 @@ var Select = function (_Component) {
       var obj = {};
 
       if (this.props.value !== undefined && this.props.value !== null) {
-        (function () {
-          var value = _this2.props.value;
-          obj = (0, _lodash.filter)(_this2.props.options, function (o) {
-            return o.value === value;
-          })[0];
-        })();
+        obj = this.props.options.find(function (o) {
+          return o.value === _this2.props.value;
+        });
       } else if (this.props.children) {
         obj = {
           name: this.props.children,
@@ -131,7 +126,7 @@ var Select = function (_Component) {
     value: function renderOptions() {
       var _this3 = this;
 
-      var selectedItemStyle = (0, _lodash.merge)({}, _stylesheet2.default.dropdownItem, _stylesheet2.default.selected);
+      var selectedItemStyle = Object.assign({}, _stylesheet2.default.dropdownItem, _stylesheet2.default.selected);
       var options = [];
 
       if (this.props.children) {

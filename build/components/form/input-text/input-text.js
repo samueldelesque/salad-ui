@@ -12,8 +12,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _lodash = require('lodash');
-
 var _stylesheet = require('./_stylesheet');
 
 var _stylesheet2 = _interopRequireDefault(_stylesheet);
@@ -25,6 +23,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ids = 1;
 
 var InputText = function (_React$Component) {
   _inherits(InputText, _React$Component);
@@ -51,7 +51,7 @@ var InputText = function (_React$Component) {
     value: function componentWillMount() {
       this.setState({
         focus: this.props.focus,
-        value: this.props.value || ""
+        value: this.props.value
       });
     }
   }, {
@@ -94,37 +94,36 @@ var InputText = function (_React$Component) {
     }
   }, {
     key: 'handleKeyUp',
-    value: function handleKeyUp(e) {
+    value: function handleKeyUp() {
       if (this.props.onKeyUp) {
-        this.props.onKeyUp(e);
+        this.props.onKeyUp();
       }
     }
   }, {
     key: 'handleClick',
-    value: function handleClick(e) {
+    value: function handleClick() {
       if (this.props.onClick) {
-        this.props.onClick(e);
+        this.props.onClick();
       }
-      if (this.props.selectOnClick) {
-        e.target.select();
-      }
+      // Hmmm what's the use?
+      // if (this.props.selectOnClick) {
+      //   e.target.select()
+      // }
     }
   }, {
     key: 'handleChange',
     value: function handleChange(e) {
-      e.persist();
-      var value = e.target.value;
-      this.setState({ value: value });
+      this.setState({ value: e.target.value });
       if (this.props.onChange) {
-        this.props.onChange(value);
+        this.props.onChange(e.target.value);
       }
     }
   }, {
     key: 'handleBlur',
-    value: function handleBlur(e) {
+    value: function handleBlur() {
       this.setState({ focus: false });
       if (this.props.onBlur) {
-        this.props.onBlur(e);
+        this.props.onBlur();
       }
     }
   }, {
@@ -145,7 +144,7 @@ var InputText = function (_React$Component) {
       var showHint = hint && !this.props.disabled && !this.props.readOnly;
       var value = this.state.value ? this.state.value : this.props.value;
       var tag = this.props.textarea ? 'textarea' : 'input';
-      var id = Date.now();
+      var id = 'input.' + ids++;
 
       var props = _extends({
         ref: 'input',
@@ -166,7 +165,7 @@ var InputText = function (_React$Component) {
         null,
         this.props.label ? _react2.default.createElement(
           'label',
-          { 'for': id, style: { fontSize: 14, color: '#888' } },
+          { htmlFor: id, style: { fontSize: 14, color: '#888' } },
           this.props.label
         ) : null,
         _react2.default.createElement(
@@ -206,6 +205,7 @@ InputText.defaultProps = {
   textarea: false,
   type: 'text',
   style: {},
+  value: '',
   focus: false,
   prefix: false,
   suffix: false,
