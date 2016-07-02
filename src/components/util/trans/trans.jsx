@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
-import mapObject from 'lodash.map'
-import zipObject from 'lodash.zipobject'
 import { sprintf } from 'sprintf-js'
 
 let DEBUG = false
@@ -15,6 +13,7 @@ export default class Trans extends React.Component {
     newLine: '<br/>',
   }
 
+  static translate = (...args) => translate(...args)
   static enableDebug = (enable = true) => DEBUG = !!enable
   static setLang = (locale = 'en') => {
     LANG = locale
@@ -25,46 +24,53 @@ export default class Trans extends React.Component {
     'a','b', 'i','p','span','br', 'img'
   ]
 
-  translate(key, args, pluralForm){
-    let trans = this.trans || this.props.context
-    if(trans && trans[key]) key = trans[key]
-    else{
-      if(DEBUG) console.warn('%s is not in translated keys', key, ' - context was ', trans)
-    }
-    if(typeof key === 'object' && key.singular){
-      if(pluralForm)
-        return sprintf(key.plural, args)
-      else
-        return sprintf(key.singular, args)
-    }
-    return sprintf(key, zipObject(Object.keys(args), mapObject(args, e => {
-      if(typeof e === 'object' && ~this.allowedElements.indexOf(e.type))
-        return ReactDOMServer.renderToString(React.createElement(e.type, e, e.text||null))
-      if(React.isValidElement(e))
-        return ReactDOMServer.renderToString(e)
-      return e
-    })))
-  }
-
-  safe_translate(key,args, pluralForm){
-    let translation = key
-    try{
-      translation = this.translate(key,args, pluralForm)
-    }
-    catch (e){
-      console.warn('Failed to produce translation of ', key, e)
-    }
-    return translation
-  }
-
   render() {
     const pluralForm = isPlural(parseFloat(this.props.n||1))
     return (
       <span dangerouslySetInnerHTML={{
-          __html: this.safe_translate(this.props.children, this.props, pluralForm)
+          __html: translate(this.props.children, this.props, pluralForm, this.trans || this.props.context)
         }}></span>
     )
   }
+}
+
+const unsafe_translate = (key, args, pluralForm, trans) => {
+  if(trans && trans[key]) key = trans[key]
+  else{
+    if(DEBUG) console.warn('%s is not in translated keys', key, ' - context was ', trans)
+  }
+  if(typeof(key) === 'object' && key.singular){
+    if(pluralForm)
+      return sprintf(key.plural, args)
+    else
+      return sprintf(key.singular, args)
+  }
+  let replacements = {}
+  Object.keys(args).forEach(key =>
+    replacements[key] = React.isValidElement(args[key]) ? ReactDOMServer.renderToString(args[key]) : args[key]
+  )
+  /*
+  let replacements = zipObject(Object.keys(args), mapObject(args, e => {
+    if(typeof(e) === 'object' && ~this.allowedElements.indexOf(e.type))
+      return ReactDOMServer.renderToString(React.createElement(e.type, e, e.text||null))
+    if(React.isValidElement(e))
+      return ReactDOMServer.renderToString(e)
+    return e
+  }))
+  */
+  return sprintf(key, replacements)
+}
+
+export const translate = (key, args, pluralForm, trans) => {
+  let translation = key
+  if(typeof(pluralForm) === 'object'){trans = pluralForm;pluralForm=1}
+  try{
+    translation = unsafe_translate(key, args, pluralForm, trans)
+  }
+  catch (e){
+    console.warn('Failed to produce translation of ', key, e)
+  }
+  return translation
 }
 
 export const pluralTypeToLanguages = {

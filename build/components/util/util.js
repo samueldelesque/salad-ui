@@ -66,5 +66,6 @@ exports.default = {
   ProfilePicture: _profilePicture2.default,
   TimeAndViews: _timeAndViews2.default,
   Overlay: _overlay2.default,
-  Trans: _trans2.default
+  Trans: _trans2.default,
+  translate: _trans.translate
 };

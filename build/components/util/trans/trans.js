@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isPlural = exports.pluralTypeName = exports.langToTypeMap = exports.pluralTypes = exports.pluralTypeToLanguages = undefined;
+exports.isPlural = exports.pluralTypeName = exports.langToTypeMap = exports.pluralTypes = exports.pluralTypeToLanguages = exports.translate = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -20,14 +20,6 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 var _server = require('react-dom/server');
 
 var _server2 = _interopRequireDefault(_server);
-
-var _lodash = require('lodash.map');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _lodash3 = require('lodash.zipobject');
-
-var _lodash4 = _interopRequireDefault(_lodash3);
 
 var _sprintfJs = require('sprintf-js');
 
@@ -57,44 +49,15 @@ var Trans = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Trans)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.allowedElements = ['a', 'b', 'i', 'p', 'span', 'br', 'img'], _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Trans)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _initialiseProps.call(_this), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Trans, [{
-    key: 'translate',
-    value: function translate(key, args, pluralForm) {
-      var _this2 = this;
-
-      var trans = this.trans || this.props.context;
-      if (trans && trans[key]) key = trans[key];else {
-        if (DEBUG) console.warn('%s is not in translated keys', key, ' - context was ', trans);
-      }
-      if ((typeof key === 'undefined' ? 'undefined' : _typeof(key)) === 'object' && key.singular) {
-        if (pluralForm) return (0, _sprintfJs.sprintf)(key.plural, args);else return (0, _sprintfJs.sprintf)(key.singular, args);
-      }
-      return (0, _sprintfJs.sprintf)(key, (0, _lodash4.default)(Object.keys(args), (0, _lodash2.default)(args, function (e) {
-        if ((typeof e === 'undefined' ? 'undefined' : _typeof(e)) === 'object' && ~_this2.allowedElements.indexOf(e.type)) return _server2.default.renderToString(_react2.default.createElement(e.type, e, e.text || null));
-        if (_react2.default.isValidElement(e)) return _server2.default.renderToString(e);
-        return e;
-      })));
-    }
-  }, {
-    key: 'safe_translate',
-    value: function safe_translate(key, args, pluralForm) {
-      var translation = key;
-      try {
-        translation = this.translate(key, args, pluralForm);
-      } catch (e) {
-        console.warn('Failed to produce translation of ', key, e);
-      }
-      return translation;
-    }
-  }, {
     key: 'render',
     value: function render() {
       var pluralForm = isPlural(parseFloat(this.props.n || 1));
       return _react2.default.createElement('span', { dangerouslySetInnerHTML: {
-          __html: this.safe_translate(this.props.children, this.props, pluralForm)
+          __html: translate(this.props.children, this.props, pluralForm, this.trans || this.props.context)
         } });
     }
   }]);
@@ -105,6 +68,10 @@ var Trans = function (_React$Component) {
 Trans.defaultProps = {
   closeLink: '</a>',
   newLine: '<br/>'
+};
+
+Trans.translate = function () {
+  return translate.apply(undefined, arguments);
 };
 
 Trans.enableDebug = function () {
@@ -119,7 +86,49 @@ Trans.setLang = function () {
   PLURAL_TYPE = pluralTypeName(locale);
 };
 
+var _initialiseProps = function _initialiseProps() {
+  this.allowedElements = ['a', 'b', 'i', 'p', 'span', 'br', 'img'];
+};
+
 exports.default = Trans;
+
+
+var unsafe_translate = function unsafe_translate(key, args, pluralForm, trans) {
+  if (trans && trans[key]) key = trans[key];else {
+    if (DEBUG) console.warn('%s is not in translated keys', key, ' - context was ', trans);
+  }
+  if ((typeof key === 'undefined' ? 'undefined' : _typeof(key)) === 'object' && key.singular) {
+    if (pluralForm) return (0, _sprintfJs.sprintf)(key.plural, args);else return (0, _sprintfJs.sprintf)(key.singular, args);
+  }
+  var replacements = {};
+  Object.keys(args).forEach(function (key) {
+    return replacements[key] = _react2.default.isValidElement(args[key]) ? _server2.default.renderToString(args[key]) : args[key];
+  });
+  /*
+  let replacements = zipObject(Object.keys(args), mapObject(args, e => {
+    if(typeof(e) === 'object' && ~this.allowedElements.indexOf(e.type))
+      return ReactDOMServer.renderToString(React.createElement(e.type, e, e.text||null))
+    if(React.isValidElement(e))
+      return ReactDOMServer.renderToString(e)
+    return e
+  }))
+  */
+  return (0, _sprintfJs.sprintf)(key, replacements);
+};
+
+var translate = exports.translate = function translate(key, args, pluralForm, trans) {
+  var translation = key;
+  if ((typeof pluralForm === 'undefined' ? 'undefined' : _typeof(pluralForm)) === 'object') {
+    trans = pluralForm;pluralForm = 1;
+  }
+  try {
+    translation = unsafe_translate(key, args, pluralForm, trans);
+  } catch (e) {
+    console.warn('Failed to produce translation of ', key, e);
+  }
+  return translation;
+};
+
 var pluralTypeToLanguages = exports.pluralTypeToLanguages = {
   chinese: ['fa', 'id', 'ja', 'ko', 'lo', 'ms', 'th', 'tr', 'zh'],
   german: ['da', 'de', 'en', 'es', 'fi', 'el', 'he', 'hu', 'it', 'nl', 'no', 'pt', 'sv'],

@@ -51,7 +51,8 @@ var InputText = function (_React$Component) {
     value: function componentWillMount() {
       this.setState({
         focus: this.props.focus,
-        value: this.props.value
+        value: this.props.value,
+        id: ids++
       });
     }
   }, {
@@ -144,7 +145,7 @@ var InputText = function (_React$Component) {
       var showHint = hint && !this.props.disabled && !this.props.readOnly;
       var value = this.state.value ? this.state.value : this.props.value;
       var tag = this.props.textarea ? 'textarea' : 'input';
-      var id = 'input.' + ids++;
+      var id = 'input.' + this.state.id;
 
       var props = _extends({
         ref: 'input',

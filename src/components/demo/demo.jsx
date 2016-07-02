@@ -274,26 +274,34 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
               <pre>
 {`<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>
 
-  <SaladUI.Util.Trans elephants={24} n={24} context={{
-      "There are %(elephants)s elephants.": {
-        singular: "Il y a %(elephants)s elephant.",
-        plural: "Il y a %(elephants)s elephants.",
-      }
-    }}>
-    There are %(elephants)s elephants.
-  </SaladUI.Util.Trans>`}</pre>
+//Can also be used as a plain function (to return a string instead of React Component)
+// Salad.Util.translate(key, args, [pluralform n], [translations])
+SaladUI.Util.translate(
+  'There are %(elephants)s elephants in %(city).',
+  {elephants: 24, city: "Hong Kong"},
+  24,
+  {
+    'There are %(elephants)s elephants in %(city).': {
+      singular: "Il y a %(elephants)s elephant à %(city)s.",
+      plural: "Il y a %(elephants)s elephants à %(city)s.",
+    }
+  }
+)`}</pre>
               <h3>
                 <SaladUI.Util.Trans context={{"Hello": "Bonjour"}}>Hello</SaladUI.Util.Trans>
               </h3>
               <p>
-                <SaladUI.Util.Trans elephants={24} n={24} context={{
-                    "There are %(elephants)s elephants.": {
-                      singular: "Il y a %(elephants)s elephant.",
-                      plural: "Il y a %(elephants)s elephants.",
+                {SaladUI.Util.translate(
+                  'There are %(elephants)s elephants in %(city).',
+                  {elephants: 24, city: "Hong Kong"},
+                  24,
+                  {
+                    'There are %(elephants)s elephants in %(city).': {
+                      singular: "Il y a %(elephants)s elephant à %(city)s.",
+                      plural: "Il y a %(elephants)s elephants à %(city)s.",
                     }
-                  }}>
-                  There are %(elephants)s elephants.
-                </SaladUI.Util.Trans>
+                  }
+                )}
               </p>
             </li>
             <li>

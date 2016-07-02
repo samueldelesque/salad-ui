@@ -75,6 +75,7 @@
     "console-polyfill": "^0.2.2",
     "es5-shim": "^4.5.8",
     "es6-promise": "^3.1.2",
+    "es6-shim": "^0.35.1",
     "fetch-everywhere": "^1.0.4",
     "install": "^0.8.1",
     "lodash.map": "^4.3.0",

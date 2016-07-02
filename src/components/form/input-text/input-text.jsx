@@ -24,7 +24,8 @@ export default class InputText extends React.Component {
   componentWillMount(){
     this.setState({
       focus: this.props.focus,
-      value: this.props.value
+      value: this.props.value,
+      id: ids++
     })
   }
 
@@ -108,7 +109,7 @@ export default class InputText extends React.Component {
     let showHint = hint && !this.props.disabled && !this.props.readOnly
     let value = this.state.value ? this.state.value : this.props.value
     let tag = this.props.textarea ? 'textarea' : 'input'
-    let id = `input.${ids++}`
+    let id = `input.${this.state.id}`
 
     let props = {
       ref: 'input',

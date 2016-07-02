@@ -9,7 +9,7 @@ import TagList from './tag-list/tag-list'
 import TextClamp from './text-clamp/text-clamp'
 import TimeAndViews from './time-and-views/time-and-views'
 import Overlay from './overlay/overlay'
-import Trans from './trans/trans'
+import Trans, {translate} from './trans/trans'
 
 export default {
   Alert,
@@ -23,5 +23,6 @@ export default {
   ProfilePicture,
   TimeAndViews,
   Overlay,
-  Trans
+  Trans,
+  translate
 }

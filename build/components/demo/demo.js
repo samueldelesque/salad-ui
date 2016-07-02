@@ -667,7 +667,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                '<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>\n\n  <SaladUI.Util.Trans elephants={24} n={24} context={{\n      "There are %(elephants)s elephants.": {\n        singular: "Il y a %(elephants)s elephant.",\n        plural: "Il y a %(elephants)s elephants.",\n      }\n    }}>\n    There are %(elephants)s elephants.\n  </SaladUI.Util.Trans>'
+                '<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>\n\n//Can also be used as a plain function (to return a string instead of React Component)\n// Salad.Util.translate(key, args, [pluralform n], [translations])\nSaladUI.Util.translate(\n  \'There are %(elephants)s elephants in %(city).\',\n  {elephants: 24, city: "Hong Kong"},\n  24,\n  {\n    \'There are %(elephants)s elephants in %(city).\': {\n      singular: "Il y a %(elephants)s elephant à %(city)s.",\n      plural: "Il y a %(elephants)s elephants à %(city)s.",\n    }\n  }\n)'
               ),
               _react2.default.createElement(
                 'h3',
@@ -681,16 +681,12 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'p',
                 null,
-                _react2.default.createElement(
-                  _saladUi2.default.Util.Trans,
-                  { elephants: 24, n: 24, context: {
-                      "There are %(elephants)s elephants.": {
-                        singular: "Il y a %(elephants)s elephant.",
-                        plural: "Il y a %(elephants)s elephants."
-                      }
-                    } },
-                  'There are %(elephants)s elephants.'
-                )
+                _saladUi2.default.Util.translate('There are %(elephants)s elephants in %(city).', { elephants: 24, city: "Hong Kong" }, 24, {
+                  'There are %(elephants)s elephants in %(city).': {
+                    singular: "Il y a %(elephants)s elephant à %(city)s.",
+                    plural: "Il y a %(elephants)s elephants à %(city)s."
+                  }
+                })
               )
             ),
             _react2.default.createElement(
