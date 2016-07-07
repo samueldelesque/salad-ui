@@ -20,6 +20,10 @@ var _icon = require('./icon/icon');
 
 var _icon2 = _interopRequireDefault(_icon);
 
+var _spinner = require('./spinner/spinner');
+
+var _spinner2 = _interopRequireDefault(_spinner);
+
 var _stylesheet = require('../lib/stylesheet/stylesheet');
 
 var _stylesheet2 = _interopRequireDefault(_stylesheet);
@@ -43,5 +47,6 @@ exports.default = {
   Stylesheet: _stylesheet2.default,
   Lib: Lib,
   Icon: _icon2.default,
+  Spinner: _spinner2.default,
   Video: _video2.default
 };

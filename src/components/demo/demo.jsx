@@ -390,6 +390,15 @@ long long long long long long text.
           </div>
         </section>
         <section>
+          <h2>Spinner</h2>
+          <pre>
+            {`<SaladUI.Spinner/>`}
+          </pre>
+          <div>
+            <SaladUI.Spinner/>
+          </div>
+        </section>
+        <section>
           <h2>Video</h2>
           <ul className="functionality">
             <li>

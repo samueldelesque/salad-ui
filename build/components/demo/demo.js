@@ -935,6 +935,25 @@ var Demo = function (_React$Component) {
           _react2.default.createElement(
             'h2',
             null,
+            'Spinner'
+          ),
+          _react2.default.createElement(
+            'pre',
+            null,
+            '<SaladUI.Spinner/>'
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_saladUi2.default.Spinner, null)
+          )
+        ),
+        _react2.default.createElement(
+          'section',
+          null,
+          _react2.default.createElement(
+            'h2',
+            null,
             'Video'
           ),
           _react2.default.createElement(

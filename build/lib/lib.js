@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sso = exports.scrollTo = exports.polyfill = exports.numberToString = exports.glob = exports.f = exports.tracking = exports.domainService = exports.currencyToSymbol = exports.childrenWithProps = undefined;
+exports.sso = exports.scrollTo = exports.numberToString = exports.glob = exports.f = exports.tracking = exports.domainService = exports.currencyToSymbol = exports.childrenWithProps = undefined;
 
 var _childrenWithProps = require('./children-with-props');
 
@@ -33,10 +33,6 @@ var _numberToString = require('./number-to-string');
 
 var _numberToString2 = _interopRequireDefault(_numberToString);
 
-var _polyfill = require('./polyfill');
-
-var _polyfill2 = _interopRequireDefault(_polyfill);
-
 var _scrollTo = require('./scroll-to');
 
 var _scrollTo2 = _interopRequireDefault(_scrollTo);
@@ -49,6 +45,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import polyfill from './polyfill'
 exports.childrenWithProps = _childrenWithProps2.default;
 exports.currencyToSymbol = _currencyToSymbol2.default;
 exports.domainService = _domainService2.default;
@@ -56,6 +53,7 @@ exports.tracking = tracking;
 exports.f = f;
 exports.glob = _glob2.default;
 exports.numberToString = _numberToString2.default;
-exports.polyfill = _polyfill2.default;
-exports.scrollTo = _scrollTo2.default;
+exports.
+// polyfill,
+scrollTo = _scrollTo2.default;
 exports.sso = _sso2.default;
