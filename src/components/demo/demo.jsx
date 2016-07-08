@@ -10,7 +10,6 @@ console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fr
 if(glob.canUseDom()){
   console.log('Test SaladUI functions directly using window.SaladUI')
   window.SaladUI = SaladUI
-  SaladUI.Lib.polyfill()
 }
 
 const chartData = [
