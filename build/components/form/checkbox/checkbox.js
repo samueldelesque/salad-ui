@@ -102,11 +102,11 @@ var Checkbox = function (_Component) {
               height: _stylesheet2.default.checkmark.height
             }, 'fill', this.props.disabled ? '#BFBFBF' : '#0066DC')) : null
           ),
-          _react2.default.createElement(
+          this.props.children ? _react2.default.createElement(
             'div',
             { style: { display: 'block', overflow: 'hidden' } },
             this.props.children
-          )
+          ) : null
         )
       );
     }

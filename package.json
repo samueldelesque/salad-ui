@@ -6,7 +6,7 @@
     "dist:copyrequiredcss": "cp ./src/styles/transitions.scss ./dist/salad-ui.transitions/",
     "dist:css:watch": "npm run dist:copyrequiredcss; sass ./src/styles/transitions.scss:./dist/salad-ui.transitions/transitions.css --watch --style compressed",
     "dist:css": "npm run dist:copyrequiredcss; sass ./src/styles/transitions.scss:./dist/salad-ui.transitions/transitions.css --style compressed",
-    "distribute": "npm run dist:css; webpack --config ./conf/webpack.config.prod.js",
+    "distribute": "npm run dist:css; npm run build; webpack --config ./conf/webpack.config.prod.js",
     "dist": "npm run distribute",
     "distribute:demo": "sass ./src/styles/demo.scss -f ./dist/demo/demo.css; sass ./src/styles/transitions.scss:./dist/demo/transitions.css --style compressed; webpack --config ./conf/webpack.config.demo.prod.js",
     "dist:demo": "npm run distribute:demo",
