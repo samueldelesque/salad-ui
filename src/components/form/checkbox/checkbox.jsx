@@ -60,7 +60,10 @@ export default class Checkbox extends Component {
               null
           }
           </i>
-          <div style={{display:'block', overflow:'hidden'}}>{this.props.children}</div>
+          {this.props.children
+            ? <div style={{display:'block', overflow:'hidden'}}>{this.props.children}</div>
+            : null
+          }
         </div>
       </div>
     )
