@@ -151,7 +151,7 @@ var InputText = function (_React$Component) {
         ref: 'input',
         type: this.props.type
       }, this.props, {
-        style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null),
+        style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null, this.props.style),
         placeholder: this.props.placeholder,
         onClick: this.handleClick.bind(this),
         onBlur: this.handleBlur.bind(this),

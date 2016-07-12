@@ -133,7 +133,7 @@ var List = function (_React$Component) {
       (0, _fetchMethods.get)(this.props.apiURL + endpoint, { data: data }).then(function (res) {
         return _this4[cb](res.list, res.has_more);
       }).catch(function (err) {
-        console.error('Failed to fetch videos', query, err);
+        console.error('Failed to fetch videos', err);
         _this4.setState({ failed: _this4.state.currentPage === 1, hasMore: false, searching: false, isLoading: false });
       });
     }
@@ -161,7 +161,7 @@ var List = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'video-list' },
+        { className: 'video-list', ref: 'container' },
         _react2.default.Children.map(this.props.children, function (item, index) {
           return _react2.default.cloneElement(item, Object.assign({}, _this5.props, _this5.state, item.props, { loadMore: function loadMore() {
               return _this5.loadMore();

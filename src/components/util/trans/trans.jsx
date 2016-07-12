@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
 import { sprintf } from 'sprintf-js'
 
-let DEBUG = false
-let LANG = 'en'
-let PLURAL_TYPE = 'german'
+export let DEBUG = false
+export let LANG = 'en'
+export let PLURAL_TYPE = 'german'
 
 export default class Trans extends React.Component {
   static defaultProps = {

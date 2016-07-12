@@ -93,7 +93,7 @@ export default class List extends React.Component {
     get(this.props.apiURL + endpoint, {data})
     .then(res => this[cb](res.list, res.has_more))
     .catch(err => {
-      console.error('Failed to fetch videos', query, err)
+      console.error('Failed to fetch videos', err)
       this.setState({failed: this.state.currentPage === 1, hasMore: false, searching: false, isLoading: false})
     })
   }
@@ -114,7 +114,7 @@ export default class List extends React.Component {
 
   render() {
     return (
-      <div className="video-list">
+      <div className="video-list" ref="container">
         {React.Children.map(this.props.children, (item, index) =>
           React.cloneElement(item, Object.assign({}, this.props, this.state, item.props, {loadMore: () => this.loadMore()}))
         )}

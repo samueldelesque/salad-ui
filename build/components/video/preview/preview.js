@@ -180,7 +180,8 @@ var Preview = function (_Component) {
               'a',
               { href: this.props.uri, style: {
                   textDecoration: this.state.hovered ? 'underline' : 'none',
-                  color: _stylesheet2.default.link.color
+                  color: _stylesheet2.default.link.color,
+                  fontSize: 16
                 } },
               _react2.default.createElement(
                 _textClamp2.default,

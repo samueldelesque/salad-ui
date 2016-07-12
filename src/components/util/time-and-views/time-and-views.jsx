@@ -1,5 +1,5 @@
 import React from 'react'
-import Trans from '../trans/trans'
+import Trans, {DEBUG} from '../trans/trans'
 
 export default class TimeAndViews extends React.Component {
   trans = DM_ENV['utils/time-and-views']
@@ -26,7 +26,7 @@ export default class TimeAndViews extends React.Component {
         monthName = this.trans.months[date.getMonth()]
       }
       catch(e){
-        console.warn('Trans error: ', e)
+        if(DEBUG) console.warn('Trans error: ', e)
         return <Trans context={this.trans}>A few months ago</Trans>
       }
       return <Trans context={this.trans} month={monthName}>last %(month)s</Trans>

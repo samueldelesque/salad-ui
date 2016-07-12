@@ -7,10 +7,6 @@ exports.del = exports.put = exports.patch = exports.post = exports.get = exports
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var _q = require('q');
-
-var _q2 = _interopRequireDefault(_q);
-
 var _lodash = require('lodash.merge');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -26,13 +22,16 @@ var mockApi = false;
 
 var enableMock = exports.enableMock = function enableMock() {
   var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
-
-  mockApi = enable;
+  return mockApi = enable;
 };
 var enableDebug = exports.enableDebug = function enableDebug() {
   var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
-
-  debug = enable;
+  return debug = enable;
+};
+var buildError = function buildError(title, res) {
+  var error = new Error(title);
+  error.res = res;
+  return error;
 };
 
 var serialize = exports.serialize = function serialize(obj) {
@@ -47,8 +46,6 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
   var method = arguments.length <= 1 || arguments[1] === undefined ? 'GET' : arguments[1];
   var params = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
-  var r = _q2.default.defer();
-
   method = method.toUpperCase();
   if (! ~['GET', 'POST', 'DELETE', 'PUT', 'PATCH'].indexOf(method)) {
     if ((typeof method === 'undefined' ? 'undefined' : _typeof(method)) === 'object' && !params) params = method;
@@ -57,7 +54,8 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
 
   params = (0, _lodash2.default)({
     method: method,
-    headers: {}
+    headers: {},
+    contentType: 'JSON'
   }, params);
 
   if (method === 'GET' && params.data) {
@@ -68,7 +66,7 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
     delete params.data;
   }
 
-  if (method === 'POST' || method === 'PATCH') {
+  if ((method === 'POST' || method === 'PATCH') && params.contentType.toUpperCase() === 'JSON') {
     params.headers['Content-Type'] = 'application/json';
     params.body = JSON.stringify(params.data);
     delete params.data;
@@ -78,22 +76,14 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
 
   if (mockApi) url = '/api-mock?url=' + btoa(url);
 
-  fetch(url, params).then(function (res) {
-    if (res.status >= 399) return r.reject(res.status + ' error', res);
+  delete params.contentType;
 
-    if (res.status === 204) return r.resolve();
-
+  return fetch(url, params).then(function (res) {
     if (params.debug) console.log('Response: ', res);
-    res.json().then(function (json) {
-      if (params.debug) console.log('Body', json);
-      r.resolve(json);
-    });
-
-    //setTimeout(()=>r.reject({error: 'Response had no body'}), 1000)
-  }).catch(function (err) {
-    return r.reject({ error: 'Failed to connect to server.', err: err });
+    if (res.status >= 399) throw buildError(res.status + ' error', res);
+    if (res.status === 204) return res;
+    return res.json();
   });
-  return r.promise;
 };
 var get = exports.get = function get(url) {
   var params = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];

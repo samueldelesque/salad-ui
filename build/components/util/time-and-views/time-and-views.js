@@ -65,7 +65,7 @@ var TimeAndViews = function (_React$Component) {
         try {
           monthName = this.trans.months[date.getMonth()];
         } catch (e) {
-          console.warn('Trans error: ', e);
+          if (_trans.DEBUG) console.warn('Trans error: ', e);
           return _react2.default.createElement(
             _trans2.default,
             { context: this.trans },

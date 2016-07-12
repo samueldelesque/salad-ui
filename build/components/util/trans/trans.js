@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isPlural = exports.pluralTypeName = exports.langToTypeMap = exports.pluralTypes = exports.pluralTypeToLanguages = exports.translate = undefined;
+exports.isPlural = exports.pluralTypeName = exports.langToTypeMap = exports.pluralTypes = exports.pluralTypeToLanguages = exports.translate = exports.PLURAL_TYPE = exports.LANG = exports.DEBUG = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -31,9 +31,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var DEBUG = false;
-var LANG = 'en';
-var PLURAL_TYPE = 'german';
+var DEBUG = exports.DEBUG = false;
+var LANG = exports.LANG = 'en';
+var PLURAL_TYPE = exports.PLURAL_TYPE = 'german';
 
 var Trans = function (_React$Component) {
   _inherits(Trans, _React$Component);
@@ -76,14 +76,14 @@ Trans.translate = function () {
 
 Trans.enableDebug = function () {
   var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
-  return DEBUG = !!enable;
+  return exports.DEBUG = DEBUG = !!enable;
 };
 
 Trans.setLang = function () {
   var locale = arguments.length <= 0 || arguments[0] === undefined ? 'en' : arguments[0];
 
-  LANG = locale;
-  PLURAL_TYPE = pluralTypeName(locale);
+  exports.LANG = LANG = locale;
+  exports.PLURAL_TYPE = PLURAL_TYPE = pluralTypeName(locale);
 };
 
 var _initialiseProps = function _initialiseProps() {

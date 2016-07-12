@@ -8,12 +8,6 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _fetchMethods = require('./fetch-methods');
 
-var _q = require('q');
-
-var _q2 = _interopRequireDefault(_q);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var SSO = function () {
@@ -54,7 +48,7 @@ var SSO = function () {
     key: 'getJWT',
     value: function getJWT(service, accountId) {
       var ignoreCache = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
-      var d = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
+      var promise = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
 
       if (!SSO.sdx) console.warn('SSO initialized without sdx');
 
@@ -64,20 +58,20 @@ var SSO = function () {
 
       SSO.debug && console.log('SSO GET', service, accountId);
 
-      d = d || _q2.default.defer();
+      promise = promise || new Promise();
 
       SSO.jwtfailures[JWTKey] = SSO.jwtfailures[JWTKey] || 0;
 
       if (!ignoreCache && localJWT && SSO.isJWTValid(localJWT)) d.resolve(localJWT);
 
       SSO.getSSOAccount(service, accountId).then(function (account) {
-        if (!account || !account.access_token) return d.reject('NO_ACCOUNT');
+        if (!account || !account.access_token) return promise.reject('NO_ACCOUNT');
         localStorage.setItem(JWTKey, account.access_token);
-        return d.resolve(account.access_token);
+        return promise.resolve(account.access_token);
       }).catch(function (err) {
         if (err === 'NO_ACCOUNT') return d.reject(err);
         SSO.jwtfailures[JWTKey]++;
-        if (SSO.jwtfailures[JWTKey] >= SSO.JWTRetries) return d.reject(err);
+        if (SSO.jwtfailures[JWTKey] >= SSO.JWTRetries) return promise.reject(err);
 
         nextTry = Math.round(4000 + SSO.jwtfailures[JWTKey] * (SSO.jwtfailures[JWTKey] / 4 + 1) * 1000);
 
@@ -85,13 +79,13 @@ var SSO = function () {
 
         setTimeout(function () {
           SSO.getJWT(service, accountId, ignoreCache).then(function (token) {
-            return d.resolve(token);
+            return promise.resolve(token);
           }).catch(function (err) {
-            return d.reject(err);
+            return promise.reject(err);
           });
         }, nextTry);
       });
-      return d.promise;
+      return promise;
     }
   }, {
     key: 'readJWT',
@@ -151,9 +145,6 @@ var SSO = function () {
     key: 'createSSOAccount',
     value: function createSSOAccount(service, accountName) {
       return (0, _fetchMethods.fetchJSON)(SSO.apiEndpoint + '/services/' + service + '/accounts?sdx=' + SSO.sdx, 'POST', { name: accountName }).then(function (SSOAccount) {
-        // @TODO: if SSO API implements this and returns token, uncomment the following and save 1 GET request.
-        // SSO.SSOAccounts[service] = SSOAccount;
-        // d.resolve(SSOAccount);
         return SSO.getSSOAccount(service, SSOAccount.item.id);
       });
     }

@@ -1,5 +1,4 @@
 import { fetchJSON } from './fetch-methods'
-import Q from 'q'
 
 export default class SSO {
   static apiEndpoint = 'https://sso.dailymotion.com'
@@ -34,7 +33,7 @@ export default class SSO {
     return 'JWT__' + service + '_' + (accountId || SSO.userId);
   }
 
-  static getJWT(service, accountId, ignoreCache=false, d=false){
+  static getJWT(service, accountId, ignoreCache=false, promise=false){
     if(!SSO.sdx)
       console.warn('SSO initialized without sdx')
 
@@ -44,7 +43,7 @@ export default class SSO {
 
     SSO.debug && console.log('SSO GET', service, accountId)
 
-    d = d || Q.defer()
+    promise = promise || new Promise()
 
     SSO.jwtfailures[JWTKey] = SSO.jwtfailures[JWTKey] || 0;
 
@@ -52,30 +51,30 @@ export default class SSO {
 
     SSO.getSSOAccount(service, accountId)
     .then((account) => {
-      if(!account || !account.access_token) return d.reject('NO_ACCOUNT')
+      if(!account || !account.access_token) return promise.reject('NO_ACCOUNT')
       localStorage.setItem(JWTKey, account.access_token)
-      return d.resolve(account.access_token)
+      return promise.resolve(account.access_token)
     })
     .catch(err => {
       if(err === 'NO_ACCOUNT') return d.reject(err)
       SSO.jwtfailures[JWTKey]++
-      if(SSO.jwtfailures[JWTKey] >= SSO.JWTRetries) return d.reject(err)
+      if(SSO.jwtfailures[JWTKey] >= SSO.JWTRetries) return promise.reject(err)
 
       nextTry = Math.round(4000 + (SSO.jwtfailures[JWTKey] * (SSO.jwtfailures[JWTKey]/4 + 1) * 1000))
 
       console.error('Failed to get SSO account for ' + service + '... launching retry in ' + nextTry / 1000 + 'sec');
 
-      setTimeout(()=>{
+      setTimeout(() => {
         SSO.getJWT(service, accountId, ignoreCache)
-        .then(token=>d.resolve(token))
-        .catch(err=>d.reject(err))
+        .then(token => promise.resolve(token))
+        .catch(err => promise.reject(err))
       }, nextTry)
     })
-    return d.promise
+    return promise
   }
 
   static readJWT(token, part){
-    if(!token || typeof token !== 'string' || token.split('.').length < 2) return null
+    if(!token || typeof(token) !== 'string' || token.split('.').length < 2) return null
     return JSON.parse(atob(token.split('.')[1]))
   }
 
@@ -105,7 +104,7 @@ export default class SSO {
   }
 
   static deleteSSOAccount(service, accountId){
-    return fetchJSON(SSO.apiEndpoint + '/services/' + service + '/accounts/' + accountId + '?sdx=' + SSO.sdx, 'DELETE').catch(err=>{
+    return fetchJSON(SSO.apiEndpoint + '/services/' + service + '/accounts/' + accountId + '?sdx=' + SSO.sdx, 'DELETE').catch(err => {
         throw new Error('Failed to delete SSO account', res)
     })
   }
@@ -123,9 +122,6 @@ export default class SSO {
 
   static createSSOAccount(service, accountName){
     return fetchJSON(SSO.apiEndpoint + '/services/' + service + '/accounts?sdx=' + SSO.sdx, 'POST', {name: accountName}).then(SSOAccount=>{
-      // @TODO: if SSO API implements this and returns token, uncomment the following and save 1 GET request.
-      // SSO.SSOAccounts[service] = SSOAccount;
-      // d.resolve(SSOAccount);
       return SSO.getSSOAccount(service, SSOAccount.item.id)
     })
   }

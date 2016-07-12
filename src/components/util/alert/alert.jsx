@@ -8,13 +8,14 @@ export default class Alert extends Component {
   static defaultProps = {
     title: false,
     type: 'info',
-    onClose: false
+    onClose: false,
+    style: null
   }
 
   render() {
     styles.alertBox.backgroundColor = styles.colorMap[this.props.type]
     return (
-      <div style={styles.alertBox}>
+      <div style={Object.assign({}, styles.alertBox, this.props.styles)}>
         <div style={styles.alertIcon}>
           <Icon width={18} height={18} type={this.props.type} style={{alignSelf:'center'}} />
         </div>

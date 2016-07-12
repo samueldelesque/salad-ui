@@ -123,7 +123,8 @@ export default class Preview extends Component {
           <h3 style={previewStyles.title}>
             <a href={this.props.uri} style={{
               textDecoration: this.state.hovered ? 'underline' : 'none',
-              color: styles.link.color
+              color: styles.link.color,
+              fontSize: 16,
             }}>
               <TextClamp clamp="2">
                 {

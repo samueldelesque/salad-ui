@@ -43,7 +43,7 @@ var Alert = function (_Component) {
       _stylesheet2.default.alertBox.backgroundColor = _stylesheet2.default.colorMap[this.props.type];
       return _react2.default.createElement(
         'div',
-        { style: _stylesheet2.default.alertBox },
+        { style: Object.assign({}, _stylesheet2.default.alertBox, this.props.styles) },
         _react2.default.createElement(
           'div',
           { style: _stylesheet2.default.alertIcon },
@@ -74,6 +74,7 @@ var Alert = function (_Component) {
 Alert.defaultProps = {
   title: false,
   type: 'info',
-  onClose: false
+  onClose: false,
+  style: null
 };
 exports.default = Alert;
