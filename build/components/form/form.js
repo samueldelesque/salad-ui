@@ -20,17 +20,17 @@ var _radio = require('./radio/radio');
 
 var _radio2 = _interopRequireDefault(_radio);
 
+var _select = require('./select/select');
+
+var _select2 = _interopRequireDefault(_select);
+
 var _inputText = require('./input-text/input-text');
 
 var _inputText2 = _interopRequireDefault(_inputText);
 
-var _toggle = require('./toggle/toggle');
+var _switch = require('./switch/switch');
 
-var _toggle2 = _interopRequireDefault(_toggle);
-
-var _select = require('./select/select');
-
-var _select2 = _interopRequireDefault(_select);
+var _switch2 = _interopRequireDefault(_switch);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40,6 +40,6 @@ exports.default = {
   RadioGroup: _radioGroup2.default,
   Radio: _radio2.default,
   InputText: _inputText2.default,
-  Toggle: _toggle2.default,
+  Switch: _switch2.default,
   Select: _select2.default
 };

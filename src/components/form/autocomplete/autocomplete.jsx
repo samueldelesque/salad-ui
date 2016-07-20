@@ -222,9 +222,17 @@ export default class Autocomplete extends Component {
       inputProps['error'] = this.props.apiError;
     }
 
-    return <div style={{position:'relative'}}>
-      <InputText ref="inputBox" {...inputProps} />
-      {(this.state.showSuggestions && !this.props.isLoading && this.props.suggestions.length > 0) ? this.renderSuggestions() : null }
-    </div>
+    const containerStyle = Object.assign(
+      {},
+      { position: 'relative'},
+      this.props.containerStyle
+    )
+
+    return (
+      <div style={containerStyle}>
+        <InputText ref="inputBox" {...inputProps} />
+        {(this.state.showSuggestions && !this.props.isLoading && this.props.suggestions.length > 0) ? this.renderSuggestions() : null }
+      </div>
+    )
   }
 }

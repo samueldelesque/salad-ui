@@ -32,6 +32,7 @@ export default class Demo extends React.Component {
   state = {
     selectedRadio: 'radio1',
     protein: {name: null, value: null, calories: 0},
+    demoSwitch: true,
     tagsAdded: ['tag1','tag2','tag3','tag4','tag5','tag6'],
     showOverlay: false,
     sectionWidth: 720,
@@ -120,6 +121,12 @@ export default class Demo extends React.Component {
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Checkbox</h3>
               <pre>{'<Checkbox/>'}</pre>
               <SaladUI.Form.Checkbox>This is a checkbox</SaladUI.Form.Checkbox>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Switch</h3>
+              <pre>{'<Switch value={this.state.val} onChange={(val)=>this.setState({val})}/>'}</pre>
+              <SaladUI.Form.Switch value={this.state.demoSwitch} onChange={(demoSwitch)=>this.setState({demoSwitch})}/>
+              <span style={{color: '#bbb', marginLeft: 20}}>{this.state.demoSwitch?'ON':'OFF'}</span>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Radio</h3>

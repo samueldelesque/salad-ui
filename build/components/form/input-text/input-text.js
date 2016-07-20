@@ -95,9 +95,9 @@ var InputText = function (_React$Component) {
     }
   }, {
     key: 'handleKeyUp',
-    value: function handleKeyUp() {
+    value: function handleKeyUp(e) {
       if (this.props.onKeyUp) {
-        this.props.onKeyUp();
+        this.props.onKeyUp(e);
       }
     }
   }, {

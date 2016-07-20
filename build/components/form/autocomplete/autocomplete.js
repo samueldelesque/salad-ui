@@ -261,9 +261,11 @@ var Autocomplete = function (_Component) {
         inputProps['error'] = this.props.apiError;
       }
 
+      var containerStyle = Object.assign({}, { position: 'relative' }, this.props.containerStyle);
+
       return _react2.default.createElement(
         'div',
-        { style: { position: 'relative' } },
+        { style: containerStyle },
         _react2.default.createElement(_inputText2.default, _extends({ ref: 'inputBox' }, inputProps)),
         this.state.showSuggestions && !this.props.isLoading && this.props.suggestions.length > 0 ? this.renderSuggestions() : null
       );

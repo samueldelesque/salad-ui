@@ -69,6 +69,7 @@ var Demo = function (_React$Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Demo)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
       selectedRadio: 'radio1',
       protein: { name: null, value: null, calories: 0 },
+      demoSwitch: true,
       tagsAdded: ['tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6'],
       showOverlay: false,
       sectionWidth: 720
@@ -274,6 +275,33 @@ var Demo = function (_React$Component) {
                 _saladUi2.default.Form.Checkbox,
                 null,
                 'This is a checkbox'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'React Component'
+                ),
+                ' Switch'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                '<Switch value={this.state.val} onChange={(val)=>this.setState({val})}/>'
+              ),
+              _react2.default.createElement(_saladUi2.default.Form.Switch, { value: this.state.demoSwitch, onChange: function onChange(demoSwitch) {
+                  return _this2.setState({ demoSwitch: demoSwitch });
+                } }),
+              _react2.default.createElement(
+                'span',
+                { style: { color: '#bbb', marginLeft: 20 } },
+                this.state.demoSwitch ? 'ON' : 'OFF'
               )
             ),
             _react2.default.createElement(

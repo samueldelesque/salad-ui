@@ -64,9 +64,9 @@ export default class InputText extends React.Component {
     this.moveCursorToEnd(input)
   }
 
-  handleKeyUp(){
+  handleKeyUp(e){
     if(this.props.onKeyUp){
-      this.props.onKeyUp()
+      this.props.onKeyUp(e)
     }
   }
 
