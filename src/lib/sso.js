@@ -1,4 +1,4 @@
-import { fetchJSON } from './fetch-methods'
+import * as f from './fetch-methods'
 
 export default class SSO {
   static apiEndpoint = 'https://sso.dailymotion.com'
@@ -29,48 +29,15 @@ export default class SSO {
     SSO.userId = userId;
   }
 
-  static getJWTKey(service, accountId){
-    return 'JWT__' + service + '_' + (accountId || SSO.userId);
-  }
-
-  static getJWT(service, accountId, ignoreCache=false, promise=false){
+  static getJWT(service, accountId){
     if(!SSO.sdx)
       console.warn('SSO initialized without sdx')
 
-    var JWTKey = SSO.getJWTKey(service, accountId),
-        localJWT = localStorage.getItem(JWTKey),
-        nextTry = 0;
-
-    SSO.debug && console.log('SSO GET', service, accountId)
-
-    promise = promise || new Promise()
-
-    SSO.jwtfailures[JWTKey] = SSO.jwtfailures[JWTKey] || 0;
-
-    if(!ignoreCache && localJWT && SSO.isJWTValid(localJWT)) d.resolve(localJWT)
-
-    SSO.getSSOAccount(service, accountId)
+    return SSO.getSSOAccount(service, accountId)
     .then((account) => {
-      if(!account || !account.access_token) return promise.reject('NO_ACCOUNT')
-      localStorage.setItem(JWTKey, account.access_token)
-      return promise.resolve(account.access_token)
+      if(!account || !account.access_token) throw('NO_ACCOUNT')
+      return account.access_token
     })
-    .catch(err => {
-      if(err === 'NO_ACCOUNT') return d.reject(err)
-      SSO.jwtfailures[JWTKey]++
-      if(SSO.jwtfailures[JWTKey] >= SSO.JWTRetries) return promise.reject(err)
-
-      nextTry = Math.round(4000 + (SSO.jwtfailures[JWTKey] * (SSO.jwtfailures[JWTKey]/4 + 1) * 1000))
-
-      console.error('Failed to get SSO account for ' + service + '... launching retry in ' + nextTry / 1000 + 'sec');
-
-      setTimeout(() => {
-        SSO.getJWT(service, accountId, ignoreCache)
-        .then(token => promise.resolve(token))
-        .catch(err => promise.reject(err))
-      }, nextTry)
-    })
-    return promise
   }
 
   static readJWT(token, part){
@@ -95,7 +62,7 @@ export default class SSO {
   }
 
   static getSSOAccounts(service){
-    return fetchJSON(SSO.apiEndpoint + '/services/' + service + '/auth?sdx=' + SSO.sdx).then(data => {
+    return f.get(SSO.apiEndpoint + '/services/' + service + '/auth?sdx=' + SSO.sdx).then(data => {
       if(!data.accounts || data.accounts.length === 0)
         throw new Error('NO_ACCOUNT')
       else
@@ -104,7 +71,7 @@ export default class SSO {
   }
 
   static deleteSSOAccount(service, accountId){
-    return fetchJSON(SSO.apiEndpoint + '/services/' + service + '/accounts/' + accountId + '?sdx=' + SSO.sdx, 'DELETE').catch(err => {
+    return f.delete(SSO.apiEndpoint + '/services/' + service + '/accounts/' + accountId + '?sdx=' + SSO.sdx).catch(err => {
         throw new Error('Failed to delete SSO account', res)
     })
   }
@@ -121,7 +88,7 @@ export default class SSO {
   }
 
   static createSSOAccount(service, accountName){
-    return fetchJSON(SSO.apiEndpoint + '/services/' + service + '/accounts?sdx=' + SSO.sdx, 'POST', {name: accountName}).then(SSOAccount=>{
+    return f.post(SSO.apiEndpoint + '/services/' + service + '/accounts?sdx=' + SSO.sdx, {data: {name: accountName}}).then(SSOAccount=>{
       return SSO.getSSOAccount(service, SSOAccount.item.id)
     })
   }

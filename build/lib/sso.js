@@ -8,6 +8,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _fetchMethods = require('./fetch-methods');
 
+var f = _interopRequireWildcard(_fetchMethods);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var SSO = function () {
@@ -40,52 +44,14 @@ var SSO = function () {
       SSO.userId = userId;
     }
   }, {
-    key: 'getJWTKey',
-    value: function getJWTKey(service, accountId) {
-      return 'JWT__' + service + '_' + (accountId || SSO.userId);
-    }
-  }, {
     key: 'getJWT',
     value: function getJWT(service, accountId) {
-      var ignoreCache = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
-      var promise = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
-
       if (!SSO.sdx) console.warn('SSO initialized without sdx');
 
-      var JWTKey = SSO.getJWTKey(service, accountId),
-          localJWT = localStorage.getItem(JWTKey),
-          nextTry = 0;
-
-      SSO.debug && console.log('SSO GET', service, accountId);
-
-      promise = promise || new Promise();
-
-      SSO.jwtfailures[JWTKey] = SSO.jwtfailures[JWTKey] || 0;
-
-      if (!ignoreCache && localJWT && SSO.isJWTValid(localJWT)) d.resolve(localJWT);
-
-      SSO.getSSOAccount(service, accountId).then(function (account) {
-        if (!account || !account.access_token) return promise.reject('NO_ACCOUNT');
-        localStorage.setItem(JWTKey, account.access_token);
-        return promise.resolve(account.access_token);
-      }).catch(function (err) {
-        if (err === 'NO_ACCOUNT') return d.reject(err);
-        SSO.jwtfailures[JWTKey]++;
-        if (SSO.jwtfailures[JWTKey] >= SSO.JWTRetries) return promise.reject(err);
-
-        nextTry = Math.round(4000 + SSO.jwtfailures[JWTKey] * (SSO.jwtfailures[JWTKey] / 4 + 1) * 1000);
-
-        console.error('Failed to get SSO account for ' + service + '... launching retry in ' + nextTry / 1000 + 'sec');
-
-        setTimeout(function () {
-          SSO.getJWT(service, accountId, ignoreCache).then(function (token) {
-            return promise.resolve(token);
-          }).catch(function (err) {
-            return promise.reject(err);
-          });
-        }, nextTry);
+      return SSO.getSSOAccount(service, accountId).then(function (account) {
+        if (!account || !account.access_token) throw 'NO_ACCOUNT';
+        return account.access_token;
       });
-      return promise;
     }
   }, {
     key: 'readJWT',
@@ -115,7 +81,7 @@ var SSO = function () {
   }, {
     key: 'getSSOAccounts',
     value: function getSSOAccounts(service) {
-      return (0, _fetchMethods.fetchJSON)(SSO.apiEndpoint + '/services/' + service + '/auth?sdx=' + SSO.sdx).then(function (data) {
+      return f.get(SSO.apiEndpoint + '/services/' + service + '/auth?sdx=' + SSO.sdx).then(function (data) {
         if (!data.accounts || data.accounts.length === 0) throw new Error('NO_ACCOUNT');else return data.accounts;
       }).catch(function (err) {
         throw new Error('Failed to retrieve SSO account', err);
@@ -124,7 +90,7 @@ var SSO = function () {
   }, {
     key: 'deleteSSOAccount',
     value: function deleteSSOAccount(service, accountId) {
-      return (0, _fetchMethods.fetchJSON)(SSO.apiEndpoint + '/services/' + service + '/accounts/' + accountId + '?sdx=' + SSO.sdx, 'DELETE').catch(function (err) {
+      return f.delete(SSO.apiEndpoint + '/services/' + service + '/accounts/' + accountId + '?sdx=' + SSO.sdx).catch(function (err) {
         throw new Error('Failed to delete SSO account', res);
       });
     }
@@ -144,7 +110,7 @@ var SSO = function () {
   }, {
     key: 'createSSOAccount',
     value: function createSSOAccount(service, accountName) {
-      return (0, _fetchMethods.fetchJSON)(SSO.apiEndpoint + '/services/' + service + '/accounts?sdx=' + SSO.sdx, 'POST', { name: accountName }).then(function (SSOAccount) {
+      return f.post(SSO.apiEndpoint + '/services/' + service + '/accounts?sdx=' + SSO.sdx, { data: { name: accountName } }).then(function (SSOAccount) {
         return SSO.getSSOAccount(service, SSOAccount.item.id);
       });
     }
