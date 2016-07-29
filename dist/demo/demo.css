@@ -105,7 +105,9 @@ header {
   header .header-content {
     width: 90%;
     max-width: 1000px;
-    margin: 20px auto; }
+    margin: 0 auto; }
+    header .header-content p, header .header-content h1, header .header-content h2, header .header-content h3 {
+      margin: 20px 0; }
   header h1 {
     font-size: 68px;
     font-weight: bold;

@@ -132,7 +132,10 @@ header{
   .header-content{
     width: 90%;
     max-width: 1000px;
-    margin: 20px auto;
+    margin: 0 auto;
+    p,h1,h2,h3{
+      margin: 20px 0;
+    }
   }
   h1{
     font-size: 68px;
