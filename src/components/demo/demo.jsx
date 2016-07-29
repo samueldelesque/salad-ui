@@ -105,6 +105,12 @@ export default class Demo extends React.Component {
           </p>
           <p>Salad-UI can be enjoyed as a complete salad using <i className="snippet">import SaladUI from 'salad-ui'</i> or as its separate ingredients using <i className="snippet">{`import {Area} from 'salad-ui.chart'`}</i>. You can install separate ingredients as <i className="snippet">npm i --save salad-ui.chart</i>.</p>
           <p>Salad-UI will work both in Browser and Server environment - use it in your universal apps!</p>
+          <p>For optimal old browser compatibility with SaladUI, please include the following polyfill on your page:
+            <pre>
+{`<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser-polyfill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>`}
+            </pre>
+          </p>
         </header>
         <section className="warning-mobile">
           <SaladUI.Util.Alert type="error">Code snippets not shown on mobile!</SaladUI.Util.Alert>
@@ -215,13 +221,6 @@ f.delete('http://api.dailymotion.com/user/spi0n')`}
               <pre>
 {`numberToString(10782)
 // 11k`}
-              </pre>
-            </li>
-            <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> polyfill</h3>
-              <pre>
-{`polyfill()
-// Object.assign etc are now available in your shitty browser`}
               </pre>
             </li>
             <li>

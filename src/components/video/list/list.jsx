@@ -34,6 +34,7 @@ export default class List extends React.Component {
     limit: 3,
     flags: [],
     endpoint: '/videos',
+    accessToken: null,
     colSize: 3,
     searchTerm: null,
     mediaType: 'video'
@@ -86,11 +87,14 @@ export default class List extends React.Component {
       limit: props.limit,
       localization: 'en_ZH' //must pass a non-existent language in order to have sort working in current API (lol)
     }
+    let headers = {}
+    if(this.props.accessToken) headers.authorization = `Bearer ${this.props.accessToken}`
+
     let endpoint = props.endpoint ? props.endpoint : '/videos'
     if(props.searchTerm) data.search = props.searchTerm
     if(props.flags && props.flags.length) data.flags = props.flags.join(',')
 
-    get(this.props.apiURL + endpoint, {data})
+    get(this.props.apiURL + endpoint, {data, headers})
     .then(res => this[cb](res.list, res.has_more))
     .catch(err => {
       console.error('Failed to fetch videos', err)
