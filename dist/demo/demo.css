@@ -102,7 +102,7 @@ header {
     top: 0;
     border: 0;
     right: 0; }
-  header p, header h1, header h2, header h3 {
+  header .header-content {
     width: 90%;
     max-width: 1000px;
     margin: 20px auto; }
