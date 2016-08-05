@@ -34,6 +34,7 @@ export default class Badge extends Component {
       'staff',
       'count',
       'recording',
+      'private',
       'featured'
     ]).isRequired,
     className: PropTypes.string,
@@ -88,6 +89,7 @@ export default class Badge extends Component {
       case 'private':
       case 'admin-buttons':
       case 'recording':
+      case 'private':
         styles.backgroundColor = 'rgba(0,0,0,0.6)'
         break
 
@@ -164,6 +166,8 @@ export default class Badge extends Component {
         {
           this.props.type === 'verified' ?
           <Icon type="check" fill="white" height={10} width={10} style={{transform: 'rotate(45deg)', position: 'absolute', left: 3, top: 3}}/>:
+          this.props.type === 'private' ?
+          <Icon type="lock" fill="white" height={14} width={14} style={{marginTop:2}}/>:
           this.props.children
         }
       </span>

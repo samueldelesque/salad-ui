@@ -92,6 +92,7 @@ var Badge = function (_Component) {
         case 'private':
         case 'admin-buttons':
         case 'recording':
+        case 'private':
           styles.backgroundColor = 'rgba(0,0,0,0.6)';
           break;
 
@@ -167,7 +168,7 @@ var Badge = function (_Component) {
       return _react2.default.createElement(
         'span',
         { style: badgeStyles },
-        this.props.type === 'verified' ? _react2.default.createElement(_icon2.default, { type: 'check', fill: 'white', height: 10, width: 10, style: { transform: 'rotate(45deg)', position: 'absolute', left: 3, top: 3 } }) : this.props.children
+        this.props.type === 'verified' ? _react2.default.createElement(_icon2.default, { type: 'check', fill: 'white', height: 10, width: 10, style: { transform: 'rotate(45deg)', position: 'absolute', left: 3, top: 3 } }) : this.props.type === 'private' ? _react2.default.createElement(_icon2.default, { type: 'lock', fill: 'white', height: 14, width: 14, style: { marginTop: 2 } }) : this.props.children
       );
     }
   }]);
@@ -176,7 +177,7 @@ var Badge = function (_Component) {
 }(_react.Component);
 
 Badge.propTypes = {
-  type: _react.PropTypes.oneOf(['substitute', 'duration', 'sponsored', 'admin-buttons', 'price', 'live', 'tag', 'partner', 'verified', 'staff', 'count', 'recording', 'featured']).isRequired,
+  type: _react.PropTypes.oneOf(['substitute', 'duration', 'sponsored', 'admin-buttons', 'price', 'live', 'tag', 'partner', 'verified', 'staff', 'count', 'recording', 'private', 'featured']).isRequired,
   className: _react.PropTypes.string,
   children: _react.PropTypes.any,
   position: _react.PropTypes.string

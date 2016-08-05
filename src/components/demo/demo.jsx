@@ -35,6 +35,7 @@ export default class Demo extends React.Component {
     demoSwitch: true,
     tagsAdded: ['tag1','tag2','tag3','tag4','tag5','tag6'],
     showOverlay: false,
+    videoSelected: false,
     sectionWidth: 720,
   }
 
@@ -258,6 +259,7 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
             <SaladUI.Chart.Area
               width={this.state.sectionWidth}
               height={this.state.sectionWidth*0.6}
+              strokeWidth={5}
               data={chartData}/>
           </div>
         </section>
@@ -407,6 +409,42 @@ long long long long long long text.
         <section>
           <h2>Video</h2>
           <ul className="functionality">
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Preview</h3>
+              <SaladUI.Video.Preview
+                {...{
+                  created_time: 1470415017,
+                  duration: 30,
+                  duration_formatted: "00:30",
+                  id: "x4neil8",
+                  onair: false,
+                  private: false,
+                  record_status: null,
+                  thumbnail_240_url: "http://s1.dmcdn.net/ZN5T3/427x240-kqC.jpg",
+                  title: "Some video title",
+                  uri: "/video/x4neil8_books-the-world-according-to-bob-the-further-adventures-of-one-man-and-his-streetwise-cat-free_news",
+                }}
+                width={240}
+              />
+              <SaladUI.Video.Preview
+                {...{
+                  created_time: 1470415017,
+                  duration: 30,
+                  duration_formatted: "00:30",
+                  id: "x4neil8",
+                  onair: false,
+                  private: false,
+                  record_status: null,
+                  thumbnail_240_url: "http://s1.dmcdn.net/ZN5T3/427x240-kqC.jpg",
+                  title: "A selectable video preview",
+                  uri: "/video/x4neil8_books-the-world-according-to-bob-the-further-adventures-of-one-man-and-his-streetwise-cat-free_news",
+                }}
+                width={240}
+                style={{marginLeft: 20}}
+                selected={this.state.videoSelected}
+                onSelect={()=>this.setState({videoSelected: !this.state.videoSelected})}
+              />
+            </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> List</h3>
               <pre>

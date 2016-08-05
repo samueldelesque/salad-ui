@@ -23,6 +23,10 @@ var _trans = require('../../util/trans/trans');
 
 var _trans2 = _interopRequireDefault(_trans);
 
+var _checkbox = require('../../form/checkbox/checkbox');
+
+var _checkbox2 = _interopRequireDefault(_checkbox);
+
 var _textClamp = require('../../util/text-clamp/text-clamp');
 
 var _textClamp2 = _interopRequireDefault(_textClamp);
@@ -45,7 +49,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var mediaTypes = exports.mediaTypes = {
   video: {
-    fields: ['id', 'uri', 'duration', 'record_status', 'duration_formatted', 'title', 'onair', 'views_total', 'created_time', 'thumbnail_240_url']
+    fields: ['id', 'uri', 'duration', 'record_status', 'duration_formatted', 'title', 'onair', 'private', 'views_total', 'created_time', 'thumbnail_240_url']
   },
   playlist: {
     fields: ['id', 'uri', 'name', 'description', 'videos_total', 'owner.username', 'owner.screenname', 'thumbnail_240_url']
@@ -123,71 +127,66 @@ var Preview = function (_Component) {
         'div',
         {
           onMouseOver: function onMouseOver() {
-            return _this2.setState({ hovered: true });
+            _this2.setState({ hovered: true });
           },
           onMouseOut: function onMouseOut() {
-            return _this2.setState({ hovered: false });
+            _this2.setState({ hovered: false });
           },
-          style: previewStyles.preview },
+          onClick: function onClick() {
+            if (_this2.props.onSelect) _this2.props.onSelect();else window.location.href = _this2.props.uri;
+          },
+          style: Object.assign({}, previewStyles.preview, {
+            height: this.props.type === 'grid' ? height + 90 : height,
+            width: this.props.type === 'grid' ? width : 'auto'
+          }, this.state.hovered && this.props.onSelect ? _stylesheet2.default.selectableHover : _stylesheet2.default.selectable, this.props.selected ? _stylesheet2.default.selected : null, this.props.style) },
         _react2.default.createElement(
           'div',
-          { style: {
-              position: 'relative',
-              display: 'inline-block', //non flex fallback
+          { style: { width: width, height: height, overflow: 'hidden' } },
+          _react2.default.createElement('div', {
+            className: 'transition-md transition-timing-ease-in-out ' + (this.state.hovered && !this.props.onSelect ? 'scale-in-md' : ''),
+            style: Object.assign({}, {
+              backgroundImage: 'url(' + this.props.thumbnail_240_url + ')',
+              backgroundSize: 'cover',
               height: height,
               width: width
-            } },
+            }, this.state.hovered && this.props.onSelect ? _stylesheet2.default.selectableHoverImage : null)
+          })
+        ),
+        _react2.default.createElement(
+          'div',
+          { style: Object.assign({}, previewStyles.badgeContainer, { width: width, height: height }) },
+          this.props.onSelect ? _react2.default.createElement(_checkbox2.default, { checked: this.props.selected, style: { position: 'absolute', left: 10, top: 10 } }) : null,
+          this.props.private ? _react2.default.createElement(_badge2.default, { position: 'btm-start', type: 'private' }) : null,
           _react2.default.createElement(
-            'a',
-            { href: this.props.uri, style: { display: 'block', overflow: 'hidden' } },
-            _react2.default.createElement('div', { className: 'transition-md transition-timing-ease-in-out ' + (this.state.hovered ? 'scale-in-md' : ''), style: {
-                backgroundImage: 'url(' + this.props.thumbnail_240_url + ')',
-                backgroundSize: 'cover',
-                height: height,
-                width: width
-              } }),
-            _react2.default.createElement('div', { style: {
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: 1
-              } }),
+            _badge2.default,
+            { position: 'btm-end', type: type },
+            label
+          ),
+          this.props.playing ? _react2.default.createElement(
+            _badge2.default,
+            { position: 'top-start', type: 'staff' },
             _react2.default.createElement(
-              _badge2.default,
-              { position: 'btm-end', type: type },
-              label
-            ),
-            this.props.playing ? _react2.default.createElement(
-              _badge2.default,
-              { position: 'top-start', type: 'staff' },
-              _react2.default.createElement(
-                _trans2.default,
-                { context: this.trans },
-                'Now playing'
-              )
-            ) : null
-          )
+              _trans2.default,
+              { context: this.trans },
+              'Now playing'
+            )
+          ) : null
         ),
         _react2.default.createElement(
           'div',
           { style: previewStyles.text },
           _react2.default.createElement(
             'h3',
-            { style: previewStyles.title },
+            {
+              style: Object.assign({}, previewStyles.title, {
+                textDecoration: this.state.hovered && !this.props.onSelect ? 'underline' : 'none',
+                color: _stylesheet2.default.link.color,
+                fontSize: 16
+              }) },
             _react2.default.createElement(
-              'a',
-              { href: this.props.uri, style: {
-                  textDecoration: this.state.hovered ? 'underline' : 'none',
-                  color: _stylesheet2.default.link.color,
-                  fontSize: 16
-                } },
-              _react2.default.createElement(
-                _textClamp2.default,
-                { clamp: '2' },
-                this.props.mediaType === 'video' ? this.props.title : this.props.name
-              )
+              _textClamp2.default,
+              { clamp: '2' },
+              this.props.mediaType === 'video' ? this.props.title : this.props.name
             )
           ),
           this.props.mediaType === 'video' ? _react2.default.createElement(_timeAndViews2.default, { noUploadLabel: true, time: this.props.created_time, views: this.props.views_total }) : null
@@ -209,6 +208,7 @@ Preview.defaultProps = {
   type: 'grid',
   pixelle: false,
   playing: false,
+  style: null,
   mediaType: 'video',
   width: 120
 };

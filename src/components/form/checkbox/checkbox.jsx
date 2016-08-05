@@ -8,7 +8,8 @@ export default class Checkbox extends Component {
   }
 
   static defaultProps = {
-    checked: false
+    checked: false,
+    style: null
   }
 
   componentWillMount() {
@@ -38,14 +39,16 @@ export default class Checkbox extends Component {
   }
 
   render() {
-    let s = styles.checkbox
-    if(this.props.disabled){
-      s = Object.assign({}, s, styles.checkboxDisabled)
-    }
+    let checkboxStyle = Object.assign(
+      {},
+      styles.checkbox,
+      this.props.disabled ? styles.checkboxDisabled : null,
+      this.props.style
+    )
 
     return (
       <div>
-        <div onClick={::this.toggleState} style={s}>
+        <div onClick={::this.toggleState} style={checkboxStyle}>
           <i style={styles.checkboxIcon}>
             {
               this.state.checked ?

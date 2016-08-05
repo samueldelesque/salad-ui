@@ -79,17 +79,14 @@ var Checkbox = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var s = _stylesheet2.default.checkbox;
-      if (this.props.disabled) {
-        s = Object.assign({}, s, _stylesheet2.default.checkboxDisabled);
-      }
+      var checkboxStyle = Object.assign({}, _stylesheet2.default.checkbox, this.props.disabled ? _stylesheet2.default.checkboxDisabled : null, this.props.style);
 
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
           'div',
-          { onClick: this.toggleState.bind(this), style: s },
+          { onClick: this.toggleState.bind(this), style: checkboxStyle },
           _react2.default.createElement(
             'i',
             { style: _stylesheet2.default.checkboxIcon },
@@ -116,6 +113,7 @@ var Checkbox = function (_Component) {
 }(_react.Component);
 
 Checkbox.defaultProps = {
-  checked: false
+  checked: false,
+  style: null
 };
 exports.default = Checkbox;

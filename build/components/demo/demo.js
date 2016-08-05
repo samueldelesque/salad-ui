@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -72,6 +74,7 @@ var Demo = function (_React$Component) {
       demoSwitch: true,
       tagsAdded: ['tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6'],
       showOverlay: false,
+      videoSelected: false,
       sectionWidth: 720
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -151,66 +154,80 @@ var Demo = function (_React$Component) {
             )
           ),
           _react2.default.createElement(
-            'h1',
-            null,
-            'Salad-UI ',
-            String.fromCharCode(55357, 56960)
-          ),
-          _react2.default.createElement(
-            'h2',
-            null,
+            'div',
+            { className: 'header-content' },
             _react2.default.createElement(
-              'pre',
+              'h1',
               null,
-              'npm i --save salad-ui'
+              'Salad-UI ',
+              String.fromCharCode(55357, 56960)
+            ),
+            _react2.default.createElement(
+              'h2',
+              null,
+              _react2.default.createElement(
+                'pre',
+                null,
+                'npm i --save salad-ui'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                'import SaladUI from \'salad-ui\''
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                '<SaladUI.Chart.Area/>'
+              )
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'a',
+                { href: 'https://npmjs.com/package/salad-ui', target: '_blank' },
+                _react2.default.createElement('img', { src: 'https://badge.fury.io/js/salad-ui.svg' })
+              )
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Salad-UI can be enjoyed as a complete salad using ',
+              _react2.default.createElement(
+                'i',
+                { className: 'snippet' },
+                'import SaladUI from \'salad-ui\''
+              ),
+              ' or as its separate ingredients using ',
+              _react2.default.createElement(
+                'i',
+                { className: 'snippet' },
+                'import {Area} from \'salad-ui.chart\''
+              ),
+              '. You can install separate ingredients as ',
+              _react2.default.createElement(
+                'i',
+                { className: 'snippet' },
+                'npm i --save salad-ui.chart'
+              ),
+              '.'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Salad-UI will work both in Browser and Server environment - use it in your universal apps!'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'For optimal old browser compatibility with SaladUI, please include the following polyfill on your page:'
             ),
             _react2.default.createElement(
               'pre',
               null,
-              'import SaladUI from \'salad-ui\''
-            ),
-            _react2.default.createElement(
-              'pre',
-              null,
-              '<SaladUI.Chart.Area/>'
+              '<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser-polyfill.min.js"></script>\n  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>'
             )
-          ),
-          _react2.default.createElement(
-            'p',
-            null,
-            _react2.default.createElement(
-              'a',
-              { href: 'https://npmjs.com/package/salad-ui', target: '_blank' },
-              _react2.default.createElement('img', { src: 'https://badge.fury.io/js/salad-ui.svg' })
-            )
-          ),
-          _react2.default.createElement(
-            'p',
-            null,
-            'Salad-UI can be enjoyed as a complete salad using ',
-            _react2.default.createElement(
-              'i',
-              { className: 'snippet' },
-              'import SaladUI from \'salad-ui\''
-            ),
-            ' or as its separate ingredients using ',
-            _react2.default.createElement(
-              'i',
-              { className: 'snippet' },
-              'import {Area} from \'salad-ui.chart\''
-            ),
-            '. You can install separate ingredients as ',
-            _react2.default.createElement(
-              'i',
-              { className: 'snippet' },
-              'npm i --save salad-ui.chart'
-            ),
-            '.'
-          ),
-          _react2.default.createElement(
-            'p',
-            null,
-            'Salad-UI will work both in Browser and Server environment - use it in your universal apps!'
           )
         ),
         _react2.default.createElement(
@@ -548,25 +565,6 @@ var Demo = function (_React$Component) {
                   { style: { fontStyle: 'italic', opacity: .3 } },
                   'Function'
                 ),
-                ' polyfill'
-              ),
-              _react2.default.createElement(
-                'pre',
-                null,
-                'polyfill()\n// Object.assign etc are now available in your shitty browser'
-              )
-            ),
-            _react2.default.createElement(
-              'li',
-              null,
-              _react2.default.createElement(
-                'h3',
-                null,
-                _react2.default.createElement(
-                  'span',
-                  { style: { fontStyle: 'italic', opacity: .3 } },
-                  'Function'
-                ),
                 ' sso'
               ),
               _react2.default.createElement(
@@ -624,6 +622,7 @@ var Demo = function (_React$Component) {
             _react2.default.createElement(_saladUi2.default.Chart.Area, {
               width: this.state.sectionWidth,
               height: this.state.sectionWidth * 0.6,
+              strokeWidth: 5,
               data: chartData })
           )
         ),
@@ -986,6 +985,53 @@ var Demo = function (_React$Component) {
           _react2.default.createElement(
             'ul',
             { className: 'functionality' },
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'React Component'
+                ),
+                ' Preview'
+              ),
+              _react2.default.createElement(_saladUi2.default.Video.Preview, _extends({
+                created_time: 1470415017,
+                duration: 30,
+                duration_formatted: "00:30",
+                id: "x4neil8",
+                onair: false,
+                private: false,
+                record_status: null,
+                thumbnail_240_url: "http://s1.dmcdn.net/ZN5T3/427x240-kqC.jpg",
+                title: "Some video title",
+                uri: "/video/x4neil8_books-the-world-according-to-bob-the-further-adventures-of-one-man-and-his-streetwise-cat-free_news"
+              }, {
+                width: 240
+              })),
+              _react2.default.createElement(_saladUi2.default.Video.Preview, _extends({
+                created_time: 1470415017,
+                duration: 30,
+                duration_formatted: "00:30",
+                id: "x4neil8",
+                onair: false,
+                private: false,
+                record_status: null,
+                thumbnail_240_url: "http://s1.dmcdn.net/ZN5T3/427x240-kqC.jpg",
+                title: "A selectable video preview",
+                uri: "/video/x4neil8_books-the-world-according-to-bob-the-further-adventures-of-one-man-and-his-streetwise-cat-free_news"
+              }, {
+                width: 240,
+                style: { marginLeft: 20 },
+                selected: this.state.videoSelected,
+                onSelect: function onSelect() {
+                  return _this2.setState({ videoSelected: !_this2.state.videoSelected });
+                }
+              }))
+            ),
             _react2.default.createElement(
               'li',
               null,
