@@ -28,9 +28,8 @@ var styles = {
     display: 'block',
     width: 16,
     height: 16
-  }, _defineProperty(_checkboxIcon, 'position', 'relative'), _defineProperty(_checkboxIcon, 'backgroundColor', _stylesheet.defaults.colors.gray5), _defineProperty(_checkboxIcon, 'border', 'solid 1px ' + _stylesheet.defaults.colors.gray3), _defineProperty(_checkboxIcon, 'borderRadius', 3), _defineProperty(_checkboxIcon, 'float', 'left'), _checkboxIcon),
+  }, _defineProperty(_checkboxIcon, 'position', 'relative'), _defineProperty(_checkboxIcon, 'backgroundColor', _stylesheet.defaults.colors.gray5), _defineProperty(_checkboxIcon, 'border', 'solid 1px ' + _stylesheet.defaults.colors.gray3), _defineProperty(_checkboxIcon, 'borderRadius', 3), _defineProperty(_checkboxIcon, 'float', 'left'), _defineProperty(_checkboxIcon, 'marginRight', '10px'), _checkboxIcon),
 
-  // margin: '5px 10px 0 0',
   checkmark: (_checkmark = {
     position: 'absolute',
     width: 14,

@@ -19,7 +19,7 @@ let styles = {
     border: 'solid 1px ' + defaults.colors.gray3,
     borderRadius: 3,
     float: 'left',
-    // margin: '5px 10px 0 0',
+    marginRight: '10px',
   },
 
   checkmark: {
