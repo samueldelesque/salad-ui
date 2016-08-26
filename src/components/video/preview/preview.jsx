@@ -17,11 +17,17 @@ export const mediaTypes = {
       'record_status',
       'duration_formatted',
       'title',
+      'description',
       'onair',
       'private',
+      'password',
+      'advertising_instream_blocked',
+      'svod',
+      'genre',
       'views_total',
       'created_time',
       'thumbnail_240_url',
+      'tags',
     ]
   },
   playlist: {

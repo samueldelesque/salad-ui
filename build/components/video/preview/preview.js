@@ -49,7 +49,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var mediaTypes = exports.mediaTypes = {
   video: {
-    fields: ['id', 'uri', 'duration', 'record_status', 'duration_formatted', 'title', 'onair', 'private', 'views_total', 'created_time', 'thumbnail_240_url']
+    fields: ['id', 'uri', 'duration', 'record_status', 'duration_formatted', 'title', 'description', 'onair', 'private', 'password', 'advertising_instream_blocked', 'svod', 'genre', 'views_total', 'created_time', 'thumbnail_240_url', 'tags']
   },
   playlist: {
     fields: ['id', 'uri', 'name', 'description', 'videos_total', 'owner.username', 'owner.screenname', 'thumbnail_240_url']

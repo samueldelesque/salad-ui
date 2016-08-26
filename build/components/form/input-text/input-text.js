@@ -24,26 +24,21 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ids = 1;
-
 var InputText = function (_React$Component) {
   _inherits(InputText, _React$Component);
 
   function InputText() {
-    var _Object$getPrototypeO;
-
-    var _temp, _this, _ret;
-
     _classCallCheck(this, InputText);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(InputText).call(this));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(InputText)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+    _this.state = {
       value: '',
       focus: false
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    };
+
+    _this.id = _this.id ? _this.id + 1 : 0;
+    return _this;
   }
 
   _createClass(InputText, [{
@@ -51,8 +46,7 @@ var InputText = function (_React$Component) {
     value: function componentWillMount() {
       this.setState({
         focus: this.props.focus,
-        value: this.props.value,
-        id: ids++
+        value: this.props.value
       });
     }
   }, {
@@ -145,7 +139,7 @@ var InputText = function (_React$Component) {
       var showHint = hint && !this.props.disabled && !this.props.readOnly;
       var value = this.state.value ? this.state.value : this.props.value;
       var tag = this.props.textarea ? 'textarea' : 'input';
-      var id = 'input.' + this.state.id;
+      var id = 'input.' + this.id;
 
       var props = _extends({
         ref: 'input',

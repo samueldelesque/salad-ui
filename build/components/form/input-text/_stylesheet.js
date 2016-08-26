@@ -19,7 +19,6 @@ var styles = {
     backgroundColor: 'white',
     fontSize: '14px',
     display: 'flex'
-
   },
 
   textareaContainer: {

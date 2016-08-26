@@ -144,7 +144,7 @@ var Area = function (_Component) {
       }
 
       return data.map(function (point, index) {
-        if (index === 0 || index === data.length - 1) return;
+        if ((index === 0 || index === data.length - 1) && !_this3.props.showFirstAndLastTip) return;
         if (data[index + 1]) followingTime = data[index + 1].time;else followingTime = point.time + intervalLength;
         if (!point.label) point.label = label;
 
@@ -196,7 +196,7 @@ var Area = function (_Component) {
             x: xBase - _this3.props.tipsWidth / 2 + 2,
             y: yBase - _this3.props.strokeWidth - tipHeight - tipOffset + _this3.props.tipsPadding + 30,
             style: { fontSize: 16, fontWeight: 'bold' },
-            dangerouslySetInnerHTML: { __html: _this3.renderTipText(point.label, { value: point.value }) }
+            dangerouslySetInnerHTML: { __html: _this3.renderTipText(_this3.props.labelTemplate, { value: point.value }) }
           })
         );
       });
@@ -208,7 +208,7 @@ var Area = function (_Component) {
 
       var isZero = ySpread === 0 && yMin === 0;
       return data.map(function (point, index) {
-        if (index === 0 || index === data.length - 1) return;
+        if ((index === 0 || index === data.length - 1) && !_this4.props.showFirstAndLastTip) return;
         return _react2.default.createElement('circle', {
           key: 'point-' + index,
           cx: (point.time - xMin) * xScale - _this4.props.strokeWidth / 2,
@@ -342,6 +342,7 @@ var Area = function (_Component) {
       var _this7 = this;
 
       var data = this.props.data;
+
       this.activeWidth = this.props.width;
       this.activeHeight = this.props.height - 50; // add 50 px in the bottom for the labels
 
@@ -350,7 +351,13 @@ var Area = function (_Component) {
         if (!point.time) {
           data[index].time = index;
         }
-        data[index].time = parseFloat(data[index].time);
+        if (!(point.time instanceof Date)) {
+          data[index].time = new Date(data[index].time).getTime();
+        }
+      });
+
+      data = data.sort(function (a, b) {
+        return a.time === b.time ? 0 : a.time > b.time ? 1 : -1;
       });
 
       // let xMax = this.props.data.length - 1
@@ -391,7 +398,7 @@ var Area = function (_Component) {
         }),
         _react2.default.createElement('polyline', {
           points: line,
-          style: { stroke: this.props.strokeColor, strokeWidth: this.props.strokeWidth, fill: 'none' }
+          style: { stroke: this.props.strokeColor, strokeDasharray: this.props.strokeDasharray, strokeWidth: this.props.strokeWidth, fill: 'none' }
         }),
         yAxis.labels.map(this.renderLabel.bind(this)),
         xAxis.labels.map(function (label, index) {
@@ -423,7 +430,9 @@ Area.propTypes = {
   strokeWidth: _react2.default.PropTypes.number,
   useDynamicYMin: _react2.default.PropTypes.bool,
   strokeColor: _react2.default.PropTypes.string,
+  strokeDasharray: _react2.default.PropTypes.number,
   pointsRadius: _react2.default.PropTypes.number,
+  showFirstAndLastTip: _react2.default.PropTypes.bool,
   tipsWidth: _react2.default.PropTypes.number,
   tipsHeight: _react2.default.PropTypes.number,
   tipsPadding: _react2.default.PropTypes.number,
@@ -434,6 +443,7 @@ Area.propTypes = {
   labelFontSize: _react2.default.PropTypes.number,
   labelTextShadow: _react2.default.PropTypes.string,
   labelColor: _react2.default.PropTypes.string,
+  labelTemplate: _react2.default.PropTypes.string,
   fillColor: _react2.default.PropTypes.string,
   maxOverflow: _react2.default.PropTypes.number,
   yLabelsOutside: _react2.default.PropTypes.bool,
@@ -448,7 +458,9 @@ Area.defaultProps = {
   strokeWidth: 2,
   useDynamicYMin: false,
   strokeColor: '#408AE5',
+  strokeDasharray: 0,
   pointsRadius: 5,
+  showFirstAndLastTip: false,
   tipsWidth: 240,
   tipsHeight: 22,
   tipsPadding: 10,
@@ -459,6 +471,7 @@ Area.defaultProps = {
   labelFontSize: 12,
   labelTextShadow: '1px 1px #fff',
   labelColor: '#555',
+  labelTemplate: '{{value}}',
   fillColor: 'rgba(191, 216, 246, 0.3)',
   maxOverflow: 20,
   yLabelsOutside: false,
