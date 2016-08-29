@@ -45,6 +45,7 @@ var styles = {
   },
 
   dropdownHidden: {
+    display: 'none',
     opacity: 0,
     visibility: 'hidden'
   },
