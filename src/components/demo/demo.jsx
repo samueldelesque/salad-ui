@@ -13,12 +13,12 @@ if(glob.canUseDom()){
 }
 
 const chartData = [
-  {time:1422766800000, value: 0, label: "{{value}} active users"},
-  {time:1422853200000, value: 9, label: "{{value}} active users"},
-  {time:1422939600000, value: 5, label: "{{value}} active users"},
-  {time:1423026000000, value: 15, label: "{{value}} active users"},
-  {time:1423112400000, value: 7, label: "{{value}} active users"},
-  {time:1423198800000, value: 13, label: "{{value}} active users"},
+  {time: new Date('2010-04-01'), value: 0, label: "{{value}} active users"},
+  {time: new Date('2010-04-02'), value: 9, label: "{{value}} active users"},
+  {time: new Date('2010-04-03'), value: 5, label: "{{value}} active users"},
+  {time: new Date('2010-04-04'), value: 15, label: "{{value}} active users"},
+  {time: new Date('2010-04-05'), value: 7, label: "{{value}} active users"},
+  {time: new Date('2010-04-06'), value: 13, label: "{{value}} active users"},
 ];
 
 const selectOptions = [
@@ -249,9 +249,13 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
         <section>
           <h2>Chart</h2>
           <pre>
-{`<SaladUI.Chart.Area
+{`
+const chartData = [{time: new Date('1990-01-02'), value: 1231}]
+
+<SaladUI.Chart.Area
   width={900}
   height={300}
+  labelTemplate="{{value}} cats ate here that day"
   data={chartData} width={560}
   />`}
           </pre>
@@ -259,7 +263,9 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
             <SaladUI.Chart.Area
               width={this.state.sectionWidth}
               height={this.state.sectionWidth*0.6}
-              strokeWidth={5}
+              strokeWidth={3}
+              strokeDasharray={3}
+              labelTemplate="Over {{value}} cats ate here that day."
               data={chartData}/>
           </div>
         </section>

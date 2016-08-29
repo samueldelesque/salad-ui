@@ -1,8 +1,6 @@
 import React from 'react'
 import styles from './_stylesheet'
 
-let ids = 1
-
 export default class InputText extends React.Component {
   state = {
     value: '',
@@ -21,11 +19,15 @@ export default class InputText extends React.Component {
     placeholder: 'Start typing'
   }
 
+  constructor(){
+    super()
+    this.id = this.id ? this.id + 1 : 0
+  }
+
   componentWillMount(){
     this.setState({
       focus: this.props.focus,
       value: this.props.value,
-      id: ids++
     })
   }
 
@@ -109,7 +111,7 @@ export default class InputText extends React.Component {
     let showHint = hint && !this.props.disabled && !this.props.readOnly
     let value = this.state.value ? this.state.value : this.props.value
     let tag = this.props.textarea ? 'textarea' : 'input'
-    let id = `input.${this.state.id}`
+    let id = `input.${this.id}`
 
     let props = {
       ref: 'input',

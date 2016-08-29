@@ -35,7 +35,9 @@ export default class Area extends Component{
     strokeWidth: React.PropTypes.number,
     useDynamicYMin: React.PropTypes.bool,
     strokeColor: React.PropTypes.string,
+    strokeDasharray: React.PropTypes.number,
     pointsRadius: React.PropTypes.number,
+    showFirstAndLastTip: React.PropTypes.bool,
     tipsWidth: React.PropTypes.number,
     tipsHeight: React.PropTypes.number,
     tipsPadding: React.PropTypes.number,
@@ -46,6 +48,7 @@ export default class Area extends Component{
     labelFontSize: React.PropTypes.number,
     labelTextShadow: React.PropTypes.string,
     labelColor: React.PropTypes.string,
+    labelTemplate: React.PropTypes.string,
     fillColor: React.PropTypes.string,
     maxOverflow: React.PropTypes.number,
     yLabelsOutside: React.PropTypes.bool,
@@ -61,7 +64,9 @@ export default class Area extends Component{
     strokeWidth: 2,
     useDynamicYMin: false,
     strokeColor: '#408AE5',
+    strokeDasharray: 0,
     pointsRadius: 5,
+    showFirstAndLastTip: false,
     tipsWidth: 240,
     tipsHeight: 22,
     tipsPadding: 10,
@@ -72,6 +77,7 @@ export default class Area extends Component{
     labelFontSize: 12,
     labelTextShadow: '1px 1px #fff',
     labelColor: '#555',
+    labelTemplate: '{{value}}',
     fillColor: 'rgba(191, 216, 246, 0.3)',
     maxOverflow: 20,
     yLabelsOutside: false,
@@ -146,78 +152,77 @@ export default class Area extends Component{
     }
 
     return data.map((point, index) => {
-        if(index === 0 || index === data.length - 1) return
-        if(data[index+1]) followingTime = data[index+1].time
-        else followingTime = point.time + intervalLength
-        if(!point.label) point.label = label
+      if((index === 0 || index === data.length - 1) && !this.props.showFirstAndLastTip) return
+      if(data[index+1]) followingTime = data[index+1].time
+      else followingTime = point.time + intervalLength
+      if(!point.label) point.label = label
 
-        let xBase = (point.time - xMin) * xScale,
-            key = 'point_' + index + '_tooltip',
-            pointTimeFormat = dateFormat,
-            tipHeight = 38,
-            tipOffset = 25,
-            yBase = (isZero ? yScale : (ySpread - (point.value - yMin)) * yScale) - this.props.tipsPadding / 2,
-            triangleWidth = 25,
-            triagleHeight = 10,
-            trianglePath = [
-              (xBase - this.props.tipStrokeWidth - triangleWidth / 2) + ',' + (yBase - tipOffset + 9),
-              (xBase - this.props.tipStrokeWidth + triangleWidth / 2) + ',' + (yBase - tipOffset + 9),
-              xBase - this.props.tipStrokeWidth  + ',' + (yBase - tipOffset + triagleHeight + 9),
-            ].join(' '),
-            triangleBorderPath = [
-              (xBase - this.props.tipStrokeWidth - triangleWidth / 2) + ',' + (yBase - tipOffset + 10),
-              (xBase - this.props.tipStrokeWidth + triangleWidth / 2) + ',' + (yBase - tipOffset + 10),
-              xBase - this.props.tipStrokeWidth  + ',' + (yBase - tipOffset + triagleHeight + 10),
-            ].join(' ')
+      let xBase = (point.time - xMin) * xScale,
+        key = 'point_' + index + '_tooltip',
+        pointTimeFormat = dateFormat,
+        tipHeight = 38,
+        tipOffset = 25,
+        yBase = (isZero ? yScale : (ySpread - (point.value - yMin)) * yScale) - this.props.tipsPadding / 2,
+        triangleWidth = 25,
+        triagleHeight = 10,
+        trianglePath = [
+          (xBase - this.props.tipStrokeWidth - triangleWidth / 2) + ',' + (yBase - tipOffset + 9),
+          (xBase - this.props.tipStrokeWidth + triangleWidth / 2) + ',' + (yBase - tipOffset + 9),
+          xBase - this.props.tipStrokeWidth  + ',' + (yBase - tipOffset + triagleHeight + 9),
+        ].join(' '),
+        triangleBorderPath = [
+          (xBase - this.props.tipStrokeWidth - triangleWidth / 2) + ',' + (yBase - tipOffset + 10),
+          (xBase - this.props.tipStrokeWidth + triangleWidth / 2) + ',' + (yBase - tipOffset + 10),
+          xBase - this.props.tipStrokeWidth  + ',' + (yBase - tipOffset + triagleHeight + 10),
+        ].join(' ')
 
-        this.tipsData[key] = {xBase: xBase}
+      this.tipsData[key] = {xBase: xBase}
 
-        if((new Date(point.time)).getFullYear() !== (new Date()).getFullYear()){
-          pointTimeFormat += ' YYYY'
-        }
-
-        return (
-          <g key={`point-${index}`} ref={key} style={{display: 'none'}}>
-            <rect
-              className="tip-background"
-              x={(point.time - xMin) * xScale - this.props.strokeWidth - this.props.tipsWidth / 2}
-              y={yBase - tipHeight - tipOffset}
-              width={this.props.tipsWidth + this.props.tipsPadding}
-              height={tipHeight + this.props.tipsPadding}
-              style={{stroke: this.props.tipStrokeColor, strokeWidth: this.props.tipStrokeWidth, fill: this.props.tipsFill}}
-            />
-            <polygon
-              points={triangleBorderPath}
-              style={{stroke: this.props.tipStrokeColor, opacity: 0.5, strokeWidth: this.props.tipStrokeWidth}}
-            />
-            <polygon
-              points={trianglePath}
-              style={{fill: this.props.tipsFill}}
-            />
-            <text
-              className="tip-text-date"
-              x={xBase - this.props.tipsWidth / 2 + 2}
-              y={yBase - this.props.strokeWidth - tipHeight - tipOffset + this.props.tipsPadding + 10}
-              style={{fontSize: 14, fontWeight: 'light'}}
-              dangerouslySetInnerHTML={{__html: this.renderTipText(tipText, {dateFormat: pointTimeFormat, date: point.time, date1: point.time, date2: followingTime, value: point.value})}}
-            />
-            <text
-              className="tip-text-value"
-              x={xBase - this.props.tipsWidth / 2 + 2}
-              y={yBase - this.props.strokeWidth - tipHeight - tipOffset + this.props.tipsPadding + 30}
-              style={{fontSize: 16, fontWeight: 'bold'}}
-              dangerouslySetInnerHTML={{__html: this.renderTipText(point.label, {value: point.value})}}
-            />
-          </g>
-        )
+      if((new Date(point.time)).getFullYear() !== (new Date()).getFullYear()){
+        pointTimeFormat += ' YYYY'
       }
-    )
+
+      return (
+        <g key={`point-${index}`} ref={key} style={{display: 'none', position: 'relative', zIndex: 4}}>
+          <rect
+            className="tip-background"
+            x={(point.time - xMin) * xScale - this.props.strokeWidth - this.props.tipsWidth / 2}
+            y={yBase - tipHeight - tipOffset}
+            width={this.props.tipsWidth + this.props.tipsPadding}
+            height={tipHeight + this.props.tipsPadding}
+            style={{stroke: this.props.tipStrokeColor, strokeWidth: this.props.tipStrokeWidth, fill: this.props.tipsFill}}
+          />
+          <polygon
+            points={triangleBorderPath}
+            style={{stroke: this.props.tipStrokeColor, opacity: 0.5, strokeWidth: this.props.tipStrokeWidth}}
+          />
+          <polygon
+            points={trianglePath}
+            style={{fill: this.props.tipsFill}}
+          />
+          <text
+            className="tip-text-date"
+            x={xBase - this.props.tipsWidth / 2 + 2}
+            y={yBase - this.props.strokeWidth - tipHeight - tipOffset + this.props.tipsPadding + 10}
+            style={{fontSize: 14, fontWeight: 'light'}}
+            dangerouslySetInnerHTML={{__html: this.renderTipText(tipText, {dateFormat: pointTimeFormat, date: point.time, date1: point.time, date2: followingTime, value: point.value})}}
+          />
+          <text
+            className="tip-text-value"
+            x={xBase - this.props.tipsWidth / 2 + 2}
+            y={yBase - this.props.strokeWidth - tipHeight - tipOffset + this.props.tipsPadding + 30}
+            style={{fontSize: 16, fontWeight: 'bold'}}
+            dangerouslySetInnerHTML={{__html: this.renderTipText(this.props.labelTemplate, {value: point.value})}}
+          />
+        </g>
+      )
+    })
   }
 
   renderPoints(data, xMin, yMin, xSpread, ySpread, xScale, yScale){
     let isZero = ySpread === 0 && yMin === 0
     return data.map((point, index) =>{
-      if(index === 0 || index === data.length - 1) return
+      if((index === 0 || index === data.length - 1) && !this.props.showFirstAndLastTip) return
       return <circle
         key={`point-${index}`}
         cx={(point.time - xMin) * xScale - this.props.strokeWidth / 2}
@@ -335,7 +340,7 @@ export default class Area extends Component{
   }
 
   render(){
-    let data = this.props.data
+    let {data} = this.props
     this.activeWidth = this.props.width
     this.activeHeight = this.props.height - 50 // add 50 px in the bottom for the labels
 
@@ -344,8 +349,12 @@ export default class Area extends Component{
       if(!point.time){
         data[index].time = index
       }
-      data[index].time = parseFloat(data[index].time)
+      if(!(point.time instanceof Date)){
+        data[index].time = (new Date(data[index].time)).getTime()
+      }
     })
+
+    data = data.sort((a,b) => a.time === b.time ? 0 : a.time > b.time ? 1 : -1)
 
     // let xMax = this.props.data.length - 1
     let xMax = Math.max(...data.map((point, index) => point.time), data.length), //either a timestamp or number of items
@@ -378,7 +387,7 @@ export default class Area extends Component{
 
         <polyline
           points={line}
-          style={{stroke: this.props.strokeColor, strokeWidth: this.props.strokeWidth, fill: 'none'}}
+          style={{stroke: this.props.strokeColor, strokeDasharray: this.props.strokeDasharray, strokeWidth: this.props.strokeWidth, fill: 'none'}}
         />
 
         {yAxis.labels.map(::this.renderLabel)}
