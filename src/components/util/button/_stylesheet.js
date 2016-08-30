@@ -48,15 +48,12 @@ const styles = {
   },
   sm: {
     padding: '5px 10px',
-    height: 28,
   },
   md: {
-    padding: '10px 14px',
-    height: 36,
+    padding: '9px 14px',
   },
   lg: {
     padding: '16px 22px',
-    height: 48,
   },
   fullWidth: {
     display: 'block'

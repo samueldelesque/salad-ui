@@ -54,16 +54,13 @@ var styles = {
     backgroundColor: 'fefefe'
   },
   sm: {
-    padding: '5px 10px',
-    height: 28
+    padding: '5px 10px'
   },
   md: {
-    padding: '10px 14px',
-    height: 36
+    padding: '9px 14px'
   },
   lg: {
-    padding: '16px 22px',
-    height: 48
+    padding: '16px 22px'
   },
   fullWidth: {
     display: 'block'
