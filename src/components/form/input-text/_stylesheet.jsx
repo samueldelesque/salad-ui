@@ -3,7 +3,7 @@ import Stylesheet, { defaults } from '../../../lib/stylesheet/stylesheet'
 let styles = {
   inputContainer: {
     width: '100%',
-    height: '32px',
+    height: '36px',
     border: 'solid 1px ' + defaults.colors.gray3,
     borderRadius: '3px',
     backgroundColor: 'white',

@@ -10,7 +10,7 @@ var _stylesheet2 = _interopRequireDefault(_stylesheet);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var itemHeight = '35px';
+var itemHeight = '36px';
 
 var styles = {
   selectBox: {

@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var styles = {
   inputContainer: {
     width: '100%',
-    height: '32px',
+    height: '36px',
     border: 'solid 1px ' + _stylesheet.defaults.colors.gray3,
     borderRadius: '3px',
     backgroundColor: 'white',

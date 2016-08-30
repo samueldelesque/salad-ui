@@ -1,6 +1,6 @@
 import Stylesheet, { defaults } from '../../../lib/stylesheet/stylesheet'
 
-let itemHeight = '35px'
+let itemHeight = '36px'
 
 let styles = {
   selectBox: {
