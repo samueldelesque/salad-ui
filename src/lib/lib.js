@@ -1,5 +1,6 @@
 import childrenWithProps from './children-with-props'
 import currencyToSymbol from './currency-to-symbol'
+import formatCurrency from './format-currency'
 import domainService from './domain-service'
 import * as tracking from './tracking'
 import * as f from './fetch-methods'
@@ -12,6 +13,7 @@ import sso from './sso'
 export {
   childrenWithProps,
   currencyToSymbol,
+  formatCurrency,
   domainService,
   tracking,
   f,

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sso = exports.scrollTo = exports.numberToString = exports.glob = exports.f = exports.tracking = exports.domainService = exports.currencyToSymbol = exports.childrenWithProps = undefined;
+exports.sso = exports.scrollTo = exports.numberToString = exports.glob = exports.f = exports.tracking = exports.domainService = exports.formatCurrency = exports.currencyToSymbol = exports.childrenWithProps = undefined;
 
 var _childrenWithProps = require('./children-with-props');
 
@@ -12,6 +12,10 @@ var _childrenWithProps2 = _interopRequireDefault(_childrenWithProps);
 var _currencyToSymbol = require('./currency-to-symbol');
 
 var _currencyToSymbol2 = _interopRequireDefault(_currencyToSymbol);
+
+var _formatCurrency = require('./format-currency');
+
+var _formatCurrency2 = _interopRequireDefault(_formatCurrency);
 
 var _domainService = require('./domain-service');
 
@@ -48,12 +52,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // import polyfill from './polyfill'
 exports.childrenWithProps = _childrenWithProps2.default;
 exports.currencyToSymbol = _currencyToSymbol2.default;
+exports.formatCurrency = _formatCurrency2.default;
 exports.domainService = _domainService2.default;
 exports.tracking = tracking;
 exports.f = f;
 exports.glob = _glob2.default;
 exports.numberToString = _numberToString2.default;
-exports.
-// polyfill,
-scrollTo = _scrollTo2.default;
+exports.scrollTo = _scrollTo2.default;
 exports.sso = _sso2.default;
