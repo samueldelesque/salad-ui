@@ -3,19 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sso = exports.scrollTo = exports.numberToString = exports.glob = exports.f = exports.tracking = exports.domainService = exports.formatCurrency = exports.currencyToSymbol = exports.childrenWithProps = undefined;
+exports.sso = exports.scrollTo = exports.glob = exports.f = exports.tracking = exports.domainService = exports.formatter = exports.childrenWithProps = undefined;
 
 var _childrenWithProps = require('./children-with-props');
 
 var _childrenWithProps2 = _interopRequireDefault(_childrenWithProps);
 
-var _currencyToSymbol = require('./currency-to-symbol');
+var _formatter = require('./formatter.js');
 
-var _currencyToSymbol2 = _interopRequireDefault(_currencyToSymbol);
-
-var _formatCurrency = require('./format-currency');
-
-var _formatCurrency2 = _interopRequireDefault(_formatCurrency);
+var formatter = _interopRequireWildcard(_formatter);
 
 var _domainService = require('./domain-service');
 
@@ -33,10 +29,6 @@ var _glob = require('./glob');
 
 var _glob2 = _interopRequireDefault(_glob);
 
-var _numberToString = require('./number-to-string');
-
-var _numberToString2 = _interopRequireDefault(_numberToString);
-
 var _scrollTo = require('./scroll-to');
 
 var _scrollTo2 = _interopRequireDefault(_scrollTo);
@@ -51,12 +43,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // import polyfill from './polyfill'
 exports.childrenWithProps = _childrenWithProps2.default;
-exports.currencyToSymbol = _currencyToSymbol2.default;
-exports.formatCurrency = _formatCurrency2.default;
+exports.formatter = formatter;
 exports.domainService = _domainService2.default;
 exports.tracking = tracking;
 exports.f = f;
 exports.glob = _glob2.default;
-exports.numberToString = _numberToString2.default;
 exports.scrollTo = _scrollTo2.default;
 exports.sso = _sso2.default;
