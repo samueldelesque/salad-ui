@@ -16,7 +16,7 @@ var currencyToSymbol = exports.currencyToSymbol = function currencyToSymbol(cur)
 var formatCurrency = exports.formatCurrency = function formatCurrency(amt) {
   var currency = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
 
-  if (!amt) return '';
+  if (amt === null || amt === '') return;
   if (typeof amt !== 'number') amt = parseFloat(amt);
   amt = amt.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
   return currencyToSymbol(currency) + ' ' + amt;
