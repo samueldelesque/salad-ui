@@ -192,7 +192,7 @@ var Select = function (_Component) {
           _react2.default.createElement(
             'div',
             null,
-            this.state.currentOption.name
+            this.state.currentOption.name || '--'
           )
         ),
         this.renderOptions()
@@ -204,6 +204,7 @@ var Select = function (_Component) {
 }(_react.Component);
 
 Select.defaultProps = {
-  noBorder: false
+  noBorder: false,
+  options: [{ name: '--', value: null }]
 };
 exports.default = Select;

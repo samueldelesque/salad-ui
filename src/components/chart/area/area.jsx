@@ -183,7 +183,7 @@ export default class Area extends Component{
       }
 
       return (
-        <g key={`point-${index}`} ref={key} style={{display: 'none', position: 'relative', zIndex: 4}}>
+        <g key={`point-${index}`} ref={key} style={{display: 'none', position: 'relative', zIndex: 4}} className="value-tip">
           <rect
             className="tip-background"
             x={(point.time - xMin) * xScale - this.props.strokeWidth - this.props.tipsWidth / 2}

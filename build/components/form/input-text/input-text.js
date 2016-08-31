@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -141,10 +139,9 @@ var InputText = function (_React$Component) {
       var tag = this.props.textarea ? 'textarea' : 'input';
       var id = 'input.' + this.id;
 
-      var props = _extends({
+      var props = {
         ref: 'input',
-        type: this.props.type
-      }, this.props, {
+        type: this.props.type,
         style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null, this.props.style),
         placeholder: this.props.placeholder,
         onClick: this.handleClick.bind(this),
@@ -153,7 +150,7 @@ var InputText = function (_React$Component) {
         onKeyUp: this.handleKeyUp.bind(this),
         value: value,
         id: id
-      });
+      };
 
       return _react2.default.createElement(
         'div',

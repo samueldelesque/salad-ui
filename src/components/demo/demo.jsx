@@ -180,6 +180,8 @@ export default class Demo extends React.Component {
                   onChange={(protein)=>this.setState({protein})}
                   noBorder={true}>Borderless</SaladUI.Form.Select>
                 <p style={{padding: 10}}>Protein: <b style={{fontWeight: 'bold'}}>{this.state.protein.value} ({this.state.protein.calories}cal)</b></p>
+
+                <SaladUI.Form.Select style={{marginTop: 20}}/>
               </div>
             </li>
           </ul>

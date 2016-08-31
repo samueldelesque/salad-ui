@@ -12,6 +12,7 @@ export default class Select extends Component {
 
   static defaultProps = {
     noBorder: false,
+    options: [{name: '--', value: null}]
   }
 
   componentWillMount() {
@@ -93,8 +94,8 @@ export default class Select extends Component {
       )
     }
 
-    options = options.concat(this.props.options.map((item, index) => {
-      return <li
+    options = options.concat(this.props.options.map((item, index) => (
+      <li
         key = {'option.' + index}
         style={(item.value === this.state.currentOption.value) ? selectedItemStyle : styles.dropdownItem}
         value={item.value}
@@ -102,7 +103,7 @@ export default class Select extends Component {
         onClick={() => this.itemClick()}>
         {item.name}
       </li>
-    }));
+    )));
 
     const dropdownStyles = Object.assign({}, styles.dropdown, !this.state.open ? styles.dropdownHidden : null)
     return (
@@ -121,7 +122,7 @@ export default class Select extends Component {
         <div style={selectBoxStyles} onClick={(e) => this.selectClick(e)}>
           <Icon type="arrow-left" width={10} height={10} style={styles.dropdownIcon} />
           <div>
-            {this.state.currentOption.name}
+            {this.state.currentOption.name||'--'}
           </div>
         </div>
         {this.renderOptions()}

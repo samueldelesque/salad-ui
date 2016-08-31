@@ -167,7 +167,7 @@ var Area = function (_Component) {
 
         return _react2.default.createElement(
           'g',
-          { key: 'point-' + index, ref: key, style: { display: 'none' } },
+          { key: 'point-' + index, ref: key, style: { display: 'none', position: 'relative', zIndex: 4 }, className: 'value-tip' },
           _react2.default.createElement('rect', {
             className: 'tip-background',
             x: (point.time - xMin) * xScale - _this3.props.strokeWidth - _this3.props.tipsWidth / 2,

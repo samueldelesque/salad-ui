@@ -116,7 +116,6 @@ export default class InputText extends React.Component {
     let props = {
       ref: 'input',
       type: this.props.type,
-      ...this.props,
       style: Object.assign({}, styles.inputContent, this.props.textarea ? styles.textareaContent : null, this.props.style),
       placeholder: this.props.placeholder,
       onClick: ::this.handleClick,

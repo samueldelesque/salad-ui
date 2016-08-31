@@ -443,7 +443,8 @@ var Demo = function (_React$Component) {
                     this.state.protein.calories,
                     'cal)'
                   )
-                )
+                ),
+                _react2.default.createElement(_saladUi2.default.Form.Select, { style: { marginTop: 20 } })
               )
             )
           )
