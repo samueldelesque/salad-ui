@@ -128,6 +128,8 @@ var List = function (_React$Component) {
       };
       var headers = {};
       if (this.props.accessToken) headers.authorization = 'Bearer ' + this.props.accessToken;
+      if (this.props.user) data.user = this.props.user;
+      if (this.props.excludeIds) data.exclude_ids = this.props.excludeIds;
 
       var endpoint = props.endpoint ? props.endpoint : '/videos';
       if (props.searchTerm) data.search = props.searchTerm;

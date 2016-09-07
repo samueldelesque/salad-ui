@@ -89,6 +89,8 @@ export default class List extends React.Component {
     }
     let headers = {}
     if(this.props.accessToken) headers.authorization = `Bearer ${this.props.accessToken}`
+    if(this.props.user) data.user = this.props.user
+    if(this.props.excludeIds) data.exclude_ids = this.props.excludeIds
 
     let endpoint = props.endpoint ? props.endpoint : '/videos'
     if(props.searchTerm) data.search = props.searchTerm

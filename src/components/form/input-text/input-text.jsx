@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './_stylesheet'
 
+const allowedInputProps = ['xWebkitSpeech', 'autoComplete']
+
 export default class InputText extends React.Component {
   state = {
     value: '',
@@ -125,6 +127,9 @@ export default class InputText extends React.Component {
       value,
       id
     }
+    allowedInputProps.forEach(property => {
+      if(this.props[property]) props[property] = this.props.property
+    })
 
     return (
       <div>

@@ -58,15 +58,13 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
     contentType: 'JSON'
   }, params);
 
-  if (method === 'GET' && params.data) {
+  if (method === 'GET' && params.data || params.useQueryParams && params.data) {
     if (debug) {
-      console.log('serialize GET params', JSON.stringify(params.data));
+      console.log('serialize params', JSON.stringify(params.data));
     }
     url += (! ~url.indexOf('?') ? '?' : '&') + serialize(params.data);
     delete params.data;
-  }
-
-  if ((method === 'POST' || method === 'PATCH') && params.contentType.toUpperCase() === 'JSON') {
+  } else if ((method === 'POST' || method === 'PATCH') && params.contentType.toUpperCase() === 'JSON') {
     params.headers['Content-Type'] = 'application/json';
     params.body = JSON.stringify(params.data);
     delete params.data;

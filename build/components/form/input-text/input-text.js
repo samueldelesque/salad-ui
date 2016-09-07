@@ -22,6 +22,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var allowedInputProps = ['xWebkitSpeech', 'autoComplete'];
+
 var InputText = function (_React$Component) {
   _inherits(InputText, _React$Component);
 
@@ -133,6 +135,8 @@ var InputText = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var hint = this.getHint();
       var showHint = hint && !this.props.disabled && !this.props.readOnly;
       var value = this.state.value ? this.state.value : this.props.value;
@@ -151,6 +155,9 @@ var InputText = function (_React$Component) {
         value: value,
         id: id
       };
+      allowedInputProps.forEach(function (property) {
+        if (_this2.props[property]) props[property] = _this2.props.property;
+      });
 
       return _react2.default.createElement(
         'div',
