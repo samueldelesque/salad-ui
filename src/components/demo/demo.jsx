@@ -373,7 +373,11 @@ long long long long long long text.
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Tag List</h3>
               <pre>{`<TagList items=['tag1','tag2','tag3','tag4','tag5','tag6']/>`}</pre>
-              <SaladUI.Util.TagList items={this.state.tagsAdded} handleRemoveItem={(t) => this.handleRemoveTag(t)} />
+              <SaladUI.Util.TagList
+                items={this.state.tagsAdded}
+                handleRemoveItem={(t) => this.handleRemoveTag(t)}
+                handleAddItem={t=>this.setState({tagsAdded: this.state.tagsAdded.concat(t)})}
+              />
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Badges</h3>

@@ -13,14 +13,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var styles = {
   tagBox: {
     border: '1px solid #E5E5E5',
-    minHeight: '150px',
     width: '100%',
     padding: '10px',
     margin: '20px 0',
     borderRadius: '5px'
   },
 
-  pill: {
+  tag: {
     display: 'inline-block',
     background: '#E5E5E5',
     margin: '0 10px 10px 0',

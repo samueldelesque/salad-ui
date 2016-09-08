@@ -18,6 +18,10 @@ var _stylesheet = require('./_stylesheet');
 
 var _stylesheet2 = _interopRequireDefault(_stylesheet);
 
+var _inputText = require('../../form/input-text/input-text');
+
+var _inputText2 = _interopRequireDefault(_inputText);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30,9 +34,19 @@ var Collection = function (_Component) {
   _inherits(Collection, _Component);
 
   function Collection() {
+    var _Object$getPrototypeO;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Collection);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Collection).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Collection)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+      addTag: ''
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Collection, [{
@@ -43,38 +57,54 @@ var Collection = function (_Component) {
       }
     }
   }, {
-    key: 'renderItems',
-    value: function renderItems() {
-      var _this2 = this;
-
-      var lis = this.props.items.map(function (item, index) {
-        return _react2.default.createElement(
-          'li',
-          { style: _stylesheet2.default.pill, key: 'tags.' + index },
-          _react2.default.createElement(
-            'span',
-            { style: { paddingRight: '10px' } },
-            item
-          ),
-          _react2.default.createElement(_icon2.default, { width: 10, height: 10, type: 'close', onClick: function onClick() {
-              return _this2.removeItem(item);
-            } })
-        );
-      });
-
-      return _react2.default.createElement(
-        'ul',
-        null,
-        lis
-      );
+    key: 'addItem',
+    value: function addItem(text) {
+      if (this.props.handleAddItem) {
+        this.props.handleAddItem(text);
+      }
+      this.setState({ addTag: '' });
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         { style: _stylesheet2.default.tagBox },
-        this.renderItems(this.props.items)
+        this.props.items.map(function (item, index) {
+          return _react2.default.createElement(
+            'span',
+            { style: _stylesheet2.default.tag, key: 'tags.' + index },
+            _react2.default.createElement(
+              'span',
+              { style: { paddingRight: '10px' } },
+              item
+            ),
+            _react2.default.createElement(_icon2.default, { width: 10, height: 10, type: 'close', onClick: function onClick() {
+                return _this2.removeItem(item);
+              } })
+          );
+        }),
+        _react2.default.createElement(
+          'div',
+          { style: { display: 'inline-block', width: 200 } },
+          _react2.default.createElement(
+            'form',
+            { autoComplete: 'off', action: '#', onSubmit: function onSubmit(e) {
+                e.preventDefault();_this2.addItem(_this2.state.addTag);
+              } },
+            _react2.default.createElement(_inputText2.default, {
+              placeholder: this.props.placeholder,
+              autoComplete: 'off',
+              onChange: function onChange(addTag) {
+                return _this2.setState({ addTag: addTag });
+              },
+              value: this.state.addTag,
+              style: { border: 'none' }
+            })
+          )
+        )
       );
     }
   }]);
@@ -83,8 +113,7 @@ var Collection = function (_Component) {
 }(_react.Component);
 
 Collection.defaultProps = {
-  classname: '',
-  itemClassname: 'pill',
-  items: []
+  items: [],
+  placeholder: 'Add a tag...'
 };
 exports.default = Collection;

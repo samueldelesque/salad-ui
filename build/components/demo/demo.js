@@ -882,9 +882,15 @@ var Demo = function (_React$Component) {
                 null,
                 '<TagList items=[\'tag1\',\'tag2\',\'tag3\',\'tag4\',\'tag5\',\'tag6\']/>'
               ),
-              _react2.default.createElement(_saladUi2.default.Util.TagList, { items: this.state.tagsAdded, handleRemoveItem: function handleRemoveItem(t) {
+              _react2.default.createElement(_saladUi2.default.Util.TagList, {
+                items: this.state.tagsAdded,
+                handleRemoveItem: function handleRemoveItem(t) {
                   return _this2.handleRemoveTag(t);
-                } })
+                },
+                handleAddItem: function handleAddItem(t) {
+                  return _this2.setState({ tagsAdded: _this2.state.tagsAdded.concat(t) });
+                }
+              })
             ),
             _react2.default.createElement(
               'li',
