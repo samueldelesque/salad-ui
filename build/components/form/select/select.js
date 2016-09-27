@@ -90,6 +90,19 @@ var Select = function (_Component) {
       document.removeEventListener('click', this.handleOutsideClick);
     }
   }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      console.log('componentWillReceiveProps', nextProps);
+
+      if (nextProps.value === undefined || nextProps.value === null) return;
+
+      var obj = {};
+      obj = this.props.options.find(function (o) {
+        return o.value === nextProps.value;
+      });
+      this.setState({ currentOption: obj });
+    }
+  }, {
     key: 'handleOutsideClick',
     value: function handleOutsideClick(e) {
       if (_reactDom2.default.findDOMNode(this).contains(e.target)) return;else {

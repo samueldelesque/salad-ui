@@ -46,6 +46,17 @@ export default class Select extends Component {
     document.removeEventListener('click', this.handleOutsideClick);
   }
 
+  componentWillReceiveProps(nextProps){
+    console.log('componentWillReceiveProps', nextProps)
+
+    if(nextProps.value === undefined || nextProps.value === null)
+      return
+
+    let obj = {}
+    obj = this.props.options.find(o => o.value === nextProps.value)
+    this.setState({ currentOption: obj })
+  }
+
   handleOutsideClick(e){
     if(ReactDOM.findDOMNode(this).contains(e.target))
       return

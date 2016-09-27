@@ -47,6 +47,8 @@ export default class Demo extends React.Component {
     ga('create', 'UA-78769010-1', 'auto');
     SaladUI.Lib.tracking.trackPage('SaladUI Demo')
 
+    this.setState({ protein: selectOptions[1] })
+
     this.onResize = this.onResize.bind(this)
     this.onResize()
     window.addEventListener('resize', this.onResize)
@@ -170,6 +172,7 @@ export default class Demo extends React.Component {
               </pre>
               <div style={{width: 300}}>
                 <SaladUI.Form.Select
+                  value={this.state.protein.value}
                   options={selectOptions}
                   onChange={(protein)=>this.setState({protein})}>Pick a protein</SaladUI.Form.Select>
 

@@ -90,6 +90,8 @@ var Demo = function (_React$Component) {
       ga('create', 'UA-78769010-1', 'auto');
       _saladUi2.default.Lib.tracking.trackPage('SaladUI Demo');
 
+      this.setState({ protein: selectOptions[1] });
+
       this.onResize = this.onResize.bind(this);
       this.onResize();
       window.addEventListener('resize', this.onResize);
@@ -377,7 +379,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { style: { marginTop: 10 } },
-                _react2.default.createElement(_saladUi2.default.Form.InputText, { prefix: 'https://dailymotion.', placeholder: 'yoursubdomain', suffix: '.com', label: 'Input with label, prefix and suffix' })
+                _react2.default.createElement(_saladUi2.default.Form.InputText, { prefix: 'https://dailymotion.', placeholder: 'yoursubdomain', suffix: '.com', label: 'Input with label, prefix and suffix', disabled: true })
               ),
               _react2.default.createElement(
                 'div',
@@ -409,6 +411,7 @@ var Demo = function (_React$Component) {
                 _react2.default.createElement(
                   _saladUi2.default.Form.Select,
                   {
+                    value: this.state.protein.value,
                     options: selectOptions,
                     onChange: function onChange(protein) {
                       return _this2.setState({ protein: protein });
