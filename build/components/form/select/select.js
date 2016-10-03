@@ -92,8 +92,6 @@ var Select = function (_Component) {
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      console.log('componentWillReceiveProps', nextProps);
-
       if (nextProps.value === undefined || nextProps.value === null) return;
 
       var obj = {};

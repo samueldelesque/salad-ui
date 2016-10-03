@@ -146,6 +146,7 @@ var InputText = function (_React$Component) {
       var props = {
         ref: 'input',
         type: this.props.type,
+        disabled: this.props.disabled,
         style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null, this.props.style),
         placeholder: this.props.placeholder,
         onClick: this.handleClick.bind(this),
