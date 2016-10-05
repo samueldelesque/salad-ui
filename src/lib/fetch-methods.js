@@ -61,7 +61,10 @@ export const fetchJSON = function (url, method = 'GET', params = null){
     if(params.debug) console.log('Response: ', res)
     if(res.status >= 399) throw buildError(res.status + ' error', res)
     if(res.status === 204) return res
-    return res.json()
+    if(params.headers['Content-Type'] && params.headers['Content-Type'].includes('text'))
+      return res.text()
+    else
+      return res.json()
   })
 }
 export const get = function (url, params = null){

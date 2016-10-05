@@ -47,8 +47,6 @@ export default class Select extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log('componentWillReceiveProps', nextProps)
-
     if(nextProps.value === undefined || nextProps.value === null)
       return
 
