@@ -379,7 +379,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { style: { marginTop: 10 } },
-                _react2.default.createElement(_saladUi2.default.Form.InputText, { prefix: 'https://dailymotion.', placeholder: 'yoursubdomain', suffix: '.com', label: 'Input with label, prefix and suffix', disabled: true })
+                _react2.default.createElement(_saladUi2.default.Form.InputText, { prefix: 'https://dailymotion.', placeholder: 'yoursubdomain', suffix: '.com', label: 'Input with label, prefix and suffix' })
               ),
               _react2.default.createElement(
                 'div',
