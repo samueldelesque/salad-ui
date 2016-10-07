@@ -8,6 +8,8 @@ export default class CirclePie extends Component{
     height: React.PropTypes.number,
     strokeWidth: React.PropTypes.number,
     strokeColor: React.PropTypes.string,
+    labelFontWeight: React.PropTypes.string,
+    labelFontSize: React.PropTypes.string,
     fillColor: React.PropTypes.string,
     startAngle: React.PropTypes.number,
     endAngle: React.PropTypes.number,
@@ -19,8 +21,9 @@ export default class CirclePie extends Component{
     height: 150,
     border: 'none',
     strokeWidth: 10,
-    labelColor: '#111111',
-    labelFontSize: '18px',
+    labelColor: '#408AE5',
+    labelFontSize: '1.2em',
+    labelFontWeight: 'bold',
     strokeColor: '#408AE5',
     railColor: '#f5f5f5',
     fillColor: 'none',
@@ -55,6 +58,8 @@ export default class CirclePie extends Component{
         center = radius + this.props.strokeWidth / 2 + this.props.padding,
         startAngle = 0,
         endAngle = 3.6 * this.props.percent,
+        label = `${this.props.percent}%`,
+        labelLeftOffset = label.length * -0.4 + 0.5,
         arc = this.describeArc(center, center, radius, startAngle, endAngle)
 
     return (
@@ -74,11 +79,12 @@ export default class CirclePie extends Component{
         <text
           x={center}
           y={center}
-          dx="-.5em"
-          dy=".4em"
+          dx={`${labelLeftOffset}em`}
+          dy=".45em"
           fill={this.props.labelColor}
+          fontWeight={this.props.labelFontWeight}
           fontSize={this.props.labelFontSize}>
-          {`${this.props.percent}%`}
+          {label}
         </text>
       </Chart>
     )

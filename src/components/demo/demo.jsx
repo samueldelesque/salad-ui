@@ -213,7 +213,10 @@ export default class Demo extends React.Component {
 .catch(err => console.error(err))
 
 f.post('http://api.dailymotion.com/user/spi0n')
-f.delete('http://api.dailymotion.com/user/spi0n')`}
+f.delete('http://api.dailymotion.com/user/spi0n')
+
+f.apiFactory('http://api.dailymotion.com', {access_token: 'abc'})
+f.get('/user/spi0n')`}
               </pre>
             </li>
             <li>

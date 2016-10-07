@@ -6,6 +6,7 @@ import * as f from './fetch-methods'
 import glob from './glob'
 // import polyfill from './polyfill'
 import scrollTo from './scroll-to'
+import {mergeDeep} from './merge-deep'
 import sso from './sso'
 
 export {
@@ -15,6 +16,7 @@ export {
   tracking,
   f,
   glob,
+  mergeDeep,
   // polyfill,
   scrollTo,
   sso,

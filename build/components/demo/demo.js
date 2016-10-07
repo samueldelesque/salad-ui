@@ -517,7 +517,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                'f.get(\'http://api.dailymotion.com/user/spi0n\')\n.then(json => console.log(json))\n.catch(err => console.error(err))\n\nf.post(\'http://api.dailymotion.com/user/spi0n\')\nf.delete(\'http://api.dailymotion.com/user/spi0n\')'
+                'f.get(\'http://api.dailymotion.com/user/spi0n\')\n.then(json => console.log(json))\n.catch(err => console.error(err))\n\nf.post(\'http://api.dailymotion.com/user/spi0n\')\nf.delete(\'http://api.dailymotion.com/user/spi0n\')\n\nf.apiFactory(\'http://api.dailymotion.com\', {access_token: \'abc\'})\nf.get(\'/user/spi0n\')'
               )
             ),
             _react2.default.createElement(

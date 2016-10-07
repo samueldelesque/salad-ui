@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.del = exports.put = exports.patch = exports.post = exports.get = exports.fetchJSON = exports.serialize = exports.enableDebug = exports.enableMock = undefined;
+exports.del = exports.put = exports.patch = exports.post = exports.get = exports.fetchJSON = exports.apiFactory = exports.serialize = exports.enableDebug = exports.enableMock = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -14,6 +14,8 @@ var _lodash2 = _interopRequireDefault(_lodash);
 var _glob = require('./glob');
 
 var _glob2 = _interopRequireDefault(_glob);
+
+var _mergeDeep = require('./merge-deep');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42,12 +44,33 @@ var serialize = exports.serialize = function serialize(obj) {
     }
   }return str.join("&");
 };
+
+var apiFactory = exports.apiFactory = function apiFactory(baseUrl, baseParams) {
+  return {
+    get: function get(url, params) {
+      return _get(baseUrl + url, (0, _mergeDeep.mergeDeep)(baseParams, params));
+    },
+    post: function post(url, params) {
+      return _post(baseUrl + url, (0, _mergeDeep.mergeDeep)(baseParams, params));
+    },
+    del: function del(url, params) {
+      return _del(baseUrl + url, (0, _mergeDeep.mergeDeep)(baseParams, params));
+    },
+    put: function put(url, params) {
+      return _put(baseUrl + url, (0, _mergeDeep.mergeDeep)(baseParams, params));
+    },
+    patch: function patch(url, params) {
+      return _patch(baseUrl + url, (0, _mergeDeep.mergeDeep)(baseParams, params));
+    }
+  };
+};
+
 var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
   var method = arguments.length <= 1 || arguments[1] === undefined ? 'GET' : arguments[1];
   var params = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
   method = method.toUpperCase();
-  if (!~['GET', 'POST', 'DELETE', 'PUT', 'PATCH'].indexOf(method)) {
+  if (! ~['GET', 'POST', 'DELETE', 'PUT', 'PATCH'].indexOf(method)) {
     if ((typeof method === 'undefined' ? 'undefined' : _typeof(method)) === 'object' && !params) params = method;
     method = 'GET';
   }
@@ -62,7 +85,7 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
     if (debug) {
       console.log('serialize params', JSON.stringify(params.data));
     }
-    url += (!~url.indexOf('?') ? '?' : '&') + serialize(params.data);
+    url += (! ~url.indexOf('?') ? '?' : '&') + serialize(params.data);
     delete params.data;
   } else if ((method === 'POST' || method === 'PATCH') && params.contentType.toUpperCase() === 'JSON') {
     params.headers['Content-Type'] = 'application/json';
@@ -83,33 +106,38 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
     if (params.headers['Content-Type'] && params.headers['Content-Type'].includes('text')) return res.text();else return res.json();
   });
 };
-var get = exports.get = function get(url) {
+var _get = function _get(url) {
   var params = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
   if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === 'object' && !params) params = url;
   return fetchJSON(url, 'GET', params);
 };
-var post = exports.post = function post(url) {
+exports.get = _get;
+var _post = function _post(url) {
   var params = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
   if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === 'object' && !params) params = url;
   return fetchJSON(url, 'POST', params);
 };
-var patch = exports.patch = function patch(url) {
+exports.post = _post;
+var _patch = function _patch(url) {
   var params = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
   if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === 'object' && !params) params = url;
   return fetchJSON(url, 'PATCH', params);
 };
-var put = exports.put = function put(url) {
+exports.patch = _patch;
+var _put = function _put(url) {
   var params = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
   if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === 'object' && !params) params = url;
   return fetchJSON(url, 'PUT', params);
 };
-var del = exports.del = function del(url) {
+exports.put = _put;
+var _del = function _del(url) {
   var params = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
   if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === 'object' && !params) params = url;
   return fetchJSON(url, 'DELETE', params);
 };
+exports.del = _del;

@@ -1,5 +1,6 @@
 import merge from 'lodash.merge'
 import glob from './glob'
+import {mergeDeep} from './merge-deep'
 
 let debug = false
 let mockApi = false
@@ -20,6 +21,15 @@ export const serialize = function (obj){
     }
   return str.join("&");
 }
+
+export const apiFactory = (baseUrl, baseParams) => ({
+  get: (url, params) => get(baseUrl + url, mergeDeep(baseParams, params)),
+  post: (url, params) => post(baseUrl + url, mergeDeep(baseParams, params)),
+  del: (url, params) => del(baseUrl + url, mergeDeep(baseParams, params)),
+  put: (url, params) => put(baseUrl + url, mergeDeep(baseParams, params)),
+  patch: (url, params) => patch(baseUrl + url, mergeDeep(baseParams, params)),
+})
+
 export const fetchJSON = function (url, method = 'GET', params = null){
   method = method.toUpperCase()
   if(!~['GET', 'POST', 'DELETE', 'PUT', 'PATCH'].indexOf(method)){
