@@ -22,11 +22,11 @@ export const serialize = function (obj){
 }
 
 export const apiFactory = (baseUrl, baseParams) => ({
-  get: (url, params) => get(baseUrl + url, merge(baseParams, params)),
-  post: (url, params) => post(baseUrl + url, merge(baseParams, params)),
-  del: (url, params) => del(baseUrl + url, merge(baseParams, params)),
-  put: (url, params) => put(baseUrl + url, merge(baseParams, params)),
-  patch: (url, params) => patch(baseUrl + url, merge(baseParams, params)),
+  get: (url, params) => get(baseUrl + url, merge({}, baseParams, params)),
+  post: (url, params) => post(baseUrl + url, merge({}, baseParams, params)),
+  del: (url, params) => del(baseUrl + url, merge({}, baseParams, params)),
+  put: (url, params) => put(baseUrl + url, merge({}, baseParams, params)),
+  patch: (url, params) => patch(baseUrl + url, merge({}, baseParams, params)),
 })
 
 export const fetchJSON = function (url, method = 'GET', params = null){

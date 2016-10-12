@@ -15,8 +15,6 @@ var _glob = require('./glob');
 
 var _glob2 = _interopRequireDefault(_glob);
 
-var _mergeDeep = require('./merge-deep');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var debug = false;
@@ -48,19 +46,19 @@ var serialize = exports.serialize = function serialize(obj) {
 var apiFactory = exports.apiFactory = function apiFactory(baseUrl, baseParams) {
   return {
     get: function get(url, params) {
-      return _get(baseUrl + url, (0, _mergeDeep.mergeDeep)(baseParams, params));
+      return _get(baseUrl + url, (0, _lodash2.default)({}, baseParams, params));
     },
     post: function post(url, params) {
-      return _post(baseUrl + url, (0, _mergeDeep.mergeDeep)(baseParams, params));
+      return _post(baseUrl + url, (0, _lodash2.default)({}, baseParams, params));
     },
     del: function del(url, params) {
-      return _del(baseUrl + url, (0, _mergeDeep.mergeDeep)(baseParams, params));
+      return _del(baseUrl + url, (0, _lodash2.default)({}, baseParams, params));
     },
     put: function put(url, params) {
-      return _put(baseUrl + url, (0, _mergeDeep.mergeDeep)(baseParams, params));
+      return _put(baseUrl + url, (0, _lodash2.default)({}, baseParams, params));
     },
     patch: function patch(url, params) {
-      return _patch(baseUrl + url, (0, _mergeDeep.mergeDeep)(baseParams, params));
+      return _patch(baseUrl + url, (0, _lodash2.default)({}, baseParams, params));
     }
   };
 };
