@@ -68,7 +68,7 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
   var params = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
   method = method.toUpperCase();
-  if (! ~['GET', 'POST', 'DELETE', 'PUT', 'PATCH'].indexOf(method)) {
+  if (!~['GET', 'POST', 'DELETE', 'PUT', 'PATCH'].indexOf(method)) {
     if ((typeof method === 'undefined' ? 'undefined' : _typeof(method)) === 'object' && !params) params = method;
     method = 'GET';
   }
@@ -83,9 +83,9 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
     if (debug) {
       console.log('serialize params', JSON.stringify(params.data));
     }
-    url += (! ~url.indexOf('?') ? '?' : '&') + serialize(params.data);
+    url += (!~url.indexOf('?') ? '?' : '&') + serialize(params.data);
     delete params.data;
-  } else if ((method === 'POST' || method === 'PATCH') && params.contentType.toUpperCase() === 'JSON') {
+  } else if (params.contentType.toUpperCase() === 'JSON') {
     params.headers['Content-Type'] = 'application/json';
     params.body = JSON.stringify(params.data);
     delete params.data;
