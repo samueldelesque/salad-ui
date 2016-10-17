@@ -48,5 +48,7 @@ exports.domainService = _domainService2.default;
 exports.tracking = tracking;
 exports.f = f;
 exports.glob = _glob2.default;
-exports.scrollTo = _scrollTo2.default;
+exports.
+// polyfill,
+scrollTo = _scrollTo2.default;
 exports.sso = _sso2.default;
