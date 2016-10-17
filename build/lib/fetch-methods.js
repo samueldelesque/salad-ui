@@ -85,7 +85,7 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
     }
     url += (!~url.indexOf('?') ? '?' : '&') + serialize(params.data);
     delete params.data;
-  } else if (params.contentType.toUpperCase() === 'JSON') {
+  } else if ((method === 'POST' || method === 'PATCH' || method === 'DELETE') && params.contentType.toUpperCase() === 'JSON') {
     params.headers['Content-Type'] = 'application/json';
     params.body = JSON.stringify(params.data);
     delete params.data;
