@@ -4,7 +4,7 @@ let itemHeight = '36px'
 
 let styles = {
   selectBox: {
-    padding: '7px 10px',
+    padding: 10,
     lineHeight: 1.1,
     border: '1px solid ' + defaults.colors.gray3,
     borderRadius: '3px',

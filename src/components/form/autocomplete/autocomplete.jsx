@@ -9,6 +9,7 @@ export default class Autocomplete extends Component {
     noSuggestionsText: React.PropTypes.string,
     isLoading: React.PropTypes.bool,
     clearOnSelect: React.PropTypes.bool,
+    allowCustomText: React.PropTypes.bool,
     latency: React.PropTypes.number,
     limit: React.PropTypes.number,
     style: React.PropTypes.object,

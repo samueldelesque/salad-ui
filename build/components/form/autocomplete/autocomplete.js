@@ -280,6 +280,7 @@ Autocomplete.propTypes = {
   noSuggestionsText: _react2.default.PropTypes.string,
   isLoading: _react2.default.PropTypes.bool,
   clearOnSelect: _react2.default.PropTypes.bool,
+  allowCustomText: _react2.default.PropTypes.bool,
   latency: _react2.default.PropTypes.number,
   limit: _react2.default.PropTypes.number,
   style: _react2.default.PropTypes.object,

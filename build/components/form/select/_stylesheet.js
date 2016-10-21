@@ -14,7 +14,7 @@ var itemHeight = '36px';
 
 var styles = {
   selectBox: {
-    padding: '7px 10px',
+    padding: 10,
     lineHeight: 1.1,
     border: '1px solid ' + _stylesheet.defaults.colors.gray3,
     borderRadius: '3px',
