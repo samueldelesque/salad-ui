@@ -39,10 +39,12 @@ export default class Radio extends React.Component {
         <div style={s} onClick={()=>this.onChange(this.props.value)}>
           <input type="radio" {...props} style={{display:'none'}} />
           <div htmlFor={id}>
-            <i style={styles.radioIcon}>
+            <div style={styles.radioIcon}>
               {this.props.selected? <span style={ds}/> : null}
-            </i>
-            {this.renderChildren()}
+            </div>
+            <div style={styles.radioContent}>
+              {this.renderChildren()}
+            </div>
           </div>
         </div>
       </div>

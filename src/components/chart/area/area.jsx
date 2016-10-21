@@ -285,7 +285,7 @@ export default class Area extends Component{
 
     return {
       gridLines: lines.map(k => {return {y: isZero ? yScale : (ySpread - k * rule) * yScale}}),
-      labels: labels.map(k => {var v = k * rule * 2;return {y: isZero ? yScale : (ySpread - k * rule * 2) * yScale, txt: numberToString(v + yMin)}})
+      labels: labels.map(k => {var v = k * rule * 2;return {y: isZero ? yScale : (ySpread - k * rule * 2) * yScale, txt: Math.round(v + yMin)}})
     }
   }
 

@@ -272,7 +272,7 @@ var Area = function (_Component) {
           return { y: isZero ? yScale : (ySpread - k * rule) * yScale };
         }),
         labels: labels.map(function (k) {
-          var v = k * rule * 2;return { y: isZero ? yScale : (ySpread - k * rule * 2) * yScale, txt: numberToString(v + yMin) };
+          var v = k * rule * 2;return { y: isZero ? yScale : (ySpread - k * rule * 2) * yScale, txt: Math.round(v + yMin) };
         })
       };
     }

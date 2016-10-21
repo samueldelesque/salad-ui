@@ -71,7 +71,7 @@ var Collection = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { style: _stylesheet2.default.tagBox },
+        { style: { border: this.props.border, padding: this.props.padding, borderRadius: this.props.borderRadius } },
         this.props.items.map(function (item, index) {
           return _react2.default.createElement(
             'span',
@@ -114,6 +114,9 @@ var Collection = function (_Component) {
 
 Collection.defaultProps = {
   items: [],
-  placeholder: 'Add a tag...'
+  placeholder: 'Add a tag...',
+  border: '1px solid #E5E5E5',
+  padding: '10px',
+  borderRadius: '5px'
 };
 exports.default = Collection;

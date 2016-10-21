@@ -7,6 +7,9 @@ export default class Collection extends Component {
   static defaultProps = {
     items: [],
     placeholder: 'Add a tag...',
+    border: '1px solid #E5E5E5',
+    padding: '10px',
+    borderRadius: '5px',
   }
 
   state = {
@@ -28,7 +31,7 @@ export default class Collection extends Component {
 
   render() {
     return (
-      <div style={styles.tagBox}>
+      <div style={{border:this.props.border, padding: this.props.padding,borderRadius: this.props.borderRadius}}>
         {
           this.props.items.map((item, index) => (
             <span style={styles.tag} key={`tags.${index}`}>

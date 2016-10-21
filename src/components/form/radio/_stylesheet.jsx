@@ -2,7 +2,6 @@ import Stylesheet, { defaults } from '../../../lib/stylesheet/stylesheet'
 
 let styles = {
   radio: {
-    display: 'inline-block',
     cursor: 'pointer',
     marginBottom: 10,
   },
@@ -16,11 +15,16 @@ let styles = {
     verticalAlign: 'middle',
     width: '16px',
     height: '16px',
-    marginRight: 10,
+    marginRight: 20,
     position: 'relative',
     backgroundColor: defaults.colors.gray5,
     border: 'solid 1px ' + defaults.colors.gray3,
     borderRadius: '50%',
+  },
+  radioContent: {
+    position: 'relative',
+    display: 'inline-block',
+    verticalAlign: 'middle',
   },
 
   disc: {

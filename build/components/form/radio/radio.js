@@ -82,11 +82,15 @@ var Radio = function (_React$Component) {
             'div',
             { htmlFor: id },
             _react2.default.createElement(
-              'i',
+              'div',
               { style: _stylesheet2.default.radioIcon },
               this.props.selected ? _react2.default.createElement('span', { style: ds }) : null
             ),
-            this.renderChildren()
+            _react2.default.createElement(
+              'div',
+              { style: _stylesheet2.default.radioContent },
+              this.renderChildren()
+            )
           )
         )
       );
