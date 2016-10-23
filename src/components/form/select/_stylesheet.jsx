@@ -31,6 +31,8 @@ let styles = {
     zIndex: 999,
     width: '100%',
     top: 0,
+    height: 280,
+    overflow: 'auto',
     border: '1px solid ' + defaults.colors.gray3,
   },
 
