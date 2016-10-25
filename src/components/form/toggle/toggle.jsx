@@ -13,9 +13,6 @@ export default class Toggle extends Component {
     onChange: PropTypes.func,
     className: PropTypes.string
   }
-  static contextTypes = {
-    router: PropTypes.func
-  }
   state = {
     selectedIndex: 0,
     cursorStyle: {},

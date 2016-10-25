@@ -114,7 +114,4 @@ Toggle.propTypes = {
   onChange: _react.PropTypes.func,
   className: _react.PropTypes.string
 };
-Toggle.contextTypes = {
-  router: _react.PropTypes.func
-};
 exports.default = Toggle;
