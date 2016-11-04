@@ -23,7 +23,10 @@ var formatCurrency = exports.formatCurrency = function formatCurrency(amt) {
 };
 
 var formatNumber = exports.formatNumber = function formatNumber(num) {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  var numberString = num.toString();
+  var numberParts = numberString.split('.');
+  var n = numberParts[0] + (numberParts[1] ? '.' + numberParts[1].slice(0, 2) : '');
+  return n.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 var numberToString = exports.numberToString = function numberToString(value) {

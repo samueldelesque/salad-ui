@@ -102,8 +102,14 @@ var Area = function (_Component) {
     }
   }, {
     key: 'renderTipText',
-    value: function renderTipText(text, data) {
-      return text.replace('{{date}}', (0, _moment2.default)(data.date).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{date1}}', (0, _moment2.default)(data.date1).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{date2}}', (0, _moment2.default)(data.date2).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{value}}', (0, _formatter.formatNumber)(data.value));
+    value: function renderTipText(template, data) {
+      if (typeof template === 'function') {
+        return template(data);
+      } else if (typeof template === 'string') {
+        return template.replace('{{date}}', (0, _moment2.default)(data.date).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{date1}}', (0, _moment2.default)(data.date1).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{date2}}', (0, _moment2.default)(data.date2).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{value}}', (0, _formatter.formatNumber)(data.value));
+      } else {
+        throw new Error('Invalid labelTemplate type!');
+      }
     }
   }, {
     key: 'renderTips',
@@ -188,7 +194,7 @@ var Area = function (_Component) {
             x: xBase - _this3.props.tipsWidth / 2 + 2,
             y: yBase - _this3.props.strokeWidth - tipHeight - tipOffset + _this3.props.tipsPadding + 30,
             style: { fontSize: 16, fontWeight: 'bold' },
-            dangerouslySetInnerHTML: { __html: _this3.renderTipText(_this3.props.labelTemplate, { value: point.value }) }
+            dangerouslySetInnerHTML: { __html: _this3.renderTipText(_this3.props.labelTemplate, { value: point.value, date: point.time }) }
           })
         );
       });
@@ -363,9 +369,6 @@ var Area = function (_Component) {
       var yMultiplier = 1 + 1 / this.props.yPadding;
       var roundedYMax = Math.max(Math.ceil(yMax / yRoundup) * yRoundup, 1);
       var naturalYPadding = roundedYMax - yMax;
-      if (naturalYPadding < yMax * yMultiplier) roundedYMax = roundedYMax * yMultiplier;
-
-      console.log(yMax, roundedYMax, yRoundup);
 
       // xMin = 0,
       var xMin = Math.min.apply(Math, _toConsumableArray(data.map(function (point, index) {
@@ -439,7 +442,6 @@ Area.propTypes = {
   labelFontSize: _react2.default.PropTypes.number,
   labelTextShadow: _react2.default.PropTypes.string,
   labelColor: _react2.default.PropTypes.string,
-  labelTemplate: _react2.default.PropTypes.string,
   fillColor: _react2.default.PropTypes.string,
   maxOverflow: _react2.default.PropTypes.number,
   yLabelsOutside: _react2.default.PropTypes.bool,
@@ -467,7 +469,7 @@ Area.defaultProps = {
   labelFontSize: 12,
   labelTextShadow: '1px 1px #fff',
   labelColor: '#555',
-  labelTemplate: '{{value}}',
+  labelTemplate: '{{value}}', // or function(value, date){ return value + "$ on " + date}
   fillColor: 'rgba(191, 216, 246, 0.3)',
   maxOverflow: 20,
   yLabelsOutside: false,

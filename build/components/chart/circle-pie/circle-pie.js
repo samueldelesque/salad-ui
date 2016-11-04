@@ -60,12 +60,12 @@ var CirclePie = function (_Component) {
           startAngle = 0,
           endAngle = 3.6 * this.props.percent,
           label = this.props.percent + '%',
-          labelLeftOffset = label.length * -0.4 + 0.5,
+          labelLeftOffset = label.length === 3 ? -0.95 : -0.6,
           arc = this.describeArc(center, center, radius, startAngle, endAngle);
 
       return _react2.default.createElement(
         _chart2.default,
-        { width: this.props.width, height: this.props.height, border: this.props.border },
+        { width: this.props.width, style: this.props.style, height: this.props.height, border: this.props.border },
         _react2.default.createElement('circle', {
           cx: center,
           cy: center,
@@ -84,7 +84,7 @@ var CirclePie = function (_Component) {
             x: center,
             y: center,
             dx: labelLeftOffset + 'em',
-            dy: '.45em',
+            dy: '.35em',
             fill: this.props.labelColor,
             fontWeight: this.props.labelFontWeight,
             fontSize: this.props.labelFontSize },
@@ -107,13 +107,15 @@ CirclePie.propTypes = {
   fillColor: _react2.default.PropTypes.string,
   startAngle: _react2.default.PropTypes.number,
   endAngle: _react2.default.PropTypes.number,
-  radius: _react2.default.PropTypes.number
+  radius: _react2.default.PropTypes.number,
+  style: _react2.default.PropTypes.object
 };
 CirclePie.defaultProps = {
   width: 150,
   height: 150,
   border: 'none',
   strokeWidth: 10,
+  style: {},
   labelColor: '#408AE5',
   labelFontSize: '1.2em',
   labelFontWeight: 'bold',

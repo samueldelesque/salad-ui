@@ -5,6 +5,7 @@ export default class Chart extends Component{
     border: 'none',
     height: 400,
     width: 600,
+    style: {},
   }
 
   render(){
@@ -12,7 +13,7 @@ export default class Chart extends Component{
       <svg
         className={`react-chart ${this.props.type}`}
         width={this.props.width}
-        style={{overflow: 'visible', border: this.props.border}}
+        style={{overflow: 'visible', border: this.props.border, ...this.props.style}}
         height={this.props.height}>
         {this.props.children}
       </svg>

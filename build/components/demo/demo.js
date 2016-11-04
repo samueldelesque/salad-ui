@@ -50,7 +50,7 @@ if (_glob2.default.canUseDom()) {
   window.SaladUI = _saladUi2.default;
 }
 
-var chartData = [{ time: new Date('2010-04-01'), value: 0.512, label: "{{value}} active users" }, { time: new Date('2010-04-02'), value: 0.992, label: "{{value}} active users" }, { time: new Date('2010-04-03'), value: 0.1052, label: "{{value}} active users" }, { time: new Date('2010-04-04'), value: 0.1153, label: "{{value}} active users" }, { time: new Date('2010-04-05'), value: 0.1701, label: "{{value}} active users" }, { time: new Date('2010-04-06'), value: 0.1110, label: "{{value}} active users" }];
+var chartData = [{ time: new Date('2010-04-01'), value: 5102 }, { time: new Date('2010-04-02'), value: 22902 }, { time: new Date('2010-04-03'), value: 10052 }, { time: new Date('2010-04-04'), value: 11053 }, { time: new Date('2010-04-05'), value: 17001 }, { time: new Date('2010-04-06'), value: 21010 }];
 
 var selectOptions = [{ name: 'tofu', value: -2, calories: 400 }, { name: 'bacon', value: -1, calories: 900 }, { name: 'roasted chicken', value: 0, calories: 600 }, { name: 'steak', value: 1, calories: 700 }];
 
@@ -244,6 +244,119 @@ var Demo = function (_React$Component) {
         _react2.default.createElement(
           'section',
           { ref: 'firstSection' },
+          _react2.default.createElement(
+            'h2',
+            null,
+            'Chart'
+          ),
+          _react2.default.createElement(
+            'ul',
+            { className: 'functionality' },
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'React Component'
+                ),
+                ' Area'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                'const chartData = [{time: new Date(\'1990-01-02\'), value: 1231}]\n\n<SaladUI.Chart.Area\n  width={900}\n  height={300}\n  labelTemplate={data=>`Cats ate ${SaladUI.Lib.formatter.formatCurrency(data.value, \'USD\')} worth of fish that day.`}\n  data={chartData} width={560}\n/>'
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_saladUi2.default.Chart.Area, {
+                  width: this.state.sectionWidth,
+                  height: this.state.sectionWidth * 0.6,
+                  labelTemplate: function labelTemplate(data) {
+                    return 'Cats ate ' + _saladUi2.default.Lib.formatter.formatCurrency(data.value, 'USD') + ' worth of fish that day.';
+                  },
+                  data: chartData
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'React Component'
+                ),
+                ' Bar Metric'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                '<SaladUI.Chart.BarMetric\n  label={\'Cats\'}\n  percent={20}\n  value={String(20)}\n  metricName="%"\n/>'
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_saladUi2.default.Chart.BarMetric, {
+                  label: 'White Cats',
+                  percent: 20,
+                  value: String(20),
+                  metricName: '%'
+                }),
+                _react2.default.createElement(_saladUi2.default.Chart.BarMetric, {
+                  label: 'Black Cats',
+                  percent: 40,
+                  value: String(40),
+                  metricName: '%'
+                }),
+                _react2.default.createElement(_saladUi2.default.Chart.BarMetric, {
+                  label: 'Other Cats',
+                  percent: 40,
+                  value: String(40),
+                  metricName: '%'
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'React Component'
+                ),
+                ' Circle Pie'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                '<SaladUI.Chart.CirclePie\n  width={100}\n  height={100}\n  strokeWidth={7}\n  percent={42}\n  strokeColor="rgb(31, 207, 101)"\n  fillColor="rgb(31, 207, 101)"\n/>'
+              ),
+              _react2.default.createElement(
+                'div',
+                { style: { display: 'flex', justifyContent: 'space-around', marginTop: 40, alignItems: 'flex-end' } },
+                _react2.default.createElement(_saladUi2.default.Chart.CirclePie, { width: 120, height: 120, strokeWidth: 20, percent: 49, labelColor: 'rgb(245, 210, 84)', strokeColor: 'rgb(245, 210, 84)' }),
+                _react2.default.createElement(_saladUi2.default.Chart.CirclePie, { width: 160, height: 160, strokeWidth: 20, percent: 42 }),
+                _react2.default.createElement(_saladUi2.default.Chart.CirclePie, { width: 200, height: 200, strokeWidth: 20, labelColor: 'rgb(31, 207, 101)', strokeColor: 'rgb(31, 207, 101)', percent: 72 }),
+                _react2.default.createElement(_saladUi2.default.Chart.CirclePie, { width: 160, height: 160, strokeWidth: 20, percent: 32, labelColor: 'rgb(245, 84, 133)', strokeColor: 'rgb(245, 84, 133)' }),
+                _react2.default.createElement(_saladUi2.default.Chart.CirclePie, { width: 120, height: 120, strokeWidth: 20, percent: 3, labelColor: 'rgb(169, 84, 245)', strokeColor: 'rgb(169, 84, 245)' })
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'section',
+          null,
           _react2.default.createElement(
             'h2',
             null,
@@ -493,25 +606,6 @@ var Demo = function (_React$Component) {
                   { style: { fontStyle: 'italic', opacity: .3 } },
                   'Function'
                 ),
-                ' currencyToSymbol'
-              ),
-              _react2.default.createElement(
-                'pre',
-                null,
-                'currencyToSymbol(\'USD\')\n// $'
-              )
-            ),
-            _react2.default.createElement(
-              'li',
-              null,
-              _react2.default.createElement(
-                'h3',
-                null,
-                _react2.default.createElement(
-                  'span',
-                  { style: { fontStyle: 'italic', opacity: .3 } },
-                  'Function'
-                ),
                 ' f'
               ),
               _react2.default.createElement(
@@ -536,7 +630,16 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                'glob.canUseDom()\n// true'
+                'glob.canUseDom()'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  _saladUi2.default.Lib.glob.canUseDom() ? 'true' : 'false'
+                )
               )
             ),
             _react2.default.createElement(
@@ -550,12 +653,105 @@ var Demo = function (_React$Component) {
                   { style: { fontStyle: 'italic', opacity: .3 } },
                   'Function'
                 ),
-                ' numberToString'
+                ' formatter.numberToString'
               ),
               _react2.default.createElement(
                 'pre',
                 null,
-                'numberToString(10782)\n// 11k'
+                'numberToString(10782.123)'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  _saladUi2.default.Lib.formatter.numberToString(10782.123)
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'Function'
+                ),
+                ' formatter.formatNumber'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                'formatNumber(10782.123)'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  _saladUi2.default.Lib.formatter.formatNumber(10782.123)
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'Function'
+                ),
+                ' formatter.currencyToSymbol'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                'currencyToSymbol(\'USD\')'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  _saladUi2.default.Lib.formatter.currencyToSymbol('USD')
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'Function'
+                ),
+                ' formatter.formatCurrency'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                'formatCurrency(205.12, \'EUR\')'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  _saladUi2.default.Lib.formatter.formatCurrency(205.12, 'EUR')
+                )
               )
             ),
             _react2.default.createElement(
@@ -596,40 +792,6 @@ var Demo = function (_React$Component) {
                 'tracking.trackPage(\'SaladUI Demo\')\ntracking.trackEvent(\'eventName\', {ga: {label: \'test\'}})'
               )
             )
-          )
-        ),
-        _react2.default.createElement(
-          'section',
-          null,
-          _react2.default.createElement(
-            'h2',
-            null,
-            'Stylesheet'
-          )
-        ),
-        _react2.default.createElement(
-          'section',
-          null,
-          _react2.default.createElement(
-            'h2',
-            null,
-            'Chart'
-          ),
-          _react2.default.createElement(
-            'pre',
-            null,
-            '\nconst chartData = [{time: new Date(\'1990-01-02\'), value: 1231}]\n\n<SaladUI.Chart.Area\n  width={900}\n  height={300}\n  labelTemplate="{{value}} cats ate here that day"\n  data={chartData} width={560}\n  />'
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(_saladUi2.default.Chart.Area, {
-              width: this.state.sectionWidth,
-              height: this.state.sectionWidth * 0.6,
-              strokeWidth: 3,
-              strokeDasharray: 3,
-              labelTemplate: 'Over {{value}} cats ate here that day.',
-              data: chartData })
           )
         ),
         _react2.default.createElement(

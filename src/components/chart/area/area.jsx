@@ -39,7 +39,6 @@ export default class Area extends Component{
     labelFontSize: React.PropTypes.number,
     labelTextShadow: React.PropTypes.string,
     labelColor: React.PropTypes.string,
-    labelTemplate: React.PropTypes.string,
     fillColor: React.PropTypes.string,
     maxOverflow: React.PropTypes.number,
     yLabelsOutside: React.PropTypes.bool,
@@ -68,7 +67,7 @@ export default class Area extends Component{
     labelFontSize: 12,
     labelTextShadow: '1px 1px #fff',
     labelColor: '#555',
-    labelTemplate: '{{value}}',
+    labelTemplate: '{{value}}', // or function(value, date){ return value + "$ on " + date}
     fillColor: 'rgba(191, 216, 246, 0.3)',
     maxOverflow: 20,
     yLabelsOutside: false,
@@ -106,12 +105,20 @@ export default class Area extends Component{
     this.refs[point.ref].style.display = 'none'
   }
 
-  renderTipText(text, data){
-    return text
+  renderTipText(template, data){
+    if(typeof(template) === 'function'){
+      return template(data)
+    }
+    else if(typeof(template) === 'string'){
+      return template
       .replace('{{date}}', moment(data.date).format(data.dateFormat || 'YYYY-MM-DD'))
       .replace('{{date1}}', moment(data.date1).format(data.dateFormat || 'YYYY-MM-DD'))
       .replace('{{date2}}', moment(data.date2).format(data.dateFormat || 'YYYY-MM-DD'))
       .replace('{{value}}', formatNumber(data.value))
+    }
+    else{
+      throw new Error('Invalid labelTemplate type!')
+    }
   }
 
   renderTips(data, xMin, yMin, xSpread, ySpread, xScale, yScale){
@@ -203,7 +210,7 @@ export default class Area extends Component{
             x={xBase - this.props.tipsWidth / 2 + 2}
             y={yBase - this.props.strokeWidth - tipHeight - tipOffset + this.props.tipsPadding + 30}
             style={{fontSize: 16, fontWeight: 'bold'}}
-            dangerouslySetInnerHTML={{__html: this.renderTipText(this.props.labelTemplate, {value: point.value})}}
+            dangerouslySetInnerHTML={{__html: this.renderTipText(this.props.labelTemplate, {value: point.value, date: point.time})}}
           />
         </g>
       )
@@ -354,10 +361,6 @@ export default class Area extends Component{
     const yMultiplier = 1 + 1 / this.props.yPadding
     let roundedYMax = Math.max(Math.ceil(yMax/yRoundup) * yRoundup,1)
     const naturalYPadding = roundedYMax - yMax
-    if(naturalYPadding < yMax * yMultiplier)
-      roundedYMax = roundedYMax * yMultiplier
-
-    console.log(yMax,roundedYMax,yRoundup)
 
         // xMin = 0,
     let xMin = Math.min(...data.map((point, index) => point.time)), //either smallest timestamp or 0

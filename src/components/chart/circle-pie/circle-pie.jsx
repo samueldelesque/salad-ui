@@ -14,6 +14,7 @@ export default class CirclePie extends Component{
     startAngle: React.PropTypes.number,
     endAngle: React.PropTypes.number,
     radius: React.PropTypes.number,
+    style: React.PropTypes.object,
   }
 
   static defaultProps = {
@@ -21,6 +22,7 @@ export default class CirclePie extends Component{
     height: 150,
     border: 'none',
     strokeWidth: 10,
+    style: {},
     labelColor: '#408AE5',
     labelFontSize: '1.2em',
     labelFontWeight: 'bold',
@@ -59,11 +61,11 @@ export default class CirclePie extends Component{
         startAngle = 0,
         endAngle = 3.6 * this.props.percent,
         label = `${this.props.percent}%`,
-        labelLeftOffset = label.length * -0.4 + 0.5,
+        labelLeftOffset = label.length === 3 ? -0.95 : -0.6,
         arc = this.describeArc(center, center, radius, startAngle, endAngle)
 
     return (
-      <Chart width={this.props.width} height={this.props.height} border={this.props.border}>
+      <Chart width={this.props.width} style={this.props.style} height={this.props.height} border={this.props.border}>
         <circle
           cx={center}
           cy={center}
@@ -80,7 +82,7 @@ export default class CirclePie extends Component{
           x={center}
           y={center}
           dx={`${labelLeftOffset}em`}
-          dy=".45em"
+          dy=".35em"
           fill={this.props.labelColor}
           fontWeight={this.props.labelFontWeight}
           fontSize={this.props.labelFontSize}>

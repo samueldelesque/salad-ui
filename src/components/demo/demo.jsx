@@ -13,12 +13,12 @@ if(glob.canUseDom()){
 }
 
 const chartData = [
-  {time: new Date('2010-04-01'), value: 0.512, label: "{{value}} active users"},
-  {time: new Date('2010-04-02'), value: 0.992, label: "{{value}} active users"},
-  {time: new Date('2010-04-03'), value: 0.1052, label: "{{value}} active users"},
-  {time: new Date('2010-04-04'), value: 0.1153, label: "{{value}} active users"},
-  {time: new Date('2010-04-05'), value: 0.1701, label: "{{value}} active users"},
-  {time: new Date('2010-04-06'), value: 0.1110, label: "{{value}} active users"},
+  {time: new Date('2010-04-01'), value: 5102},
+  {time: new Date('2010-04-02'), value: 22902},
+  {time: new Date('2010-04-03'), value: 10052},
+  {time: new Date('2010-04-04'), value: 11053},
+  {time: new Date('2010-04-05'), value: 17001},
+  {time: new Date('2010-04-06'), value: 21010},
 ];
 
 const selectOptions = [
@@ -120,6 +120,83 @@ export default class Demo extends React.Component {
           <SaladUI.Util.Alert type="error">Code snippets not shown on mobile!</SaladUI.Util.Alert>
         </section>
         <section ref="firstSection">
+          <h2>Chart</h2>
+          <ul className="functionality">
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Area</h3>
+              <pre>
+{`const chartData = [{time: new Date('1990-01-02'), value: 1231}]
+
+<SaladUI.Chart.Area
+  width={900}
+  height={300}
+  labelTemplate={data=>\`Cats ate \${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.\`}
+  data={chartData} width={560}
+/>`}
+              </pre>
+              <div>
+                <SaladUI.Chart.Area
+                  width={this.state.sectionWidth}
+                  height={this.state.sectionWidth*0.6}
+                  labelTemplate={data=>`Cats ate ${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.`}
+                  data={chartData}
+                />
+              </div>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Bar Metric</h3>
+              <pre>
+{`<SaladUI.Chart.BarMetric
+  label={'Cats'}
+  percent={20}
+  value={String(20)}
+  metricName="%"
+/>`}
+              </pre>
+              <div>
+                <SaladUI.Chart.BarMetric
+                  label={'White Cats'}
+                  percent={20}
+                  value={String(20)}
+                  metricName="%"
+                />
+                <SaladUI.Chart.BarMetric
+                  label={'Black Cats'}
+                  percent={40}
+                  value={String(40)}
+                  metricName="%"
+                />
+                <SaladUI.Chart.BarMetric
+                  label={'Other Cats'}
+                  percent={40}
+                  value={String(40)}
+                  metricName="%"
+                />
+              </div>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Circle Pie</h3>
+              <pre>
+{`<SaladUI.Chart.CirclePie
+  width={100}
+  height={100}
+  strokeWidth={7}
+  percent={42}
+  strokeColor="rgb(31, 207, 101)"
+  fillColor="rgb(31, 207, 101)"
+/>`}
+              </pre>
+              <div style={{display: 'flex', justifyContent: 'space-around', marginTop: 40, alignItems: 'flex-end'}}>
+                <SaladUI.Chart.CirclePie width={120} height={120} strokeWidth={20} percent={49} labelColor="rgb(245, 210, 84)" strokeColor="rgb(245, 210, 84)"/>
+                <SaladUI.Chart.CirclePie width={160} height={160} strokeWidth={20} percent={42}/>
+                <SaladUI.Chart.CirclePie width={200} height={200} strokeWidth={20} labelColor="rgb(31, 207, 101)" strokeColor="rgb(31, 207, 101)" percent={72}/>
+                <SaladUI.Chart.CirclePie width={160} height={160} strokeWidth={20} percent={32} labelColor="rgb(245, 84, 133)" strokeColor="rgb(245, 84, 133)"/>
+                <SaladUI.Chart.CirclePie width={120} height={120} strokeWidth={20} percent={3} labelColor="rgb(169, 84, 245)" strokeColor="rgb(169, 84, 245)"/>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section>
           <h2>Form</h2>
           <ul className="functionality">
             <li>
@@ -199,13 +276,6 @@ export default class Demo extends React.Component {
               </pre>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> currencyToSymbol</h3>
-              <pre>
-{`currencyToSymbol('USD')
-// $`}
-              </pre>
-            </li>
-            <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> f</h3>
               <pre>
 {`f.get('http://api.dailymotion.com/user/spi0n')
@@ -222,16 +292,37 @@ f.get('/user/spi0n')`}
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> glob</h3>
               <pre>
-{`glob.canUseDom()
-// true`}
+                {`glob.canUseDom()`}
               </pre>
+              <p><strong>{SaladUI.Lib.glob.canUseDom()?'true':'false'}</strong></p>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> numberToString</h3>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.numberToString</h3>
               <pre>
-{`numberToString(10782)
-// 11k`}
+                {`numberToString(10782.123)`}
               </pre>
+              <p><strong>{SaladUI.Lib.formatter.numberToString(10782.123)}</strong></p>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.formatNumber</h3>
+              <pre>
+                {`formatNumber(10782.123)`}
+              </pre>
+              <p><strong>{SaladUI.Lib.formatter.formatNumber(10782.123)}</strong></p>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.currencyToSymbol</h3>
+              <pre>
+                {`currencyToSymbol('USD')`}
+              </pre>
+              <p><strong>{SaladUI.Lib.formatter.currencyToSymbol('USD')}</strong></p>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.formatCurrency</h3>
+              <pre>
+                {`formatCurrency(205.12, 'EUR')`}
+              </pre>
+              <p><strong>{SaladUI.Lib.formatter.formatCurrency(205.12, 'EUR')}</strong></p>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> sso</h3>
@@ -250,32 +341,6 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
               </pre>
             </li>
           </ul>
-        </section>
-        <section>
-          <h2>Stylesheet</h2>
-        </section>
-        <section>
-          <h2>Chart</h2>
-          <pre>
-{`
-const chartData = [{time: new Date('1990-01-02'), value: 1231}]
-
-<SaladUI.Chart.Area
-  width={900}
-  height={300}
-  labelTemplate="{{value}} cats ate here that day"
-  data={chartData} width={560}
-  />`}
-          </pre>
-          <div>
-            <SaladUI.Chart.Area
-              width={this.state.sectionWidth}
-              height={this.state.sectionWidth*0.6}
-              strokeWidth={3}
-              strokeDasharray={3}
-              labelTemplate="Over {{value}} cats ate here that day."
-              data={chartData}/>
-          </div>
         </section>
         <section>
           <h2>Util</h2>

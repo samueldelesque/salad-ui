@@ -10,6 +10,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _formatter = require('../../../lib/formatter');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28,6 +30,11 @@ var Bar = function (_React$Component) {
   }
 
   _createClass(Bar, [{
+    key: 'formatValue',
+    value: function formatValue(value) {
+      return this.props.metricName === '%' ? Math.round(value) : (0, _formatter.formatNumber)(value);
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -69,7 +76,7 @@ var Bar = function (_React$Component) {
                 display: 'inline-block',
                 color: this.props.metricColor,
                 textAlign: 'right' } },
-            (this.props.value ? this.props.value + " " : "") + this.props.metricName
+            this.formatValue(this.props.value) + ' ' + this.props.metricName
           )
         ),
         _react2.default.createElement('br', { style: { display: 'table', clear: 'both' } })

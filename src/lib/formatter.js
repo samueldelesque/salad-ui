@@ -16,7 +16,10 @@ export const formatCurrency = (amt, currency='') => {
 }
 
 export const formatNumber = (num) => {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const numberString = num.toString()
+  const numberParts = numberString.split('.')
+  const n = numberParts[0] + (numberParts[1] ? '.' + numberParts[1].slice(0,2) : '')
+  return n.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 export const numberToString = (value) => {

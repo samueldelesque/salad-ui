@@ -29,7 +29,7 @@ export default class Bar extends React.Component{
   }
 
   formatValue(value){
-     this.props.metricName === '%' ? return Math.round(value) : formatNumber(value)
+     return this.props.metricName === '%' ? Math.round(value) : formatNumber(value)
   }
 
   render(){
