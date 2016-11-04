@@ -359,11 +359,13 @@ var Area = function (_Component) {
       var yMax = Math.max.apply(Math, _toConsumableArray(data.map(function (point) {
         return point.value;
       })));
-      var yRoundup = Math.pow(10, String(yMax).length - 1);
+      var yRoundup = Math.pow(10, String(Math.round(yMax)).length - 1);
       var yMultiplier = 1 + 1 / this.props.yPadding;
-      var roundedYMax = Math.ceil(yMax / yRoundup) * yRoundup;
+      var roundedYMax = Math.max(Math.ceil(yMax / yRoundup) * yRoundup, 1);
       var naturalYPadding = roundedYMax - yMax;
       if (naturalYPadding < yMax * yMultiplier) roundedYMax = roundedYMax * yMultiplier;
+
+      console.log(yMax, roundedYMax, yRoundup);
 
       // xMin = 0,
       var xMin = Math.min.apply(Math, _toConsumableArray(data.map(function (point, index) {

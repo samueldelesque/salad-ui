@@ -1,4 +1,5 @@
 import React from 'react'
+import {formatNumber} from '../../../lib/formatter'
 
 export default class Bar extends React.Component{
   static defaultProps = {
@@ -25,6 +26,10 @@ export default class Bar extends React.Component{
     metricColor: React.PropTypes.string,
     barColor: React.PropTypes.string,
     barRailColor: React.PropTypes.string,
+  }
+
+  formatValue(value){
+     this.props.metricName === '%' ? return Math.round(value) : formatNumber(value)
   }
 
   render(){
@@ -56,7 +61,7 @@ export default class Bar extends React.Component{
               display: 'inline-block',
               color: this.props.metricColor,
               textAlign: 'right'}}>
-              {(this.props.value ? this.props.value + " " : "") + this.props.metricName}
+              {`${this.formatValue(this.props.value)} ${this.props.metricName}`}
           </div>
         </div>
         <br style={{display: 'table',clear: 'both'}}/>

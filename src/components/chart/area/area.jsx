@@ -350,12 +350,14 @@ export default class Area extends Component{
     // let xMax = this.props.data.length - 1
     const xMax = Math.max(...data.map((point, index) => point.time), data.length) //either a timestamp or number of items
     const yMax = Math.max(...data.map(point => point.value))
-    const yRoundup = Math.pow(10, String(yMax).length-1)
+    const yRoundup = Math.pow(10, String(Math.round(yMax)).length-1)
     const yMultiplier = 1 + 1 / this.props.yPadding
-    let roundedYMax = Math.ceil(yMax/yRoundup) * yRoundup
+    let roundedYMax = Math.max(Math.ceil(yMax/yRoundup) * yRoundup,1)
     const naturalYPadding = roundedYMax - yMax
     if(naturalYPadding < yMax * yMultiplier)
       roundedYMax = roundedYMax * yMultiplier
+
+    console.log(yMax,roundedYMax,yRoundup)
 
         // xMin = 0,
     let xMin = Math.min(...data.map((point, index) => point.time)), //either smallest timestamp or 0
