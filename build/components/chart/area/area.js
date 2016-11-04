@@ -18,6 +18,8 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _formatter = require('../../../lib/formatter');
+
 var _chart = require('../chart/chart');
 
 var _chart2 = _interopRequireDefault(_chart);
@@ -41,16 +43,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  *
  *
  */
-
-var numberToString = function numberToString(value) {
-  if (typeof value !== 'number') return value;
-  if (value > 1000000000) return Math.round(value / 100000000) / 10 + 'B';
-  if (value > 10000000) return Math.round(value / 1000000) + 'M';
-  if (value > 1000000) return Math.round(value / 100000) / 10 + 'M';
-  if (value > 10000) return Math.round(value / 1000) + 'K';
-  if (value > 1000) return Math.round(value / 100) / 10 + 'K';
-  return Math.round(value * 100) / 100;
-};
 
 var Area = function (_Component) {
   _inherits(Area, _Component);
@@ -111,7 +103,7 @@ var Area = function (_Component) {
   }, {
     key: 'renderTipText',
     value: function renderTipText(text, data) {
-      return text.replace('{{date}}', (0, _moment2.default)(data.date).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{date1}}', (0, _moment2.default)(data.date1).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{date2}}', (0, _moment2.default)(data.date2).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{value}}', numberToString(data.value));
+      return text.replace('{{date}}', (0, _moment2.default)(data.date).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{date1}}', (0, _moment2.default)(data.date1).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{date2}}', (0, _moment2.default)(data.date2).format(data.dateFormat || 'YYYY-MM-DD')).replace('{{value}}', (0, _formatter.formatNumber)(data.value));
     }
   }, {
     key: 'renderTips',
@@ -255,7 +247,7 @@ var Area = function (_Component) {
     }
   }, {
     key: 'describeYAxis',
-    value: function describeYAxis(yMin, ySpread, yScale, yPadding) {
+    value: function describeYAxis(yMin, ySpread, yScale) {
       function ruler(value, m) {
         if (!m) m = 100;
         if (value > m) ruler(value, m * 5);
@@ -272,7 +264,7 @@ var Area = function (_Component) {
           return { y: isZero ? yScale : (ySpread - k * rule) * yScale };
         }),
         labels: labels.map(function (k) {
-          var v = k * rule * 2;return { y: isZero ? yScale : (ySpread - k * rule * 2) * yScale, txt: Math.round(v + yMin) };
+          var v = k * rule * 2;return { y: isZero ? yScale : (ySpread - k * rule * 2) * yScale, txt: (0, _formatter.formatNumber)(Math.round(v + yMin)) };
         })
       };
     }
@@ -363,28 +355,30 @@ var Area = function (_Component) {
       // let xMax = this.props.data.length - 1
       var xMax = Math.max.apply(Math, _toConsumableArray(data.map(function (point, index) {
         return point.time;
-      })).concat([data.length])),
-          //either a timestamp or number of items
-      yMax = Math.max.apply(Math, _toConsumableArray(data.map(function (point) {
+      })).concat([data.length])); //either a timestamp or number of items
+      var yMax = Math.max.apply(Math, _toConsumableArray(data.map(function (point) {
         return point.value;
-      }))) * (1 + 1 / this.props.yPadding),
-
+      })));
+      var yRoundup = Math.pow(10, String(yMax).length - 1);
+      var yMultiplier = 1 + 1 / this.props.yPadding;
+      var roundedYMax = Math.ceil(yMax / yRoundup) * yRoundup;
+      var naturalYPadding = roundedYMax - yMax;
+      if (naturalYPadding < yMax * yMultiplier) roundedYMax = roundedYMax * yMultiplier;
 
       // xMin = 0,
-      xMin = Math.min.apply(Math, _toConsumableArray(data.map(function (point, index) {
+      var xMin = Math.min.apply(Math, _toConsumableArray(data.map(function (point, index) {
         return point.time;
       }))),
           //either smallest timestamp or 0
       yMin = this.props.useDynamicYMin ? Math.min.apply(Math, _toConsumableArray(data.map(function (point) {
         return point.value;
-      }))) - yMax / 5 : 0,
+      }))) - roundedYMax / 5 : 0,
           xSpread = xMax - xMin,
-          ySpread = yMax - yMin,
+          ySpread = roundedYMax - yMin,
           xScale = this.activeWidth / (xSpread || 1),
           yScale = this.activeHeight / (ySpread || 1),
-          yPadding = yMax / this.props.yPadding,
           line = this.describeLine(data, xMin, yMin, xSpread, ySpread, xScale, yScale),
-          yAxis = this.describeYAxis(yMin, ySpread, yScale, yPadding),
+          yAxis = this.describeYAxis(yMin, ySpread, yScale),
           xAxis = this.describeXAxis(xMin, xSpread, xScale, data),
           isZero = ySpread === 0 && yMin === 0;
 
@@ -414,8 +408,8 @@ var Area = function (_Component) {
           });
         }),
         xAxis.labels.map(this.renderLabel.bind(this)),
-        this.renderPoints(data, xMin, yMin, xSpread, ySpread, xScale, yScale, yPadding),
-        this.renderTips(data, xMin, yMin, xSpread, ySpread, xScale, yScale, yPadding)
+        this.renderPoints(data, xMin, yMin, xSpread, ySpread, xScale, yScale),
+        this.renderTips(data, xMin, yMin, xSpread, ySpread, xScale, yScale)
       );
     }
   }]);

@@ -182,9 +182,6 @@ Badge.propTypes = {
   children: _react.PropTypes.any,
   position: _react.PropTypes.string
 };
-Badge.contextTypes = {
-  router: _react.PropTypes.func
-};
 Badge.defaultProps = {
   position: 'btm-end'
 };

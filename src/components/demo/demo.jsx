@@ -13,12 +13,12 @@ if(glob.canUseDom()){
 }
 
 const chartData = [
-  {time: new Date('2010-04-01'), value: 0, label: "{{value}} active users"},
-  {time: new Date('2010-04-02'), value: 9, label: "{{value}} active users"},
-  {time: new Date('2010-04-03'), value: 5, label: "{{value}} active users"},
-  {time: new Date('2010-04-04'), value: 15, label: "{{value}} active users"},
-  {time: new Date('2010-04-05'), value: 7, label: "{{value}} active users"},
-  {time: new Date('2010-04-06'), value: 13, label: "{{value}} active users"},
+  {time: new Date('2010-04-01'), value: 512, label: "{{value}} active users"},
+  {time: new Date('2010-04-02'), value: 992, label: "{{value}} active users"},
+  {time: new Date('2010-04-03'), value: 1052, label: "{{value}} active users"},
+  {time: new Date('2010-04-04'), value: 1153, label: "{{value}} active users"},
+  {time: new Date('2010-04-05'), value: 1701, label: "{{value}} active users"},
+  {time: new Date('2010-04-06'), value: 1110, label: "{{value}} active users"},
 ];
 
 const selectOptions = [

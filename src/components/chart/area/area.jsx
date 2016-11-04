@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import moment from 'moment'
+import {formatNumber} from '../../../lib/formatter'
 
 import Chart from '../chart/chart'
 
@@ -13,16 +14,6 @@ import Chart from '../chart/chart'
  *
  *
  */
-
-const numberToString = function (value){
- if(typeof value !== 'number') return value
- if(value > 1000000000) return Math.round(value/100000000)/10 + 'B'
- if(value > 10000000) return Math.round(value/1000000) + 'M'
- if(value > 1000000) return Math.round(value/100000)/10 + 'M'
- if(value > 10000) return Math.round(value/1000) + 'K'
- if(value > 1000) return Math.round(value/100)/10 + 'K'
- return Math.round(value*100)/100
-}
 
 export default class Area extends Component{
   tipsData = {}
@@ -120,7 +111,7 @@ export default class Area extends Component{
       .replace('{{date}}', moment(data.date).format(data.dateFormat || 'YYYY-MM-DD'))
       .replace('{{date1}}', moment(data.date1).format(data.dateFormat || 'YYYY-MM-DD'))
       .replace('{{date2}}', moment(data.date2).format(data.dateFormat || 'YYYY-MM-DD'))
-      .replace('{{value}}', numberToString(data.value))
+      .replace('{{value}}', formatNumber(data.value))
   }
 
   renderTips(data, xMin, yMin, xSpread, ySpread, xScale, yScale){
@@ -271,7 +262,7 @@ export default class Area extends Component{
     )
   }
 
-  describeYAxis(yMin, ySpread, yScale, yPadding){
+  describeYAxis(yMin, ySpread, yScale){
     function ruler(value, m){
       if(!m) m = 100
       if(value > m) ruler(value, m * 5)
@@ -285,7 +276,7 @@ export default class Area extends Component{
 
     return {
       gridLines: lines.map(k => {return {y: isZero ? yScale : (ySpread - k * rule) * yScale}}),
-      labels: labels.map(k => {var v = k * rule * 2;return {y: isZero ? yScale : (ySpread - k * rule * 2) * yScale, txt: Math.round(v + yMin)}})
+      labels: labels.map(k => {var v = k * rule * 2;return {y: isZero ? yScale : (ySpread - k * rule * 2) * yScale, txt: formatNumber(Math.round(v + yMin))}})
     }
   }
 
@@ -357,24 +348,30 @@ export default class Area extends Component{
     data = data.sort((a,b) => a.time === b.time ? 0 : a.time > b.time ? 1 : -1)
 
     // let xMax = this.props.data.length - 1
-    let xMax = Math.max(...data.map((point, index) => point.time), data.length), //either a timestamp or number of items
-        yMax = Math.max(...data.map(point => point.value)) * (1 + 1 / this.props.yPadding),
+    const xMax = Math.max(...data.map((point, index) => point.time), data.length) //either a timestamp or number of items
+    const yMax = Math.max(...data.map(point => point.value))
+    const yRoundup = Math.pow(10, String(yMax).length-1)
+    const yMultiplier = 1 + 1 / this.props.yPadding
+    let roundedYMax = Math.ceil(yMax/yRoundup) * yRoundup
+    const naturalYPadding = roundedYMax - yMax
+    if(naturalYPadding < yMax * yMultiplier)
+      roundedYMax = roundedYMax * yMultiplier
 
         // xMin = 0,
-        xMin = Math.min(...data.map((point, index) => point.time)), //either smallest timestamp or 0
-        yMin = this.props.useDynamicYMin ? Math.min(...data.map(point => point.value)) - yMax / 5 : 0,
+    let xMin = Math.min(...data.map((point, index) => point.time)), //either smallest timestamp or 0
+        yMin = this.props.useDynamicYMin ? Math.min(...data.map(point => point.value)) - roundedYMax / 5 : 0,
 
         xSpread = (xMax - xMin),
-        ySpread = (yMax - yMin),
+        ySpread = (roundedYMax - yMin),
         xScale = this.activeWidth / (xSpread || 1),
         yScale = this.activeHeight / (ySpread || 1),
-        yPadding = yMax / this.props.yPadding,
 
         line = this.describeLine(data, xMin, yMin, xSpread, ySpread, xScale, yScale),
-        yAxis = this.describeYAxis(yMin, ySpread, yScale, yPadding),
+        yAxis = this.describeYAxis(yMin, ySpread, yScale),
         xAxis = this.describeXAxis(xMin, xSpread, xScale, data),
 
         isZero = ySpread === 0 && yMin === 0
+
 
     return (
       <Chart width={this.props.width} height={this.props.height} type="area">
@@ -402,8 +399,8 @@ export default class Area extends Component{
           strokeWidth={1}
         />)}
         {xAxis.labels.map(::this.renderLabel)}
-        {this.renderPoints(data, xMin, yMin, xSpread, ySpread, xScale, yScale, yPadding)}
-        {this.renderTips(data, xMin, yMin, xSpread, ySpread, xScale, yScale, yPadding)}
+        {this.renderPoints(data, xMin, yMin, xSpread, ySpread, xScale, yScale)}
+        {this.renderTips(data, xMin, yMin, xSpread, ySpread, xScale, yScale)}
       </Chart>
     )
   }

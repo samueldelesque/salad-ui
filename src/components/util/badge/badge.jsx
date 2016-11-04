@@ -41,11 +41,7 @@ export default class Badge extends Component {
     children: PropTypes.any,
     position: PropTypes.string
   }
-
-  static contextTypes = {
-    router: PropTypes.func
-  }
-
+  
   static defaultProps = {
     position: 'btm-end'
   }
