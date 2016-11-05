@@ -10,6 +10,7 @@ console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fr
 if(glob.canUseDom()){
   console.log('Test SaladUI functions directly using window.SaladUI')
   window.SaladUI = SaladUI
+  window.enableHighlight = ()=>SaladUI.Util.Trans.enableHighlight()
 }
 
 const chartData = [
@@ -118,6 +119,15 @@ export default class Demo extends React.Component {
         </header>
         <section className="warning-mobile">
           <SaladUI.Util.Alert type="error">Code snippets not shown on mobile!</SaladUI.Util.Alert>
+        </section>
+        <section>
+          <h2>1.x.x release notes</h2>
+          <ol>
+            <li><i className="snippet">Trans</i> component and translate function should now take parameters in object notation format: <i className="snippet">{`{user:{name:'Sam'}}`}</i></li>
+            <li><i className="snippet">f</i> is renamed to <i className="snippet">http</i></li>
+            <li>Added a nigty formatter.render function to format templates.</li>
+            <li>Various updates to the charts, better yLabel formatting.</li>
+          </ol>
         </section>
         <section ref="firstSection">
           <h2>Chart</h2>
@@ -299,30 +309,37 @@ f.get('/user/spi0n')`}
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.numberToString</h3>
               <pre>
-                {`numberToString(10782.123)`}
+                {`formatter.numberToString(10782.123)`}
               </pre>
               <p><strong>{SaladUI.Lib.formatter.numberToString(10782.123)}</strong></p>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.formatNumber</h3>
               <pre>
-                {`formatNumber(10782.123)`}
+                {`formatter.formatNumber(10782.123)`}
               </pre>
               <p><strong>{SaladUI.Lib.formatter.formatNumber(10782.123)}</strong></p>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.currencyToSymbol</h3>
               <pre>
-                {`currencyToSymbol('USD')`}
+                {`formatter.currencyToSymbol('USD')`}
               </pre>
               <p><strong>{SaladUI.Lib.formatter.currencyToSymbol('USD')}</strong></p>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.formatCurrency</h3>
               <pre>
-                {`formatCurrency(205.12, 'EUR')`}
+                {`formatter.formatCurrency(205.12, 'EUR')`}
               </pre>
               <p><strong>{SaladUI.Lib.formatter.formatCurrency(205.12, 'EUR')}</strong></p>
+            </li>
+            <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.render</h3>
+              <pre>
+                {`formatter.render('{greeting}! I am {user.age} years old.', {greeting: 'Hello', user: {age: 32}})`}
+              </pre>
+              <p><strong>{SaladUI.Lib.formatter.render('{greeting}! I am {user.age} years old.', {greeting: 'Hello', user: {age: 32}})}</strong></p>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> sso</h3>
@@ -364,13 +381,13 @@ tracking.trackEvent('eventName', {ga: {label: 'test'}})`}
 //Can also be used as a plain function (to return a string instead of React Component)
 // Salad.Util.translate(key, args, [pluralform n], [translations])
 SaladUI.Util.translate(
-  'There are %(elephants)s elephants in %(city).',
+  'There are {elephants} elephants in {city}.',
   {elephants: 24, city: "Hong Kong"},
   24,
   {
-    'There are %(elephants)s elephants in %(city).': {
-      singular: "Il y a %(elephants)s elephant à %(city)s.",
-      plural: "Il y a %(elephants)s elephants à %(city)s.",
+    'There are {elephants} elephants in {city}': {
+      singular: "Il y a {elephants} elephant à {city}.",
+      plural: "Il y a {elephants} elephants à {city}.",
     }
   }
 )`}</pre>
@@ -378,17 +395,19 @@ SaladUI.Util.translate(
                 <SaladUI.Util.Trans context={{"Hello": "Bonjour"}}>Hello</SaladUI.Util.Trans>
               </h3>
               <p>
+                <strong>
                 {SaladUI.Util.translate(
-                  'There are %(elephants)s elephants in %(city).',
+                  'There are {elephants} elephants in {city}.',
                   {elephants: 24, city: "Hong Kong"},
                   24,
                   {
-                    'There are %(elephants)s elephants in %(city).': {
-                      singular: "Il y a %(elephants)s elephant à %(city)s.",
-                      plural: "Il y a %(elephants)s elephants à %(city)s.",
+                    'There are {elephants} elephants in {city}.': {
+                      singular: "Il y a {elephants} éléphant à {city}.",
+                      plural: "Il y a {elephants} éléphants à {city}.",
                     }
                   }
                 )}
+                </strong>
               </p>
             </li>
             <li>

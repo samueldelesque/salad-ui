@@ -1,5 +1,5 @@
 import React from 'react'
-import { get } from '../../../lib/fetch-methods'
+import { get } from '../../../lib/http'
 import Grid from '../../util/grid/grid'
 import Preview, {mediaTypes} from '../preview/preview'
 import Button from '../../util/button/button'

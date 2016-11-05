@@ -1,4 +1,4 @@
-import {fetchJSON, post, del, patch} from './fetch-methods'
+import {fetchJSON, post, del, patch} from './http'
 
 export default class ds {
   static apiEndpoint;

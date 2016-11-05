@@ -35,8 +35,13 @@ input, textarea {
 a {
   text-decoration: none; }
 
-ol, ul {
+ul {
   list-style: none; }
+
+ol {
+  list-style: decimal; }
+  ol li {
+    padding: 10px 20px; }
 
 blockquote, q {
   quotes: none; }

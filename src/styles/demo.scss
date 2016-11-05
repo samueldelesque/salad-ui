@@ -68,8 +68,14 @@ input, textarea{
 a{
   text-decoration: none;
 }
-ol, ul {
+ul {
 	list-style: none;
+}
+ol{
+  list-style: decimal;
+  li{
+    padding:10px 20px;
+  }
 }
 blockquote, q {
 	quotes: none;

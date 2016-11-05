@@ -1,10 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.sso = exports.scrollTo = exports.glob = exports.f = exports.tracking = exports.domainService = exports.formatter = exports.childrenWithProps = undefined;
-
 var _childrenWithProps = require('./children-with-props');
 
 var _childrenWithProps2 = _interopRequireDefault(_childrenWithProps);
@@ -21,9 +16,9 @@ var _tracking = require('./tracking');
 
 var tracking = _interopRequireWildcard(_tracking);
 
-var _fetchMethods = require('./fetch-methods');
+var _http = require('./http');
 
-var f = _interopRequireWildcard(_fetchMethods);
+var http = _interopRequireWildcard(_http);
 
 var _glob = require('./glob');
 
@@ -41,14 +36,16 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import polyfill from './polyfill'
-exports.childrenWithProps = _childrenWithProps2.default;
-exports.formatter = formatter;
-exports.domainService = _domainService2.default;
-exports.tracking = tracking;
-exports.f = f;
-exports.glob = _glob2.default;
-exports.
-// polyfill,
-scrollTo = _scrollTo2.default;
-exports.sso = _sso2.default;
+var Lib = {
+  childrenWithProps: _childrenWithProps2.default,
+  formatter: formatter,
+  domainService: _domainService2.default,
+  tracking: tracking,
+  http: http,
+  f: http,
+  glob: _glob2.default,
+  scrollTo: _scrollTo2.default,
+  sso: _sso2.default
+};
+
+module.exports = Lib;

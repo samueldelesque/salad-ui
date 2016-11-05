@@ -2,20 +2,21 @@ import childrenWithProps from './children-with-props'
 import * as formatter from './formatter.js'
 import domainService from './domain-service'
 import * as tracking from './tracking'
-import * as f from './fetch-methods'
+import * as http from './http'
 import glob from './glob'
-// import polyfill from './polyfill'
 import scrollTo from './scroll-to'
 import sso from './sso'
 
-export {
+const Lib = {
   childrenWithProps,
   formatter,
   domainService,
   tracking,
-  f,
+  http,
+  f: http,
   glob,
-  // polyfill,
   scrollTo,
   sso,
 }
+
+module.exports = Lib

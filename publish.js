@@ -4,7 +4,7 @@ var fs = require('fs-extra'),
     exec = require('child_process').exec,
     _ = require('lodash'),
     distDir = root + '/dist/',
-    versionBase = '0.0.',
+    versionBase = '1.0.',
     currentVersion = parseFloat(require(distDir + 'salad-ui/package.json').version.split('.')[2]),
     version = versionBase + (currentVersion + 1)
 
@@ -16,7 +16,7 @@ entrypoints['salad-ui.transitions'] = 'transitions.css'
 
 const childPackage = {
   "name":"salad-ui",
-  "version":"0.0.0",
+  "version":"1.0.0",
   "description":
   "Reusable React UI Components Toolkit",
   "main":"./salad-ui.js",
