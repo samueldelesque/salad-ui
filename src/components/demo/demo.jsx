@@ -286,17 +286,17 @@ export default class Demo extends React.Component {
               </pre>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> f</h3>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> http (fetch wrapper)</h3>
               <pre>
-{`f.get('http://api.dailymotion.com/user/spi0n')
+{`http.get('https://api.dailymotion.com/user/spi0n')
 .then(json => console.log(json))
 .catch(err => console.error(err))
 
-f.post('http://api.dailymotion.com/user/spi0n')
-f.delete('http://api.dailymotion.com/user/spi0n')
+http.post('https://api.dailymotion.com/user/spi0n')
+http.delete('https://api.dailymotion.com/user/spi0n')
 
-f.apiFactory('http://api.dailymotion.com', {access_token: 'abc'})
-f.get('/user/spi0n')`}
+http.apiFactory('https://api.dailymotion.com', {access_token: 'abc'})
+http.get('/user/spi0n')`}
               </pre>
             </li>
             <li>
