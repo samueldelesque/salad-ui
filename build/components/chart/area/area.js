@@ -48,7 +48,7 @@ var Area = function (_Component) {
   _inherits(Area, _Component);
 
   function Area() {
-    var _ref;
+    var _Object$getPrototypeO;
 
     var _temp, _this, _ret;
 
@@ -58,7 +58,7 @@ var Area = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Area.__proto__ || Object.getPrototypeOf(Area)).call.apply(_ref, [this].concat(args))), _this), _this.tipsData = {}, _this.xAxisLabels = [], _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Area)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.tipsData = {}, _this.xAxisLabels = [], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Area, [{
@@ -74,7 +74,7 @@ var Area = function (_Component) {
   }, {
     key: 'centerElement',
     value: function centerElement(el, center, width) {
-      var setWidth = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+      var setWidth = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
 
       if (setWidth) el.setAttribute('width', width);
       var xPos = center - width / 2;

@@ -18,7 +18,7 @@ var ds = function () {
   _createClass(ds, null, [{
     key: 'init',
     value: function init(token) {
-      var apiEndpoint = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var apiEndpoint = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
       if (apiEndpoint) ds.apiEndpoint = apiEndpoint;else ds.apiEndpoint = 'https://api.pxlad.io';
 
@@ -37,8 +37,8 @@ var ds = function () {
   }, {
     key: 'getDomains',
     value: function getDomains() {
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var maxResults = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 20;
+      var page = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+      var maxResults = arguments.length <= 1 || arguments[1] === undefined ? 20 : arguments[1];
 
       var url = ds.apiEndpoint + '/domains?access_token=' + ds.token + '&page=' + page + '&max_results=' + maxResults;
       return (0, _http.fetchJSON)(url).then(function (data) {
@@ -50,8 +50,8 @@ var ds = function () {
   }, {
     key: 'getVerifiedDomains',
     value: function getVerifiedDomains() {
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var maxResults = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 20;
+      var page = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+      var maxResults = arguments.length <= 1 || arguments[1] === undefined ? 20 : arguments[1];
 
       var url = ds.apiEndpoint + '/domains?access_token=' + ds.token + '&where=' + encodeURIComponent('{"status":"verified"}');
       '&page=' + page + '&max_results=' + maxResults;

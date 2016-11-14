@@ -28,7 +28,7 @@ var TextClamp = function (_Component) {
   function TextClamp() {
     _classCallCheck(this, TextClamp);
 
-    return _possibleConstructorReturn(this, (TextClamp.__proto__ || Object.getPrototypeOf(TextClamp)).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(TextClamp).apply(this, arguments));
   }
 
   _createClass(TextClamp, [{

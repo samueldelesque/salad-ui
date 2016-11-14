@@ -30,7 +30,7 @@ var Anchor = function (_Component) {
   _inherits(Anchor, _Component);
 
   function Anchor() {
-    var _ref;
+    var _Object$getPrototypeO;
 
     var _temp, _this, _ret;
 
@@ -40,7 +40,7 @@ var Anchor = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Anchor.__proto__ || Object.getPrototypeOf(Anchor)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Anchor)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
       hovered: false
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }

@@ -47,7 +47,7 @@ var Badge = function (_Component) {
   function Badge() {
     _classCallCheck(this, Badge);
 
-    return _possibleConstructorReturn(this, (Badge.__proto__ || Object.getPrototypeOf(Badge)).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Badge).apply(this, arguments));
   }
 
   _createClass(Badge, [{

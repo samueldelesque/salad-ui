@@ -28,7 +28,7 @@ var CirclePie = function (_Component) {
   function CirclePie() {
     _classCallCheck(this, CirclePie);
 
-    return _possibleConstructorReturn(this, (CirclePie.__proto__ || Object.getPrototypeOf(CirclePie)).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(CirclePie).apply(this, arguments));
   }
 
   _createClass(CirclePie, [{

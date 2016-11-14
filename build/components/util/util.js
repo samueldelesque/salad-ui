@@ -20,10 +20,6 @@ var _button = require('./button/button');
 
 var _button2 = _interopRequireDefault(_button);
 
-var _formatNumber = require('./format-number/format-number');
-
-var _formatNumber2 = _interopRequireDefault(_formatNumber);
-
 var _grid = require('./grid/grid');
 
 var _grid2 = _interopRequireDefault(_grid);
@@ -59,7 +55,6 @@ exports.default = {
   Anchor: _anchor2.default,
   Badge: _badge2.default,
   Button: _button2.default,
-  FormatNumber: _formatNumber2.default,
   Grid: _grid2.default,
   TagList: _tagList2.default,
   TextClamp: _textClamp2.default,

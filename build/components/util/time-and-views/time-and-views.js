@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -28,7 +28,7 @@ var TimeAndViews = function (_React$Component) {
   _inherits(TimeAndViews, _React$Component);
 
   function TimeAndViews() {
-    var _ref;
+    var _Object$getPrototypeO;
 
     var _temp, _this, _ret;
 
@@ -38,7 +38,7 @@ var TimeAndViews = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TimeAndViews.__proto__ || Object.getPrototypeOf(TimeAndViews)).call.apply(_ref, [this].concat(args))), _this), _this.trans = DM_ENV['utils/time-and-views'], _this.defaultProps = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(TimeAndViews)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.trans = DM_ENV['utils/time-and-views'], _this.defaultProps = {
       views: null,
       time: null
     }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -47,8 +47,8 @@ var TimeAndViews = function (_React$Component) {
   _createClass(TimeAndViews, [{
     key: 'timesince',
     value: function timesince(val) {
-      var date = typeof val === 'number' ? new Date(val * 1000) : (typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' ? val : new Date(),
-          now = new Date();
+      var date = typeof val === 'number' ? new Date(val * 1000) : (typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' ? val : new Date();
+      var now = new Date();
 
       var diff = (now - date) / 36e5;
 

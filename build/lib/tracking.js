@@ -22,7 +22,7 @@ var services = [{
 }];
 
 var enableDebug = exports.enableDebug = function enableDebug() {
-  var enabled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  var enabled = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
   return debug = enabled;
 };
 
@@ -32,7 +32,7 @@ var initialize = exports.initialize = function initialize(events) {
 };
 
 var trigger = exports.trigger = function trigger(event) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
   if (debug) console.log('tracking.trigger Event: ' + event, 'options: ', options, 'eventsCache: ', eventsCache);
   if (typeof event !== 'string') {

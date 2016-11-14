@@ -26,7 +26,7 @@ var Chart = function (_Component) {
   function Chart() {
     _classCallCheck(this, Chart);
 
-    return _possibleConstructorReturn(this, (Chart.__proto__ || Object.getPrototypeOf(Chart)).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Chart).apply(this, arguments));
   }
 
   _createClass(Chart, [{

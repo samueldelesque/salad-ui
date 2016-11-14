@@ -24,7 +24,7 @@ var Spinner = function (_React$Component) {
   function Spinner() {
     _classCallCheck(this, Spinner);
 
-    return _possibleConstructorReturn(this, (Spinner.__proto__ || Object.getPrototypeOf(Spinner)).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Spinner).apply(this, arguments));
   }
 
   _createClass(Spinner, [{

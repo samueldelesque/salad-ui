@@ -34,7 +34,7 @@ var Overlay = function (_Component) {
   _inherits(Overlay, _Component);
 
   function Overlay() {
-    var _ref;
+    var _Object$getPrototypeO;
 
     var _temp, _this, _ret;
 
@@ -44,7 +44,7 @@ var Overlay = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Overlay.__proto__ || Object.getPrototypeOf(Overlay)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Overlay)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
       responsive: false
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }

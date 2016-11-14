@@ -125,7 +125,7 @@ var Icon = function (_React$Component) {
   function Icon() {
     _classCallCheck(this, Icon);
 
-    return _possibleConstructorReturn(this, (Icon.__proto__ || Object.getPrototypeOf(Icon)).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Icon).apply(this, arguments));
   }
 
   _createClass(Icon, [{
@@ -133,20 +133,23 @@ var Icon = function (_React$Component) {
     value: function render() {
       // For some funny reason, react can't match client and server
       // code when the properties are not specified individually
+
       var _Object$assign = Object.assign({}, this.props, {
         style: Object.assign({}, this.props.style, {
           width: this.props.width,
           height: this.props.height
         })
-      }),
-          type = _Object$assign.type,
-          width = _Object$assign.width,
-          height = _Object$assign.height,
-          fill = _Object$assign.fill,
-          x = _Object$assign.x,
-          y = _Object$assign.y,
-          viewBox = _Object$assign.viewBox,
-          props = _objectWithoutProperties(_Object$assign, ['type', 'width', 'height', 'fill', 'x', 'y', 'viewBox']);
+      });
+
+      var type = _Object$assign.type;
+      var width = _Object$assign.width;
+      var height = _Object$assign.height;
+      var fill = _Object$assign.fill;
+      var x = _Object$assign.x;
+      var y = _Object$assign.y;
+      var viewBox = _Object$assign.viewBox;
+
+      var props = _objectWithoutProperties(_Object$assign, ['type', 'width', 'height', 'fill', 'x', 'y', 'viewBox']);
 
       return _react2.default.createElement(
         'svg',
