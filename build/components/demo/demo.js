@@ -53,6 +53,11 @@ if (_glob2.default.canUseDom()) {
   };
 }
 
+var Trans = _saladUi2.default.Util.Trans.factory({
+  'It is a beautiful day!': 'C\'est une belle journée!',
+  'The parrot ate the cake.': 'Le perroquet a mangé le gateau.'
+});
+
 var chartData = [{ time: new Date('2010-04-01'), value: 5102 }, { time: new Date('2010-04-02'), value: 22902 }, { time: new Date('2010-04-03'), value: 10052 }, { time: new Date('2010-04-04'), value: 11053 }, { time: new Date('2010-04-05'), value: 17001 }, { time: new Date('2010-04-06'), value: 21010 }];
 
 var selectOptions = [{ name: 'tofu', value: -2, calories: 400 }, { name: 'bacon', value: -1, calories: 900 }, { name: 'roasted chicken', value: 0, calories: 600 }, { name: 'steak', value: 1, calories: 700 }];
@@ -662,12 +667,12 @@ var Demo = function (_React$Component) {
                   { style: { fontStyle: 'italic', opacity: .3 } },
                   'Function'
                 ),
-                ' f'
+                ' http (fetch wrapper)'
               ),
               _react2.default.createElement(
                 'pre',
                 null,
-                'f.get(\'http://api.dailymotion.com/user/spi0n\')\n.then(json => console.log(json))\n.catch(err => console.error(err))\n\nf.post(\'http://api.dailymotion.com/user/spi0n\')\nf.delete(\'http://api.dailymotion.com/user/spi0n\')\n\nf.apiFactory(\'http://api.dailymotion.com\', {access_token: \'abc\'})\nf.get(\'/user/spi0n\')'
+                'http.get(\'https://api.dailymotion.com/user/spi0n\')\n.then(json => console.log(json))\n.catch(err => console.error(err))\n\nhttp.post(\'https://api.dailymotion.com/user/spi0n\')\nhttp.delete(\'https://api.dailymotion.com/user/spi0n\')\n\nhttp.apiFactory(\'https://api.dailymotion.com\', {access_token: \'abc\'})\nhttp.get(\'/user/spi0n\')'
               )
             ),
             _react2.default.createElement(
@@ -945,7 +950,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                '<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>\n\n//Can also be used as a plain function (to return a string instead of React Component)\n// Salad.Util.translate(key, args, [pluralform n], [translations])\nSaladUI.Util.translate(\n  \'There are {elephants} elephants in {city}.\',\n  {elephants: 24, city: "Hong Kong"},\n  24,\n  {\n    \'There are {elephants} elephants in {city}\': {\n      singular: "Il y a {elephants} elephant à {city}.",\n      plural: "Il y a {elephants} elephants à {city}.",\n    }\n  }\n)'
+                '<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>\n\n//Can also be used as a plain function (to return a string instead of React Component)\n// Salad.Util.translate(key, args, [pluralform n], [translations])\nSaladUI.Util.translate(\n  \'There are {elephants} elephants in {city}.\',\n  {elephants: 24, city: "Hong Kong"},\n  24,\n  {\n    \'There are {elephants} elephants in {city}\': {\n      singular: "Il y a {elephants} elephant à {city}.",\n      plural: "Il y a {elephants} elephants à {city}.",\n    }\n  }\n)\n\n// Or as a factory passing the translations object:\nconst Trans = SaladUI.Util.Trans.factory({\n  \'It is a beautiful day!\': \'C\'est une belle journée!\'\n  \'The parrot ate the cake.\': \'Le perroquet a mangé le gateau.\'\n})\n<Trans>It is a beautiful day!</Trans>\nTrans.translate(\'The parrot ate the cake.\')'
               ),
               _react2.default.createElement(
                 'h3',
@@ -968,6 +973,28 @@ var Demo = function (_React$Component) {
                       plural: "Il y a {elephants} éléphants à {city}."
                     }
                   })
+                )
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  _react2.default.createElement(
+                    Trans,
+                    null,
+                    'It is a beautiful day!'
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  Trans.translate('The parrot ate the cake.')
                 )
               )
             ),

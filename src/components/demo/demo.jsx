@@ -13,6 +13,11 @@ if(glob.canUseDom()){
   window.enableHighlight = ()=>SaladUI.Util.Trans.enableHighlight()
 }
 
+const Trans = SaladUI.Util.Trans.factory({
+  'It is a beautiful day!': 'C\'est une belle journée!',
+  'The parrot ate the cake.': 'Le perroquet a mangé le gateau.',
+})
+
 const chartData = [
   {time: new Date('2010-04-01'), value: 5102},
   {time: new Date('2010-04-02'), value: 22902},
@@ -390,7 +395,15 @@ SaladUI.Util.translate(
       plural: "Il y a {elephants} elephants à {city}.",
     }
   }
-)`}</pre>
+)
+
+// Or as a factory passing the translations object:
+const Trans = SaladUI.Util.Trans.factory({
+  'It is a beautiful day!': 'C\'est une belle journée!'
+  'The parrot ate the cake.': 'Le perroquet a mangé le gateau.'
+})
+<Trans>It is a beautiful day!</Trans>
+Trans.translate('The parrot ate the cake.')`}</pre>
               <h3>
                 <SaladUI.Util.Trans context={{"Hello": "Bonjour"}}>Hello</SaladUI.Util.Trans>
               </h3>
@@ -407,6 +420,16 @@ SaladUI.Util.translate(
                     }
                   }
                 )}
+                </strong>
+              </p>
+              <p>
+                <strong>
+                <Trans>It is a beautiful day!</Trans>
+                </strong>
+              </p>
+              <p>
+                <strong>
+                {Trans.translate('The parrot ate the cake.')}
                 </strong>
               </p>
             </li>

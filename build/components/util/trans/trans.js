@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isPlural = exports.pluralTypeName = exports.langToTypeMap = exports.pluralTypes = exports.pluralTypeToLanguages = exports.translate = exports.PLURAL_TYPE = exports.LANG = exports.DEBUG = undefined;
+exports.pluralType = exports.pluralTypeName = exports.langToTypeMap = exports.pluralTypes = exports.pluralTypeToLanguages = exports.translate = exports.PLURAL_TYPE = exports.LANG = exports.DEBUG = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -72,9 +72,8 @@ var Trans = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var pluralForm = isPlural(parseFloat(this.props.n || 1));
       var styles = HIGHLIGHT_TRANSLATIONS ? { background: "rgb(23, 80, 167)", color: "white", padding: '0 2px' } : {};
-      var translation = translate(this.props.key || this.props.children, this.props, pluralForm, this.trans || this.props.trans || this.props.context);
+      var translation = translate(this.props.key || this.props.children, this.props, parseFloat(this.props.n || 1), this.trans || this.props.trans || this.props.context);
       var content = HIGHLIGHT_TRANSLATIONS ? (this.props.key || this.props.children) + ' (' + LANG + ')' : translation;
       return _react2.default.createElement('span', { style: styles, dangerouslySetInnerHTML: {
           __html: content
@@ -115,6 +114,34 @@ Trans.setLang = function () {
   exports.PLURAL_TYPE = PLURAL_TYPE = pluralTypeName(locale);
 };
 
+Trans.factory = function (translations) {
+  var _class, _temp3, _initialiseProps2;
+
+  return _temp3 = _class = function (_Trans) {
+    _inherits(T, _Trans);
+
+    function T() {
+      var _Object$getPrototypeO2;
+
+      var _temp2, _this2, _ret2;
+
+      _classCallCheck(this, T);
+
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(T)).call.apply(_Object$getPrototypeO2, [this].concat(args))), _this2), _initialiseProps2.call(_this2), _temp2), _possibleConstructorReturn(_this2, _ret2);
+    }
+
+    return T;
+  }(Trans), _class.translate = function (key, args, pluralForm) {
+    return translate(key, args, pluralForm, translations);
+  }, _initialiseProps2 = function _initialiseProps2() {
+    this.trans = translations;
+  }, _temp3;
+};
+
 var _initialiseProps = function _initialiseProps() {
   this.allowedElements = ['a', 'b', 'i', 'p', 'span', 'br', 'img'];
 };
@@ -127,7 +154,7 @@ var unsafeTranslate = function unsafeTranslate(key, args, pluralForm, trans) {
     if (DEBUG) console.warn('%s is not in translated keys', key, ' - context was ', trans);
   }
   if ((typeof key === 'undefined' ? 'undefined' : _typeof(key)) === 'object' && key.singular) {
-    if (pluralForm) return unsafeTranslate(key.plural, args, pluralForm, trans);else return unsafeTranslate(key.singular, args, pluralForm, trans);
+    if (pluralForm && key[pluralForm]) return unsafeTranslate(key[pluralForm], args, pluralForm, trans);else if (pluralForm === 0 && key['singular']) return unsafeTranslate(key['singular'], args, pluralForm, trans);else if (pluralForm >= 1 && key['plural']) return unsafeTranslate(key['plural'], args, pluralForm, trans);
   }
   var replacements = {};
   Object.keys(args).forEach(function (key) {
@@ -146,12 +173,17 @@ var unsafeTranslate = function unsafeTranslate(key, args, pluralForm, trans) {
   return formatted;
 };
 
-var translate = exports.translate = function translate(key, args, pluralForm, trans) {
+var translate = exports.translate = function translate(key) {
+  var args = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+  var n = arguments.length <= 2 || arguments[2] === undefined ? 1 : arguments[2];
+  var trans = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+
   var translation = key;
-  if ((typeof pluralForm === 'undefined' ? 'undefined' : _typeof(pluralForm)) === 'object') {
-    trans = pluralForm;pluralForm = 1;
+  if ((typeof n === 'undefined' ? 'undefined' : _typeof(n)) === 'object') {
+    trans = n;n = 1;
   }
   try {
+    var pluralForm = pluralType(n);
     translation = unsafeTranslate(key, args, pluralForm, trans);
   } catch (e) {
     console.warn('Failed to produce translation of ', key, e);
@@ -217,7 +249,7 @@ var pluralTypeName = exports.pluralTypeName = function pluralTypeName(locale) {
   var langToPluralType = langToTypeMap(pluralTypeToLanguages);
   return langToPluralType[locale] || langToPluralType.en;
 };
-var isPlural = exports.isPlural = function isPlural() {
+var pluralType = exports.pluralType = function pluralType() {
   var n = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
   return pluralTypes[PLURAL_TYPE](n);
 };

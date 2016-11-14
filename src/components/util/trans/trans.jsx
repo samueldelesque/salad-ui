@@ -27,7 +27,9 @@ export default class Trans extends React.Component {
     delete transRefs[this.transRefsKey]
   }
 
-  static translate = (...args) => translate(...args)
+  static translate = (...args) => {
+    return translate(...args)
+  }
   static enableDebug = (enable = true) => DEBUG = !!enable
   static enableHighlight = (enable = true) => {
     HIGHLIGHT_TRANSLATIONS = !!enable
@@ -37,15 +39,22 @@ export default class Trans extends React.Component {
     LANG = locale
     PLURAL_TYPE = pluralTypeName(locale)
   }
+  static factory = (translations) => {
+    return class T extends Trans {
+      trans = translations
+      static translate = (key, args, pluralForm) => {
+        return translate(key, args, pluralForm, translations)
+      }
+    }
+  }
 
   allowedElements = [
     'a','b', 'i','p','span','br', 'img'
   ]
 
   render() {
-    const pluralForm = isPlural(parseFloat(this.props.n||1))
     const styles = HIGHLIGHT_TRANSLATIONS ? {background: "rgb(23, 80, 167)", color:"white", padding: '0 2px'} : {}
-    const translation = translate(this.props.key || this.props.children, this.props, pluralForm, this.trans || this.props.trans || this.props.context)
+    const translation = translate(this.props.key || this.props.children, this.props, parseFloat(this.props.n||1), this.trans || this.props.trans || this.props.context)
     const content = HIGHLIGHT_TRANSLATIONS ? `${this.props.key || this.props.children} (${LANG})` : translation
     return (
       <span style={styles} dangerouslySetInnerHTML={{
@@ -61,10 +70,12 @@ const unsafeTranslate = (key, args, pluralForm, trans) => {
     if(DEBUG) console.warn('%s is not in translated keys', key, ' - context was ', trans)
   }
   if(typeof(key) === 'object' && key.singular){
-    if(pluralForm)
-      return unsafeTranslate(key.plural, args, pluralForm, trans)
-    else
-      return unsafeTranslate(key.singular, args, pluralForm, trans)
+    if(pluralForm && key[pluralForm])
+      return unsafeTranslate(key[pluralForm], args, pluralForm, trans)
+    else if(pluralForm === 0 && key['singular'])
+      return unsafeTranslate(key['singular'], args, pluralForm, trans)
+    else if(pluralForm >= 1 && key['plural'])
+      return unsafeTranslate(key['plural'], args, pluralForm, trans)
   }
   let replacements = {}
   Object.keys(args).forEach(key =>
@@ -84,10 +95,11 @@ const unsafeTranslate = (key, args, pluralForm, trans) => {
   return formatted
 }
 
-export const translate = (key, args, pluralForm, trans) => {
+export const translate = (key, args={}, n=1, trans={}) => {
   let translation = key
-  if(typeof(pluralForm) === 'object'){trans = pluralForm;pluralForm=1}
+  if(typeof(n) === 'object'){trans = n;n=1}
   try{
+    const pluralForm = pluralType(n)
     translation = unsafeTranslate(key, args, pluralForm, trans)
   }
   catch (e){
@@ -137,4 +149,4 @@ export const pluralTypeName = (locale) => {
   const langToPluralType = langToTypeMap(pluralTypeToLanguages)
   return langToPluralType[locale] || langToPluralType.en
 }
-export const isPlural = (n = 1) => pluralTypes[PLURAL_TYPE](n)
+export const pluralType = (n = 1) => pluralTypes[PLURAL_TYPE](n)
