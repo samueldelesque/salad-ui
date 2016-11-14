@@ -124,7 +124,7 @@ export default class Preview extends Component {
           this.props.selected ? styles.selected : null,
           this.props.style,
         )}>
-        <div style={{width,height}}>
+        <div style={{width,height, overflow: 'hidden', display: 'table'}}>    
           <div
             className={`transition-md transition-timing-ease-in-out ${this.state.hovered&&!this.props.onSelect?'scale-in-md':''}`}
             style={Object.assign(
