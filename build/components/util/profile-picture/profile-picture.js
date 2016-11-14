@@ -26,7 +26,7 @@ var ProfilePicture = function (_React$Component) {
   function ProfilePicture() {
     _classCallCheck(this, ProfilePicture);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ProfilePicture).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ProfilePicture.__proto__ || Object.getPrototypeOf(ProfilePicture)).apply(this, arguments));
   }
 
   _createClass(ProfilePicture, [{

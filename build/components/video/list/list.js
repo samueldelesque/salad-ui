@@ -40,7 +40,7 @@ var List = function (_React$Component) {
   _inherits(List, _React$Component);
 
   function List() {
-    var _Object$getPrototypeO;
+    var _ref;
 
     var _temp, _this, _ret;
 
@@ -50,7 +50,7 @@ var List = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(List)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = List.__proto__ || Object.getPrototypeOf(List)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       videos: [],
       failed: false,
       currentPage: 1,

@@ -15,8 +15,7 @@ var styles = {
     preview: {
       marginBottom: 20,
       display: 'flex',
-      position: 'relative',
-      overflow: 'hidden'
+      position: 'relative'
     },
     image: {
       width: 162,

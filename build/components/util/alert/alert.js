@@ -32,7 +32,7 @@ var Alert = function (_Component) {
   function Alert() {
     _classCallCheck(this, Alert);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Alert).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Alert.__proto__ || Object.getPrototypeOf(Alert)).apply(this, arguments));
   }
 
   _createClass(Alert, [{

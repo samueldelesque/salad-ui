@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.pluralType = exports.pluralTypeName = exports.langToTypeMap = exports.pluralTypes = exports.pluralTypeToLanguages = exports.translate = exports.PLURAL_TYPE = exports.LANG = exports.DEBUG = undefined;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -45,7 +45,7 @@ var Trans = function (_React$Component) {
   _inherits(Trans, _React$Component);
 
   function Trans() {
-    var _Object$getPrototypeO;
+    var _ref;
 
     var _temp, _this, _ret;
 
@@ -55,7 +55,7 @@ var Trans = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Trans)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _initialiseProps.call(_this), _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Trans.__proto__ || Object.getPrototypeOf(Trans)).call.apply(_ref, [this].concat(args))), _this), _initialiseProps.call(_this), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Trans, [{
@@ -94,12 +94,12 @@ Trans.translate = function () {
 };
 
 Trans.enableDebug = function () {
-  var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+  var enable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   return exports.DEBUG = DEBUG = !!enable;
 };
 
 Trans.enableHighlight = function () {
-  var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+  var enable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
   HIGHLIGHT_TRANSLATIONS = !!enable;
   Object.keys(transRefs).map(function (key) {
@@ -108,7 +108,7 @@ Trans.enableHighlight = function () {
 };
 
 Trans.setLang = function () {
-  var locale = arguments.length <= 0 || arguments[0] === undefined ? 'en' : arguments[0];
+  var locale = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'en';
 
   exports.LANG = LANG = locale;
   exports.PLURAL_TYPE = PLURAL_TYPE = pluralTypeName(locale);
@@ -121,7 +121,7 @@ Trans.factory = function (translations) {
     _inherits(T, _Trans);
 
     function T() {
-      var _Object$getPrototypeO2;
+      var _ref2;
 
       var _temp2, _this2, _ret2;
 
@@ -131,7 +131,7 @@ Trans.factory = function (translations) {
         args[_key2] = arguments[_key2];
       }
 
-      return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(T)).call.apply(_Object$getPrototypeO2, [this].concat(args))), _this2), _initialiseProps2.call(_this2), _temp2), _possibleConstructorReturn(_this2, _ret2);
+      return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref2 = T.__proto__ || Object.getPrototypeOf(T)).call.apply(_ref2, [this].concat(args))), _this2), _initialiseProps2.call(_this2), _temp2), _possibleConstructorReturn(_this2, _ret2);
     }
 
     return T;
@@ -174,9 +174,9 @@ var unsafeTranslate = function unsafeTranslate(key, args, pluralForm, trans) {
 };
 
 var translate = exports.translate = function translate(key) {
-  var args = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-  var n = arguments.length <= 2 || arguments[2] === undefined ? 1 : arguments[2];
-  var trans = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+  var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var n = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  var trans = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
   var translation = key;
   if ((typeof n === 'undefined' ? 'undefined' : _typeof(n)) === 'object') {
@@ -250,6 +250,6 @@ var pluralTypeName = exports.pluralTypeName = function pluralTypeName(locale) {
   return langToPluralType[locale] || langToPluralType.en;
 };
 var pluralType = exports.pluralType = function pluralType() {
-  var n = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+  var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
   return pluralTypes[PLURAL_TYPE](n);
 };

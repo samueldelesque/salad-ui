@@ -32,7 +32,7 @@ var FormatNumber = function (_Component) {
   function FormatNumber() {
     _classCallCheck(this, FormatNumber);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(FormatNumber).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FormatNumber.__proto__ || Object.getPrototypeOf(FormatNumber)).apply(this, arguments));
   }
 
   _createClass(FormatNumber, [{

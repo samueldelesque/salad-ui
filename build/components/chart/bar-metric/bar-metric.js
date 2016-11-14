@@ -26,7 +26,7 @@ var Bar = function (_React$Component) {
   function Bar() {
     _classCallCheck(this, Bar);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Bar).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Bar.__proto__ || Object.getPrototypeOf(Bar)).apply(this, arguments));
   }
 
   _createClass(Bar, [{
