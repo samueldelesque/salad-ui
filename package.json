@@ -1,6 +1,6 @@
 {
   "name": "salad-ui-wrapper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "scripts": {
     "dist:copyrequiredcss": "cp ./src/styles/transitions.scss ./dist/salad-ui.transitions/",
