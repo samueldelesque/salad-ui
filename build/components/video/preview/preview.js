@@ -60,7 +60,7 @@ var Preview = function (_Component) {
   _inherits(Preview, _Component);
 
   function Preview() {
-    var _Object$getPrototypeO;
+    var _ref;
 
     var _temp, _this, _ret;
 
@@ -70,7 +70,7 @@ var Preview = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Preview)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.trans = DM_ENV['video/preview'], _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Preview.__proto__ || Object.getPrototypeOf(Preview)).call.apply(_ref, [this].concat(args))), _this), _this.trans = DM_ENV['video/preview'], _this.state = {
       hovered: false
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -141,7 +141,7 @@ var Preview = function (_Component) {
           }, this.state.hovered && this.props.onSelect ? _stylesheet2.default.selectableHover : _stylesheet2.default.selectable, this.props.selected ? _stylesheet2.default.selected : null, this.props.style) },
         _react2.default.createElement(
           'div',
-          { style: { width: width, height: height } },
+          { style: { width: width, height: height, overflow: 'hidden', display: 'table' } },
           _react2.default.createElement('div', {
             className: 'transition-md transition-timing-ease-in-out ' + (this.state.hovered && !this.props.onSelect ? 'scale-in-md' : ''),
             style: Object.assign({}, {

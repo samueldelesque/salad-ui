@@ -24,7 +24,7 @@ var Switch = function (_React$Component) {
   function Switch() {
     _classCallCheck(this, Switch);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Switch).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Switch.__proto__ || Object.getPrototypeOf(Switch)).apply(this, arguments));
   }
 
   _createClass(Switch, [{

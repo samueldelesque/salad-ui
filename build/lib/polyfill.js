@@ -20,7 +20,9 @@ exports.default = function () {
   // 	entries.shim();
   // }
 
+
   // Should be included in es6-shim
+
 
   // if (typeof Object.assign != 'function') {
   //   (function () {

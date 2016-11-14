@@ -66,7 +66,7 @@ var Demo = function (_React$Component) {
   _inherits(Demo, _React$Component);
 
   function Demo() {
-    var _Object$getPrototypeO;
+    var _ref;
 
     var _temp, _this, _ret;
 
@@ -76,7 +76,7 @@ var Demo = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Demo)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Demo.__proto__ || Object.getPrototypeOf(Demo)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       selectedRadio: 'radio1',
       protein: { name: null, value: null, calories: 0 },
       demoSwitch: true,
@@ -950,7 +950,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                '<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>\n\n//Can also be used as a plain function (to return a string instead of React Component)\n// Salad.Util.translate(key, args, [pluralform n], [translations])\nSaladUI.Util.translate(\n  \'There are {elephants} elephants in {city}.\',\n  {elephants: 24, city: "Hong Kong"},\n  24,\n  {\n    \'There are {elephants} elephants in {city}\': {\n      singular: "Il y a {elephants} elephant à {city}.",\n      plural: "Il y a {elephants} elephants à {city}.",\n    }\n  }\n)\n\n// Or as a factory passing the translations object:\nconst Trans = SaladUI.Util.Trans.factory({\n  \'It is a beautiful day!\': \'C\'est une belle journée!\'\n  \'The parrot ate the cake.\': \'Le perroquet a mangé le gateau.\'\n})\n<Trans>It is a beautiful day!</Trans>\nTrans.translate(\'The parrot ate the cake.\')'
+                '<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>\n\n//Can also be used as a plain function (to return a string instead of React Component)\n// Salad.Util.translate(key, args, [pluralform n], [translations])\nSaladUI.Util.translate(\n  \'There are {elephants} elephants in {city}.\',\n  {elephants: 24, city: "Hong Kong"},\n  24,\n  {\n    \'There are {elephants} elephants in {city}\': {\n      singular: "Il y a {elephants} elephant \xE0 {city}.",\n      plural: "Il y a {elephants} elephants \xE0 {city}.",\n    }\n  }\n)\n\n// Or as a factory passing the translations object:\nconst Trans = SaladUI.Util.Trans.factory({\n  \'It is a beautiful day!\': \'C\'est une belle journ\xE9e!\'\n  \'The parrot ate the cake.\': \'Le perroquet a mang\xE9 le gateau.\'\n})\n<Trans>It is a beautiful day!</Trans>\nTrans.translate(\'The parrot ate the cake.\')'
               ),
               _react2.default.createElement(
                 'h3',

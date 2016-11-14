@@ -28,7 +28,7 @@ var RadioGroup = function (_React$Component) {
   function RadioGroup() {
     _classCallCheck(this, RadioGroup);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(RadioGroup).apply(this, arguments));
+    return _possibleConstructorReturn(this, (RadioGroup.__proto__ || Object.getPrototypeOf(RadioGroup)).apply(this, arguments));
   }
 
   _createClass(RadioGroup, [{
