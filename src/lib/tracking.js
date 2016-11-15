@@ -6,17 +6,17 @@ const services = [
     name: 'ga',
     trackEvent: (event, data) => {
       if (typeof(ga) === 'undefined' || ga === false)
-        throw new Error('GA is not available at this time.')
+        console.error('GA is not available at this time.')
       else if (!data.category || !data.action)
-        throw new Error('SaladUI.Tracking: data object is missing category (' + category + ') or action (' + action + ') property.')
+        console.error('SaladUI.Tracking: data object is missing category (' + category + ') or action (' + action + ') property.')
       else
         ga('send', 'event', data.category, data.action, data.label, data.value)
     },
     trackPage: (pageName) => {
       if (typeof(ga) === 'undefined' || ga === false)
-        throw new Error('GA is not available at this time.')
+        console.error('GA is not available at this time.')
       else if (!pageName){
-        throw new Error('SaladUI.Tracking: data object is missing pageName (' + pageName + ').')
+        console.error('SaladUI.Tracking: data object is missing pageName (' + pageName + ').')
       }
       else
         ga('send', {
