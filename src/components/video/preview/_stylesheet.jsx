@@ -6,7 +6,6 @@ const styles = {
       marginBottom: 20,
       display: 'flex',
       position: 'relative',
-      overflow: 'hidden',
     },
     image: {
       width: 162,

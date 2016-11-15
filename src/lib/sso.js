@@ -1,4 +1,4 @@
-import * as f from './fetch-methods'
+import * as http from './http'
 
 export default class SSO {
   static apiEndpoint = 'https://sso.dailymotion.com'
@@ -62,7 +62,7 @@ export default class SSO {
   }
 
   static getSSOAccounts(service){
-    return f.get(SSO.apiEndpoint + '/services/' + service + '/auth?sdx=' + SSO.sdx).then(data => {
+    return http.get(SSO.apiEndpoint + '/services/' + service + '/auth?sdx=' + SSO.sdx).then(data => {
       if(!data.accounts || data.accounts.length === 0)
         throw new Error('NO_ACCOUNT')
       else
@@ -71,7 +71,7 @@ export default class SSO {
   }
 
   static deleteSSOAccount(service, accountId){
-    return f.delete(SSO.apiEndpoint + '/services/' + service + '/accounts/' + accountId + '?sdx=' + SSO.sdx).catch(err => {
+    return http.delete(SSO.apiEndpoint + '/services/' + service + '/accounts/' + accountId + '?sdx=' + SSO.sdx).catch(err => {
         throw new Error('Failed to delete SSO account', res)
     })
   }
@@ -88,7 +88,7 @@ export default class SSO {
   }
 
   static createSSOAccount(service, accountName){
-    return f.post(SSO.apiEndpoint + '/services/' + service + '/accounts?sdx=' + SSO.sdx, {data: {name: accountName}}).then(SSOAccount=>{
+    return http.post(SSO.apiEndpoint + '/services/' + service + '/accounts?sdx=' + SSO.sdx, {data: {name: accountName}}).then(SSOAccount=>{
       return SSO.getSSOAccount(service, SSOAccount.item.id)
     })
   }

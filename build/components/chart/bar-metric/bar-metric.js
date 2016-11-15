@@ -89,7 +89,7 @@ var Bar = function (_React$Component) {
 
 Bar.defaultProps = {
   metricName: 'points',
-  value: 0,
+  value: '0',
   percent: 100,
   metricPadding: 15,
   metricColor: '#777',
@@ -101,7 +101,6 @@ Bar.defaultProps = {
 };
 Bar.propTypes = {
   metricName: _react2.default.PropTypes.string,
-  value: _react2.default.PropTypes.number,
   percent: _react2.default.PropTypes.number,
   barWidth: _react2.default.PropTypes.number,
   barHeight: _react2.default.PropTypes.number,

@@ -4,7 +4,7 @@ import {formatNumber} from '../../../lib/formatter'
 export default class Bar extends React.Component{
   static defaultProps = {
     metricName: 'points',
-    value: 0,
+    value: '0',
     percent: 100,
     metricPadding: 15,
     metricColor: '#777',
@@ -17,7 +17,6 @@ export default class Bar extends React.Component{
 
   static propTypes = {
     metricName: React.PropTypes.string,
-    value: React.PropTypes.number,
     percent: React.PropTypes.number,
     barWidth: React.PropTypes.number,
     barHeight: React.PropTypes.number,

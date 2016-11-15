@@ -141,7 +141,7 @@ var Preview = function (_Component) {
           }, this.state.hovered && this.props.onSelect ? _stylesheet2.default.selectableHover : _stylesheet2.default.selectable, this.props.selected ? _stylesheet2.default.selected : null, this.props.style) },
         _react2.default.createElement(
           'div',
-          { style: { width: width, height: height } },
+          { style: { width: width, height: height, overflow: 'hidden', display: 'table' } },
           _react2.default.createElement('div', {
             className: 'transition-md transition-timing-ease-in-out ' + (this.state.hovered && !this.props.onSelect ? 'scale-in-md' : ''),
             style: Object.assign({}, {

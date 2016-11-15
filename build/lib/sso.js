@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _fetchMethods = require('./fetch-methods');
+var _http = require('./http');
 
-var f = _interopRequireWildcard(_fetchMethods);
+var http = _interopRequireWildcard(_http);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -81,7 +81,7 @@ var SSO = function () {
   }, {
     key: 'getSSOAccounts',
     value: function getSSOAccounts(service) {
-      return f.get(SSO.apiEndpoint + '/services/' + service + '/auth?sdx=' + SSO.sdx).then(function (data) {
+      return http.get(SSO.apiEndpoint + '/services/' + service + '/auth?sdx=' + SSO.sdx).then(function (data) {
         if (!data.accounts || data.accounts.length === 0) throw new Error('NO_ACCOUNT');else return data.accounts;
       }).catch(function (err) {
         throw new Error('Failed to retrieve SSO account', err);
@@ -90,7 +90,7 @@ var SSO = function () {
   }, {
     key: 'deleteSSOAccount',
     value: function deleteSSOAccount(service, accountId) {
-      return f.delete(SSO.apiEndpoint + '/services/' + service + '/accounts/' + accountId + '?sdx=' + SSO.sdx).catch(function (err) {
+      return http.delete(SSO.apiEndpoint + '/services/' + service + '/accounts/' + accountId + '?sdx=' + SSO.sdx).catch(function (err) {
         throw new Error('Failed to delete SSO account', res);
       });
     }
@@ -110,7 +110,7 @@ var SSO = function () {
   }, {
     key: 'createSSOAccount',
     value: function createSSOAccount(service, accountName) {
-      return f.post(SSO.apiEndpoint + '/services/' + service + '/accounts?sdx=' + SSO.sdx, { data: { name: accountName } }).then(function (SSOAccount) {
+      return http.post(SSO.apiEndpoint + '/services/' + service + '/accounts?sdx=' + SSO.sdx, { data: { name: accountName } }).then(function (SSOAccount) {
         return SSO.getSSOAccount(service, SSOAccount.item.id);
       });
     }

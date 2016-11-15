@@ -10,7 +10,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _fetchMethods = require('../../../lib/fetch-methods');
+var _http = require('../../../lib/http');
 
 var _grid = require('../../util/grid/grid');
 
@@ -135,7 +135,7 @@ var List = function (_React$Component) {
       if (props.searchTerm) data.search = props.searchTerm;
       if (props.flags && props.flags.length) data.flags = props.flags.join(',');
 
-      (0, _fetchMethods.get)(this.props.apiURL + endpoint, { data: data, headers: headers }).then(function (res) {
+      (0, _http.get)(this.props.apiURL + endpoint, { data: data, headers: headers }).then(function (res) {
         return _this4[cb](res.list, res.has_more);
       }).catch(function (err) {
         console.error('Failed to fetch videos', err);

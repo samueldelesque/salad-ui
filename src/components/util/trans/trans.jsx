@@ -2,10 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
 import { sprintf } from 'sprintf-js'
+import {render} from '../../../lib/formatter'
 
 export let DEBUG = false
 export let LANG = 'en'
 export let PLURAL_TYPE = 'german'
+let DEPRECATION_WARNING_SHOWED = false
+let HIGHLIGHT_TRANSLATIONS = false
+
+let transRefs = {}
 
 export default class Trans extends React.Component {
   static defaultProps = {
@@ -13,11 +18,34 @@ export default class Trans extends React.Component {
     newLine: '<br/>',
   }
 
-  static translate = (...args) => translate(...args)
+  componentWillMount(){
+    this.transRefsKey = 'transRefs.' + Math.random() + Date.now()
+    transRefs[this.transRefsKey] = this
+  }
+
+  componentWillUnmount(){
+    delete transRefs[this.transRefsKey]
+  }
+
+  static translate = (...args) => {
+    return translate(...args)
+  }
   static enableDebug = (enable = true) => DEBUG = !!enable
+  static enableHighlight = (enable = true) => {
+    HIGHLIGHT_TRANSLATIONS = !!enable
+    Object.keys(transRefs).map(key=>transRefs[key].forceUpdate())
+  }
   static setLang = (locale = 'en') => {
     LANG = locale
     PLURAL_TYPE = pluralTypeName(locale)
+  }
+  static factory = (translations) => {
+    return class T extends Trans {
+      trans = translations
+      static translate = (key, args, pluralForm) => {
+        return translate(key, args, pluralForm, translations)
+      }
+    }
   }
 
   allowedElements = [
@@ -25,47 +53,54 @@ export default class Trans extends React.Component {
   ]
 
   render() {
-    const pluralForm = isPlural(parseFloat(this.props.n||1))
+    const styles = HIGHLIGHT_TRANSLATIONS ? {background: "rgb(23, 80, 167)", color:"white", padding: '0 2px'} : {}
+    const translation = translate(this.props.key || this.props.children, this.props, parseFloat(this.props.n||1), this.trans || this.props.trans || this.props.context)
+    const content = HIGHLIGHT_TRANSLATIONS ? `${this.props.key || this.props.children} (${LANG})` : translation
     return (
-      <span dangerouslySetInnerHTML={{
-          __html: translate(this.props.children, this.props, pluralForm, this.trans || this.props.context)
-        }}></span>
+      <span style={styles} dangerouslySetInnerHTML={{
+        __html: content
+      }}/>
     )
   }
 }
 
-const unsafe_translate = (key, args, pluralForm, trans) => {
+const unsafeTranslate = (key, args, pluralForm, trans) => {
   if(trans && trans[key]) key = trans[key]
   else{
     if(DEBUG) console.warn('%s is not in translated keys', key, ' - context was ', trans)
   }
   if(typeof(key) === 'object' && key.singular){
-    if(pluralForm)
-      return sprintf(key.plural, args)
-    else
-      return sprintf(key.singular, args)
+    if(pluralForm && key[pluralForm])
+      return unsafeTranslate(key[pluralForm], args, pluralForm, trans)
+    else if(pluralForm === 0 && key['singular'])
+      return unsafeTranslate(key['singular'], args, pluralForm, trans)
+    else if(pluralForm >= 1 && key['plural'])
+      return unsafeTranslate(key['plural'], args, pluralForm, trans)
   }
   let replacements = {}
   Object.keys(args).forEach(key =>
     replacements[key] = React.isValidElement(args[key]) ? ReactDOMServer.renderToString(args[key]) : args[key]
   )
-  /*
-  let replacements = zipObject(Object.keys(args), mapObject(args, e => {
-    if(typeof(e) === 'object' && ~this.allowedElements.indexOf(e.type))
-      return ReactDOMServer.renderToString(React.createElement(e.type, e, e.text||null))
-    if(React.isValidElement(e))
-      return ReactDOMServer.renderToString(e)
-    return e
-  }))
-  */
-  return sprintf(key, replacements)
+  let formatted = key
+  if(key.match(/\%\([^\)]+\)/g)){
+    formatted = sprintf(key, replacements)
+    if(formatted !== key && !DEPRECATION_WARNING_SHOWED){
+      console.warn('SaladUI: DEPRECATION WARNING - translate() called with legacy sprintf format! Please upgrade translation keys. https://salad-ui.com', key)
+      DEPRECATION_WARNING_SHOWED = true
+    }
+  }
+  else{
+    formatted = render(key, replacements)
+  }
+  return formatted
 }
 
-export const translate = (key, args, pluralForm, trans) => {
+export const translate = (key, args={}, n=1, trans={}) => {
   let translation = key
-  if(typeof(pluralForm) === 'object'){trans = pluralForm;pluralForm=1}
+  if(typeof(n) === 'object'){trans = n;n=1}
   try{
-    translation = unsafe_translate(key, args, pluralForm, trans)
+    const pluralForm = pluralType(n)
+    translation = unsafeTranslate(key, args, pluralForm, trans)
   }
   catch (e){
     console.warn('Failed to produce translation of ', key, e)
@@ -114,4 +149,4 @@ export const pluralTypeName = (locale) => {
   const langToPluralType = langToTypeMap(pluralTypeToLanguages)
   return langToPluralType[locale] || langToPluralType.en
 }
-export const isPlural = (n = 1) => pluralTypes[PLURAL_TYPE](n)
+export const pluralType = (n = 1) => pluralTypes[PLURAL_TYPE](n)

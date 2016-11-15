@@ -48,7 +48,15 @@ console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fr
 if (_glob2.default.canUseDom()) {
   console.log('Test SaladUI functions directly using window.SaladUI');
   window.SaladUI = _saladUi2.default;
+  window.enableHighlight = function () {
+    return _saladUi2.default.Util.Trans.enableHighlight();
+  };
 }
+
+var Trans = _saladUi2.default.Util.Trans.factory({
+  'It is a beautiful day!': 'C\'est une belle journée!',
+  'The parrot ate the cake.': 'Le perroquet a mangé le gateau.'
+});
 
 var chartData = [{ time: new Date('2010-04-01'), value: 5102 }, { time: new Date('2010-04-02'), value: 22902 }, { time: new Date('2010-04-03'), value: 10052 }, { time: new Date('2010-04-04'), value: 11053 }, { time: new Date('2010-04-05'), value: 17001 }, { time: new Date('2010-04-06'), value: 21010 }];
 
@@ -239,6 +247,59 @@ var Demo = function (_React$Component) {
             _saladUi2.default.Util.Alert,
             { type: 'error' },
             'Code snippets not shown on mobile!'
+          )
+        ),
+        _react2.default.createElement(
+          'section',
+          null,
+          _react2.default.createElement(
+            'h2',
+            null,
+            '1.x.x release notes'
+          ),
+          _react2.default.createElement(
+            'ol',
+            null,
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'i',
+                { className: 'snippet' },
+                'Trans'
+              ),
+              ' component and translate function should now take parameters in object notation format: ',
+              _react2.default.createElement(
+                'i',
+                { className: 'snippet' },
+                '{user:{name:\'Sam\'}}'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'i',
+                { className: 'snippet' },
+                'f'
+              ),
+              ' is renamed to ',
+              _react2.default.createElement(
+                'i',
+                { className: 'snippet' },
+                'http'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              'Added a nigty formatter.render function to format templates.'
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              'Various updates to the charts, better yLabel formatting.'
+            )
           )
         ),
         _react2.default.createElement(
@@ -606,12 +667,12 @@ var Demo = function (_React$Component) {
                   { style: { fontStyle: 'italic', opacity: .3 } },
                   'Function'
                 ),
-                ' f'
+                ' http (fetch wrapper)'
               ),
               _react2.default.createElement(
                 'pre',
                 null,
-                'f.get(\'http://api.dailymotion.com/user/spi0n\')\n.then(json => console.log(json))\n.catch(err => console.error(err))\n\nf.post(\'http://api.dailymotion.com/user/spi0n\')\nf.delete(\'http://api.dailymotion.com/user/spi0n\')\n\nf.apiFactory(\'http://api.dailymotion.com\', {access_token: \'abc\'})\nf.get(\'/user/spi0n\')'
+                'http.get(\'https://api.dailymotion.com/user/spi0n\')\n.then(json => console.log(json))\n.catch(err => console.error(err))\n\nhttp.post(\'https://api.dailymotion.com/user/spi0n\')\nhttp.delete(\'https://api.dailymotion.com/user/spi0n\')\n\nhttp.apiFactory(\'https://api.dailymotion.com\', {access_token: \'abc\'})\nhttp.get(\'/user/spi0n\')'
               )
             ),
             _react2.default.createElement(
@@ -658,7 +719,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                'numberToString(10782.123)'
+                'formatter.numberToString(10782.123)'
               ),
               _react2.default.createElement(
                 'p',
@@ -686,7 +747,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                'formatNumber(10782.123)'
+                'formatter.formatNumber(10782.123)'
               ),
               _react2.default.createElement(
                 'p',
@@ -714,7 +775,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                'currencyToSymbol(\'USD\')'
+                'formatter.currencyToSymbol(\'USD\')'
               ),
               _react2.default.createElement(
                 'p',
@@ -742,7 +803,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                'formatCurrency(205.12, \'EUR\')'
+                'formatter.formatCurrency(205.12, \'EUR\')'
               ),
               _react2.default.createElement(
                 'p',
@@ -751,6 +812,34 @@ var Demo = function (_React$Component) {
                   'strong',
                   null,
                   _saladUi2.default.Lib.formatter.formatCurrency(205.12, 'EUR')
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'Function'
+                ),
+                ' formatter.render'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                'formatter.render(\'{greeting}! I am {user.age} years old.\', {greeting: \'Hello\', user: {age: 32}})'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  _saladUi2.default.Lib.formatter.render('{greeting}! I am {user.age} years old.', { greeting: 'Hello', user: { age: 32 } })
                 )
               )
             ),
@@ -861,7 +950,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'pre',
                 null,
-                '<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>\n\n//Can also be used as a plain function (to return a string instead of React Component)\n// Salad.Util.translate(key, args, [pluralform n], [translations])\nSaladUI.Util.translate(\n  \'There are %(elephants)s elephants in %(city).\',\n  {elephants: 24, city: "Hong Kong"},\n  24,\n  {\n    \'There are %(elephants)s elephants in %(city).\': {\n      singular: "Il y a %(elephants)s elephant à %(city)s.",\n      plural: "Il y a %(elephants)s elephants à %(city)s.",\n    }\n  }\n)'
+                '<Trans context={{"Hello": "Bonjour"}}>Hello</Trans>\n\n//Can also be used as a plain function (to return a string instead of React Component)\n// Salad.Util.translate(key, args, [pluralform n], [translations])\nSaladUI.Util.translate(\n  \'There are {elephants} elephants in {city}.\',\n  {elephants: 24, city: "Hong Kong"},\n  24,\n  {\n    \'There are {elephants} elephants in {city}\': {\n      singular: "Il y a {elephants} elephant à {city}.",\n      plural: "Il y a {elephants} elephants à {city}.",\n    }\n  }\n)\n\n// Or as a factory passing the translations object:\nconst Trans = SaladUI.Util.Trans.factory({\n  \'It is a beautiful day!\': \'C\'est une belle journée!\'\n  \'The parrot ate the cake.\': \'Le perroquet a mangé le gateau.\'\n})\n<Trans>It is a beautiful day!</Trans>\nTrans.translate(\'The parrot ate the cake.\')'
               ),
               _react2.default.createElement(
                 'h3',
@@ -875,12 +964,38 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'p',
                 null,
-                _saladUi2.default.Util.translate('There are %(elephants)s elephants in %(city).', { elephants: 24, city: "Hong Kong" }, 24, {
-                  'There are %(elephants)s elephants in %(city).': {
-                    singular: "Il y a %(elephants)s elephant à %(city)s.",
-                    plural: "Il y a %(elephants)s elephants à %(city)s."
-                  }
-                })
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  _saladUi2.default.Util.translate('There are {elephants} elephants in {city}.', { elephants: 24, city: "Hong Kong" }, 24, {
+                    'There are {elephants} elephants in {city}.': {
+                      singular: "Il y a {elephants} éléphant à {city}.",
+                      plural: "Il y a {elephants} éléphants à {city}."
+                    }
+                  })
+                )
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  _react2.default.createElement(
+                    Trans,
+                    null,
+                    'It is a beautiful day!'
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  Trans.translate('The parrot ate the cake.')
+                )
               )
             ),
             _react2.default.createElement(
