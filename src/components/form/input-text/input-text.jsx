@@ -78,10 +78,6 @@ export default class InputText extends React.Component {
     if (this.props.onClick) {
       this.props.onClick()
     }
-    // Hmmm what's the use?
-    // if (this.props.selectOnClick) {
-    //   e.target.select()
-    // }
   }
 
   handleChange(e){
@@ -128,6 +124,7 @@ export default class InputText extends React.Component {
       value,
       id
     }
+
     allowedInputProps.forEach(property => {
       if(this.props[property]) props[property] = this.props.property
     })

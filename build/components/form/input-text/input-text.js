@@ -100,10 +100,6 @@ var InputText = function (_React$Component) {
       if (this.props.onClick) {
         this.props.onClick();
       }
-      // Hmmm what's the use?
-      // if (this.props.selectOnClick) {
-      //   e.target.select()
-      // }
     }
   }, {
     key: 'handleChange',
@@ -156,6 +152,7 @@ var InputText = function (_React$Component) {
         value: value,
         id: id
       };
+
       allowedInputProps.forEach(function (property) {
         if (_this2.props[property]) props[property] = _this2.props.property;
       });
