@@ -108,8 +108,6 @@ app.get('*', function(req, res) {
     username: 'spi0n', //The owner channel
     useFixtures: true,
     query: route.route.match(req.url),
-    sdx: 'fgYjWtVEUNYRNT6MqgK8qNdLnYUhFtjjEPqDrhe93RYqd4BwqaM1O-fRSytWygjl',
-    links: {"link":{"type":"link","url":"http://www.canalplus.fr/"},"facebook":{"type":"facebook","url":"https://www.facebook.com/GuignolsInfo"},"twitter":{"type":"twitter","url":"https://twitter.com/LesGuignols"}}
   }
 
   let html = ''

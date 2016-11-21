@@ -648,31 +648,12 @@ var Demo = function (_React$Component) {
                   { style: { fontStyle: 'italic', opacity: .3 } },
                   'Function'
                 ),
-                ' childrenWithProps'
-              ),
-              _react2.default.createElement(
-                'pre',
-                null,
-                'childrenWithProps(reactComponent, __INITIAL_PROPS__)'
-              )
-            ),
-            _react2.default.createElement(
-              'li',
-              null,
-              _react2.default.createElement(
-                'h3',
-                null,
-                _react2.default.createElement(
-                  'span',
-                  { style: { fontStyle: 'italic', opacity: .3 } },
-                  'Function'
-                ),
                 ' http (fetch wrapper)'
               ),
               _react2.default.createElement(
                 'pre',
                 null,
-                'http.get(\'https://api.dailymotion.com/user/spi0n\')\n.then(json => console.log(json))\n.catch(err => console.error(err))\n\nhttp.post(\'https://api.dailymotion.com/user/spi0n\')\nhttp.delete(\'https://api.dailymotion.com/user/spi0n\')\n\nhttp.apiFactory(\'https://api.dailymotion.com\', {access_token: \'abc\'})\nhttp.get(\'/user/spi0n\')'
+                'http.get(\'https://api.dailymotion.com/user/spi0n\')\n.then(json => console.log(json))\n.catch(err => console.error(err))\n\nhttp.post(\'https://api.dailymotion.com/user/spi0n\')\nhttp.delete(\'https://api.dailymotion.com/user/spi0n\')\n\nconst api = http.apiFactory(\'https://api.dailymotion.com\', {access_token: \'abc\'})\napi.get(\'/user/spi0n\')'
               )
             ),
             _react2.default.createElement(
@@ -1341,7 +1322,7 @@ var Demo = function (_React$Component) {
               ),
               _react2.default.createElement(
                 _saladUi2.default.Video.List,
-                { apiURL: 'https://api.dailymotion.com', limit: 10, endpoint: '/videos' },
+                { apiURL: 'https://api.dailymotion.com', limit: 10, endpoint: '/videos', sortBy: 'random' },
                 _react2.default.createElement(videoComponents.GridArea, null),
                 _react2.default.createElement(videoComponents.LoadMore, null)
               )
@@ -1366,7 +1347,7 @@ var Demo = function (_React$Component) {
               ),
               _react2.default.createElement(
                 _saladUi2.default.Video.List,
-                { apiURL: 'https://api.dailymotion.com', limit: 3, endpoint: '/videos' },
+                { apiURL: 'https://api.dailymotion.com', limit: 3, endpoint: '/videos', sortBy: 'random' },
                 _react2.default.createElement(videoComponents.ListArea, null),
                 _react2.default.createElement(videoComponents.LoadMore, null)
               )

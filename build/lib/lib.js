@@ -1,9 +1,5 @@
 'use strict';
 
-var _childrenWithProps = require('./children-with-props');
-
-var _childrenWithProps2 = _interopRequireDefault(_childrenWithProps);
-
 var _formatter = require('./formatter.js');
 
 var formatter = _interopRequireWildcard(_formatter);
@@ -32,12 +28,11 @@ var _sso = require('./sso');
 
 var _sso2 = _interopRequireDefault(_sso);
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 var Lib = {
-  childrenWithProps: _childrenWithProps2.default,
   formatter: formatter,
   domainService: _domainService2.default,
   tracking: tracking,
