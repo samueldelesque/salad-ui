@@ -1341,7 +1341,7 @@ var Demo = function (_React$Component) {
               ),
               _react2.default.createElement(
                 _saladUi2.default.Video.List,
-                { apiURL: 'https://api.dailymotion.com', limit: 10, endpoint: '/videos' },
+                { apiURL: 'https://api.dailymotion.com', limit: 10, endpoint: '/videos', sortBy: 'random' },
                 _react2.default.createElement(videoComponents.GridArea, null),
                 _react2.default.createElement(videoComponents.LoadMore, null)
               )
@@ -1366,7 +1366,7 @@ var Demo = function (_React$Component) {
               ),
               _react2.default.createElement(
                 _saladUi2.default.Video.List,
-                { apiURL: 'https://api.dailymotion.com', limit: 3, endpoint: '/videos' },
+                { apiURL: 'https://api.dailymotion.com', limit: 3, endpoint: '/videos', sortBy: 'random' },
                 _react2.default.createElement(videoComponents.ListArea, null),
                 _react2.default.createElement(videoComponents.LoadMore, null)
               )

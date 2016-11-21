@@ -285,12 +285,6 @@ export default class Demo extends React.Component {
           <h2>Lib</h2>
           <ul className="functionality">
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> childrenWithProps</h3>
-              <pre>
-                {`childrenWithProps(reactComponent, __INITIAL_PROPS__)`}
-              </pre>
-            </li>
-            <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> http (fetch wrapper)</h3>
               <pre>
 {`http.get('https://api.dailymotion.com/user/spi0n')
@@ -300,8 +294,8 @@ export default class Demo extends React.Component {
 http.post('https://api.dailymotion.com/user/spi0n')
 http.delete('https://api.dailymotion.com/user/spi0n')
 
-http.apiFactory('https://api.dailymotion.com', {access_token: 'abc'})
-http.get('/user/spi0n')`}
+const api = http.apiFactory('https://api.dailymotion.com', {access_token: 'abc'})
+api.get('/user/spi0n')`}
               </pre>
             </li>
             <li>
@@ -608,7 +602,7 @@ export class LoadMore extends React.Component{
   <LoadMore/>
 </SaladUI.Video.List>`}
               </pre>
-              <SaladUI.Video.List apiURL="https://api.dailymotion.com" limit={10} endpoint="/videos">
+              <SaladUI.Video.List apiURL="https://api.dailymotion.com" limit={10} endpoint="/videos" sortBy="random">
                 <videoComponents.GridArea/>
                 <videoComponents.LoadMore/>
               </SaladUI.Video.List>
@@ -638,7 +632,7 @@ export class LoadMore extends React.Component{
   <LoadMore/>
 </SaladUI.Video.List>`}
               </pre>
-              <SaladUI.Video.List apiURL="https://api.dailymotion.com" limit={3} endpoint="/videos">
+              <SaladUI.Video.List apiURL="https://api.dailymotion.com" limit={3} endpoint="/videos" sortBy="random">
                 <videoComponents.ListArea/>
                 <videoComponents.LoadMore/>
               </SaladUI.Video.List>

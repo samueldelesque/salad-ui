@@ -1,4 +1,3 @@
-import childrenWithProps from './children-with-props'
 import * as formatter from './formatter.js'
 import domainService from './domain-service'
 import * as tracking from './tracking'
@@ -8,7 +7,6 @@ import scrollTo from './scroll-to'
 import sso from './sso'
 
 const Lib = {
-  childrenWithProps,
   formatter,
   domainService,
   tracking,
