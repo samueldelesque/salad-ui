@@ -9,11 +9,11 @@ var debug = false;
 var services = [{
   name: 'ga',
   trackEvent: function trackEvent(event, data) {
-    if (typeof ga === 'undefined' || ga === false) throw new Error('GA is not available at this time.');else if (!data.category || !data.action) throw new Error('SaladUI.Tracking: data object is missing category (' + category + ') or action (' + action + ') property.');else ga('send', 'event', data.category, data.action, data.label, data.value);
+    if (typeof ga === 'undefined' || ga === false) console.error('GA is not available at this time.');else if (!data.category || !data.action) console.error('SaladUI.Tracking: data object is missing category (' + category + ') or action (' + action + ') property.');else ga('send', 'event', data.category, data.action, data.label, data.value);
   },
   trackPage: function trackPage(pageName) {
-    if (typeof ga === 'undefined' || ga === false) throw new Error('GA is not available at this time.');else if (!pageName) {
-      throw new Error('SaladUI.Tracking: data object is missing pageName (' + pageName + ').');
+    if (typeof ga === 'undefined' || ga === false) console.error('GA is not available at this time.');else if (!pageName) {
+      console.error('SaladUI.Tracking: data object is missing pageName (' + pageName + ').');
     } else ga('send', {
       hitType: 'pageview',
       page: pageName

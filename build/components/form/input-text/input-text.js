@@ -170,7 +170,7 @@ var InputText = function (_React$Component) {
         ) : null,
         _react2.default.createElement(
           'div',
-          { style: Object.assign({}, _stylesheet2.default.inputContainer, this.props.textarea ? _stylesheet2.default.textareaContainer : null, this.props.style) },
+          { style: Object.assign({}, _stylesheet2.default.inputContainer, this.props.textarea ? _stylesheet2.default.textareaContainer : null) },
           this.props.prefix ? _react2.default.createElement(
             'span',
             { style: Object.assign({}, _stylesheet2.default.inputContent, this.props.textarea ? _stylesheet2.default.textareaContent : null, _stylesheet2.default.inputPrefix) },

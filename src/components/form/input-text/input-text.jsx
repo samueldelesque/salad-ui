@@ -139,7 +139,7 @@ export default class InputText extends React.Component {
           <label htmlFor={id} style={{fontSize: 14, color: '#888'}}>{this.props.label}</label> :
           null
         }
-        <div style={Object.assign({}, styles.inputContainer, this.props.textarea ? styles.textareaContainer : null, this.props.style)}>
+        <div style={Object.assign({}, styles.inputContainer, this.props.textarea ? styles.textareaContainer : null)}>
           {
             this.props.prefix ?
             <span style={Object.assign({}, styles.inputContent, this.props.textarea ? styles.textareaContent : null, styles.inputPrefix)}>
