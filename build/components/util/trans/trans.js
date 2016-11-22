@@ -153,8 +153,14 @@ var unsafeTranslate = function unsafeTranslate(key, args, pluralForm, trans) {
   if (trans && trans[key]) key = trans[key];else {
     if (DEBUG) console.warn('%s is not in translated keys', key, ' - context was ', trans);
   }
-  if ((typeof key === 'undefined' ? 'undefined' : _typeof(key)) === 'object' && key.singular) {
-    if (pluralForm && key[pluralForm]) return unsafeTranslate(key[pluralForm], args, pluralForm, trans);else if (pluralForm === 0 && key['singular']) return unsafeTranslate(key['singular'], args, pluralForm, trans);else if (pluralForm >= 1 && key['plural']) return unsafeTranslate(key['plural'], args, pluralForm, trans);
+  if ((typeof key === 'undefined' ? 'undefined' : _typeof(key)) === 'object' && typeof key['singular'] !== 'undefined') {
+    if (pluralForm === 0 && key['singular']) {
+      return unsafeTranslate(key['singular'], args, pluralForm, trans);
+    } else if (pluralForm >= 1 && key['plural']) {
+      return unsafeTranslate(key['plural'], args, pluralForm, trans);
+    }
+  } else if ((typeof key === 'undefined' ? 'undefined' : _typeof(key)) === 'object' && typeof key[pluralForm] === 'string') {
+    return unsafeTranslate(key[pluralForm], args, pluralForm, trans);
   }
   var replacements = {};
   Object.keys(args).forEach(function (key) {

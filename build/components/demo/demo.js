@@ -48,15 +48,19 @@ console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fr
 if (_glob2.default.canUseDom()) {
   console.log('Test SaladUI functions directly using window.SaladUI');
   window.SaladUI = _saladUi2.default;
+  _saladUi2.default.Util.Trans.enableDebug();
   window.enableHighlight = function () {
     return _saladUi2.default.Util.Trans.enableHighlight();
   };
 }
 
-var Trans = _saladUi2.default.Util.Trans.factory({
+var translations = {
   'It is a beautiful day!': 'C\'est une belle journée!',
-  'The parrot ate the cake.': 'Le perroquet a mangé le gateau.'
-});
+  'The parrot ate the cake.': 'Le perroquet a mangé le gateau.',
+  hello: "<a class=\"js-fb-permissions link\" data-scopes=\"email\" href=\"https://google.com\" target=\"_blank\">Bonjour"
+};
+
+var Trans = _saladUi2.default.Util.Trans.factory(translations);
 
 var chartData = [{ time: new Date('2010-04-01'), value: 5102 }, { time: new Date('2010-04-02'), value: 22902 }, { time: new Date('2010-04-03'), value: 10052 }, { time: new Date('2010-04-04'), value: 11053 }, { time: new Date('2010-04-05'), value: 17001 }, { time: new Date('2010-04-06'), value: 21010 }];
 
@@ -648,31 +652,12 @@ var Demo = function (_React$Component) {
                   { style: { fontStyle: 'italic', opacity: .3 } },
                   'Function'
                 ),
-                ' childrenWithProps'
-              ),
-              _react2.default.createElement(
-                'pre',
-                null,
-                'childrenWithProps(reactComponent, __INITIAL_PROPS__)'
-              )
-            ),
-            _react2.default.createElement(
-              'li',
-              null,
-              _react2.default.createElement(
-                'h3',
-                null,
-                _react2.default.createElement(
-                  'span',
-                  { style: { fontStyle: 'italic', opacity: .3 } },
-                  'Function'
-                ),
                 ' http (fetch wrapper)'
               ),
               _react2.default.createElement(
                 'pre',
                 null,
-                'http.get(\'https://api.dailymotion.com/user/spi0n\')\n.then(json => console.log(json))\n.catch(err => console.error(err))\n\nhttp.post(\'https://api.dailymotion.com/user/spi0n\')\nhttp.delete(\'https://api.dailymotion.com/user/spi0n\')\n\nhttp.apiFactory(\'https://api.dailymotion.com\', {access_token: \'abc\'})\nhttp.get(\'/user/spi0n\')'
+                'http.get(\'https://api.dailymotion.com/user/spi0n\')\n.then(json => console.log(json))\n.catch(err => console.error(err))\n\nhttp.post(\'https://api.dailymotion.com/user/spi0n\')\nhttp.delete(\'https://api.dailymotion.com/user/spi0n\')\n\nconst api = http.apiFactory(\'https://api.dailymotion.com\', {access_token: \'abc\'})\napi.get(\'/user/spi0n\')'
               )
             ),
             _react2.default.createElement(
@@ -996,7 +981,29 @@ var Demo = function (_React$Component) {
                   null,
                   Trans.translate('The parrot ate the cake.')
                 )
-              )
+              ),
+              Object.keys(DM_ENV).map(function (key) {
+                return _react2.default.createElement(
+                  'div',
+                  { key: key },
+                  _react2.default.createElement(
+                    'h3',
+                    null,
+                    key
+                  ),
+                  Object.keys(DM_ENV[key]).map(function (sub_key) {
+                    return _react2.default.createElement(
+                      'p',
+                      { key: sub_key },
+                      _react2.default.createElement(
+                        _saladUi2.default.Util.Trans,
+                        { context: DM_ENV[key] },
+                        sub_key
+                      )
+                    );
+                  })
+                );
+              })
             ),
             _react2.default.createElement(
               'li',

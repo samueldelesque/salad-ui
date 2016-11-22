@@ -10,13 +10,17 @@ console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fr
 if(glob.canUseDom()){
   console.log('Test SaladUI functions directly using window.SaladUI')
   window.SaladUI = SaladUI
+  SaladUI.Util.Trans.enableDebug()
   window.enableHighlight = ()=>SaladUI.Util.Trans.enableHighlight()
 }
 
-const Trans = SaladUI.Util.Trans.factory({
+const translations = {
   'It is a beautiful day!': 'C\'est une belle journée!',
   'The parrot ate the cake.': 'Le perroquet a mangé le gateau.',
-})
+  hello: "<a class=\"js-fb-permissions link\" data-scopes=\"email\" href=\"https://google.com\" target=\"_blank\">Bonjour",
+}
+
+const Trans = SaladUI.Util.Trans.factory(translations)
 
 const chartData = [
   {time: new Date('2010-04-01'), value: 5102},
@@ -426,6 +430,18 @@ Trans.translate('The parrot ate the cake.')`}</pre>
                 {Trans.translate('The parrot ate the cake.')}
                 </strong>
               </p>
+              {
+                Object.keys(DM_ENV).map(key=>(
+                  <div key={key}>
+                    <h3>{key}</h3>
+                    {
+                      Object.keys(DM_ENV[key]).map(sub_key=>(
+                        <p key={sub_key}><SaladUI.Util.Trans context={DM_ENV[key]}>{sub_key}</SaladUI.Util.Trans></p>
+                      ))
+                    }
+                  </div>
+                ))
+              }
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> TimeAndViews</h3>
