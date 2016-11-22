@@ -17,7 +17,7 @@ export default class TimeAndViews extends React.Component {
     var diff = (now - date) / 36e5
 
     if(diff > 17520)
-      return <Trans context={this.trans} years={Math.round(diff/8760)} n={Math.round(diff/8760)}>%(years)s years ago</Trans>
+      return <Trans context={this.trans} years={Math.round(diff/8760)} n={Math.round(diff/8760)}>{'{years} years ago'}</Trans>
     else if(diff > 8760)
       return <Trans context={this.trans}>last year</Trans>
     else if(diff > 1440){
@@ -29,12 +29,12 @@ export default class TimeAndViews extends React.Component {
         if(DEBUG) console.warn('Trans error: ', e)
         return <Trans context={this.trans}>A few months ago</Trans>
       }
-      return <Trans context={this.trans} month={monthName}>last %(month)s</Trans>
+      return <Trans context={this.trans} month={monthName}>{'last {month}'}</Trans>
     }
     else if(diff > 720)
       return <Trans context={this.trans}>last month</Trans>
     else if(diff > 336)
-      return <Trans context={this.trans} weeks={Math.round(diff/168)} n={Math.round(diff/168)}>%(weeks)s weeks ago</Trans>
+      return <Trans context={this.trans} weeks={Math.round(diff/168)} n={Math.round(diff/168)}>{'{weeks} weeks ago'}</Trans>
     else if(diff > 168)
       return <Trans context={this.trans}>a week ago</Trans>
     else if(diff > 48){
@@ -46,12 +46,12 @@ export default class TimeAndViews extends React.Component {
         console.warn('Trans error: ', e)
         return <Trans context={this.trans}>A few days ago</Trans>
       }
-      return <Trans context={this.trans} day={this.trans.days[date.getDay()]}>last %(day)s</Trans>
+      return <Trans context={this.trans} day={this.trans.days[date.getDay()]}>{'last {day}'}</Trans>
     }
     else if(diff > 24)
       return <Trans context={this.trans}>yesterday</Trans>
     else if(diff > 1)
-      return <Trans context={this.trans} hours={Math.round(diff)} n={Math.round(diff)}>%(hours)s hours ago</Trans>
+      return <Trans context={this.trans} hours={Math.round(diff)} n={Math.round(diff)}>{'{hours} hours ago'}</Trans>
     return <Trans context={this.trans}>a few minutes ago</Trans>
   }
 

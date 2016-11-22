@@ -55,7 +55,7 @@ var TimeAndViews = function (_React$Component) {
       if (diff > 17520) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans, years: Math.round(diff / 8760), n: Math.round(diff / 8760) },
-        '%(years)s years ago'
+        '{years} years ago'
       );else if (diff > 8760) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans },
@@ -75,7 +75,7 @@ var TimeAndViews = function (_React$Component) {
         return _react2.default.createElement(
           _trans2.default,
           { context: this.trans, month: monthName },
-          'last %(month)s'
+          'last {month}'
         );
       } else if (diff > 720) return _react2.default.createElement(
         _trans2.default,
@@ -84,7 +84,7 @@ var TimeAndViews = function (_React$Component) {
       );else if (diff > 336) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans, weeks: Math.round(diff / 168), n: Math.round(diff / 168) },
-        '%(weeks)s weeks ago'
+        '{weeks} weeks ago'
       );else if (diff > 168) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans },
@@ -104,7 +104,7 @@ var TimeAndViews = function (_React$Component) {
         return _react2.default.createElement(
           _trans2.default,
           { context: this.trans, day: this.trans.days[date.getDay()] },
-          'last %(day)s'
+          'last {day}'
         );
       } else if (diff > 24) return _react2.default.createElement(
         _trans2.default,
@@ -113,7 +113,7 @@ var TimeAndViews = function (_React$Component) {
       );else if (diff > 1) return _react2.default.createElement(
         _trans2.default,
         { context: this.trans, hours: Math.round(diff), n: Math.round(diff) },
-        '%(hours)s hours ago'
+        '{hours} hours ago'
       );
       return _react2.default.createElement(
         _trans2.default,

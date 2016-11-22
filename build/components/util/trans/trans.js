@@ -38,6 +38,7 @@ var LANG = exports.LANG = 'en';
 var PLURAL_TYPE = exports.PLURAL_TYPE = 'german';
 var DEPRECATION_WARNING_SHOWED = false;
 var HIGHLIGHT_TRANSLATIONS = false;
+var LOG_ALL_TRANSLATIONS = false;
 
 var transRefs = {};
 
@@ -98,6 +99,11 @@ Trans.enableDebug = function () {
   return exports.DEBUG = DEBUG = !!enable;
 };
 
+Trans.enableLogAllTrans = function () {
+  var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+  return LOG_ALL_TRANSLATIONS = !!enable;
+};
+
 Trans.enableHighlight = function () {
   var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
 
@@ -150,26 +156,30 @@ exports.default = Trans;
 
 
 var unsafeTranslate = function unsafeTranslate(key, args, pluralForm, trans) {
-  if (trans && trans[key]) key = trans[key];else {
-    if (DEBUG) console.warn('%s is not in translated keys', key, ' - context was ', trans);
-  }
-  if ((typeof key === 'undefined' ? 'undefined' : _typeof(key)) === 'object' && typeof key['singular'] !== 'undefined') {
-    if (pluralForm === 0 && key['singular']) {
-      return unsafeTranslate(key['singular'], args, pluralForm, trans);
-    } else if (pluralForm >= 1 && key['plural']) {
-      return unsafeTranslate(key['plural'], args, pluralForm, trans);
-    }
-  } else if ((typeof key === 'undefined' ? 'undefined' : _typeof(key)) === 'object' && typeof key[pluralForm] === 'string') {
-    return unsafeTranslate(key[pluralForm], args, pluralForm, trans);
-  }
+  var translation = key;
   var replacements = {};
-  Object.keys(args).forEach(function (key) {
-    return replacements[key] = _react2.default.isValidElement(args[key]) ? _server2.default.renderToString(args[key]) : args[key];
+  if (_typeof(trans[key]) === 'object' && pluralForm === 0 && typeof trans[key]['singular'] !== 'undefined') {
+    translation = trans[key]['singular'];
+  } else if (_typeof(trans[key]) === 'object' && pluralForm >= 1 && typeof trans[key]['plural'] !== 'undefined') {
+    translation = trans[key]['plural'];
+  } else if (_typeof(trans[key]) === 'object' && typeof trans[key][pluralForm] === 'string') {
+    translation = trans[key][pluralForm];
+  } else if (typeof trans[key] === 'string') {
+    translation = trans[key];
+  } else {
+    if (DEBUG) {
+      console.warn('%s is not in translated keys', key, ' - translations: ', trans);
+    }
+    return translation;
+  }
+
+  Object.keys(args).forEach(function (k) {
+    replacements[k] = _react2.default.isValidElement(args[k]) ? _server2.default.renderToString(args[k]) : args[k];
   });
-  var formatted = key;
-  if (key.match(/\%\([^\)]+\)/g)) {
-    formatted = (0, _sprintfJs.sprintf)(key, replacements);
-    if (formatted !== key && !DEPRECATION_WARNING_SHOWED) {
+  var formatted = translation;
+  if (translation.match(/\%\([^\)]+\)/g)) {
+    formatted = (0, _sprintfJs.sprintf)(translation, replacements);
+    if (formatted !== translation && !DEPRECATION_WARNING_SHOWED) {
       console.warn('SaladUI: DEPRECATION WARNING - translate() called with legacy sprintf format! Please upgrade translation keys. https://salad-ui.com', key);
       DEPRECATION_WARNING_SHOWED = true;
     }
@@ -193,6 +203,9 @@ var translate = exports.translate = function translate(key) {
     translation = unsafeTranslate(key, args, pluralForm, trans);
   } catch (e) {
     console.warn('Failed to produce translation of ', key, e);
+  }
+  if (LOG_ALL_TRANSLATIONS) {
+    console.log('Translate', key, args, n, trans, ' produced the translation: ' + translation);
   }
   return translation;
 };

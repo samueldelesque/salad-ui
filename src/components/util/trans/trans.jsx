@@ -9,6 +9,7 @@ export let LANG = 'en'
 export let PLURAL_TYPE = 'german'
 let DEPRECATION_WARNING_SHOWED = false
 let HIGHLIGHT_TRANSLATIONS = false
+let LOG_ALL_TRANSLATIONS = false
 
 let transRefs = {}
 
@@ -31,6 +32,7 @@ export default class Trans extends React.Component {
     return translate(...args)
   }
   static enableDebug = (enable = true) => DEBUG = !!enable
+  static enableLogAllTrans = (enable = true) => LOG_ALL_TRANSLATIONS = !!enable
   static enableHighlight = (enable = true) => {
     HIGHLIGHT_TRANSLATIONS = !!enable
     Object.keys(transRefs).map(key=>transRefs[key].forceUpdate())
@@ -65,34 +67,36 @@ export default class Trans extends React.Component {
 }
 
 const unsafeTranslate = (key, args, pluralForm, trans) => {
-  if(trans && trans[key]) key = trans[key]
-  else{
-    if(DEBUG) console.warn('%s is not in translated keys', key, ' - context was ', trans)
-  }
-  if(typeof(key) === 'object' && typeof(key['singular']) !== 'undefined'){
-    if(pluralForm === 0 && key['singular']){
-      return unsafeTranslate(key['singular'], args, pluralForm, trans)
-    }
-    else if(pluralForm >= 1 && key['plural']){
-      return unsafeTranslate(key['plural'], args, pluralForm, trans)
-    }
-  }
-  else if(typeof(key) === 'object' && typeof(key[pluralForm]) === 'string'){
-    return unsafeTranslate(key[pluralForm], args, pluralForm, trans)
-  }
+  let translation = key
   let replacements = {}
-  Object.keys(args).forEach(key =>
-    replacements[key] = React.isValidElement(args[key]) ? ReactDOMServer.renderToString(args[key]) : args[key]
-  )
-  let formatted = key
-  if(key.match(/\%\([^\)]+\)/g)){
-    formatted = sprintf(key, replacements)
-    if(formatted !== key && !DEPRECATION_WARNING_SHOWED){
+  if(typeof(trans[key]) === 'object' && pluralForm === 0 && typeof(trans[key]['singular']) !== 'undefined'){
+    translation = trans[key]['singular']
+  } else if(typeof(trans[key]) === 'object' && pluralForm >= 1 && typeof(trans[key]['plural']) !== 'undefined'){
+    translation = trans[key]['plural']
+  } else if(typeof(trans[key]) === 'object' && typeof(trans[key][pluralForm]) === 'string'){
+    translation = trans[key][pluralForm]
+  } else if(typeof(trans[key]) === 'string'){
+    translation = trans[key]
+  } else {
+    if(DEBUG){console.warn('%s is not in translated keys', key, ' - translations: ', trans)}
+    return translation
+  }
+
+  Object.keys(args).forEach(k => {
+    replacements[k] = (
+      React.isValidElement(args[k]) ?
+      ReactDOMServer.renderToString(args[k]) :
+      args[k]
+    )
+  })
+  let formatted = translation
+  if(translation.match(/\%\([^\)]+\)/g)){
+    formatted = sprintf(translation, replacements)
+    if(formatted !== translation && !DEPRECATION_WARNING_SHOWED){
       console.warn('SaladUI: DEPRECATION WARNING - translate() called with legacy sprintf format! Please upgrade translation keys. https://salad-ui.com', key)
       DEPRECATION_WARNING_SHOWED = true
     }
-  }
-  else{
+  } else {
     formatted = render(key, replacements)
   }
   return formatted
@@ -107,6 +111,9 @@ export const translate = (key, args={}, n=1, trans={}) => {
   }
   catch (e){
     console.warn('Failed to produce translation of ', key, e)
+  }
+  if(LOG_ALL_TRANSLATIONS){
+    console.log('Translate', key, args, n, trans, ' produced the translation: ' + translation)
   }
   return translation
 }
