@@ -23,10 +23,12 @@ var styles = {
   },
 
   inputPrefix: {
+    display: 'inline-block',
     flex: -1,
     backgroundColor: _stylesheet.defaults.colors.gray3,
     paddingRight: 10,
-    color: 'white'
+    color: 'white',
+    lineHeight: 1
   },
 
   inputContent: {
@@ -34,8 +36,8 @@ var styles = {
     backgroundColor: 'transparent',
     flex: 1,
     border: 'none',
-    padding: '7px 10px',
-    fontSize: '14px'
+    padding: '8px 10px',
+    fontSize: 'inherit'
   },
 
   textareaContent: {
