@@ -184,7 +184,7 @@ var unsafeTranslate = function unsafeTranslate(key, args, pluralForm, trans) {
       DEPRECATION_WARNING_SHOWED = true;
     }
   } else {
-    formatted = (0, _formatter.render)(key, replacements);
+    formatted = (0, _formatter.render)(translation, replacements);
   }
   return formatted;
 };

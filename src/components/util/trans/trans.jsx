@@ -97,7 +97,7 @@ const unsafeTranslate = (key, args, pluralForm, trans) => {
       DEPRECATION_WARNING_SHOWED = true
     }
   } else {
-    formatted = render(key, replacements)
+    formatted = render(translation, replacements)
   }
   return formatted
 }
