@@ -212,6 +212,11 @@ var Demo = function (_React$Component) {
             _react2.default.createElement(
               'p',
               null,
+              'SaladUI is a collection of React component and utility functions that range from translation, to autocomplete and charts.'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
               'Salad-UI can be enjoyed as a complete salad using ',
               _react2.default.createElement(
                 'i',
@@ -302,7 +307,7 @@ var Demo = function (_React$Component) {
             _react2.default.createElement(
               'li',
               null,
-              'Added a nigty formatter.render function to format templates.'
+              'Added formatter.render function to format string templates.'
             ),
             _react2.default.createElement(
               'li',
@@ -346,6 +351,7 @@ var Demo = function (_React$Component) {
                 _react2.default.createElement(_saladUi2.default.Chart.Area, {
                   width: this.state.sectionWidth,
                   height: this.state.sectionWidth * 0.6,
+                  maxPoints: 30,
                   data: realtime_data,
                   labelTemplate: function labelTemplate(data) {
                     return data.value + ' views';
@@ -833,25 +839,6 @@ var Demo = function (_React$Component) {
                   null,
                   _saladUi2.default.Lib.formatter.render('{greeting}! I am {user.age} years old.', { greeting: 'Hello', user: { age: 32 } })
                 )
-              )
-            ),
-            _react2.default.createElement(
-              'li',
-              null,
-              _react2.default.createElement(
-                'h3',
-                null,
-                _react2.default.createElement(
-                  'span',
-                  { style: { fontStyle: 'italic', opacity: .3 } },
-                  'Function'
-                ),
-                ' sso'
-              ),
-              _react2.default.createElement(
-                'pre',
-                null,
-                'sso.init(SDX)\nsso.getJWT(\'revshare\').then(token => {\n  console.log(\'Yay I have a token!\')\n})'
               )
             ),
             _react2.default.createElement(

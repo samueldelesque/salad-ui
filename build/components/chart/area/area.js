@@ -412,10 +412,12 @@ var Area = function (_Component) {
         return point.time;
       })));
 
-      data = this.reduceData(data, (0, _moment2.default)(xMin), (0, _moment2.default)(xMax), 12);
-      xMax = Math.max.apply(Math, _toConsumableArray(data.map(function (point, index) {
-        return point.time;
-      })).concat([data.length])); //either a timestamp or number of items
+      if (this.props.maxPoints !== -1) {
+        data = this.reduceData(data, (0, _moment2.default)(xMin), (0, _moment2.default)(xMax), this.props.maxPoints);
+        xMax = Math.max.apply(Math, _toConsumableArray(data.map(function (point, index) {
+          return point.time;
+        })).concat([data.length]));
+      }
 
       var yMax = Math.max.apply(Math, _toConsumableArray(data.map(function (point) {
         return point.value;
@@ -427,22 +429,26 @@ var Area = function (_Component) {
 
       var yMin = this.props.useDynamicYMin ? Math.min.apply(Math, _toConsumableArray(data.map(function (point) {
         return point.value;
-      }))) - roundedYMax / 5 : 0,
-          xSpread = xMax - xMin,
-          ySpread = roundedYMax - yMin,
-          xScale = this.activeWidth / (xSpread || 1),
-          yScale = this.activeHeight / (ySpread || 1),
-          line = this.describeLine(data, xMin, yMin, xSpread, ySpread, xScale, yScale),
-          yAxis = this.describeYAxis(yMin, ySpread, yScale),
-          xAxis = this.describeXAxis(xMin, xSpread, xScale, data),
-          isZero = ySpread === 0 && yMin === 0;
+      }))) - roundedYMax / 5 : 0;
+
+      var xSpread = xMax - xMin;
+      var ySpread = roundedYMax - yMin;
+      var xScale = this.activeWidth / (xSpread || 1);
+      var yScale = this.activeHeight / (ySpread || 1);
+
+      var line = this.describeLine(data, xMin, yMin, xSpread, ySpread, xScale, yScale);
+      var area = '0,' + ((isZero ? yScale : ySpread * yScale) - this.props.strokeWidth) + ' ' + line + ' ' + ((xMax - xMin) * xScale - this.props.strokeWidth) + ',' + ((isZero ? yScale : ySpread * yScale) - this.props.strokeWidth);
+      var yAxis = this.describeYAxis(yMin, ySpread, yScale);
+      var xAxis = this.describeXAxis(xMin, xSpread, xScale, data);
+
+      var isZero = ySpread === 0 && yMin === 0;
 
       return _react2.default.createElement(
         _chart2.default,
         { width: this.props.width, height: this.props.height, type: 'area' },
         yAxis.gridLines.map(this.renderYGridLine.bind(this)),
         _react2.default.createElement('polygon', {
-          points: '0,' + ((isZero ? yScale : ySpread * yScale) - this.props.strokeWidth) + ' ' + line + ' ' + ((xMax - xMin) * xScale - this.props.strokeWidth) + ',' + ((isZero ? yScale : ySpread * yScale) - this.props.strokeWidth),
+          points: area,
           style: { fill: this.props.fillColor, strokeWidth: 0 }
         }),
         _react2.default.createElement('polyline', {
@@ -494,6 +500,7 @@ Area.propTypes = {
   labelColor: _react2.default.PropTypes.string,
   fillColor: _react2.default.PropTypes.string,
   maxOverflow: _react2.default.PropTypes.number,
+  maxPoints: _react2.default.PropTypes.number,
   yLabelsOutside: _react2.default.PropTypes.bool,
   yLabelsPosition: _react2.default.PropTypes.string,
   yPadding: _react2.default.PropTypes.number,
@@ -525,6 +532,7 @@ Area.defaultProps = {
   yLabelsOutside: false,
   yLabelsPosition: 'left',
   yPadding: 10,
+  maxPoints: -1,
   data: []
 };
 exports.default = Area;

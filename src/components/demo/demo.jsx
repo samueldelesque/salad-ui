@@ -120,6 +120,7 @@ export default class Demo extends React.Component {
             <p>
               <a href="https://npmjs.com/package/salad-ui" target="_blank"><img src="https://badge.fury.io/js/salad-ui.svg"/></a>
             </p>
+            <p>SaladUI is a collection of React component and utility functions that range from translation, to autocomplete and charts.</p>
             <p>Salad-UI can be enjoyed as a complete salad using <i className="snippet">import SaladUI from 'salad-ui'</i> or as its separate ingredients using <i className="snippet">{`import {Area} from 'salad-ui.chart'`}</i>. You can install separate ingredients as <i className="snippet">npm i --save salad-ui.chart</i>.</p>
             <p>Salad-UI will work both in Browser and Server environment - use it in your universal apps!</p>
             <p>For optimal old browser compatibility with SaladUI, please include the following polyfill on your page:</p>
@@ -137,7 +138,7 @@ export default class Demo extends React.Component {
           <ol>
             <li><i className="snippet">Trans</i> component and translate function should now take parameters in object notation format: <i className="snippet">{`{user:{name:'Sam'}}`}</i></li>
             <li><i className="snippet">f</i> is renamed to <i className="snippet">http</i></li>
-            <li>Added a nigty formatter.render function to format templates.</li>
+            <li>Added formatter.render function to format string templates.</li>
             <li>Various updates to the charts, better yLabel formatting.</li>
           </ol>
         </section>
@@ -160,6 +161,7 @@ export default class Demo extends React.Component {
                 <SaladUI.Chart.Area
                   width={this.state.sectionWidth}
                   height={this.state.sectionWidth*0.6}
+                  maxPoints={30}
                   data={realtime_data}
                   labelTemplate={data=>`${data.value} views`}
                   // labelTemplate={data=>`Cats ate ${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.`}
@@ -349,7 +351,7 @@ api.get('/user/spi0n')`}
               </pre>
               <p><strong>{SaladUI.Lib.formatter.render('{greeting}! I am {user.age} years old.', {greeting: 'Hello', user: {age: 32}})}</strong></p>
             </li>
-            <li>
+            {/* <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> sso</h3>
               <pre>
 {`sso.init(SDX)
@@ -357,7 +359,7 @@ sso.getJWT('revshare').then(token => {
   console.log('Yay I have a token!')
 })`}
               </pre>
-            </li>
+            </li> */}
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> tracking</h3>
               <pre>

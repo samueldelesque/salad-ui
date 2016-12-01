@@ -41,6 +41,7 @@ export default class Area extends Component{
     labelColor: React.PropTypes.string,
     fillColor: React.PropTypes.string,
     maxOverflow: React.PropTypes.number,
+    maxPoints: React.PropTypes.number,
     yLabelsOutside: React.PropTypes.bool,
     yLabelsPosition: React.PropTypes.string,
     yPadding: React.PropTypes.number,
@@ -73,6 +74,7 @@ export default class Area extends Component{
     yLabelsOutside: false,
     yLabelsPosition: 'left',
     yPadding: 10,
+    maxPoints: -1,
     data: [],
   }
 
@@ -389,8 +391,10 @@ export default class Area extends Component{
     let xMax = Math.max(...data.map((point, index) => point.time), data.length)
     const xMin = Math.min(...data.map((point, index) => point.time))
 
-    data = this.reduceData(data, moment(xMin), moment(xMax), 12)
-    xMax = Math.max(...data.map((point, index) => point.time), data.length) //either a timestamp or number of items
+    if(this.props.maxPoints !== -1) {
+      data = this.reduceData(data, moment(xMin), moment(xMax), this.props.maxPoints)
+      xMax = Math.max(...data.map((point, index) => point.time), data.length)
+    }
 
     const yMax = Math.max(...data.map(point => point.value))
     const yRoundup = Math.pow(10, String(Math.round(yMax)).length-1)
@@ -398,25 +402,30 @@ export default class Area extends Component{
     let roundedYMax = Math.max(Math.ceil(yMax/yRoundup) * yRoundup,1)
     const naturalYPadding = roundedYMax - yMax
 
-    let yMin = this.props.useDynamicYMin ? Math.min(...data.map(point => point.value)) - roundedYMax / 5 : 0,
+    let yMin = (
+      this.props.useDynamicYMin ?
+      Math.min(...data.map(point => point.value)) - roundedYMax / 5 :
+      0
+    )
 
-        xSpread = (xMax - xMin),
-        ySpread = (roundedYMax - yMin),
-        xScale = this.activeWidth / (xSpread || 1),
-        yScale = this.activeHeight / (ySpread || 1),
+    const xSpread = (xMax - xMin)
+    const ySpread = (roundedYMax - yMin)
+    const xScale = this.activeWidth / (xSpread || 1)
+    const yScale = this.activeHeight / (ySpread || 1)
 
-        line = this.describeLine(data, xMin, yMin, xSpread, ySpread, xScale, yScale),
-        yAxis = this.describeYAxis(yMin, ySpread, yScale),
-        xAxis = this.describeXAxis(xMin, xSpread, xScale, data),
+    const line = this.describeLine(data, xMin, yMin, xSpread, ySpread, xScale, yScale)
+    const area = `0,${(isZero ? yScale : ySpread * yScale) - this.props.strokeWidth} ${line} ${(xMax - xMin) * xScale - this.props.strokeWidth},${(isZero ? yScale : ySpread * yScale) - this.props.strokeWidth}`
+    const yAxis = this.describeYAxis(yMin, ySpread, yScale)
+    const xAxis = this.describeXAxis(xMin, xSpread, xScale, data)
 
-        isZero = ySpread === 0 && yMin === 0
+    const isZero = ySpread === 0 && yMin === 0
 
     return (
       <Chart width={this.props.width} height={this.props.height} type="area">
         {yAxis.gridLines.map(::this.renderYGridLine)}
 
         <polygon
-          points={`0,${(isZero ? yScale : ySpread * yScale) - this.props.strokeWidth} ${line} ${(xMax - xMin) * xScale - this.props.strokeWidth},${(isZero ? yScale : ySpread * yScale) - this.props.strokeWidth}`}
+          points={area}
           style={{fill: this.props.fillColor, strokeWidth: 0}}
         />
 
