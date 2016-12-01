@@ -287,6 +287,36 @@ export default class Area extends Component{
     }
   }
 
+
+  reduceData(data = [], startDate, endDate, maxPoints = 12){
+    let results = []
+    // Force each point ot have a time
+    data.forEach((point, i)=>{if(!point.time)data[i].time = point.id || 0;results.push(point)})
+
+    // Convert unix time to ms unix time
+    // results.forEach((point, i)=>{if(results[i].format !== 'x'){results[i].time = parseFloat(point.time) * 1000;results[i].format = 'x'}})
+
+    // Remove data which is out of range
+    let s = parseFloat(startDate.format('x')),
+        e = parseFloat(endDate.format('x'))
+
+    results = results.filter(point=>point.time >= s && point.time <= e)
+
+    // Limit number of points for given data set
+    if(results.length > maxPoints){
+      let zScale = results.length / maxPoints, selectedRange = []
+      results.forEach((point, i) => {
+        let k = Math.floor(i / zScale),
+            v = parseFloat(point.value)
+        if(selectedRange[k]) selectedRange[k].value += v
+        else selectedRange[k] = {value: v, label: '{{value}} '+point.label, time: point.time}
+      })
+      return selectedRange
+    }
+    else
+      return results
+  }
+
   describeXAxis(xMin, xSpread, xScale, data){
     let keys = [1,2,3,4,5,6,7,8,9],
         keyInterval = data.length / keys.length,
@@ -302,6 +332,7 @@ export default class Area extends Component{
     if(xSpread > day * 365 * 7) dateFormat = 'YYYY' // > 7 years
     else if(xSpread > day * 30 * 9) dateFormat = 'MMM' // > 9 Months
     else if(xSpread > day * 7) dateFormat = 'MMM Do' // > a week
+    else if(xSpread < day) dateFormat = 'LT'
 
     keys.forEach((k,i)=>{
       let time = xMin + (k * (xSpread/keys.length))
@@ -355,16 +386,19 @@ export default class Area extends Component{
     data = data.sort((a,b) => a.time === b.time ? 0 : a.time > b.time ? 1 : -1)
 
     // let xMax = this.props.data.length - 1
-    const xMax = Math.max(...data.map((point, index) => point.time), data.length) //either a timestamp or number of items
+    let xMax = Math.max(...data.map((point, index) => point.time), data.length)
+    const xMin = Math.min(...data.map((point, index) => point.time))
+
+    data = this.reduceData(data, moment(xMin), moment(xMax), 12)
+    xMax = Math.max(...data.map((point, index) => point.time), data.length) //either a timestamp or number of items
+
     const yMax = Math.max(...data.map(point => point.value))
     const yRoundup = Math.pow(10, String(Math.round(yMax)).length-1)
     const yMultiplier = 1 + 1 / this.props.yPadding
     let roundedYMax = Math.max(Math.ceil(yMax/yRoundup) * yRoundup,1)
     const naturalYPadding = roundedYMax - yMax
 
-        // xMin = 0,
-    let xMin = Math.min(...data.map((point, index) => point.time)), //either smallest timestamp or 0
-        yMin = this.props.useDynamicYMin ? Math.min(...data.map(point => point.value)) - roundedYMax / 5 : 0,
+    let yMin = this.props.useDynamicYMin ? Math.min(...data.map(point => point.value)) - roundedYMax / 5 : 0,
 
         xSpread = (xMax - xMin),
         ySpread = (roundedYMax - yMin),
@@ -376,7 +410,6 @@ export default class Area extends Component{
         xAxis = this.describeXAxis(xMin, xSpread, xScale, data),
 
         isZero = ySpread === 0 && yMin === 0
-
 
     return (
       <Chart width={this.props.width} height={this.props.height} type="area">

@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -275,6 +277,49 @@ var Area = function (_Component) {
       };
     }
   }, {
+    key: 'reduceData',
+    value: function reduceData() {
+      var data = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+      var startDate = arguments[1];
+      var endDate = arguments[2];
+      var maxPoints = arguments.length <= 3 || arguments[3] === undefined ? 12 : arguments[3];
+
+      var results = [];
+      // Force each point ot have a time
+      data.forEach(function (point, i) {
+        if (!point.time) data[i].time = point.id || 0;results.push(point);
+      });
+
+      // Convert unix time to ms unix time
+      // results.forEach((point, i)=>{if(results[i].format !== 'x'){results[i].time = parseFloat(point.time) * 1000;results[i].format = 'x'}})
+
+      // Remove data which is out of range
+      var s = parseFloat(startDate.format('x')),
+          e = parseFloat(endDate.format('x'));
+
+      results = results.filter(function (point) {
+        return point.time >= s && point.time <= e;
+      });
+
+      // Limit number of points for given data set
+      if (results.length > maxPoints) {
+        var _ret2 = function () {
+          var zScale = results.length / maxPoints,
+              selectedRange = [];
+          results.forEach(function (point, i) {
+            var k = Math.floor(i / zScale),
+                v = parseFloat(point.value);
+            if (selectedRange[k]) selectedRange[k].value += v;else selectedRange[k] = { value: v, label: '{{value}} ' + point.label, time: point.time };
+          });
+          return {
+            v: selectedRange
+          };
+        }();
+
+        if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
+      } else return results;
+    }
+  }, {
     key: 'describeXAxis',
     value: function describeXAxis(xMin, xSpread, xScale, data) {
       var _this5 = this;
@@ -295,6 +340,7 @@ var Area = function (_Component) {
       if (xSpread > day * 365 * 7) dateFormat = 'YYYY'; // > 7 years
       else if (xSpread > day * 30 * 9) dateFormat = 'MMM'; // > 9 Months
         else if (xSpread > day * 7) dateFormat = 'MMM Do'; // > a week
+          else if (xSpread < day) dateFormat = 'LT';
 
       keys.forEach(function (k, i) {
         var time = xMin + k * (xSpread / keys.length);
@@ -361,7 +407,16 @@ var Area = function (_Component) {
       // let xMax = this.props.data.length - 1
       var xMax = Math.max.apply(Math, _toConsumableArray(data.map(function (point, index) {
         return point.time;
+      })).concat([data.length]));
+      var xMin = Math.min.apply(Math, _toConsumableArray(data.map(function (point, index) {
+        return point.time;
+      })));
+
+      data = this.reduceData(data, (0, _moment2.default)(xMin), (0, _moment2.default)(xMax), 12);
+      xMax = Math.max.apply(Math, _toConsumableArray(data.map(function (point, index) {
+        return point.time;
       })).concat([data.length])); //either a timestamp or number of items
+
       var yMax = Math.max.apply(Math, _toConsumableArray(data.map(function (point) {
         return point.value;
       })));
@@ -370,12 +425,7 @@ var Area = function (_Component) {
       var roundedYMax = Math.max(Math.ceil(yMax / yRoundup) * yRoundup, 1);
       var naturalYPadding = roundedYMax - yMax;
 
-      // xMin = 0,
-      var xMin = Math.min.apply(Math, _toConsumableArray(data.map(function (point, index) {
-        return point.time;
-      }))),
-          //either smallest timestamp or 0
-      yMin = this.props.useDynamicYMin ? Math.min.apply(Math, _toConsumableArray(data.map(function (point) {
+      var yMin = this.props.useDynamicYMin ? Math.min.apply(Math, _toConsumableArray(data.map(function (point) {
         return point.value;
       }))) - roundedYMax / 5 : 0,
           xSpread = xMax - xMin,
