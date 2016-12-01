@@ -120,8 +120,9 @@ export default class Demo extends React.Component {
             <p>
               <a href="https://npmjs.com/package/salad-ui" target="_blank"><img src="https://badge.fury.io/js/salad-ui.svg"/></a>
             </p>
-            <p>SaladUI is a collection of React component and utility functions that range from translation, to autocomplete and charts.</p>
-            <p>Salad-UI can be enjoyed as a complete salad using <i className="snippet">import SaladUI from 'salad-ui'</i> or as its separate ingredients using <i className="snippet">{`import {Area} from 'salad-ui.chart'`}</i>. You can install separate ingredients as <i className="snippet">npm i --save salad-ui.chart</i>.</p>
+            <p>
+              SaladUI is a collection of React components and utility functions that range from translation, to autocomplete and charts.
+              It can be enjoyed as a complete salad using <i className="snippet">import SaladUI from 'salad-ui'</i> or as its separate ingredients using <i className="snippet">{`import {Area} from 'salad-ui.chart'`}</i>. You can install separate ingredients as <i className="snippet">npm i --save salad-ui.chart</i>.</p>
             <p>Salad-UI will work both in Browser and Server environment - use it in your universal apps!</p>
             <p>For optimal old browser compatibility with SaladUI, please include the following polyfill on your page:</p>
             <pre>

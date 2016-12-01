@@ -212,12 +212,7 @@ var Demo = function (_React$Component) {
             _react2.default.createElement(
               'p',
               null,
-              'SaladUI is a collection of React component and utility functions that range from translation, to autocomplete and charts.'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              'Salad-UI can be enjoyed as a complete salad using ',
+              'SaladUI is a collection of React components and utility functions that range from translation, to autocomplete and charts. It can be enjoyed as a complete salad using ',
               _react2.default.createElement(
                 'i',
                 { className: 'snippet' },
