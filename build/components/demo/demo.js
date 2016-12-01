@@ -1626,13 +1626,28 @@ var Demo = function (_React$Component) {
         _react2.default.createElement(
           'footer',
           null,
-          'Made with love at ',
           _react2.default.createElement(
-            'a',
-            { href: 'http://dailymotion.com' },
-            'Dailymotion'
+            'p',
+            null,
+            'Made with love at ',
+            _react2.default.createElement(
+              'a',
+              { href: 'https://dailymotion.com' },
+              'Dailymotion'
+            ),
+            ' in NYC.'
           ),
-          ' in NYC.'
+          _react2.default.createElement(
+            'p',
+            null,
+            'Maintained by ',
+            _react2.default.createElement(
+              'a',
+              { href: 'https://samueldelesque.com' },
+              'Samuel Delesque'
+            ),
+            '.'
+          )
         )
       );
     }
