@@ -44,6 +44,7 @@ export default class Area extends Component{
     maxPoints: React.PropTypes.number,
     yLabelsOutside: React.PropTypes.bool,
     yLabelsPosition: React.PropTypes.string,
+    formula: React.PropTypes.string,
     yPadding: React.PropTypes.number,
     data: React.PropTypes.array,
   }
@@ -75,6 +76,7 @@ export default class Area extends Component{
     yLabelsPosition: 'left',
     yPadding: 10,
     maxPoints: -1,
+    formula: 'sum',
     data: [],
   }
 
@@ -126,7 +128,7 @@ export default class Area extends Component{
   renderTips(data, xMin, yMin, xSpread, ySpread, xScale, yScale){
     let intervalLength,
         dateFormat,
-        tipText,
+        tipText = '{{date}}',
         followingTime,
         label = '{{value}} views',
         day = 86400000,
@@ -138,17 +140,23 @@ export default class Area extends Component{
 
     // if(data[0].label) label = data[0].label
 
+    if(xSpread > day * 365 * 7) dateFormat = 'YYYY' // > 7 years
+    else if(xSpread > day * 30 * 9) dateFormat = 'MMM' // > 9 Months
+    else if(xSpread > day * 7) dateFormat = 'MMM Do' // > a week
+    else if(xSpread < day) dateFormat = 'LT'
+
     if(intervalLength > day * 27 && intervalLength < day * 32){ //roughly one month
       dateFormat = 'MMMM'
-      tipText = '{{date}}'
     }
     else if(intervalLength > day){ //more than 1d
       dateFormat = 'MMM Do'
       tipText = '{{date1}} through {{date2}}'
     }
+    else if(xSpread < day){
+      dateFormat = 'LT'
+    }
     else{
       dateFormat = 'MMM Do'
-      tipText = '{{date}}'
     }
 
     return data.map((point, index) => {
@@ -313,6 +321,9 @@ export default class Area extends Component{
         if(selectedRange[k]) selectedRange[k].value += v
         else selectedRange[k] = {value: v, label: '{{value}} '+point.label, time: point.time}
       })
+      if(this.props.formula === 'mean'){
+        return selectedRange.map(point=>({...point, value: Math.round(point.value * 100 / zScale) / 100}))
+      }
       return selectedRange
     }
     else

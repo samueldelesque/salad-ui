@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -120,7 +122,7 @@ var Area = function (_Component) {
 
       var intervalLength = void 0,
           dateFormat = void 0,
-          tipText = void 0,
+          tipText = '{{date}}',
           followingTime = void 0,
           label = '{{value}} views',
           day = 86400000,
@@ -130,17 +132,22 @@ var Area = function (_Component) {
 
       // if(data[0].label) label = data[0].label
 
+      if (xSpread > day * 365 * 7) dateFormat = 'YYYY'; // > 7 years
+      else if (xSpread > day * 30 * 9) dateFormat = 'MMM'; // > 9 Months
+        else if (xSpread > day * 7) dateFormat = 'MMM Do'; // > a week
+          else if (xSpread < day) dateFormat = 'LT';
+
       if (intervalLength > day * 27 && intervalLength < day * 32) {
         //roughly one month
         dateFormat = 'MMMM';
-        tipText = '{{date}}';
       } else if (intervalLength > day) {
         //more than 1d
         dateFormat = 'MMM Do';
         tipText = '{{date1}} through {{date2}}';
+      } else if (xSpread < day) {
+        dateFormat = 'LT';
       } else {
         dateFormat = 'MMM Do';
-        tipText = '{{date}}';
       }
 
       return data.map(function (point, index) {
@@ -281,6 +288,9 @@ var Area = function (_Component) {
     value: function reduceData() {
       var data = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
       var startDate = arguments[1];
+
+      var _this5 = this;
+
       var endDate = arguments[2];
       var maxPoints = arguments.length <= 3 || arguments[3] === undefined ? 12 : arguments[3];
 
@@ -311,6 +321,13 @@ var Area = function (_Component) {
                 v = parseFloat(point.value);
             if (selectedRange[k]) selectedRange[k].value += v;else selectedRange[k] = { value: v, label: '{{value}} ' + point.label, time: point.time };
           });
+          if (_this5.props.formula === 'mean') {
+            return {
+              v: selectedRange.map(function (point) {
+                return _extends({}, point, { value: Math.round(point.value * 100 / zScale) / 100 });
+              })
+            };
+          }
           return {
             v: selectedRange
           };
@@ -322,7 +339,7 @@ var Area = function (_Component) {
   }, {
     key: 'describeXAxis',
     value: function describeXAxis(xMin, xSpread, xScale, data) {
-      var _this5 = this;
+      var _this6 = this;
 
       var keys = [1, 2, 3, 4, 5, 6, 7, 8, 9],
           keyInterval = data.length / keys.length,
@@ -349,7 +366,7 @@ var Area = function (_Component) {
           txt: (0, _moment2.default)(time).format(dateFormat),
           time: time,
           x: (time - xMin) * xScale,
-          y: _this5.activeHeight + 30,
+          y: _this6.activeHeight + 30,
           ref: 'xLabel.' + i
         });
       });
@@ -363,11 +380,11 @@ var Area = function (_Component) {
   }, {
     key: 'centerXAxisLabelMarkers',
     value: function centerXAxisLabelMarkers() {
-      var _this6 = this;
+      var _this7 = this;
 
       this.xAxisLabels.forEach(function (label) {
-        var domLabel = _this6.refs[label.ref];
-        _this6.centerElement(domLabel, label.x, domLabel.getBBox().width);
+        var domLabel = _this7.refs[label.ref];
+        _this7.centerElement(domLabel, label.x, domLabel.getBBox().width);
       });
     }
   }, {
@@ -383,7 +400,7 @@ var Area = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this7 = this;
+      var _this8 = this;
 
       var data = this.props.data;
 
@@ -462,9 +479,9 @@ var Area = function (_Component) {
             ref: label.ref + '.marker',
             x1: label.x,
             x2: label.x,
-            y1: _this7.activeHeight,
-            y2: _this7.activeHeight + 10,
-            stroke: _this7.props.gridColor,
+            y1: _this8.activeHeight,
+            y2: _this8.activeHeight + 10,
+            stroke: _this8.props.gridColor,
             strokeWidth: 1
           });
         }),
@@ -503,6 +520,7 @@ Area.propTypes = {
   maxPoints: _react2.default.PropTypes.number,
   yLabelsOutside: _react2.default.PropTypes.bool,
   yLabelsPosition: _react2.default.PropTypes.string,
+  formula: _react2.default.PropTypes.string,
   yPadding: _react2.default.PropTypes.number,
   data: _react2.default.PropTypes.array
 };
@@ -533,6 +551,7 @@ Area.defaultProps = {
   yLabelsPosition: 'left',
   yPadding: 10,
   maxPoints: -1,
+  formula: 'sum',
   data: []
 };
 exports.default = Area;

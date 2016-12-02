@@ -158,6 +158,11 @@ exports.default = Trans;
 var unsafeTranslate = function unsafeTranslate(key, args, pluralForm, trans) {
   var translation = key;
   var replacements = {};
+
+  Object.keys(args).forEach(function (k) {
+    replacements[k] = _react2.default.isValidElement(args[k]) ? _server2.default.renderToString(args[k]) : args[k];
+  });
+
   if (_typeof(trans[key]) === 'object' && pluralForm === 0 && typeof trans[key]['singular'] !== 'undefined') {
     translation = trans[key]['singular'];
   } else if (_typeof(trans[key]) === 'object' && pluralForm >= 1 && typeof trans[key]['plural'] !== 'undefined') {
@@ -170,12 +175,9 @@ var unsafeTranslate = function unsafeTranslate(key, args, pluralForm, trans) {
     if (DEBUG) {
       console.warn('%s is not in translated keys', key, ' - translations: ', trans);
     }
-    return translation;
+    return (0, _formatter.render)(translation, replacements);
   }
 
-  Object.keys(args).forEach(function (k) {
-    replacements[k] = _react2.default.isValidElement(args[k]) ? _server2.default.renderToString(args[k]) : args[k];
-  });
   var formatted = translation;
   if (translation.match(/\%\([^\)]+\)/g)) {
     formatted = (0, _sprintfJs.sprintf)(translation, replacements);

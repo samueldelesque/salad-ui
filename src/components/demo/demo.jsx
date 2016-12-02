@@ -163,6 +163,7 @@ export default class Demo extends React.Component {
                   width={this.state.sectionWidth}
                   height={this.state.sectionWidth*0.6}
                   maxPoints={30}
+                  formula="mean"
                   data={realtime_data}
                   labelTemplate={data=>`${data.value} views`}
                   // labelTemplate={data=>`Cats ate ${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.`}
@@ -254,7 +255,7 @@ export default class Demo extends React.Component {
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> InputText</h3>
               <pre>{'<InputText/><InputText textarea/>'}</pre>
               <div style={{marginTop: 10}}>
-                <SaladUI.Form.InputText prefix="https://dailymotion." placeholder="yoursubdomain" suffix=".com" label="Input with label, prefix and suffix"/>
+                <SaladUI.Form.InputText placeholder="yoursubdomain" label="Input with label, prefix and suffix"/>
               </div>
               <div style={{marginTop: 10}}>
                 <SaladUI.Form.InputText textarea label="Input type textarea"/>

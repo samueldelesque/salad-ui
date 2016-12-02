@@ -204,8 +204,8 @@ InputText.defaultProps = {
   style: {},
   value: '',
   focus: false,
-  prefix: false,
-  suffix: false,
+  prefix: null,
+  suffix: null,
   error: false,
   placeholder: 'Start typing'
 };

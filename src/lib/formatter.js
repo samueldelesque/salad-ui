@@ -2,7 +2,11 @@ export const currencyToSymbol = (cur) => {
   switch (cur) {
     case 'EUR':
       return '€'
-      break
+    case 'DKK':
+      return 'kr'
+    case 'GBP':
+      return '£'
+    case 'USD':
     default:
       return '$'
   }
@@ -12,6 +16,19 @@ export const formatCurrency = (amt, currency='') => {
   if(amt === null || amt === '') return
   if(typeof amt !== 'number') amt = parseFloat(amt)
   amt = amt.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+  const symbol = currencyToSymbol(currency)
+  switch (currency) {
+    case 'EUR':
+      // €12.01
+      return `${symbol}${amt}`
+    case 'DKK':
+      // kr12.01
+      return `${symbol}${amt}`
+    case 'USD':
+    default:
+      // $12.01
+      return `${symbol}${amt}`
+  }
   return currencyToSymbol(currency) + ' ' + amt;
 }
 

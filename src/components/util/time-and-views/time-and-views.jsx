@@ -26,7 +26,7 @@ export default class TimeAndViews extends React.Component {
         monthName = this.trans.months[date.getMonth()]
       }
       catch(e){
-        if(DEBUG) console.warn('Trans error: ', e)
+        if(DEBUG) console.warn('Months['+date.getMonth()+'] is not translated')
         return <Trans context={this.trans}>A few months ago</Trans>
       }
       return <Trans context={this.trans} month={monthName}>{'last {month}'}</Trans>

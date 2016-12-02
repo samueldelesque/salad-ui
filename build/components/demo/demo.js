@@ -347,6 +347,7 @@ var Demo = function (_React$Component) {
                   width: this.state.sectionWidth,
                   height: this.state.sectionWidth * 0.6,
                   maxPoints: 30,
+                  formula: 'mean',
                   data: realtime_data,
                   labelTemplate: function labelTemplate(data) {
                     return data.value + ' views';
@@ -565,7 +566,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { style: { marginTop: 10 } },
-                _react2.default.createElement(_saladUi2.default.Form.InputText, { prefix: 'https://dailymotion.', placeholder: 'yoursubdomain', suffix: '.com', label: 'Input with label, prefix and suffix' })
+                _react2.default.createElement(_saladUi2.default.Form.InputText, { placeholder: 'yoursubdomain', label: 'Input with label, prefix and suffix' })
               ),
               _react2.default.createElement(
                 'div',
