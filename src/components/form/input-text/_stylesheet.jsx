@@ -4,6 +4,7 @@ let styles = {
   inputContainer: {
     width: '100%',
     border: 'solid 1px ' + defaults.colors.gray3,
+    backgroundColor: 'white',
     borderRadius: '3px',
     display: 'flex',
   },

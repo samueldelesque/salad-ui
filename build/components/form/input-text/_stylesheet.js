@@ -14,6 +14,7 @@ var styles = {
   inputContainer: {
     width: '100%',
     border: 'solid 1px ' + _stylesheet.defaults.colors.gray3,
+    backgroundColor: 'white',
     borderRadius: '3px',
     display: 'flex'
   },
