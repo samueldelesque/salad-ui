@@ -172,6 +172,37 @@ export default class Demo extends React.Component {
               </div>
             </li>
             <li>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Bar</h3>
+              <pre>
+{`const chartData = [{time: new Date('1990-01-02'), value: 1231}]
+
+<SaladUI.Chart.Area
+  width={900}
+  height={300}
+  labelTemplate={data=>\`Cats ate \${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.\`}
+  data={chartData} width={560}
+/>`}
+              </pre>
+              <div>
+                <SaladUI.Chart.Bar
+                  width={this.state.sectionWidth}
+                  height={this.state.sectionWidth*0.4}
+                  data={[
+                    {label: '100%', value: 100},
+                    {label: '90%', value: 80},
+                    {label: '80%', value: 79},
+                    {label: '70%', value: 68},
+                    {label: '60%', value: 59},
+                    {label: '50%', value: 50},
+                    {label: '40%', value: 39},
+                    {label: '30%', value: 29},
+                    {label: '20%', value: 12},
+                    {label: '10%', value: 10}
+                  ]}
+                />
+              </div>
+            </li>
+            <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Bar Metric</h3>
               <pre>
 {`<SaladUI.Chart.BarMetric

@@ -8,7 +8,6 @@ export default class Bar extends React.Component{
     percent: 100,
     metricPadding: 15,
     metricColor: '#777',
-    barWidth: 70,
     barHeight: 7,
     barRailColor: '#ddd',
     barColor: '#408AE5',
@@ -33,15 +32,18 @@ export default class Bar extends React.Component{
 
   render(){
     return (
-      <div>
+      <div style={{
+        position: 'relative',
+        marginBottom: 15,
+      }}>
         <div style={{fontSize: 13, textTransform: 'uppercase'}}>{this.props.label}</div>
         <div className="bar-row">
           <div style={{
               backgroundColor: this.props.barRailColor,
-              width: this.props.barWidth + '%',
+              width: '100%',
               height: this.props.barHeight,
+              display: 'block',
               marginTop: 4,
-              display: 'inline-block',
               position: 'relative'}}>
             <div style={{
                 width: this.props.percent + '%',
@@ -54,16 +56,18 @@ export default class Bar extends React.Component{
                 transition: 'all .5s'}}></div>
           </div>
           <div style={{
-              width: 100 - this.props.barWidth + '%',
               paddingLeft: this.props.metricPadding,
               fontSize: 13,
               display: 'inline-block',
+              position: 'absolute',
+              right: 0,
+              top: 0,
+              fontWeight: 'bold',
               color: this.props.metricColor,
               textAlign: 'right'}}>
               {`${this.formatValue(this.props.value)} ${this.props.metricName}`}
           </div>
         </div>
-        <br style={{display: 'table',clear: 'both'}}/>
       </div>
     )
   }

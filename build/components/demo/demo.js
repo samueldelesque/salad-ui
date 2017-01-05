@@ -75,7 +75,7 @@ var Demo = function (_React$Component) {
   _inherits(Demo, _React$Component);
 
   function Demo() {
-    var _Object$getPrototypeO;
+    var _ref;
 
     var _temp, _this, _ret;
 
@@ -85,7 +85,7 @@ var Demo = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Demo)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Demo.__proto__ || Object.getPrototypeOf(Demo)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       selectedRadio: 'radio1',
       protein: { name: null, value: null, calories: 0 },
       demoSwitch: true,
@@ -354,6 +354,34 @@ var Demo = function (_React$Component) {
                   }
                   // labelTemplate={data=>`Cats ate ${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.`}
                   // data={chartData}
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'h3',
+                null,
+                _react2.default.createElement(
+                  'span',
+                  { style: { fontStyle: 'italic', opacity: .3 } },
+                  'React Component'
+                ),
+                ' Bar'
+              ),
+              _react2.default.createElement(
+                'pre',
+                null,
+                'const chartData = [{time: new Date(\'1990-01-02\'), value: 1231}]\n\n<SaladUI.Chart.Area\n  width={900}\n  height={300}\n  labelTemplate={data=>`Cats ate ${SaladUI.Lib.formatter.formatCurrency(data.value, \'USD\')} worth of fish that day.`}\n  data={chartData} width={560}\n/>'
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_saladUi2.default.Chart.Bar, {
+                  width: this.state.sectionWidth,
+                  height: this.state.sectionWidth * 0.4,
+                  data: [{ label: '100%', value: 100 }, { label: '90%', value: 80 }, { label: '80%', value: 79 }, { label: '70%', value: 68 }, { label: '60%', value: 59 }, { label: '50%', value: 50 }, { label: '40%', value: 39 }, { label: '30%', value: 29 }, { label: '20%', value: 12 }, { label: '10%', value: 10 }]
                 })
               )
             ),

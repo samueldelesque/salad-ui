@@ -9,7 +9,6 @@ var glob = {};
 if (CANUSEDOM) {
   glob = window;
 } else {
-  console.log('SaladUI being used in Server mode.');
   glob = global;
 }
 if (!glob.DM_ENV) glob.DM_ENV = {};

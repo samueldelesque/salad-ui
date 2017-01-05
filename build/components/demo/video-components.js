@@ -31,7 +31,7 @@ var GridArea = exports.GridArea = function (_React$Component) {
   function GridArea() {
     _classCallCheck(this, GridArea);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(GridArea).apply(this, arguments));
+    return _possibleConstructorReturn(this, (GridArea.__proto__ || Object.getPrototypeOf(GridArea)).apply(this, arguments));
   }
 
   _createClass(GridArea, [{
@@ -56,7 +56,7 @@ var ListArea = exports.ListArea = function (_React$Component2) {
   function ListArea() {
     _classCallCheck(this, ListArea);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ListArea).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ListArea.__proto__ || Object.getPrototypeOf(ListArea)).apply(this, arguments));
   }
 
   _createClass(ListArea, [{
@@ -81,7 +81,7 @@ var LoadMore = exports.LoadMore = function (_React$Component3) {
   function LoadMore() {
     _classCallCheck(this, LoadMore);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(LoadMore).apply(this, arguments));
+    return _possibleConstructorReturn(this, (LoadMore.__proto__ || Object.getPrototypeOf(LoadMore)).apply(this, arguments));
   }
 
   _createClass(LoadMore, [{

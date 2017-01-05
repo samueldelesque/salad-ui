@@ -24,7 +24,7 @@ var Grid = function (_React$Component) {
   _inherits(Grid, _React$Component);
 
   function Grid() {
-    var _Object$getPrototypeO;
+    var _ref;
 
     var _temp, _this, _ret;
 
@@ -34,7 +34,7 @@ var Grid = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Grid)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Grid.__proto__ || Object.getPrototypeOf(Grid)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       items: [],
       width: 660,
       breakPoint: { columns: 3, width: 660 }
@@ -52,10 +52,9 @@ var Grid = function (_React$Component) {
 
       try {
         for (var _iterator = breakPoints.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var _step$value = _slicedToArray(_step.value, 2);
-
-          var index = _step$value[0];
-          var bp = _step$value[1];
+          var _step$value = _slicedToArray(_step.value, 2),
+              index = _step$value[0],
+              bp = _step$value[1];
 
           var newdiff = Math.abs(bp.width - width);
           if (newdiff < diff) {
@@ -129,8 +128,8 @@ var Grid = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { ref: function ref(_ref) {
-            return _this3.container = _ref;
+        { ref: function ref(_ref2) {
+            return _this3.container = _ref2;
           }, style: {
             display: 'flex',
             justifyContent: 'flex-start',

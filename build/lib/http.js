@@ -21,11 +21,11 @@ var debug = false;
 var mockApi = false;
 
 var enableMock = exports.enableMock = function enableMock() {
-  var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+  var enable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   return mockApi = enable;
 };
 var enableDebug = exports.enableDebug = function enableDebug() {
-  var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+  var enable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   return debug = enable;
 };
 var buildError = function buildError(title, res) {
@@ -64,8 +64,8 @@ var apiFactory = exports.apiFactory = function apiFactory(baseUrl, baseParams) {
 };
 
 var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
-  var method = arguments.length <= 1 || arguments[1] === undefined ? 'GET' : arguments[1];
-  var params = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+  var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'GET';
+  var params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
   method = method.toUpperCase();
   if (! ~['GET', 'POST', 'DELETE', 'PUT', 'PATCH'].indexOf(method)) {
@@ -105,35 +105,35 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
   });
 };
 var _get = function _get(url) {
-  var params = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === 'object' && !params) params = url;
   return fetchJSON(url, 'GET', params);
 };
 exports.get = _get;
 var _post = function _post(url) {
-  var params = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === 'object' && !params) params = url;
   return fetchJSON(url, 'POST', params);
 };
 exports.post = _post;
 var _patch = function _patch(url) {
-  var params = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === 'object' && !params) params = url;
   return fetchJSON(url, 'PATCH', params);
 };
 exports.patch = _patch;
 var _put = function _put(url) {
-  var params = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === 'object' && !params) params = url;
   return fetchJSON(url, 'PUT', params);
 };
 exports.put = _put;
 var _del = function _del(url) {
-  var params = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+  var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   if ((typeof url === 'undefined' ? 'undefined' : _typeof(url)) === 'object' && !params) params = url;
   return fetchJSON(url, 'DELETE', params);

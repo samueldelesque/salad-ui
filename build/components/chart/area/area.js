@@ -52,7 +52,7 @@ var Area = function (_Component) {
   _inherits(Area, _Component);
 
   function Area() {
-    var _Object$getPrototypeO;
+    var _ref;
 
     var _temp, _this, _ret;
 
@@ -62,7 +62,7 @@ var Area = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Area)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.tipsData = {}, _this.xAxisLabels = [], _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Area.__proto__ || Object.getPrototypeOf(Area)).call.apply(_ref, [this].concat(args))), _this), _this.tipsData = {}, _this.xAxisLabels = [], _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Area, [{
@@ -78,7 +78,7 @@ var Area = function (_Component) {
   }, {
     key: 'centerElement',
     value: function centerElement(el, center, width) {
-      var setWidth = arguments.length <= 3 || arguments[3] === undefined ? false : arguments[3];
+      var setWidth = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
       if (setWidth) el.setAttribute('width', width);
       var xPos = center - width / 2;
@@ -286,13 +286,13 @@ var Area = function (_Component) {
   }, {
     key: 'reduceData',
     value: function reduceData() {
-      var data = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
       var startDate = arguments[1];
 
       var _this5 = this;
 
       var endDate = arguments[2];
-      var maxPoints = arguments.length <= 3 || arguments[3] === undefined ? 12 : arguments[3];
+      var maxPoints = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 12;
 
       var results = [];
       // Force each point ot have a time

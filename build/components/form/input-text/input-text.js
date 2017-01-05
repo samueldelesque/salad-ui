@@ -30,7 +30,7 @@ var InputText = function (_React$Component) {
   function InputText() {
     _classCallCheck(this, InputText);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(InputText).call(this));
+    var _this = _possibleConstructorReturn(this, (InputText.__proto__ || Object.getPrototypeOf(InputText)).call(this));
 
     _this.state = {
       value: '',
