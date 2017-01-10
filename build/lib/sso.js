@@ -22,7 +22,7 @@ var SSO = function () {
   _createClass(SSO, null, [{
     key: 'init',
     value: function init(sdx) {
-      var apiEndpoint = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+      var apiEndpoint = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
       if (!apiEndpoint) SSO.apiEndpoint = 'https://sso.dailymotion.com';else SSO.apiEndpoint = apiEndpoint;
 

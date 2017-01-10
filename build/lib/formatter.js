@@ -10,18 +10,35 @@ var currencyToSymbol = exports.currencyToSymbol = function currencyToSymbol(cur)
   switch (cur) {
     case 'EUR':
       return '€';
-      break;
+    case 'DKK':
+      return 'kr';
+    case 'GBP':
+      return '£';
+    case 'USD':
     default:
       return '$';
   }
 };
 
 var formatCurrency = exports.formatCurrency = function formatCurrency(amt) {
-  var currency = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+  var currency = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
   if (amt === null || amt === '') return;
   if (typeof amt !== 'number') amt = parseFloat(amt);
   amt = amt.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+  var symbol = currencyToSymbol(currency);
+  switch (currency) {
+    case 'EUR':
+      // €12.01
+      return '' + symbol + amt;
+    case 'DKK':
+      // kr12.01
+      return '' + symbol + amt;
+    case 'USD':
+    default:
+      // $12.01
+      return '' + symbol + amt;
+  }
   return currencyToSymbol(currency) + ' ' + amt;
 };
 
@@ -51,7 +68,7 @@ var numberToString = exports.numberToString = function numberToString(value) {
  * ex: [{name: 'Sam'}, {name: 'Benoit'}] ==> Sam and Benoit
  */
 var mapList = exports.mapList = function mapList(key_parts, list) {
-  var iteration = arguments.length <= 2 || arguments[2] === undefined ? 0 : arguments[2];
+  var iteration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
   var listTexts = list.map(function (child) {
     if ((typeof child === 'undefined' ? 'undefined' : _typeof(child)) === 'object') return readProperty(key_parts, child, iteration + 1).value;else return child;
@@ -71,7 +88,7 @@ var mapList = exports.mapList = function mapList(key_parts, list) {
  * ex: [{user:{view: 1000}}, {user: {views: 1000}}] ==> 2000
  */
 var mapSum = exports.mapSum = function mapSum(key_parts, list) {
-  var iteration = arguments.length <= 2 || arguments[2] === undefined ? 0 : arguments[2];
+  var iteration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
   var listVals = list.map(function (child) {
     if ((typeof child === 'undefined' ? 'undefined' : _typeof(child)) === 'object') return readProperty(key_parts, child, iteration + 1).value;else return child;
@@ -90,7 +107,7 @@ var mapSum = exports.mapSum = function mapSum(key_parts, list) {
  * ex: ['user', 'views'], {user: view: {1000}} ==> 1000
  */
 var readProperty = exports.readProperty = function readProperty(key_parts, obj) {
-  var iteration = arguments.length <= 2 || arguments[2] === undefined ? 0 : arguments[2];
+  var iteration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
   if (!key_parts || !key_parts[iteration]) {
     return { value: '_invalid_key_', iteration: iteration };

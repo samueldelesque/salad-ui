@@ -1,3 +1,3 @@
-import * as Util from './util'
+import Util from './util'
 
 module.exports =  Util

@@ -1,3 +1,3 @@
-import * as Chart from './chart'
+import Chart from './chart'
 
 module.exports = Chart

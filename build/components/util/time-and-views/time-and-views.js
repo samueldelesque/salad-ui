@@ -28,7 +28,7 @@ var TimeAndViews = function (_React$Component) {
   _inherits(TimeAndViews, _React$Component);
 
   function TimeAndViews() {
-    var _Object$getPrototypeO;
+    var _ref;
 
     var _temp, _this, _ret;
 
@@ -38,7 +38,7 @@ var TimeAndViews = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(TimeAndViews)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.trans = DM_ENV['utils/time-and-views'], _this.defaultProps = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TimeAndViews.__proto__ || Object.getPrototypeOf(TimeAndViews)).call.apply(_ref, [this].concat(args))), _this), _this.trans = DM_ENV['utils/time-and-views'], _this.defaultProps = {
       views: null,
       time: null
     }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -47,8 +47,8 @@ var TimeAndViews = function (_React$Component) {
   _createClass(TimeAndViews, [{
     key: 'timesince',
     value: function timesince(val) {
-      var date = typeof val === 'number' ? new Date(val * 1000) : (typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' ? val : new Date();
-      var now = new Date();
+      var date = typeof val === 'number' ? new Date(val * 1000) : (typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' ? val : new Date(),
+          now = new Date();
 
       var diff = (now - date) / 36e5;
 
@@ -65,7 +65,7 @@ var TimeAndViews = function (_React$Component) {
         try {
           monthName = this.trans.months[date.getMonth()];
         } catch (e) {
-          if (_trans.DEBUG) console.warn('Trans error: ', e);
+          if (_trans.DEBUG) console.warn('Months[' + date.getMonth() + '] is not translated');
           return _react2.default.createElement(
             _trans2.default,
             { context: this.trans },

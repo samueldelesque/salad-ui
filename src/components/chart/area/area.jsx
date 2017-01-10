@@ -41,8 +41,10 @@ export default class Area extends Component{
     labelColor: React.PropTypes.string,
     fillColor: React.PropTypes.string,
     maxOverflow: React.PropTypes.number,
+    maxPoints: React.PropTypes.number,
     yLabelsOutside: React.PropTypes.bool,
     yLabelsPosition: React.PropTypes.string,
+    formula: React.PropTypes.string,
     yPadding: React.PropTypes.number,
     data: React.PropTypes.array,
   }
@@ -73,6 +75,8 @@ export default class Area extends Component{
     yLabelsOutside: false,
     yLabelsPosition: 'left',
     yPadding: 10,
+    maxPoints: -1,
+    formula: 'sum',
     data: [],
   }
 
@@ -124,7 +128,7 @@ export default class Area extends Component{
   renderTips(data, xMin, yMin, xSpread, ySpread, xScale, yScale){
     let intervalLength,
         dateFormat,
-        tipText,
+        tipText = '{{date}}',
         followingTime,
         label = '{{value}} views',
         day = 86400000,
@@ -136,17 +140,23 @@ export default class Area extends Component{
 
     // if(data[0].label) label = data[0].label
 
+    if(xSpread > day * 365 * 7) dateFormat = 'YYYY' // > 7 years
+    else if(xSpread > day * 30 * 9) dateFormat = 'MMM' // > 9 Months
+    else if(xSpread > day * 7) dateFormat = 'MMM Do' // > a week
+    else if(xSpread < day) dateFormat = 'LT'
+
     if(intervalLength > day * 27 && intervalLength < day * 32){ //roughly one month
       dateFormat = 'MMMM'
-      tipText = '{{date}}'
     }
     else if(intervalLength > day){ //more than 1d
       dateFormat = 'MMM Do'
       tipText = '{{date1}} through {{date2}}'
     }
+    else if(xSpread < day){
+      dateFormat = 'LT'
+    }
     else{
       dateFormat = 'MMM Do'
-      tipText = '{{date}}'
     }
 
     return data.map((point, index) => {
@@ -287,6 +297,39 @@ export default class Area extends Component{
     }
   }
 
+
+  reduceData(data = [], startDate, endDate, maxPoints = 12){
+    let results = []
+    // Force each point ot have a time
+    data.forEach((point, i)=>{if(!point.time)data[i].time = point.id || 0;results.push(point)})
+
+    // Convert unix time to ms unix time
+    // results.forEach((point, i)=>{if(results[i].format !== 'x'){results[i].time = parseFloat(point.time) * 1000;results[i].format = 'x'}})
+
+    // Remove data which is out of range
+    let s = parseFloat(startDate.format('x')),
+        e = parseFloat(endDate.format('x'))
+
+    results = results.filter(point=>point.time >= s && point.time <= e)
+
+    // Limit number of points for given data set
+    if(results.length > maxPoints){
+      let zScale = results.length / maxPoints, selectedRange = []
+      results.forEach((point, i) => {
+        let k = Math.floor(i / zScale),
+            v = parseFloat(point.value)
+        if(selectedRange[k]) selectedRange[k].value += v
+        else selectedRange[k] = {value: v, label: '{{value}} '+point.label, time: point.time}
+      })
+      if(this.props.formula === 'mean'){
+        return selectedRange.map(point=>({...point, value: Math.round(point.value * 100 / zScale) / 100}))
+      }
+      return selectedRange
+    }
+    else
+      return results
+  }
+
   describeXAxis(xMin, xSpread, xScale, data){
     let keys = [1,2,3,4,5,6,7,8,9],
         keyInterval = data.length / keys.length,
@@ -301,7 +344,8 @@ export default class Area extends Component{
     }
     if(xSpread > day * 365 * 7) dateFormat = 'YYYY' // > 7 years
     else if(xSpread > day * 30 * 9) dateFormat = 'MMM' // > 9 Months
-    else if(xSpread > day * 7) dateFormat = 'MMM Do' // > a week
+    else if(xSpread > day * 7) dateFormat = 'MMM D' // > a week
+    else if(xSpread < day) dateFormat = 'LT'
 
     keys.forEach((k,i)=>{
       let time = xMin + (k * (xSpread/keys.length))
@@ -318,7 +362,7 @@ export default class Area extends Component{
     this.xAxisLabels = labels
 
     return {
-      labels: labels
+      labels
     }
   }
 
@@ -355,35 +399,44 @@ export default class Area extends Component{
     data = data.sort((a,b) => a.time === b.time ? 0 : a.time > b.time ? 1 : -1)
 
     // let xMax = this.props.data.length - 1
-    const xMax = Math.max(...data.map((point, index) => point.time), data.length) //either a timestamp or number of items
+    let xMax = Math.max(...data.map((point, index) => point.time), data.length)
+    const xMin = Math.min(...data.map((point, index) => point.time))
+
+    if(this.props.maxPoints !== -1) {
+      data = this.reduceData(data, moment(xMin), moment(xMax), this.props.maxPoints)
+      xMax = Math.max(...data.map((point, index) => point.time), data.length)
+    }
+
     const yMax = Math.max(...data.map(point => point.value))
     const yRoundup = Math.pow(10, String(Math.round(yMax)).length-1)
     const yMultiplier = 1 + 1 / this.props.yPadding
     let roundedYMax = Math.max(Math.ceil(yMax/yRoundup) * yRoundup,1)
     const naturalYPadding = roundedYMax - yMax
 
-        // xMin = 0,
-    let xMin = Math.min(...data.map((point, index) => point.time)), //either smallest timestamp or 0
-        yMin = this.props.useDynamicYMin ? Math.min(...data.map(point => point.value)) - roundedYMax / 5 : 0,
+    let yMin = (
+      this.props.useDynamicYMin ?
+      Math.min(...data.map(point => point.value)) - roundedYMax / 5 :
+      0
+    )
 
-        xSpread = (xMax - xMin),
-        ySpread = (roundedYMax - yMin),
-        xScale = this.activeWidth / (xSpread || 1),
-        yScale = this.activeHeight / (ySpread || 1),
+    const xSpread = (xMax - xMin)
+    const ySpread = (roundedYMax - yMin)
+    const xScale = this.activeWidth / (xSpread || 1)
+    const yScale = this.activeHeight / (ySpread || 1)
 
-        line = this.describeLine(data, xMin, yMin, xSpread, ySpread, xScale, yScale),
-        yAxis = this.describeYAxis(yMin, ySpread, yScale),
-        xAxis = this.describeXAxis(xMin, xSpread, xScale, data),
+    const line = this.describeLine(data, xMin, yMin, xSpread, ySpread, xScale, yScale)
+    const area = `0,${(isZero ? yScale : ySpread * yScale) - this.props.strokeWidth} ${line} ${(xMax - xMin) * xScale - this.props.strokeWidth},${(isZero ? yScale : ySpread * yScale) - this.props.strokeWidth}`
+    const yAxis = this.describeYAxis(yMin, ySpread, yScale)
+    const xAxis = this.describeXAxis(xMin, xSpread, xScale, data)
 
-        isZero = ySpread === 0 && yMin === 0
-
+    const isZero = ySpread === 0 && yMin === 0
 
     return (
       <Chart width={this.props.width} height={this.props.height} type="area">
         {yAxis.gridLines.map(::this.renderYGridLine)}
 
         <polygon
-          points={`0,${(isZero ? yScale : ySpread * yScale) - this.props.strokeWidth} ${line} ${(xMax - xMin) * xScale - this.props.strokeWidth},${(isZero ? yScale : ySpread * yScale) - this.props.strokeWidth}`}
+          points={area}
           style={{fill: this.props.fillColor, strokeWidth: 0}}
         />
 

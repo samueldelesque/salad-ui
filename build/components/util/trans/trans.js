@@ -46,7 +46,7 @@ var Trans = function (_React$Component) {
   _inherits(Trans, _React$Component);
 
   function Trans() {
-    var _Object$getPrototypeO;
+    var _ref;
 
     var _temp, _this, _ret;
 
@@ -56,7 +56,7 @@ var Trans = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Trans)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _initialiseProps.call(_this), _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Trans.__proto__ || Object.getPrototypeOf(Trans)).call.apply(_ref, [this].concat(args))), _this), _initialiseProps.call(_this), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Trans, [{
@@ -95,17 +95,17 @@ Trans.translate = function () {
 };
 
 Trans.enableDebug = function () {
-  var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+  var enable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   return exports.DEBUG = DEBUG = !!enable;
 };
 
 Trans.enableLogAllTrans = function () {
-  var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+  var enable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   return LOG_ALL_TRANSLATIONS = !!enable;
 };
 
 Trans.enableHighlight = function () {
-  var enable = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+  var enable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
   HIGHLIGHT_TRANSLATIONS = !!enable;
   Object.keys(transRefs).map(function (key) {
@@ -114,7 +114,7 @@ Trans.enableHighlight = function () {
 };
 
 Trans.setLang = function () {
-  var locale = arguments.length <= 0 || arguments[0] === undefined ? 'en' : arguments[0];
+  var locale = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'en';
 
   exports.LANG = LANG = locale;
   exports.PLURAL_TYPE = PLURAL_TYPE = pluralTypeName(locale);
@@ -127,7 +127,7 @@ Trans.factory = function (translations) {
     _inherits(T, _Trans);
 
     function T() {
-      var _Object$getPrototypeO2;
+      var _ref2;
 
       var _temp2, _this2, _ret2;
 
@@ -137,7 +137,7 @@ Trans.factory = function (translations) {
         args[_key2] = arguments[_key2];
       }
 
-      return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(T)).call.apply(_Object$getPrototypeO2, [this].concat(args))), _this2), _initialiseProps2.call(_this2), _temp2), _possibleConstructorReturn(_this2, _ret2);
+      return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref2 = T.__proto__ || Object.getPrototypeOf(T)).call.apply(_ref2, [this].concat(args))), _this2), _initialiseProps2.call(_this2), _temp2), _possibleConstructorReturn(_this2, _ret2);
     }
 
     return T;
@@ -158,6 +158,11 @@ exports.default = Trans;
 var unsafeTranslate = function unsafeTranslate(key, args, pluralForm, trans) {
   var translation = key;
   var replacements = {};
+
+  Object.keys(args).forEach(function (k) {
+    replacements[k] = _react2.default.isValidElement(args[k]) ? _server2.default.renderToString(args[k]) : args[k];
+  });
+
   if (_typeof(trans[key]) === 'object' && pluralForm === 0 && typeof trans[key]['singular'] !== 'undefined') {
     translation = trans[key]['singular'];
   } else if (_typeof(trans[key]) === 'object' && pluralForm >= 1 && typeof trans[key]['plural'] !== 'undefined') {
@@ -170,12 +175,9 @@ var unsafeTranslate = function unsafeTranslate(key, args, pluralForm, trans) {
     if (DEBUG) {
       console.warn('%s is not in translated keys', key, ' - translations: ', trans);
     }
-    return translation;
+    return (0, _formatter.render)(translation, replacements);
   }
 
-  Object.keys(args).forEach(function (k) {
-    replacements[k] = _react2.default.isValidElement(args[k]) ? _server2.default.renderToString(args[k]) : args[k];
-  });
   var formatted = translation;
   if (translation.match(/\%\([^\)]+\)/g)) {
     formatted = (0, _sprintfJs.sprintf)(translation, replacements);
@@ -184,15 +186,15 @@ var unsafeTranslate = function unsafeTranslate(key, args, pluralForm, trans) {
       DEPRECATION_WARNING_SHOWED = true;
     }
   } else {
-    formatted = (0, _formatter.render)(key, replacements);
+    formatted = (0, _formatter.render)(translation, replacements);
   }
   return formatted;
 };
 
 var translate = exports.translate = function translate(key) {
-  var args = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-  var n = arguments.length <= 2 || arguments[2] === undefined ? 1 : arguments[2];
-  var trans = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+  var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var n = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  var trans = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 
   var translation = key;
   if ((typeof n === 'undefined' ? 'undefined' : _typeof(n)) === 'object') {
@@ -269,6 +271,6 @@ var pluralTypeName = exports.pluralTypeName = function pluralTypeName(locale) {
   return langToPluralType[locale] || langToPluralType.en;
 };
 var pluralType = exports.pluralType = function pluralType() {
-  var n = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+  var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
   return pluralTypes[PLURAL_TYPE](n);
 };

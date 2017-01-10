@@ -69,6 +69,15 @@ export default class Trans extends React.Component {
 const unsafeTranslate = (key, args, pluralForm, trans) => {
   let translation = key
   let replacements = {}
+
+  Object.keys(args).forEach(k => {
+    replacements[k] = (
+      React.isValidElement(args[k]) ?
+      ReactDOMServer.renderToString(args[k]) :
+      args[k]
+    )
+  })
+
   if(typeof(trans[key]) === 'object' && pluralForm === 0 && typeof(trans[key]['singular']) !== 'undefined'){
     translation = trans[key]['singular']
   } else if(typeof(trans[key]) === 'object' && pluralForm >= 1 && typeof(trans[key]['plural']) !== 'undefined'){
@@ -79,16 +88,9 @@ const unsafeTranslate = (key, args, pluralForm, trans) => {
     translation = trans[key]
   } else {
     if(DEBUG){console.warn('%s is not in translated keys', key, ' - translations: ', trans)}
-    return translation
+    return render(translation, replacements)
   }
 
-  Object.keys(args).forEach(k => {
-    replacements[k] = (
-      React.isValidElement(args[k]) ?
-      ReactDOMServer.renderToString(args[k]) :
-      args[k]
-    )
-  })
   let formatted = translation
   if(translation.match(/\%\([^\)]+\)/g)){
     formatted = sprintf(translation, replacements)
@@ -97,7 +99,7 @@ const unsafeTranslate = (key, args, pluralForm, trans) => {
       DEPRECATION_WARNING_SHOWED = true
     }
   } else {
-    formatted = render(key, replacements)
+    formatted = render(translation, replacements)
   }
   return formatted
 }

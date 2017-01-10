@@ -26,7 +26,7 @@ var Bar = function (_React$Component) {
   function Bar() {
     _classCallCheck(this, Bar);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Bar).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Bar.__proto__ || Object.getPrototypeOf(Bar)).apply(this, arguments));
   }
 
   _createClass(Bar, [{
@@ -39,7 +39,10 @@ var Bar = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { style: {
+            position: 'relative',
+            marginBottom: 15
+          } },
         _react2.default.createElement(
           'div',
           { style: { fontSize: 13, textTransform: 'uppercase' } },
@@ -52,10 +55,10 @@ var Bar = function (_React$Component) {
             'div',
             { style: {
                 backgroundColor: this.props.barRailColor,
-                width: this.props.barWidth + '%',
+                width: '100%',
                 height: this.props.barHeight,
+                display: 'block',
                 marginTop: 4,
-                display: 'inline-block',
                 position: 'relative' } },
             _react2.default.createElement('div', { style: {
                 width: this.props.percent + '%',
@@ -70,16 +73,18 @@ var Bar = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { style: {
-                width: 100 - this.props.barWidth + '%',
                 paddingLeft: this.props.metricPadding,
                 fontSize: 13,
                 display: 'inline-block',
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                fontWeight: 'bold',
                 color: this.props.metricColor,
                 textAlign: 'right' } },
             this.formatValue(this.props.value) + ' ' + this.props.metricName
           )
-        ),
-        _react2.default.createElement('br', { style: { display: 'table', clear: 'both' } })
+        )
       );
     }
   }]);
@@ -93,7 +98,6 @@ Bar.defaultProps = {
   percent: 100,
   metricPadding: 15,
   metricColor: '#777',
-  barWidth: 70,
   barHeight: 7,
   barRailColor: '#ddd',
   barColor: '#408AE5',
