@@ -164,10 +164,10 @@ export default class Demo extends React.Component {
                   height={this.state.sectionWidth*0.6}
                   maxPoints={30}
                   formula="mean"
-                  data={realtime_data}
-                  labelTemplate={data=>`${data.value} views`}
-                  // labelTemplate={data=>`Cats ate ${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.`}
-                  // data={chartData}
+                  // data={realtime_data}
+                  // labelTemplate={data=>`${data.value} views`}
+                  labelTemplate={data=>`Cats ate ${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.`}
+                  data={chartData}
                 />
               </div>
             </li>

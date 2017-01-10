@@ -344,7 +344,7 @@ export default class Area extends Component{
     }
     if(xSpread > day * 365 * 7) dateFormat = 'YYYY' // > 7 years
     else if(xSpread > day * 30 * 9) dateFormat = 'MMM' // > 9 Months
-    else if(xSpread > day * 7) dateFormat = 'MMM Do' // > a week
+    else if(xSpread > day * 7) dateFormat = 'MMM D' // > a week
     else if(xSpread < day) dateFormat = 'LT'
 
     keys.forEach((k,i)=>{
@@ -362,7 +362,7 @@ export default class Area extends Component{
     this.xAxisLabels = labels
 
     return {
-      labels: labels
+      labels
     }
   }
 

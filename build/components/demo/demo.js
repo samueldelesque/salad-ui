@@ -347,13 +347,13 @@ var Demo = function (_React$Component) {
                   width: this.state.sectionWidth,
                   height: this.state.sectionWidth * 0.6,
                   maxPoints: 30,
-                  formula: 'mean',
-                  data: realtime_data,
-                  labelTemplate: function labelTemplate(data) {
-                    return data.value + ' views';
-                  }
-                  // labelTemplate={data=>`Cats ate ${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.`}
-                  // data={chartData}
+                  formula: 'mean'
+                  // data={realtime_data}
+                  // labelTemplate={data=>`${data.value} views`}
+                  , labelTemplate: function labelTemplate(data) {
+                    return 'Cats ate ' + _saladUi2.default.Lib.formatter.formatCurrency(data.value, 'USD') + ' worth of fish that day.';
+                  },
+                  data: chartData
                 })
               )
             ),
