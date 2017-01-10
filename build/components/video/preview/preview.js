@@ -133,7 +133,7 @@ var Preview = function (_Component) {
             _this2.setState({ hovered: false });
           },
           onClick: function onClick() {
-            if (_this2.props.onSelect) _this2.props.onSelect();else window.location.href = _this2.props.uri;
+            if (_this2.props.onSelect) _this2.props.onSelect();else if (_this2.props.onClick) _this2.props.onClick();else window.location.href = _this2.props.uri;
           },
           style: Object.assign({}, previewStyles.preview, {
             height: this.props.type === 'grid' ? height + 90 : height,
