@@ -133,7 +133,6 @@ var Icon = function (_React$Component) {
     value: function render() {
       // For some funny reason, react can't match client and server
       // code when the properties are not specified individually
-
       var _Object$assign = Object.assign({}, this.props, {
         style: Object.assign({}, this.props.style, {
           width: this.props.width,

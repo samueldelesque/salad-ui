@@ -6,7 +6,7 @@ export default class Bar extends React.Component{
     data: [],
     metricName: 'points',
     metricColor: '#777',
-    barSize: 7,
+    barSize: 20,
     barRailColor: null,
     barColor: '#408AE5',
     gridColor: 'rgba(230,230,230,.5)',
@@ -18,6 +18,7 @@ export default class Bar extends React.Component{
     labelFontSize: 12,
     labelTextShadow: '1px 1px #fff',
     labelColor: '#555',
+    isPercent: false,
     labelTemplate: '{{value}}', // or function(value, date){ return value + "$ on " + date}
   }
 
@@ -61,8 +62,45 @@ export default class Bar extends React.Component{
 
     return {
       gridLines: lines.map(k => {return {y: isZero ? yScale : (ySpread - k * rule) * yScale}}),
-      labels: labels.map(k => {var v = k * rule * 2;return {y: isZero ? yScale : (ySpread - k * rule * 2) * yScale, txt: formatNumber(Math.round(v + yMin))}})
+      labels: labels.map(k => {
+        var v = k * rule * 2;
+        return {
+          y: isZero ? yScale : (ySpread - k * rule * 2) * yScale,
+          txt: formatNumber(Math.round(v + yMin)) + (this.props.isPercent ? '%' : '')
+        }
+      })
     }
+  }
+
+  renderTip(index, text, xBase, yBase){
+    const triangleWidth = 25
+    const triangleHeight = 10
+
+    const trianglePath = [
+      (xBase - triangleWidth / 2) + ',' + yBase - 10,
+      (xBase + triangleWidth / 2) + ',' + yBase - 10,
+      xBase + ',' + (yBase + triangleHeight) - 10,
+    ].join(' ')
+    const triangleBorderPath = [
+      (xBase - triangleWidth / 2) + ',' + yBase - 10,
+      (xBase + triangleWidth / 2) + ',' + yBase - 10,
+      xBase  + ',' + (yBase + triangleHeight ) - 10,
+    ].join(' ')
+
+    const boxWidth = 28
+    const boxHeight = 15
+
+    return (
+      <g key={`point.${index}`} ref={`point.${index}`}>
+        <text
+          x={xBase - boxWidth / 2}
+          y={yBase - boxHeight / 2}
+          style={{fontSize: 16, fontWeight: 'bold'}}
+        >
+          {text}
+        </text>
+      </g>
+    )
   }
 
   renderLabel(label, index){
@@ -80,7 +118,7 @@ export default class Bar extends React.Component{
         y={label.y}
         ref={label.ref}
         fill={this.props.labelColor}
-        style={{fontSize: this.props.labelFontSize, textShadow: this.props.labelTextShadow}}
+        style={{fontSize: this.props.labelFontSize, textShadow: this.props.labelTextShadow, textAlign: 'center'}}
       >
         {label.txt}
       </text>
@@ -90,7 +128,7 @@ export default class Bar extends React.Component{
   render(){
     const height = this.props.height - this.props.bottomBarHeight
     const yMin = 0
-    const yMax = Math.max(...this.props.data.map(point => point.value))
+    const yMax = Math.max(...this.props.data.map(point => point.value)) * 1.25
     const ySpread = (yMax - yMin)
     const yScale = height / (ySpread || 1)
     const yAxis = this.describeYAxis(yMin, ySpread, yScale)
@@ -103,14 +141,16 @@ export default class Bar extends React.Component{
         {yAxis.gridLines.map(::this.renderYGridLine)}
         {
           this.props.data.map((item,i)=>(
-            <rect
-              key={`bar.item.${i}`}
-              fill={this.props.barColor}
-              width={barSize}
-              height={item.value * yScale}
-              y={height - (item.value * yScale)}
-              x={i * barSpacing - barSize / 2 + barSpacing / 2}
-            />
+            <g key={`bar.item.${i}`}>
+              <rect
+                fill={this.props.barColor}
+                width={barSize}
+                height={item.value * yScale}
+                y={height - (item.value * yScale)}
+                x={i * barSpacing - barSize / 2 + barSpacing / 2 - barSize / 2}
+              />
+              {this.renderTip(i, item.value + (this.props.isPercent?'%':''), i * barSpacing - barSize / 2 + barSpacing / 2, height - (item.value * yScale))}
+            </g>
           ))
         }
         {yAxis.labels.map(::this.renderLabel)}

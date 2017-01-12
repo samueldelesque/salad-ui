@@ -113,7 +113,6 @@ var Grid = function (_React$Component) {
           marginBottom: 20,
           flexGrow: 'grow',
           display: 'inline-block' });
-        //non flex fallback
         return _react2.default.createElement(
           'div',
           { key: 'vid.' + index, style: itemStyles },
