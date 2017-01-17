@@ -460,6 +460,8 @@ var Area = function (_Component) {
 
       var isZero = ySpread === 0 && yMin === 0;
 
+      if (!data || !data.length) return null;
+
       return _react2.default.createElement(
         _chart2.default,
         { width: this.props.width, height: this.props.height, type: 'area' },

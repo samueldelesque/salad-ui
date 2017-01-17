@@ -132,13 +132,15 @@ var Bar = function (_React$Component) {
       var yMin = 0;
       var yMax = Math.max.apply(Math, _toConsumableArray(this.props.data.map(function (point) {
         return point.value;
-      }))) * 1.25;
+      }))) * 1.1;
       var ySpread = yMax - yMin;
       var yScale = height / (ySpread || 1);
       var yAxis = this.describeYAxis(yMin, ySpread, yScale);
 
       var barSpacing = this.props.width / this.props.data.length;
       var barSize = this.props.barSize === -1 ? barSpacing : this.props.barSize;
+
+      if (!this.props.data || !this.props.data.length) return null;
 
       return _react2.default.createElement(
         'svg',

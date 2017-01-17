@@ -128,13 +128,15 @@ export default class Bar extends React.Component{
   render(){
     const height = this.props.height - this.props.bottomBarHeight
     const yMin = 0
-    const yMax = Math.max(...this.props.data.map(point => point.value)) * 1.25
+    const yMax = Math.max(...this.props.data.map(point => point.value)) * 1.1
     const ySpread = (yMax - yMin)
     const yScale = height / (ySpread || 1)
     const yAxis = this.describeYAxis(yMin, ySpread, yScale)
 
     const barSpacing = this.props.width / this.props.data.length
     const barSize = this.props.barSize === -1 ? barSpacing : this.props.barSize
+
+    if(!this.props.data || !this.props.data.length) return null
 
     return (
       <svg width={this.props.width} height={this.props.height}>
