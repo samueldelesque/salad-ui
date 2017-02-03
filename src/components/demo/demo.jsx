@@ -785,7 +785,7 @@ export class LoadMore extends React.Component{
         </section>
         <footer>
           <p>Made with love at <a href="https://dailymotion.com">Dailymotion</a> in NYC.</p>
-          <p>Maintained by <a href="https://samueldelesque.com">Samuel Delesque</a>.</p>
+          <p>Maintained by <a href="https://samueldelesque.me">Samuel Delesque</a>.</p>
         </footer>
       </div>
     )

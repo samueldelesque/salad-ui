@@ -1654,7 +1654,7 @@ var Demo = function (_React$Component) {
             'Maintained by ',
             _react2.default.createElement(
               'a',
-              { href: 'https://samueldelesque.com' },
+              { href: 'https://samueldelesque.me' },
               'Samuel Delesque'
             ),
             '.'
