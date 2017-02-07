@@ -213,7 +213,6 @@ export default class Autocomplete extends Component {
       placeholder: this.props.inputPlaceholder,
       value: this.state.inputText,
       style: this.props.style,
-      //onBlur: ()=>setTimeout(()=>this.setState({showSuggestions: false}), 50),
       onClick: ::this.handleInputClick,
       onChange: ::this.handleInputChange,
       onKeyUp: ::this.handleInputKeyUp,

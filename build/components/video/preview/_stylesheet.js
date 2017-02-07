@@ -26,12 +26,12 @@ var styles = {
       display: 'inline-block', //non flex fallback
       paddingLeft: 20,
       lineHeight: 1.2,
-      height: '2.4rem'
+      height: '2.6rem'
     },
     title: {
       marginBottom: 10,
       lineHeight: 1.2,
-      height: '2.4rem',
+      maxHeight: '2.6rem',
       overflow: 'hidden',
       maxWidth: '260px'
     },
@@ -60,7 +60,7 @@ var styles = {
       marginTop: 10,
       marginBottom: 10,
       lineHeight: 1.2,
-      height: '2.4rem',
+      height: '2.6rem',
       overflow: 'hidden',
       maxWidth: '210px'
     },
