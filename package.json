@@ -11,7 +11,7 @@
     "distribute:demo": "sass ./src/styles/demo.scss -f ./dist/demo/demo.css; sass ./src/styles/transitions.scss:./dist/demo/transitions.css --style compressed; webpack --config ./conf/webpack.config.demo.prod.js",
     "dist:demo": "npm run distribute:demo",
     "lint": "eslint src",
-    "publish": "npm run tests; npm run dist; node ./publish.js",
+    "publish": "npm run tests; npm run dist; node ./publish.js; git add .; git commit -m 'increment salad-ui version'; git push",
     "pub": "npm run publish",
     "tests": "mocha build/tests/*.js",
     "webpack": "node build/webpack-server.js",

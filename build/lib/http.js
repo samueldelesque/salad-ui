@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.del = exports.put = exports.patch = exports.post = exports.get = exports.fetchJSON = exports.apiFactory = exports.serialize = exports.enableDebug = exports.enableMock = undefined;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _lodash = require('lodash.merge');
 
@@ -68,7 +68,7 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
   var params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
   method = method.toUpperCase();
-  if (! ~['GET', 'POST', 'DELETE', 'PUT', 'PATCH'].indexOf(method)) {
+  if (!~['GET', 'POST', 'DELETE', 'PUT', 'PATCH'].indexOf(method)) {
     if ((typeof method === 'undefined' ? 'undefined' : _typeof(method)) === 'object' && !params) params = method;
     method = 'GET';
   }
@@ -83,7 +83,7 @@ var fetchJSON = exports.fetchJSON = function fetchJSON(url) {
     if (debug) {
       console.log('serialize params', JSON.stringify(params.data));
     }
-    url += (! ~url.indexOf('?') ? '?' : '&') + serialize(params.data);
+    url += (!~url.indexOf('?') ? '?' : '&') + serialize(params.data);
     delete params.data;
   } else if ((method === 'POST' || method === 'PATCH' || method === 'PUT' || method === 'DELETE') && params.contentType.toUpperCase() === 'JSON') {
     params.headers['Content-Type'] = 'application/json';

@@ -35,8 +35,7 @@ var Bar = function (_React$Component) {
     key: 'formatValue',
     value: function formatValue(value) {
       return this.props.metricName === '%' ? Math.round(value) : (0, _formatter.formatNumber)(value);
-    } // or function(value, date){ return value + "$ on " + date}
-
+    }
   }, {
     key: 'renderYGridLine',
     value: function renderYGridLine(label, index) {
@@ -52,6 +51,8 @@ var Bar = function (_React$Component) {
   }, {
     key: 'describeYAxis',
     value: function describeYAxis(yMin, ySpread, yScale) {
+      var _this2 = this;
+
       function ruler(value, m) {
         if (!m) m = 100;
         if (value > m) ruler(value, m * 5);
@@ -68,9 +69,39 @@ var Bar = function (_React$Component) {
           return { y: isZero ? yScale : (ySpread - k * rule) * yScale };
         }),
         labels: labels.map(function (k) {
-          var v = k * rule * 2;return { y: isZero ? yScale : (ySpread - k * rule * 2) * yScale, txt: (0, _formatter.formatNumber)(Math.round(v + yMin)) };
+          var v = k * rule * 2;
+          return {
+            y: isZero ? yScale : (ySpread - k * rule * 2) * yScale,
+            txt: (0, _formatter.formatNumber)(Math.round(v + yMin)) + (_this2.props.isPercent ? '%' : '')
+          };
         })
       };
+    }
+  }, {
+    key: 'renderTip',
+    value: function renderTip(index, text, xBase, yBase) {
+      var triangleWidth = 25;
+      var triangleHeight = 10;
+
+      var trianglePath = [xBase - triangleWidth / 2 + ',' + yBase - 10, xBase + triangleWidth / 2 + ',' + yBase - 10, xBase + ',' + (yBase + triangleHeight) - 10].join(' ');
+      var triangleBorderPath = [xBase - triangleWidth / 2 + ',' + yBase - 10, xBase + triangleWidth / 2 + ',' + yBase - 10, xBase + ',' + (yBase + triangleHeight) - 10].join(' ');
+
+      var boxWidth = 28;
+      var boxHeight = 15;
+
+      return _react2.default.createElement(
+        'g',
+        { key: 'point.' + index, ref: 'point.' + index },
+        _react2.default.createElement(
+          'text',
+          {
+            x: xBase - boxWidth / 2,
+            y: yBase - boxHeight / 2,
+            style: { fontSize: 16, fontWeight: 'bold' }
+          },
+          text
+        )
+      );
     }
   }, {
     key: 'renderLabel',
@@ -87,7 +118,7 @@ var Bar = function (_React$Component) {
           y: label.y,
           ref: label.ref,
           fill: this.props.labelColor,
-          style: { fontSize: this.props.labelFontSize, textShadow: this.props.labelTextShadow }
+          style: { fontSize: this.props.labelFontSize, textShadow: this.props.labelTextShadow, textAlign: 'center' }
         },
         label.txt
       );
@@ -95,13 +126,13 @@ var Bar = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var height = this.props.height - this.props.bottomBarHeight;
       var yMin = 0;
       var yMax = Math.max.apply(Math, _toConsumableArray(this.props.data.map(function (point) {
         return point.value;
-      })));
+      }))) * 1.1;
       var ySpread = yMax - yMin;
       var yScale = height / (ySpread || 1);
       var yAxis = this.describeYAxis(yMin, ySpread, yScale);
@@ -109,19 +140,25 @@ var Bar = function (_React$Component) {
       var barSpacing = this.props.width / this.props.data.length;
       var barSize = this.props.barSize === -1 ? barSpacing : this.props.barSize;
 
+      if (!this.props.data || !this.props.data.length) return null;
+
       return _react2.default.createElement(
         'svg',
         { width: this.props.width, height: this.props.height },
         yAxis.gridLines.map(this.renderYGridLine.bind(this)),
         this.props.data.map(function (item, i) {
-          return _react2.default.createElement('rect', {
-            key: 'bar.item.' + i,
-            fill: _this2.props.barColor,
-            width: barSize,
-            height: item.value * yScale,
-            y: height - item.value * yScale,
-            x: i * barSpacing - barSize / 2 + barSpacing / 2
-          });
+          return _react2.default.createElement(
+            'g',
+            { key: 'bar.item.' + i },
+            _react2.default.createElement('rect', {
+              fill: _this3.props.barColor,
+              width: barSize,
+              height: item.value * yScale,
+              y: height - item.value * yScale,
+              x: i * barSpacing - barSize / 2 + barSpacing / 2 - barSize / 2
+            }),
+            _this3.renderTip(i, item.value + (_this3.props.isPercent ? '%' : ''), i * barSpacing - barSize / 2 + barSpacing / 2, height - item.value * yScale)
+          );
         }),
         yAxis.labels.map(this.renderLabel.bind(this)),
         this.props.data.map(function (item, i) {
@@ -130,9 +167,9 @@ var Bar = function (_React$Component) {
             {
               key: 'graph.xAxis.label.' + i,
               x: i * barSpacing - barSize / 2 + barSpacing / 2 - 5,
-              y: height + _this2.props.bottomBarHeight,
-              fill: _this2.props.labelColor,
-              style: { fontSize: _this2.props.labelFontSize, textShadow: _this2.props.labelTextShadow }
+              y: height + _this3.props.bottomBarHeight,
+              fill: _this3.props.labelColor,
+              style: { fontSize: _this3.props.labelFontSize, textShadow: _this3.props.labelTextShadow }
             },
             item.label
           );
@@ -148,7 +185,7 @@ Bar.defaultProps = {
   data: [],
   metricName: 'points',
   metricColor: '#777',
-  barSize: 7,
+  barSize: 20,
   barRailColor: null,
   barColor: '#408AE5',
   gridColor: 'rgba(230,230,230,.5)',
@@ -160,6 +197,7 @@ Bar.defaultProps = {
   labelFontSize: 12,
   labelTextShadow: '1px 1px #fff',
   labelColor: '#555',
+  isPercent: false,
   labelTemplate: '{{value}}' };
 Bar.propTypes = {
   metricName: _react2.default.PropTypes.string,

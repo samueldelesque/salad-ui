@@ -431,6 +431,8 @@ export default class Area extends Component{
 
     const isZero = ySpread === 0 && yMin === 0
 
+    if(!data || !data.length) return null
+
     return (
       <Chart width={this.props.width} height={this.props.height} type="area">
         {yAxis.gridLines.map(::this.renderYGridLine)}
