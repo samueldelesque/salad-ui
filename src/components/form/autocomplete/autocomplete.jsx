@@ -217,6 +217,7 @@ export default class Autocomplete extends Component {
       onClick: ::this.handleInputClick,
       onChange: ::this.handleInputChange,
       onKeyUp: ::this.handleInputKeyUp,
+      disabled: this.props.disabled
     }
 
     if(this.props.apiError && this.state.inputText === ''){
