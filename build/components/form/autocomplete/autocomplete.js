@@ -251,10 +251,10 @@ var Autocomplete = function (_Component) {
         placeholder: this.props.inputPlaceholder,
         value: this.state.inputText,
         style: this.props.style,
-        //onBlur: ()=>setTimeout(()=>this.setState({showSuggestions: false}), 50),
         onClick: this.handleInputClick.bind(this),
         onChange: this.handleInputChange.bind(this),
-        onKeyUp: this.handleInputKeyUp.bind(this)
+        onKeyUp: this.handleInputKeyUp.bind(this),
+        disabled: this.props.disabled
       };
 
       if (this.props.apiError && this.state.inputText === '') {
