@@ -15,13 +15,15 @@ const styles = {
       // flex: 1,
       display: 'inline-block', //non flex fallback
       paddingLeft: 20,
-      lineHeight: 1.2,
+      lineHeight: 1.3,
     },
     title: {
       marginBottom: 3,
-      lineHeight: 1.2,
+      lineHeight: 1.3,
+      fontWeight: 600;
       overflow: 'hidden',
       maxWidth: '260px',
+      fontWeight: 600,
     },
     badgeContainer: {
       position: 'absolute',
@@ -48,9 +50,11 @@ const styles = {
     title: {
       marginTop: 5,
       marginBottom: 3,
-      lineHeight: 1.2,
+      lineHeight: 1.3,
+      fontWeight: 600;
       overflow: 'hidden',
       maxWidth: '210px',
+      fontWeight: 600;
     },
     badgeContainer: {
       position: 'absolute',
