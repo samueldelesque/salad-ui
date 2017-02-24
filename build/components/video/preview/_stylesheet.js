@@ -30,6 +30,7 @@ var styles = {
     title: {
       marginBottom: 3,
       lineHeight: 1.2,
+      fontWeight: 600,
       overflow: 'hidden',
       maxWidth: '260px'
     },
@@ -58,6 +59,7 @@ var styles = {
       marginTop: 5,
       marginBottom: 3,
       lineHeight: 1.2,
+      fontWeight: 600,
       overflow: 'hidden',
       maxWidth: '210px'
     },
