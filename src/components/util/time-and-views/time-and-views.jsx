@@ -71,7 +71,7 @@ export default class TimeAndViews extends React.Component {
       parts.push((<Trans context={this.trans} views={this.number(this.props.views)} n={this.props.views}>{'{views} views'}</Trans>))
 
     return (
-      <div style={{fontSize: '0.875rem', color: '#BFBFBF'}}>
+      <div style={{fontSize: '13px', color: '#BFBFBF'}}>
         {parts.map((part,i) => <span key={Math.random() + i}>{i>0?' • ':null}{part}</span>)}
       </div>
     )

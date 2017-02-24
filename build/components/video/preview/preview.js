@@ -136,7 +136,7 @@ var Preview = function (_Component) {
             if (_this2.props.onSelect) _this2.props.onSelect();else if (_this2.props.onClick) _this2.props.onClick();else window.location.href = _this2.props.uri;
           },
           style: Object.assign({}, previewStyles.preview, {
-            height: this.props.type === 'grid' ? height + 90 : height,
+            height: this.props.type === 'grid' ? height + 70 : height,
             width: this.props.type === 'grid' ? width : 'auto'
           }, this.state.hovered && this.props.onSelect ? _stylesheet2.default.selectableHover : _stylesheet2.default.selectable, this.props.selected ? _stylesheet2.default.selected : null, this.props.style) },
         _react2.default.createElement(
@@ -181,7 +181,7 @@ var Preview = function (_Component) {
               style: Object.assign({}, previewStyles.title, {
                 textDecoration: this.state.hovered && !this.props.onSelect ? 'underline' : 'none',
                 color: _stylesheet2.default.link.color,
-                fontSize: 16
+                fontSize: 15
               }) },
             _react2.default.createElement(
               _textClamp2.default,

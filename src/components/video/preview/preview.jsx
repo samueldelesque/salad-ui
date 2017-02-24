@@ -119,7 +119,7 @@ export default class Preview extends Component {
           {},
           previewStyles.preview,
           {
-            height: this.props.type === 'grid' ? height + 90 : height,
+            height: this.props.type === 'grid' ? height + 70 : height,
             width: this.props.type === 'grid' ? width : 'auto',
           },
           this.state.hovered && this.props.onSelect ? styles.selectableHover : styles.selectable,
@@ -160,7 +160,7 @@ export default class Preview extends Component {
             style={Object.assign({}, previewStyles.title, {
               textDecoration: this.state.hovered && !this.props.onSelect ? 'underline' : 'none',
               color: styles.link.color,
-              fontSize: 16
+              fontSize: 15
             })}>
             <TextClamp clamp="2">
               {
