@@ -126,6 +126,14 @@ export default class Preview extends Component {
           this.props.selected ? styles.selected : null,
           this.props.style,
         )}>
+        {this.props.onRemove
+          ? <div
+              style={{position: 'absolute', right: 10, top: 10, zIndex: 2}}
+              onClick={(e) => {e.stopPropagation(); this.props.onRemove()}}>
+            <SaladUI.Icon type="delete" width={16} height={16} fill="white" />
+          </div>
+          : null
+        }
         <div style={{width,height, overflow: 'hidden', display: 'table'}}>
           <div
             className={`transition-md transition-timing-ease-in-out ${this.state.hovered&&!this.props.onSelect?'scale-in-md':''}`}

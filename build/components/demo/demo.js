@@ -1343,6 +1343,9 @@ var Demo = function (_React$Component) {
                 selected: this.state.videoSelected,
                 onSelect: function onSelect() {
                   return _this2.setState({ videoSelected: !_this2.state.videoSelected });
+                },
+                onRemove: function onRemove() {
+                  return console.log('Remove this video from the list');
                 }
               }))
             ),

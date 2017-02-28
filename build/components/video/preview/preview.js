@@ -139,6 +139,15 @@ var Preview = function (_Component) {
             height: this.props.type === 'grid' ? height + 70 : height,
             width: this.props.type === 'grid' ? width : 'auto'
           }, this.state.hovered && this.props.onSelect ? _stylesheet2.default.selectableHover : _stylesheet2.default.selectable, this.props.selected ? _stylesheet2.default.selected : null, this.props.style) },
+        this.props.onRemove ? _react2.default.createElement(
+          'div',
+          {
+            style: { position: 'absolute', right: 10, top: 10, zIndex: 2 },
+            onClick: function onClick(e) {
+              e.stopPropagation();_this2.props.onRemove();
+            } },
+          _react2.default.createElement(SaladUI.Icon, { type: 'delete', width: 16, height: 16, fill: 'white' })
+        ) : null,
         _react2.default.createElement(
           'div',
           { style: { width: width, height: height, overflow: 'hidden', display: 'table' } },

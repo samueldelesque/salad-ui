@@ -618,6 +618,7 @@ long long long long long long text.
                 style={{marginLeft: 20}}
                 selected={this.state.videoSelected}
                 onSelect={()=>this.setState({videoSelected: !this.state.videoSelected})}
+                onRemove={() => console.log('Remove this video from the list')}
               />
             </li>
             <li>
