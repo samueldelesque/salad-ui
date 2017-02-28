@@ -3,6 +3,7 @@ import moment from 'moment'
 import Badge from '../../util/badge/badge'
 import Trans from '../../util/trans/trans'
 import Checkbox from '../../form/checkbox/checkbox'
+import Icon from '../../icon/icon'
 import TextClamp from '../../util/text-clamp/text-clamp'
 import TimeAndViews from '../../util/time-and-views/time-and-views'
 
@@ -130,7 +131,7 @@ export default class Preview extends Component {
           ? <div
               style={{position: 'absolute', right: 10, top: 10, zIndex: 2}}
               onClick={(e) => {e.stopPropagation(); this.props.onRemove()}}>
-            <SaladUI.Icon type="delete" width={16} height={16} fill="white" />
+            <Icon type="delete" width={16} height={16} fill="white" />
           </div>
           : null
         }

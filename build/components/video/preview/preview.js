@@ -27,6 +27,10 @@ var _checkbox = require('../../form/checkbox/checkbox');
 
 var _checkbox2 = _interopRequireDefault(_checkbox);
 
+var _icon = require('../../icon/icon');
+
+var _icon2 = _interopRequireDefault(_icon);
+
 var _textClamp = require('../../util/text-clamp/text-clamp');
 
 var _textClamp2 = _interopRequireDefault(_textClamp);
@@ -146,7 +150,7 @@ var Preview = function (_Component) {
             onClick: function onClick(e) {
               e.stopPropagation();_this2.props.onRemove();
             } },
-          _react2.default.createElement(SaladUI.Icon, { type: 'delete', width: 16, height: 16, fill: 'white' })
+          _react2.default.createElement(_icon2.default, { type: 'delete', width: 16, height: 16, fill: 'white' })
         ) : null,
         _react2.default.createElement(
           'div',
