@@ -129,7 +129,7 @@ export default class Preview extends Component {
         )}>
         {this.props.onRemove
           ? <div
-              style={{position: 'absolute', right: 10, top: 10, zIndex: 2}}
+              style={{position: 'absolute', right: 7, top: 10, zIndex: 2}}
               onClick={(e) => {e.stopPropagation(); this.props.onRemove()}}>
             <Icon type="delete" width={16} height={16} fill="white" />
           </div>

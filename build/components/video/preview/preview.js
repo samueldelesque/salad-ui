@@ -146,7 +146,7 @@ var Preview = function (_Component) {
         this.props.onRemove ? _react2.default.createElement(
           'div',
           {
-            style: { position: 'absolute', right: 10, top: 10, zIndex: 2 },
+            style: { position: 'absolute', right: 7, top: 10, zIndex: 2 },
             onClick: function onClick(e) {
               e.stopPropagation();_this2.props.onRemove();
             } },
