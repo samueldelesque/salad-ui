@@ -8,7 +8,7 @@ const styles = {
   textTransform: 'uppercase',
   textAlign: 'center',
   color: 'white',
-  padding: '0 0.3rem',
+  padding: '3px',
   lineHeight: '1.2rem',
   height: 'auto',
   fontSize: '12px',
@@ -41,7 +41,7 @@ export default class Badge extends Component {
     children: PropTypes.any,
     position: PropTypes.string
   }
-  
+
   static defaultProps = {
     position: 'btm-end'
   }

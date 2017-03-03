@@ -594,7 +594,11 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { style: { marginTop: 10 } },
-                _react2.default.createElement(_saladUi2.default.Form.InputText, { placeholder: 'yoursubdomain', label: 'Input with label, prefix and suffix' })
+                _react2.default.createElement(_saladUi2.default.Form.InputText, {
+                  prefix: 'https://facebook.com/',
+                  placeholder: 'yoursubdomain',
+                  label: 'Input with label, prefix and suffix',
+                  suffix: '✓' })
               ),
               _react2.default.createElement(
                 'div',
@@ -1338,6 +1342,7 @@ var Demo = function (_React$Component) {
                 title: "A selectable video preview",
                 uri: "/video/x4neil8_books-the-world-according-to-bob-the-further-adventures-of-one-man-and-his-streetwise-cat-free_news"
               }, {
+                'private': 'true',
                 width: 240,
                 style: { marginLeft: 20 },
                 selected: this.state.videoSelected,
@@ -1430,6 +1435,7 @@ var Demo = function (_React$Component) {
               _react2.default.createElement(
                 _saladUi2.default.Util.Overlay,
                 {
+                  width: 600,
                   show: this.state.showOverlay,
                   onClose: function onClose() {
                     return _this2.closeOverlay();

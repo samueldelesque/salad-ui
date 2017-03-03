@@ -36,10 +36,17 @@ export default class Overlay extends Component {
       </div>
     })
 
+    let s = {}
+    if(this.props.width){
+      s.width = this.props.width
+      s.marginLeft = -1 * this.props.width/2
+    }
+
     let className = `transition ${this.props.show? 'fade-in': 'fade-out scale-out-lg' }`
     let overlayStyles = Object.assign(
       {},
       styles.wrapper,
+      s,
       this.state.responsive ? styles.wrapperResponsive : null,
       this.props.show ? null : { opacity: 0, transform: 'scale(0.7)', visibility: 'hidden' }
     )

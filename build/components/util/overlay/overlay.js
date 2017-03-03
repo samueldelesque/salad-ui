@@ -85,8 +85,14 @@ var Overlay = function (_Component) {
         );
       });
 
+      var s = {};
+      if (this.props.width) {
+        s.width = this.props.width;
+        s.marginLeft = -1 * this.props.width / 2;
+      }
+
       var className = 'transition ' + (this.props.show ? 'fade-in' : 'fade-out scale-out-lg');
-      var overlayStyles = Object.assign({}, _stylesheet2.default.wrapper, this.state.responsive ? _stylesheet2.default.wrapperResponsive : null, this.props.show ? null : { opacity: 0, transform: 'scale(0.7)', visibility: 'hidden' });
+      var overlayStyles = Object.assign({}, _stylesheet2.default.wrapper, s, this.state.responsive ? _stylesheet2.default.wrapperResponsive : null, this.props.show ? null : { opacity: 0, transform: 'scale(0.7)', visibility: 'hidden' });
 
       return _react2.default.createElement(
         'div',

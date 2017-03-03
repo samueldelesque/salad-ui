@@ -143,15 +143,6 @@ var Preview = function (_Component) {
             height: this.props.type === 'grid' ? height + 70 : height,
             width: this.props.type === 'grid' ? width : 'auto'
           }, this.state.hovered && this.props.onSelect ? _stylesheet2.default.selectableHover : _stylesheet2.default.selectable, this.props.selected ? _stylesheet2.default.selected : null, this.props.style) },
-        this.props.onRemove ? _react2.default.createElement(
-          'div',
-          {
-            style: { position: 'absolute', right: 7, top: 10, zIndex: 2 },
-            onClick: function onClick(e) {
-              e.stopPropagation();_this2.props.onRemove();
-            } },
-          _react2.default.createElement(_icon2.default, { type: 'delete', width: 16, height: 16, fill: 'white' })
-        ) : null,
         _react2.default.createElement(
           'div',
           { style: { width: width, height: height, overflow: 'hidden', display: 'table' } },
@@ -168,7 +159,16 @@ var Preview = function (_Component) {
         _react2.default.createElement(
           'div',
           { style: Object.assign({}, previewStyles.badgeContainer, { width: width, height: height }) },
-          this.props.onSelect ? _react2.default.createElement(_checkbox2.default, { checked: this.props.selected, style: { position: 'absolute', left: 10, top: 10 } }) : null,
+          this.props.onSelect ? _react2.default.createElement(_checkbox2.default, { checked: this.props.selected, style: { position: 'absolute', left: 5, top: 5 } }) : null,
+          this.props.onRemove ? _react2.default.createElement(
+            'div',
+            {
+              style: { position: 'absolute', right: 5, top: 5, zIndex: 2 },
+              onClick: function onClick(e) {
+                e.stopPropagation();_this2.props.onRemove();
+              } },
+            _react2.default.createElement(_icon2.default, { type: 'delete', width: 16, height: 16, fill: 'white' })
+          ) : null,
           this.props.private ? _react2.default.createElement(_badge2.default, { position: 'btm-start', type: 'private' }) : null,
           _react2.default.createElement(
             _badge2.default,

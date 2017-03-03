@@ -286,7 +286,11 @@ export default class Demo extends React.Component {
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> InputText</h3>
               <pre>{'<InputText/><InputText textarea/>'}</pre>
               <div style={{marginTop: 10}}>
-                <SaladUI.Form.InputText placeholder="yoursubdomain" label="Input with label, prefix and suffix"/>
+                <SaladUI.Form.InputText
+                  prefix="https://facebook.com/"
+                  placeholder="yoursubdomain"
+                  label="Input with label, prefix and suffix"
+                  suffix="&#x2713;" />
               </div>
               <div style={{marginTop: 10}}>
                 <SaladUI.Form.InputText textarea label="Input type textarea"/>
@@ -614,6 +618,7 @@ long long long long long long text.
                   title: "A selectable video preview",
                   uri: "/video/x4neil8_books-the-world-according-to-bob-the-further-adventures-of-one-man-and-his-streetwise-cat-free_news",
                 }}
+                private="true"
                 width={240}
                 style={{marginLeft: 20}}
                 selected={this.state.videoSelected}
@@ -720,6 +725,7 @@ export class LoadMore extends React.Component{
             <li>
               <SaladUI.Util.Button type="primary" onPress={()=>this.showOverlay()}>Click me!</SaladUI.Util.Button>
               <SaladUI.Util.Overlay
+                width={600}
                 show={this.state.showOverlay}
                 onClose={()=>this.closeOverlay()}
                 closeButton={true}>

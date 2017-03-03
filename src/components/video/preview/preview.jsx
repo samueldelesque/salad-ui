@@ -127,14 +127,6 @@ export default class Preview extends Component {
           this.props.selected ? styles.selected : null,
           this.props.style,
         )}>
-        {this.props.onRemove
-          ? <div
-              style={{position: 'absolute', right: 7, top: 10, zIndex: 2}}
-              onClick={(e) => {e.stopPropagation(); this.props.onRemove()}}>
-            <Icon type="delete" width={16} height={16} fill="white" />
-          </div>
-          : null
-        }
         <div style={{width,height, overflow: 'hidden', display: 'table'}}>
           <div
             className={`transition-md transition-timing-ease-in-out ${this.state.hovered&&!this.props.onSelect?'scale-in-md':''}`}
@@ -153,8 +145,16 @@ export default class Preview extends Component {
         <div style={Object.assign({}, previewStyles.badgeContainer, {width, height})}>
           {
             this.props.onSelect ?
-            <Checkbox checked={this.props.selected} style={{position: 'absolute', left: 10, top: 10}}/>:
+            <Checkbox checked={this.props.selected} style={{position: 'absolute', left: 5, top: 5}}/>:
             null
+          }
+          {this.props.onRemove
+            ? <div
+                style={{position: 'absolute', right: 5, top: 5, zIndex: 2}}
+                onClick={(e) => {e.stopPropagation(); this.props.onRemove()}}>
+                <Icon type="delete" width={16} height={16} fill="white" />
+            </div>
+            : null
           }
           {
             this.props.private ?
