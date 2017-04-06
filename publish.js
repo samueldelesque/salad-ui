@@ -21,7 +21,7 @@ const childPackage = {
   "main":"./salad-ui.js",
   "repository":{
     "type":"git",
-    "url":"https://github.com/dailymotion/salad-ui.git"
+    "url":"https://github.com/samueldelesque/salad-ui.git"
   },
   "keywords":[
     "react",
