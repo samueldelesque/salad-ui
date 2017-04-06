@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.del = exports.put = exports.patch = exports.post = exports.get = exports.fetchJSON = exports.apiFactory = exports.serialize = exports.enableDebug = exports.enableMock = undefined;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _lodash = require('lodash.merge');
 
