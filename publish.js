@@ -37,8 +37,7 @@ _.map(entrypoints, function(entrypoint, name){
   if(name !== 'salad-ui.lib'){
     pk['peerDependencies'] = {
       "react": "^15.0.0",
-      "react-dom": "^15.0.0",
-      "react-router": "^2.4.1",
+      "react-dom": "^15.0.0"
     }
   }
   fs.writeFile(distDir + name + '/package.json', JSON.stringify(pk), function(err){

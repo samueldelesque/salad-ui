@@ -82,11 +82,12 @@
     "node-fetch": "^1.5.3",
     "numeral": "^1.5.3",
     "object.entries": "^1.0.3",
-    "react": "^15.3.2",
+    "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.1",
     "react-dom": "^15.3.2",
     "route-parser": "0.0.5",
     "sprintf-js": "^1.0.3",
+    "universal-fetch": "^1.0.0",
     "webpack": "^1.12.14"
   }
 }
