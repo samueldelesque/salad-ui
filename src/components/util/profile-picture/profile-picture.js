@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {defaults} from '../../../lib/stylesheet/stylesheet'
 
 export default class ProfilePicture extends React.Component{
@@ -6,8 +7,8 @@ export default class ProfilePicture extends React.Component{
     size: 50
   }
   static propTypes = {
-    src: React.PropTypes.string,
-    size: React.PropTypes.number,
+    src: PropTypes.string,
+    size: PropTypes.number,
   }
   render(){
     const styles = {

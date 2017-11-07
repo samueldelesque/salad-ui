@@ -1,5 +1,6 @@
 import React from 'react'
-import {formatNumber} from '../../../lib/formatter'
+import PropTypes from 'prop-types'
+import {formatNumber} from '../../../lib/format'
 
 export default class Bar extends React.Component{
   static defaultProps = {
@@ -15,15 +16,15 @@ export default class Bar extends React.Component{
   }
 
   static propTypes = {
-    metricName: React.PropTypes.string,
-    percent: React.PropTypes.number,
-    barWidth: React.PropTypes.number,
-    barHeight: React.PropTypes.number,
-    metricPadding: React.PropTypes.number,
-    label: React.PropTypes.string,
-    metricColor: React.PropTypes.string,
-    barColor: React.PropTypes.string,
-    barRailColor: React.PropTypes.string,
+    metricName: PropTypes.string,
+    percent: PropTypes.number,
+    barWidth: PropTypes.number,
+    barHeight: PropTypes.number,
+    metricPadding: PropTypes.number,
+    label: PropTypes.string,
+    metricColor: PropTypes.string,
+    barColor: PropTypes.string,
+    barRailColor: PropTypes.string,
   }
 
   formatValue(value){

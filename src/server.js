@@ -3,9 +3,9 @@ import request from 'request'
 import express from 'express'
 import ReactServer from 'react-dom/server'
 import bodyParser from 'body-parser'
-import routing from '../conf/routing.json'
 import Route from 'route-parser'
-import fetch from 'node-fetch'
+import fetch from 'universal-fetch'
+import routing from '../conf/routing.json'
 
 // fetch polyfill must be available natively...
 global.fetch = fetch

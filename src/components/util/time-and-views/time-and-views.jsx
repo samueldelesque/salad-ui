@@ -1,10 +1,10 @@
 import React from 'react'
-import Trans, {DEBUG} from '../trans/trans'
+import Trans, { DEBUG } from '../trans/trans'
 
 export default class TimeAndViews extends React.Component {
   trans = DM_ENV['utils/time-and-views']
 
-  defaultProps = {
+  static defaultProps = {
     views: null,
     time: null
   }

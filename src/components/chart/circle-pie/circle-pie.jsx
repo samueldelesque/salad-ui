@@ -1,20 +1,20 @@
-import React, {Component} from 'react'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Chart from '../chart/chart'
 
 export default class CirclePie extends Component{
   static propTypes = {
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    strokeWidth: React.PropTypes.number,
-    strokeColor: React.PropTypes.string,
-    labelFontWeight: React.PropTypes.string,
-    labelFontSize: React.PropTypes.string,
-    fillColor: React.PropTypes.string,
-    startAngle: React.PropTypes.number,
-    endAngle: React.PropTypes.number,
-    radius: React.PropTypes.number,
-    style: React.PropTypes.object,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    strokeWidth: PropTypes.number,
+    strokeColor: PropTypes.string,
+    labelFontWeight: PropTypes.string,
+    labelFontSize: PropTypes.string,
+    fillColor: PropTypes.string,
+    startAngle: PropTypes.number,
+    endAngle: PropTypes.number,
+    radius: PropTypes.number,
+    style: PropTypes.object,
   }
 
   static defaultProps = {

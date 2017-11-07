@@ -1,21 +1,22 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import InputText from '../input-text/input-text'
 import styles from './_stylesheet'
 
 export default class Autocomplete extends Component {
 
   static propTypes = {
-    inputPlaceholder: React.PropTypes.string,
-    noSuggestionsText: React.PropTypes.string,
-    isLoading: React.PropTypes.bool,
-    clearOnSelect: React.PropTypes.bool,
-    allowCustomText: React.PropTypes.bool,
-    latency: React.PropTypes.number,
-    limit: React.PropTypes.number,
-    style: React.PropTypes.object,
-    suggestions: React.PropTypes.array,
-    handleSelectItem: React.PropTypes.func.isRequired,
-    requestSuggestions: React.PropTypes.func.isRequired,
+    inputPlaceholder: PropTypes.string,
+    noSuggestionsText: PropTypes.string,
+    isLoading: PropTypes.bool,
+    clearOnSelect: PropTypes.bool,
+    allowCustomText: PropTypes.bool,
+    latency: PropTypes.number,
+    limit: PropTypes.number,
+    style: PropTypes.object,
+    suggestions: PropTypes.array,
+    handleSelectItem: PropTypes.func.isRequired,
+    requestSuggestions: PropTypes.func.isRequired,
   }
 
   static defaultProps = {

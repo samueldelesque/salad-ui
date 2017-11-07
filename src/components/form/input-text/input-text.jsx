@@ -105,15 +105,13 @@ export default class InputText extends React.Component {
   }
 
   render() {
-    let hint = this.getHint()
-    let showHint = hint && !this.props.disabled && !this.props.readOnly
-    let value = this.state.value ? this.state.value : this.props.value
-    let tag = this.props.textarea ? 'textarea' : 'input'
-    let id = `input.${this.id}`
+    const hint = this.getHint()
+    const showHint = hint && !this.props.disabled && !this.props.readOnly
+    const value = this.state.value ? this.state.value : this.props.value
+    const id = `input.${this.id}`
 
-    let props = {
-      ref: 'input',
-      type: this.props.type,
+    const props = {
+      ref: ref => this.input = ref,
       disabled: this.props.disabled,
       style: Object.assign({}, styles.inputContent, this.props.textarea ? styles.textareaContent : null, this.props.style),
       placeholder: this.props.placeholder,
@@ -144,7 +142,10 @@ export default class InputText extends React.Component {
             </span> :
             null
           }
-          {React.createElement(tag, props, null)}
+          { this.props.textarea?
+            <textarea {...props} /> :
+            <input type="text" {...props} />
+          }
           {
             this.props.suffix ?
             <span style={Object.assign({}, styles.inputContent, this.props.textarea ? styles.textareaContent : null, styles.inputPrefix)}>

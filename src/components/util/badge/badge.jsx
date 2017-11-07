@@ -1,6 +1,6 @@
-import React, {PropTypes, Component} from 'react'
-import Icon from '../../icon/icon'
-import {defaults} from '../../../lib/stylesheet/stylesheet'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { defaults } from '../../../lib/stylesheet/stylesheet'
 
 const styles = {
   display: 'inline-block',
@@ -89,20 +89,6 @@ export default class Badge extends Component {
         styles.backgroundColor = 'rgba(0,0,0,0.6)'
         break
 
-      case 'recording':
-        // let preprend = <div style={{
-        //       marginTop: '10px',
-        //       float: 'left',
-        //       marginRight: '10px',
-        //       width: '10px',
-        //       height: '10px',
-        //       borderRadius: '50%',
-        //       backgroundColor: defaults.colors.red,
-        //       verticalAlign: 'middle',
-        //       animation: 'pulse 1s infinite alternate',
-        //     }}/>
-        break
-
       case 'live':
       case 'count':
         styles.letterSpacing = '1px'
@@ -126,9 +112,6 @@ export default class Badge extends Component {
 
       case 'verified':
         styles.backgroundColor = defaults.colors.dmBrand
-        styles.width = 16
-        styles.height = 16
-        styles.transform = 'rotate(-45deg)'
         styles.color = '#FFF'
         break
 
@@ -156,16 +139,11 @@ export default class Badge extends Component {
   }
 
   render() {
-    let badgeStyles = Object.assign({}, styles, this.props.styles, this.colorizeBadge(this.props.type), this.positionBadge(this.props.position))
+    const badgeStyles = Object.assign({}, styles, this.props.styles, this.colorizeBadge(this.props.type), this.positionBadge(this.props.position));
+
     return (
       <span style={badgeStyles}>
-        {
-          this.props.type === 'verified' ?
-          <Icon type="check" fill="white" height={10} width={10} style={{transform: 'rotate(45deg)', position: 'absolute', left: 3, top: 3}}/>:
-          this.props.type === 'private' ?
-          <Icon type="lock" fill="white" height={14} width={14} style={{marginTop:2}}/>:
-          this.props.children
-        }
+        { this.props.children }
       </span>
     )
   }

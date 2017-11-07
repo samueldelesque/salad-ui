@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
 import { sprintf } from 'sprintf-js'
-import {render} from '../../../lib/formatter'
+import {render} from '../../../lib/format'
 
 export let DEBUG = false
 export let LANG = 'en'

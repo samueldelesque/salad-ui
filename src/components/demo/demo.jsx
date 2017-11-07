@@ -4,14 +4,10 @@ import { iconTypes } from '../icon/icon'
 import _ from 'lodash'
 import glob from '../../lib/glob.js'
 import DemoAutocomplete from './demo-autocomplete'
-import * as videoComponents from './video-components'
 
-console.log('Enjoying this toolkit? Come to 156 5th ave in NYC for ' + String.fromCharCode(55356, 57211) + ' Friday 6pm.')
 if(glob.canUseDom()){
   console.log('Test SaladUI functions directly using window.SaladUI')
   window.SaladUI = SaladUI
-  // SaladUI.Util.Trans.enableDebug()
-  window.enableHighlight = ()=>SaladUI.Util.Trans.enableHighlight()
 }
 const realtime_views = {"label":"Vues simultan\u00e9es","data":[{"id":1480448720,"value":0,"label":"vues"},{"id":1480448730,"value":5,"label":"vues"},{"id":1480448740,"value":10,"label":"vues"},{"id":1480448750,"value":10,"label":"vues"},{"id":1480448760,"value":11,"label":"vues"},{"id":1480448770,"value":11,"label":"vues"},{"id":1480448780,"value":10,"label":"vues"},{"id":1480448790,"value":12,"label":"vues"},{"id":1480448800,"value":11,"label":"vues"},{"id":1480448810,"value":13,"label":"vues"},{"id":1480448820,"value":15,"label":"vues"},{"id":1480448830,"value":15,"label":"vues"},{"id":1480448840,"value":18,"label":"vues"},{"id":1480448850,"value":18,"label":"vues"},{"id":1480448860,"value":24,"label":"vues"},{"id":1480448870,"value":20,"label":"vues"},{"id":1480448880,"value":22,"label":"vues"},{"id":1480448890,"value":20,"label":"vues"},{"id":1480448900,"value":26,"label":"vues"},{"id":1480448910,"value":24,"label":"vues"},{"id":1480448920,"value":24,"label":"vues"},{"id":1480448930,"value":24,"label":"vues"},{"id":1480448940,"value":24,"label":"vues"},{"id":1480448950,"value":27,"label":"vues"},{"id":1480448960,"value":20,"label":"vues"},{"id":1480448970,"value":29,"label":"vues"},{"id":1480448980,"value":23,"label":"vues"},{"id":1480448990,"value":24,"label":"vues"},{"id":1480449000,"value":24,"label":"vues"},{"id":1480449010,"value":24,"label":"vues"},{"id":1480449020,"value":24,"label":"vues"},{"id":1480449030,"value":21,"label":"vues"},{"id":1480449040,"value":23,"label":"vues"},{"id":1480449050,"value":24,"label":"vues"},{"id":1480449060,"value":22,"label":"vues"},{"id":1480449070,"value":20,"label":"vues"},{"id":1480449080,"value":22,"label":"vues"},{"id":1480449090,"value":22,"label":"vues"},{"id":1480449100,"value":21,"label":"vues"},{"id":1480449110,"value":22,"label":"vues"},{"id":1480449120,"value":24,"label":"vues"},{"id":1480449130,"value":26,"label":"vues"},{"id":1480449140,"value":20,"label":"vues"},{"id":1480449150,"value":22,"label":"vues"},{"id":1480449160,"value":22,"label":"vues"},{"id":1480449170,"value":23,"label":"vues"},{"id":1480449180,"value":25,"label":"vues"},{"id":1480449190,"value":27,"label":"vues"},{"id":1480449200,"value":27,"label":"vues"},{"id":1480449210,"value":23,"label":"vues"},{"id":1480449220,"value":33,"label":"vues"},{"id":1480449230,"value":27,"label":"vues"},{"id":1480449240,"value":28,"label":"vues"},{"id":1480449250,"value":28,"label":"vues"},{"id":1480449260,"value":22,"label":"vues"},{"id":1480449270,"value":25,"label":"vues"},{"id":1480449280,"value":84,"label":"vues"},{"id":1480449290,"value":303,"label":"vues"},{"id":1480449300,"value":271,"label":"vues"},{"id":1480449310,"value":308,"label":"vues"},{"id":1480449320,"value":312,"label":"vues"},{"id":1480449330,"value":280,"label":"vues"},{"id":1480449340,"value":279,"label":"vues"},{"id":1480449350,"value":306,"label":"vues"},{"id":1480449360,"value":293,"label":"vues"},{"id":1480449370,"value":34,"label":"vues"},{"id":1480449380,"value":114,"label":"vues"},{"id":1480449390,"value":202,"label":"vues"},{"id":1480449400,"value":228,"label":"vues"},{"id":1480449410,"value":280,"label":"vues"},{"id":1480449420,"value":181,"label":"vues"},{"id":1480449430,"value":173,"label":"vues"},{"id":1480449440,"value":266,"label":"vues"},{"id":1480449450,"value":299,"label":"vues"},{"id":1480449460,"value":316,"label":"vues"},{"id":1480449470,"value":326,"label":"vues"},{"id":1480449480,"value":199,"label":"vues"},{"id":1480449490,"value":36,"label":"vues"},{"id":1480449500,"value":36,"label":"vues"},{"id":1480449510,"value":39,"label":"vues"},{"id":1480449520,"value":42,"label":"vues"},{"id":1480449530,"value":40,"label":"vues"},{"id":1480449540,"value":45,"label":"vues"},{"id":1480449550,"value":87,"label":"vues"},{"id":1480449560,"value":271,"label":"vues"},{"id":1480449570,"value":302,"label":"vues"},{"id":1480449580,"value":192,"label":"vues"},{"id":1480449590,"value":59,"label":"vues"},{"id":1480449600,"value":102,"label":"vues"},{"id":1480449610,"value":48,"label":"vues"},{"id":1480449620,"value":48,"label":"vues"},{"id":1480449630,"value":49,"label":"vues"},{"id":1480449640,"value":49,"label":"vues"},{"id":1480449650,"value":55,"label":"vues"},{"id":1480449660,"value":57,"label":"vues"},{"id":1480449670,"value":57,"label":"vues"},{"id":1480449680,"value":60,"label":"vues"},{"id":1480449690,"value":61,"label":"vues"},{"id":1480449700,"value":63,"label":"vues"},{"id":1480449710,"value":66,"label":"vues"},{"id":1480449720,"value":65,"label":"vues"},{"id":1480449730,"value":68,"label":"vues"},{"id":1480449740,"value":69,"label":"vues"},{"id":1480449750,"value":69,"label":"vues"},{"id":1480449760,"value":68,"label":"vues"},{"id":1480449770,"value":69,"label":"vues"},{"id":1480449780,"value":70,"label":"vues"},{"id":1480449790,"value":73,"label":"vues"},{"id":1480449800,"value":74,"label":"vues"},{"id":1480449810,"value":78,"label":"vues"},{"id":1480449820,"value":80,"label":"vues"},{"id":1480449830,"value":80,"label":"vues"},{"id":1480449840,"value":83,"label":"vues"},{"id":1480449850,"value":84,"label":"vues"},{"id":1480449860,"value":82,"label":"vues"},{"id":1480449870,"value":83,"label":"vues"},{"id":1480449880,"value":84,"label":"vues"},{"id":1480449890,"value":87,"label":"vues"},{"id":1480449900,"value":88,"label":"vues"},{"id":1480449910,"value":92,"label":"vues"},{"id":1480449920,"value":98,"label":"vues"},{"id":1480449930,"value":92,"label":"vues"},{"id":1480449940,"value":87,"label":"vues"},{"id":1480449950,"value":91,"label":"vues"},{"id":1480449960,"value":93,"label":"vues"},{"id":1480449970,"value":97,"label":"vues"},{"id":1480449980,"value":99,"label":"vues"},{"id":1480449990,"value":101,"label":"vues"},{"id":1480450000,"value":107,"label":"vues"},{"id":1480450010,"value":119,"label":"vues"},{"id":1480450020,"value":118,"label":"vues"},{"id":1480450030,"value":113,"label":"vues"},{"id":1480450040,"value":113,"label":"vues"},{"id":1480450050,"value":112,"label":"vues"},{"id":1480450060,"value":109,"label":"vues"},{"id":1480450070,"value":103,"label":"vues"},{"id":1480450080,"value":105,"label":"vues"},{"id":1480450090,"value":104,"label":"vues"},{"id":1480450100,"value":101,"label":"vues"},{"id":1480450110,"value":106,"label":"vues"},{"id":1480450120,"value":103,"label":"vues"},{"id":1480450130,"value":100,"label":"vues"},{"id":1480450140,"value":100,"label":"vues"},{"id":1480450150,"value":103,"label":"vues"},{"id":1480450160,"value":109,"label":"vues"},{"id":1480450170,"value":111,"label":"vues"},{"id":1480450180,"value":107,"label":"vues"},{"id":1480450190,"value":104,"label":"vues"},{"id":1480450200,"value":108,"label":"vues"},{"id":1480450210,"value":108,"label":"vues"},{"id":1480450220,"value":114,"label":"vues"},{"id":1480450230,"value":113,"label":"vues"},{"id":1480450240,"value":105,"label":"vues"},{"id":1480450250,"value":114,"label":"vues"},{"id":1480450260,"value":118,"label":"vues"},{"id":1480450270,"value":113,"label":"vues"},{"id":1480450280,"value":122,"label":"vues"},{"id":1480450290,"value":128,"label":"vues"},{"id":1480450300,"value":123,"label":"vues"},{"id":1480450310,"value":123,"label":"vues"},{"id":1480450320,"value":125,"label":"vues"},{"id":1480450330,"value":127,"label":"vues"},{"id":1480450340,"value":128,"label":"vues"},{"id":1480450350,"value":128,"label":"vues"},{"id":1480450360,"value":127,"label":"vues"},{"id":1480450370,"value":129,"label":"vues"},{"id":1480450380,"value":130,"label":"vues"},{"id":1480450390,"value":131,"label":"vues"},{"id":1480450400,"value":134,"label":"vues"},{"id":1480450410,"value":134,"label":"vues"},{"id":1480450420,"value":134,"label":"vues"},{"id":1480450430,"value":135,"label":"vues"},{"id":1480450440,"value":136,"label":"vues"},{"id":1480450450,"value":136,"label":"vues"},{"id":1480450460,"value":137,"label":"vues"},{"id":1480450470,"value":141,"label":"vues"},{"id":1480450480,"value":146,"label":"vues"},{"id":1480450490,"value":147,"label":"vues"},{"id":1480450500,"value":145,"label":"vues"},{"id":1480450510,"value":145,"label":"vues"},{"id":1480450520,"value":147,"label":"vues"},{"id":1480450530,"value":151,"label":"vues"},{"id":1480450540,"value":146,"label":"vues"},{"id":1480450550,"value":145,"label":"vues"},{"id":1480450560,"value":147,"label":"vues"},{"id":1480450570,"value":143,"label":"vues"},{"id":1480450580,"value":135,"label":"vues"},{"id":1480450590,"value":132,"label":"vues"},{"id":1480450600,"value":136,"label":"vues"},{"id":1480450610,"value":138,"label":"vues"},{"id":1480450620,"value":139,"label":"vues"},{"id":1480450630,"value":141,"label":"vues"},{"id":1480450640,"value":142,"label":"vues"},{"id":1480450650,"value":141,"label":"vues"},{"id":1480450660,"value":134,"label":"vues"},{"id":1480450670,"value":133,"label":"vues"},{"id":1480450680,"value":135,"label":"vues"},{"id":1480450690,"value":135,"label":"vues"},{"id":1480450700,"value":132,"label":"vues"},{"id":1480450710,"value":131,"label":"vues"},{"id":1480450720,"value":130,"label":"vues"},{"id":1480450730,"value":132,"label":"vues"},{"id":1480450740,"value":135,"label":"vues"},{"id":1480450750,"value":135,"label":"vues"},{"id":1480450760,"value":142,"label":"vues"},{"id":1480450770,"value":143,"label":"vues"},{"id":1480450780,"value":141,"label":"vues"},{"id":1480450790,"value":143,"label":"vues"},{"id":1480450800,"value":139,"label":"vues"},{"id":1480450810,"value":136,"label":"vues"},{"id":1480450820,"value":135,"label":"vues"},{"id":1480450830,"value":133,"label":"vues"},{"id":1480450840,"value":134,"label":"vues"},{"id":1480450850,"value":135,"label":"vues"},{"id":1480450860,"value":134,"label":"vues"},{"id":1480450870,"value":142,"label":"vues"},{"id":1480450880,"value":147,"label":"vues"},{"id":1480450890,"value":143,"label":"vues"},{"id":1480450900,"value":139,"label":"vues"},{"id":1480450910,"value":141,"label":"vues"},{"id":1480450920,"value":148,"label":"vues"},{"id":1480450930,"value":151,"label":"vues"},{"id":1480450940,"value":149,"label":"vues"},{"id":1480450950,"value":152,"label":"vues"},{"id":1480450960,"value":146,"label":"vues"},{"id":1480450970,"value":142,"label":"vues"},{"id":1480450980,"value":142,"label":"vues"},{"id":1480450990,"value":138,"label":"vues"},{"id":1480451000,"value":136,"label":"vues"},{"id":1480451010,"value":135,"label":"vues"},{"id":1480451020,"value":133,"label":"vues"},{"id":1480451030,"value":134,"label":"vues"},{"id":1480451040,"value":133,"label":"vues"},{"id":1480451050,"value":144,"label":"vues"},{"id":1480451060,"value":139,"label":"vues"},{"id":1480451070,"value":133,"label":"vues"},{"id":1480451080,"value":132,"label":"vues"},{"id":1480451090,"value":134,"label":"vues"},{"id":1480451100,"value":142,"label":"vues"},{"id":1480451110,"value":142,"label":"vues"},{"id":1480451120,"value":145,"label":"vues"},{"id":1480451130,"value":146,"label":"vues"},{"id":1480451140,"value":142,"label":"vues"},{"id":1480451150,"value":141,"label":"vues"},{"id":1480451160,"value":142,"label":"vues"},{"id":1480451170,"value":141,"label":"vues"},{"id":1480451180,"value":143,"label":"vues"},{"id":1480451190,"value":145,"label":"vues"},{"id":1480451200,"value":142,"label":"vues"},{"id":1480451210,"value":148,"label":"vues"},{"id":1480451220,"value":155,"label":"vues"},{"id":1480451230,"value":157,"label":"vues"},{"id":1480451240,"value":155,"label":"vues"},{"id":1480451250,"value":151,"label":"vues"},{"id":1480451260,"value":148,"label":"vues"},{"id":1480451270,"value":151,"label":"vues"},{"id":1480451280,"value":154,"label":"vues"},{"id":1480451290,"value":150,"label":"vues"},{"id":1480451300,"value":149,"label":"vues"},{"id":1480451310,"value":150,"label":"vues"},{"id":1480451320,"value":150,"label":"vues"},{"id":1480451330,"value":150,"label":"vues"},{"id":1480451340,"value":155,"label":"vues"},{"id":1480451350,"value":161,"label":"vues"},{"id":1480451360,"value":154,"label":"vues"},{"id":1480451370,"value":152,"label":"vues"},{"id":1480451380,"value":159,"label":"vues"},{"id":1480451390,"value":151,"label":"vues"},{"id":1480451400,"value":145,"label":"vues"},{"id":1480451410,"value":143,"label":"vues"},{"id":1480451420,"value":135,"label":"vues"},{"id":1480451430,"value":139,"label":"vues"},{"id":1480451440,"value":142,"label":"vues"},{"id":1480451450,"value":143,"label":"vues"},{"id":1480451460,"value":143,"label":"vues"},{"id":1480451470,"value":140,"label":"vues"},{"id":1480451480,"value":138,"label":"vues"},{"id":1480451490,"value":136,"label":"vues"},{"id":1480451500,"value":261,"label":"vues"},{"id":1480451510,"value":404,"label":"vues"},{"id":1480451520,"value":426,"label":"vues"},{"id":1480451530,"value":425,"label":"vues"},{"id":1480451540,"value":346,"label":"vues"},{"id":1480451550,"value":204,"label":"vues"},{"id":1480451560,"value":138,"label":"vues"},{"id":1480451570,"value":145,"label":"vues"},{"id":1480451580,"value":145,"label":"vues"},{"id":1480451590,"value":141,"label":"vues"},{"id":1480451600,"value":145,"label":"vues"},{"id":1480451610,"value":145,"label":"vues"},{"id":1480451620,"value":140,"label":"vues"},{"id":1480451630,"value":113,"label":"vues"},{"id":1480451640,"value":145,"label":"vues"},{"id":1480451650,"value":144,"label":"vues"},{"id":1480451660,"value":148,"label":"vues"},{"id":1480451670,"value":148,"label":"vues"},{"id":1480451680,"value":147,"label":"vues"},{"id":1480451690,"value":150,"label":"vues"},{"id":1480451700,"value":150,"label":"vues"},{"id":1480451710,"value":157,"label":"vues"},{"id":1480451720,"value":157,"label":"vues"},{"id":1480451730,"value":152,"label":"vues"},{"id":1480451740,"value":151,"label":"vues"},{"id":1480451750,"value":156,"label":"vues"},{"id":1480451760,"value":154,"label":"vues"},{"id":1480451770,"value":151,"label":"vues"},{"id":1480451780,"value":153,"label":"vues"},{"id":1480451790,"value":151,"label":"vues"},{"id":1480451800,"value":153,"label":"vues"},{"id":1480451810,"value":155,"label":"vues"},{"id":1480451820,"value":157,"label":"vues"},{"id":1480451830,"value":157,"label":"vues"},{"id":1480451840,"value":156,"label":"vues"},{"id":1480451850,"value":157,"label":"vues"},{"id":1480451860,"value":159,"label":"vues"},{"id":1480451870,"value":155,"label":"vues"},{"id":1480451880,"value":154,"label":"vues"},{"id":1480451890,"value":157,"label":"vues"},{"id":1480451900,"value":263,"label":"vues"},{"id":1480451910,"value":429,"label":"vues"},{"id":1480451920,"value":490,"label":"vues"},{"id":1480451930,"value":497,"label":"vues"},{"id":1480451940,"value":498,"label":"vues"},{"id":1480451950,"value":502,"label":"vues"},{"id":1480451960,"value":397,"label":"vues"},{"id":1480451970,"value":373,"label":"vues"},{"id":1480451980,"value":310,"label":"vues"},{"id":1480451990,"value":162,"label":"vues"},{"id":1480452000,"value":157,"label":"vues"},{"id":1480452010,"value":154,"label":"vues"},{"id":1480452020,"value":162,"label":"vues"},{"id":1480452030,"value":159,"label":"vues"},{"id":1480452040,"value":153,"label":"vues"},{"id":1480452050,"value":157,"label":"vues"},{"id":1480452060,"value":157,"label":"vues"},{"id":1480452070,"value":160,"label":"vues"},{"id":1480452080,"value":161,"label":"vues"},{"id":1480452090,"value":156,"label":"vues"},{"id":1480452100,"value":153,"label":"vues"},{"id":1480452110,"value":153,"label":"vues"},{"id":1480452120,"value":160,"label":"vues"},{"id":1480452130,"value":157,"label":"vues"},{"id":1480452140,"value":157,"label":"vues"},{"id":1480452150,"value":160,"label":"vues"},{"id":1480452160,"value":163,"label":"vues"},{"id":1480452170,"value":166,"label":"vues"},{"id":1480452180,"value":168,"label":"vues"},{"id":1480452190,"value":163,"label":"vues"},{"id":1480452200,"value":165,"label":"vues"},{"id":1480452210,"value":162,"label":"vues"},{"id":1480452220,"value":163,"label":"vues"},{"id":1480452230,"value":163,"label":"vues"},{"id":1480452240,"value":260,"label":"vues"},{"id":1480452250,"value":433,"label":"vues"},{"id":1480452260,"value":513,"label":"vues"},{"id":1480452270,"value":514,"label":"vues"},{"id":1480452280,"value":448,"label":"vues"},{"id":1480452290,"value":439,"label":"vues"},{"id":1480452300,"value":489,"label":"vues"},{"id":1480452310,"value":428,"label":"vues"}]}
 
@@ -103,7 +99,7 @@ export default class Demo extends React.Component {
     return (
       <div className="demo" ref="container">
         <header>
-          <a href="https://github.com/dailymotion/salad-ui" target="_blank" className="github-corner">
+          <a href="https://github.com/samueldelesque/salad-ui" target="_blank" className="github-corner">
             <svg width="80" height="80" viewBox="0 0 250 250">
               <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
               <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" className="octo-arm"></path>
@@ -129,6 +125,16 @@ export default class Demo extends React.Component {
   {`<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser-polyfill.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>`}
             </pre>
+            <article>
+              <a href="http://skl.sh/2hL2X7v" target="_blank" style={{ display: 'block', marginTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#333', color: '#bbb', padding: 20 }}>
+                <div>
+                  <h3 style={{ margin: 0 }}>React class</h3>
+                  <p style={{ margin: '15px 0 10px 0', fontSize: '0.9rem' }}>Learning React?</p>
+                  <p style={{ margin: 0, fontSize: '0.9rem' }}>Check out this free video and learn React in less than 30min 😀</p>
+                </div>
+                <img src="https://samueldelesque.me/assets/img/personal/skillshare-screenshot.png" style={{ width: 200 }} alt="Learn React" />
+              </a>
+            </article>
           </div>
         </header>
         <section className="warning-mobile">
@@ -333,20 +339,6 @@ export default class Demo extends React.Component {
           <h2>Lib</h2>
           <ul className="functionality">
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> http (fetch wrapper)</h3>
-              <pre>
-{`http.get('https://api.dailymotion.com/user/spi0n')
-.then(json => console.log(json))
-.catch(err => console.error(err))
-
-http.post('https://api.dailymotion.com/user/spi0n')
-http.delete('https://api.dailymotion.com/user/spi0n')
-
-const api = http.apiFactory('https://api.dailymotion.com', {access_token: 'abc'})
-api.get('/user/spi0n')`}
-              </pre>
-            </li>
-            <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> glob</h3>
               <pre>
                 {`glob.canUseDom()`}
@@ -388,15 +380,6 @@ api.get('/user/spi0n')`}
               </pre>
               <p><strong>{SaladUI.Lib.formatter.render('{greeting}! I am {user.age} years old.', {greeting: 'Hello', user: {age: 32}})}</strong></p>
             </li>
-            {/* <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> sso</h3>
-              <pre>
-{`sso.init(SDX)
-sso.getJWT('revshare').then(token => {
-  console.log('Yay I have a token!')
-})`}
-              </pre>
-            </li> */}
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> tracking</h3>
               <pre>
@@ -552,29 +535,9 @@ long long long long long long text.
               <pre>{`<SaladUI.Util.Badge type='verified'></SaladUI.Util.Badge>`}</pre>
               <SaladUI.Util.Badge position="inline" type="live">Live</SaladUI.Util.Badge>
               <SaladUI.Util.Badge position="inline" type="duration">00:23</SaladUI.Util.Badge>
-              <SaladUI.Util.Badge position="inline" type="verified"><SaladUI.Icon type="check" fill="white" width={12} height={12}/></SaladUI.Util.Badge>
+              <SaladUI.Util.Badge position="inline" type="verified">✓</SaladUI.Util.Badge>
             </li>
           </ul>
-        </section>
-        <section>
-          <h2>Icon <SaladUI.Icon type="favorite" fill="white" width={20} height={20}/></h2>
-          <pre>
-{`<SaladUI.Icon
-    type="favorite"
-    fill="white"
-    width={20}
-    height={20}/>`}
-          </pre>
-          <div className="icon-list">
-          {
-            _.map(iconTypes, (path, icon) =>
-              <span key={`icon.${icon}`} className="icon-item">
-                <SaladUI.Icon type={icon} fill={'white'}/>
-                <span className="icon-title">{icon}</span>
-              </span>
-            )
-          }
-          </div>
         </section>
         <section>
           <h2>Spinner</h2>
@@ -584,122 +547,6 @@ long long long long long long text.
           <div>
             <SaladUI.Spinner/>
           </div>
-        </section>
-        <section>
-          <h2>Video</h2>
-          <ul className="functionality">
-            <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Preview</h3>
-              <SaladUI.Video.Preview
-                {...{
-                  created_time: 1470415017,
-                  duration: 30,
-                  duration_formatted: "00:30",
-                  id: "x4neil8",
-                  onair: false,
-                  private: false,
-                  record_status: null,
-                  thumbnail_240_url: "http://s1.dmcdn.net/ZN5T3/427x240-kqC.jpg",
-                  title: "Some video title",
-                  uri: "/video/x4neil8_books-the-world-according-to-bob-the-further-adventures-of-one-man-and-his-streetwise-cat-free_news",
-                }}
-                width={240}
-              />
-              <SaladUI.Video.Preview
-                {...{
-                  created_time: 1470415017,
-                  duration: 30,
-                  duration_formatted: "00:30",
-                  id: "x4neil8",
-                  onair: false,
-                  private: false,
-                  record_status: null,
-                  thumbnail_240_url: "http://s1.dmcdn.net/ZN5T3/427x240-kqC.jpg",
-                  title: "A selectable video preview",
-                  uri: "/video/x4neil8_books-the-world-according-to-bob-the-further-adventures-of-one-man-and-his-streetwise-cat-free_news",
-                }}
-                private="true"
-                width={240}
-                style={{marginLeft: 20}}
-                selected={this.state.videoSelected}
-                onSelect={()=>this.setState({videoSelected: !this.state.videoSelected})}
-                onRemove={() => console.log('Remove this video from the list')}
-              />
-            </li>
-            <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> List</h3>
-              <pre>
-{`class GridArea extends React.Component{
-  render(){
-    return (
-      <SaladUI.Util.Grid>
-        // The videos property is passed down from the Video.List Component
-        {
-          this.props.videos.map((video,index) =>
-            <SaladUI.Video.Preview key={\`video.\${index}\`} type="grid" {...video}/>
-          )
-        }
-      </SaladUI.Util.Grid>
-    )
-  }
-}
-
-export class LoadMore extends React.Component{
-  render(){
-    return (
-      // The loadMore property is passed down from the Video.List Component
-      <SaladUI.Util.Button fullWidth={true} onPress={()=>this.props.loadMore()}>
-        Load More
-      </SaladUI.Util.Button>
-    )
-  }
-}
-
-<SaladUI.Video.List
-  apiURL="https://api.dailymotion.com"
-  limit={10}
-  endpoint="/videos"
->
-  <GridArea/>
-  <LoadMore/>
-</SaladUI.Video.List>`}
-              </pre>
-              <SaladUI.Video.List apiURL="https://api.dailymotion.com" limit={10} endpoint="/videos" sortBy="random">
-                <videoComponents.GridArea/>
-                <videoComponents.LoadMore/>
-              </SaladUI.Video.List>
-            </li>
-            <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> List with Preview</h3>
-              <pre>
-{`class ListArea extends React.Component{
-    render(){
-      return (
-        <div className="video-list-area">
-          {
-            this.props.videos.map((video,index) =>
-              <SaladUI.Video.Preview key={\`video.\${index}\`} width={220} type="list" {...video}/>
-            )
-          }
-        </div>
-      )
-    }
-  }
-<SaladUI.Video.List
-  apiURL="https://api.dailymotion.com"
-  limit={3}
-  endpoint="/videos"
->
-  <ListArea/>
-  <LoadMore/>
-</SaladUI.Video.List>`}
-              </pre>
-              <SaladUI.Video.List apiURL="https://api.dailymotion.com" limit={3} endpoint="/videos" sortBy="random">
-                <videoComponents.ListArea/>
-                <videoComponents.LoadMore/>
-              </SaladUI.Video.List>
-            </li>
-          </ul>
         </section>
         <section>
           <h2>Overlay</h2>
@@ -743,55 +590,7 @@ export class LoadMore extends React.Component{
             </li>
           </ul>
         </section>
-
-        <section>
-          <h2>Transitions</h2>
-          <pre>{`import 'salad-ui.transitions'`}</pre>
-          <ul className="functionality">
-            <li>
-              <h3>Transition Duration</h3>
-              <ol>
-                <li>transition (default transition)</li>
-                <li>transition-xs</li>
-                <li>transition-sm</li>
-                <li>transition-md</li>
-                <li>transition-lg</li>
-                <li>transition-xl</li>
-              </ol>
-            </li>
-            <li>
-              <h3>Transition Timing</h3>
-              <ol>
-                <li>transition-timing-linear</li>
-                <li>transition-timing-bezier</li>
-                <li>transition-timing-ease</li>
-                <li>transition-timing-ease-in-out</li>
-              </ol>
-            </li>
-            <li>
-              <h3>Scale Effects</h3>
-              <ol>
-                <li>scale-in-sm</li>
-                <li>scale-in-md</li>
-                <li>scale-in-lg</li>
-                <li>scale-in-xl</li>
-                <li>scale-out-sm</li>
-                <li>scale-out-md</li>
-                <li>scale-out-lg</li>
-                <li>scale-out-xl</li>
-              </ol>
-            </li>
-            <li>
-              <h3>Fade Effects</h3>
-              <ol>
-                <li>fade-in</li>
-                <li>fade-out</li>
-              </ol>
-            </li>
-          </ul>
-        </section>
         <footer>
-          <p>Made with love at <a href="https://dailymotion.com">Dailymotion</a> in NYC.</p>
           <p>Maintained by <a href="https://samueldelesque.me">Samuel Delesque</a>.</p>
         </footer>
       </div>

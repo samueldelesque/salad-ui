@@ -1,5 +1,5 @@
-
 import React from 'react'
+import PropTypes from 'prop-types'
 
 
 /*
@@ -84,10 +84,10 @@ export const iconTypes = {
 
 export default class Icon extends React.Component {
   static propTypes = {
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    type: React.PropTypes.oneOf(Object.keys(iconTypes)),
-    viewbox: React.PropTypes.string,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    type: PropTypes.oneOf(Object.keys(iconTypes)),
+    viewbox: PropTypes.string,
   }
 
   static defaultProps = {

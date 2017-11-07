@@ -1,8 +1,7 @@
-import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
-import {formatNumber} from '../../../lib/formatter'
-
+import { formatNumber } from '../../../lib/format'
 import Chart from '../chart/chart'
 
 /*
@@ -20,33 +19,33 @@ export default class Area extends Component{
   xAxisLabels = []
 
   static propTypes = {
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    border: React.PropTypes.string,
-    strokeWidth: React.PropTypes.number,
-    useDynamicYMin: React.PropTypes.bool,
-    strokeColor: React.PropTypes.string,
-    strokeDasharray: React.PropTypes.number,
-    pointsRadius: React.PropTypes.number,
-    showFirstAndLastTip: React.PropTypes.bool,
-    tipsWidth: React.PropTypes.number,
-    tipsHeight: React.PropTypes.number,
-    tipsPadding: React.PropTypes.number,
-    tipStrokeWidth: React.PropTypes.number,
-    tipStrokeColor: React.PropTypes.string,
-    tipsFill: React.PropTypes.string,
-    gridColor: React.PropTypes.string,
-    labelFontSize: React.PropTypes.number,
-    labelTextShadow: React.PropTypes.string,
-    labelColor: React.PropTypes.string,
-    fillColor: React.PropTypes.string,
-    maxOverflow: React.PropTypes.number,
-    maxPoints: React.PropTypes.number,
-    yLabelsOutside: React.PropTypes.bool,
-    yLabelsPosition: React.PropTypes.string,
-    formula: React.PropTypes.string,
-    yPadding: React.PropTypes.number,
-    data: React.PropTypes.array,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    border: PropTypes.string,
+    strokeWidth: PropTypes.number,
+    useDynamicYMin: PropTypes.bool,
+    strokeColor: PropTypes.string,
+    strokeDasharray: PropTypes.number,
+    pointsRadius: PropTypes.number,
+    showFirstAndLastTip: PropTypes.bool,
+    tipsWidth: PropTypes.number,
+    tipsHeight: PropTypes.number,
+    tipsPadding: PropTypes.number,
+    tipStrokeWidth: PropTypes.number,
+    tipStrokeColor: PropTypes.string,
+    tipsFill: PropTypes.string,
+    gridColor: PropTypes.string,
+    labelFontSize: PropTypes.number,
+    labelTextShadow: PropTypes.string,
+    labelColor: PropTypes.string,
+    fillColor: PropTypes.string,
+    maxOverflow: PropTypes.number,
+    maxPoints: PropTypes.number,
+    yLabelsOutside: PropTypes.bool,
+    yLabelsPosition: PropTypes.string,
+    formula: PropTypes.string,
+    yPadding: PropTypes.number,
+    data: PropTypes.array,
   }
 
   static defaultProps = {

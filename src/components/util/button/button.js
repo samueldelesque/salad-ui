@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styles from './_stylesheet.js'
 import Spinner from '../../spinner/spinner'
 

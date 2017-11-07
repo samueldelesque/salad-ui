@@ -11,9 +11,6 @@ var fs = require('fs-extra'),
 console.log('Attempt to publish all entrypoints... version: ', version)
 console.log('Please verify /usr/local/bin/npm is available')
 
-// manually add non JS Components
-entrypoints['salad-ui.transitions'] = 'transitions.css'
-
 const childPackage = {
   "name": "salad-ui",
   "version": "1.0.0",
@@ -31,13 +28,13 @@ const childPackage = {
   ]
 }
 
-_.map(entrypoints, function(entrypoint, name){
-  console.log('Creating', name)
-  var pk = _.merge(childPackage, {name: name, version: version, main: './'+name+'.js'})
+_.map(entrypoints, async (entrypoint, name) => {
+  console.log('Creating', name);
+  const pk = _.merge(childPackage, {name: name, version: version, main: './'+name+'.js'})
   if(name !== 'salad-ui.lib'){
-    pk['peerDependencies'] = {
-      "react": "^15.0.0",
-      "react-dom": "^15.0.0"
+    pk.peerDependencies = {
+      "react": "^16.0.0",
+      "react-dom": "^16.0.0"
     }
   }
   fs.writeFile(distDir + name + '/package.json', JSON.stringify(pk), function(err){
