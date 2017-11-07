@@ -41,7 +41,7 @@ _.map(entrypoints, async (entrypoint, name) => {
     if(err){
       console.log('Could not save package.json!', err)
     }
-    exec('cd ' + distDir + name + ' && /usr/local/bin/npm publish', function(error, stdout, stderr){
+    exec('cd ' + distDir + name + '; npm publish', function(error, stdout, stderr){
       if(error) console.log('Error: ', error)
       console.log(stdout)
     })
