@@ -55,13 +55,14 @@ var CirclePie = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var percent = Math.min(this.props.percent || 0, 100);
       var radius = this.props.width / 2 - this.props.strokeWidth / 2 - this.props.padding,
           center = radius + this.props.strokeWidth / 2 + this.props.padding,
           startAngle = 0,
-          endAngle = 3.6 * this.props.percent,
-          label = this.props.percent + '%',
-          labelLeftOffset = label.length === 3 ? -0.95 : -0.6,
-          arc = this.describeArc(center, center, radius, startAngle, endAngle);
+          endAngle = 3.6 * percent,
+          label = percent + '%',
+          labelLeftOffset = label.length === 3 ? -0.6 : -0.95,
+          arc = this.describeArc(center, center, radius, startAngle, endAngle - .001);
 
       return _react2.default.createElement(
         _chart2.default,
@@ -122,7 +123,7 @@ CirclePie.defaultProps = {
   strokeColor: '#408AE5',
   railColor: '#f5f5f5',
   fillColor: 'none',
-  percent: 70,
+  percent: 0,
   padding: 0
 };
 exports.default = CirclePie;

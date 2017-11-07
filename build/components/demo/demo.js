@@ -450,7 +450,7 @@ var Demo = function (_React$Component) {
                 _react2.default.createElement(_saladUi2.default.Chart.CirclePie, { width: 120, height: 120, strokeWidth: 20, percent: 49, labelColor: 'rgb(245, 210, 84)', strokeColor: 'rgb(245, 210, 84)' }),
                 _react2.default.createElement(_saladUi2.default.Chart.CirclePie, { width: 160, height: 160, strokeWidth: 20, percent: 42 }),
                 _react2.default.createElement(_saladUi2.default.Chart.CirclePie, { width: 200, height: 200, strokeWidth: 20, labelColor: 'rgb(31, 207, 101)', strokeColor: 'rgb(31, 207, 101)', percent: 72 }),
-                _react2.default.createElement(_saladUi2.default.Chart.CirclePie, { width: 160, height: 160, strokeWidth: 20, percent: 32, labelColor: 'rgb(245, 84, 133)', strokeColor: 'rgb(245, 84, 133)' }),
+                _react2.default.createElement(_saladUi2.default.Chart.CirclePie, { width: 160, height: 160, strokeWidth: 20, percent: 100, labelColor: 'rgb(245, 84, 133)', strokeColor: 'rgb(245, 84, 133)' }),
                 _react2.default.createElement(_saladUi2.default.Chart.CirclePie, { width: 120, height: 120, strokeWidth: 20, percent: 3, labelColor: 'rgb(169, 84, 245)', strokeColor: 'rgb(169, 84, 245)' })
               )
             )

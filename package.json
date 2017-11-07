@@ -1,6 +1,10 @@
 {
   "name": "salad-ui-wrapper",
   "version": "0.0.4",
+  "licence": {
+    "type": "mit",
+    "url": "https://raw.githubusercontent.com/samueldelesque/salad-ui/master/LICENCE"
+  },
   "description": "",
   "scripts": {
     "dist:copyrequiredcss": "cp ./src/styles/transitions.scss ./dist/salad-ui.transitions/",
