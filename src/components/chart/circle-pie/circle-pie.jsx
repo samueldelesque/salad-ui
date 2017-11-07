@@ -29,7 +29,7 @@ export default class CirclePie extends Component{
     strokeColor: '#408AE5',
     railColor: '#f5f5f5',
     fillColor: 'none',
-    percent: 70,
+    percent: 0,
     padding: 0,
   }
 
@@ -56,13 +56,15 @@ export default class CirclePie extends Component{
   }
 
   render() {
-    let radius = this.props.width / 2 - this.props.strokeWidth / 2 - this.props.padding,
+    const percent = Math.min(this.props.percent || 0, 100)
+    const radius = this.props.width / 2 - this.props.strokeWidth / 2 - this.props.padding,
         center = radius + this.props.strokeWidth / 2 + this.props.padding,
         startAngle = 0,
-        endAngle = 3.6 * this.props.percent,
-        label = `${this.props.percent}%`,
-        labelLeftOffset = label.length === 3 ? -0.95 : -0.6,
-        arc = this.describeArc(center, center, radius, startAngle, endAngle)
+        endAngle = 3.6 * percent,
+        label = `${percent}%`,
+        labelLeftOffset = label.length === 3 ? -0.6 : -0.95,
+        arc = this.describeArc(center, center, radius, startAngle, endAngle - .001)
+
 
     return (
       <Chart width={this.props.width} style={this.props.style} height={this.props.height} border={this.props.border}>
