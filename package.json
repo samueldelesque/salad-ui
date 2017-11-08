@@ -15,6 +15,7 @@
     "publish": "npm run dist; node ./publish.js; git add .; git commit -m 'increment salad-ui version'; git push",
     "pub": "npm run publish",
     "tests": "mocha src/tests/*.js",
+    "deploy": "rsync -rvz ./static/* aligator:/var/app/salad-ui",
     "dev": "npm run build; concurrently --kill-others 'npm run build-watch' 'npm run webpack' 'node build/server.js --local'",
     "build": "babel src -d build",
     "build-watch": "babel src --watch -d build"

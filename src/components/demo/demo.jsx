@@ -120,11 +120,6 @@ export default class Demo extends React.Component {
               SaladUI is a collection of React components and utility functions that range from translation, to autocomplete and charts.
               It can be enjoyed as a complete salad using <i className="snippet">import SaladUI from 'salad-ui'</i> or as its separate ingredients using <i className="snippet">{`import {Area} from 'salad-ui.chart'`}</i>. You can install separate ingredients as <i className="snippet">npm i --save salad-ui.chart</i>.</p>
             <p>Salad-UI will work both in Browser and Server environment - use it in your universal apps!</p>
-            <p>For optimal old browser compatibility with SaladUI, please include the following polyfill on your page:</p>
-            <pre>
-  {`<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser-polyfill.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>`}
-            </pre>
             <article>
               <a href="http://skl.sh/2hL2X7v" target="_blank" style={{ display: 'block', marginTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#333', color: '#bbb', padding: 20 }}>
                 <div>
@@ -145,22 +140,24 @@ export default class Demo extends React.Component {
           <ol>
             <li><i className="snippet">Trans</i> component and translate function should now take parameters in object notation format: <i className="snippet">{`{user:{name:'Sam'}}`}</i></li>
             <li><i className="snippet">f</i> is renamed to <i className="snippet">http</i></li>
-            <li>Added formatter.render function to format string templates.</li>
+            <li>Added format.render function to format string templates.</li>
             <li>Various updates to the charts, better yLabel formatting.</li>
           </ol>
         </section>
         <section ref="firstSection">
           <h2>Chart</h2>
+          <p>SaladUI.Chart is a tiny graphing library that works both on the server and in your browser. The compressed size is only 7kb!</p>
           <ul className="functionality">
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Area</h3>
               <pre>
-{`const chartData = [{time: new Date('1990-01-02'), value: 1231}]
+{`import { Area } from 'salad-ui.chart';
+const chartData = [{time: new Date('1990-01-02'), value: 1231}];
 
-<SaladUI.Chart.Area
+<Area
   width={900}
   height={300}
-  labelTemplate={data=>\`Cats ate \${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.\`}
+  labelTemplate={data=>\`Cats ate \${SaladUI.Lib.format.formatCurrency(data.value, 'USD')} worth of fish that day.\`}
   data={chartData} width={560}
 />`}
               </pre>
@@ -172,7 +169,7 @@ export default class Demo extends React.Component {
                   formula="mean"
                   // data={realtime_data}
                   // labelTemplate={data=>`${data.value} views`}
-                  labelTemplate={data=>`Cats ate ${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.`}
+                  labelTemplate={data=>`Cats ate ${SaladUI.Lib.format.formatCurrency(data.value, 'USD')} worth of fish that day.`}
                   data={chartData}
                 />
               </div>
@@ -180,12 +177,12 @@ export default class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Bar</h3>
               <pre>
-{`const chartData = [{time: new Date('1990-01-02'), value: 1231}]
+{`import { Bar } from 'salad-ui.chart';
+const chartData = [{label: 'Foo', value: 131}]
 
-<SaladUI.Chart.Area
+<Bar
   width={900}
   height={300}
-  labelTemplate={data=>\`Cats ate \${SaladUI.Lib.formatter.formatCurrency(data.value, 'USD')} worth of fish that day.\`}
   data={chartData} width={560}
 />`}
               </pre>
@@ -211,7 +208,8 @@ export default class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Bar Metric</h3>
               <pre>
-{`<SaladUI.Chart.BarMetric
+{`import { BarMetric } from 'salad-ui.chart';
+<BarMetric
   label={'Cats'}
   percent={20}
   value={String(20)}
@@ -242,7 +240,9 @@ export default class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Circle Pie</h3>
               <pre>
-{`<SaladUI.Chart.CirclePie
+{`import { CirclePie } from 'salad-ui.chart';
+
+<CirclePie
   width={100}
   height={100}
   strokeWidth={7}
@@ -305,7 +305,7 @@ export default class Demo extends React.Component {
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> Select</h3>
               <pre>
-{`let options = [
+{`const options = [
   {name: 'tofu', value: 'tofu', calories: 400},
   {name: 'bacon', value: 'bacon', calories: 900},
   {name: 'roasted chicken', value: 'chicken', calories: 600},
@@ -313,7 +313,7 @@ export default class Demo extends React.Component {
 ]
 <Select
   options={options}
-  onChange={(protein)=>this.setState({protein})}>Pick one</Select>`
+  onChange={protein => this.setState({ protein })}>Pick one</Select>`
 }
               </pre>
               <div style={{width: 300}}>
@@ -337,6 +337,7 @@ export default class Demo extends React.Component {
         </section>
         <section>
           <h2>Lib</h2>
+          <p>A library of useful methods for displaying various types of data.</p>
           <ul className="functionality">
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> glob</h3>
@@ -346,39 +347,39 @@ export default class Demo extends React.Component {
               <p><strong>{SaladUI.Lib.glob.canUseDom()?'true':'false'}</strong></p>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.numberToString</h3>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> format.numberToString</h3>
               <pre>
-                {`formatter.numberToString(10782.123)`}
+                {`format.numberToString(10782.123)`}
               </pre>
-              <p><strong>{SaladUI.Lib.formatter.numberToString(10782.123)}</strong></p>
+              <p><strong>{SaladUI.Lib.format.numberToString(10782.123)}</strong></p>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.formatNumber</h3>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> format.formatNumber</h3>
               <pre>
-                {`formatter.formatNumber(10782.123)`}
+                {`format.formatNumber(10782.123)`}
               </pre>
-              <p><strong>{SaladUI.Lib.formatter.formatNumber(10782.123)}</strong></p>
+              <p><strong>{SaladUI.Lib.format.formatNumber(10782.123)}</strong></p>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.currencyToSymbol</h3>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> format.currencyToSymbol</h3>
               <pre>
-                {`formatter.currencyToSymbol('USD')`}
+                {`format.currencyToSymbol('USD')`}
               </pre>
-              <p><strong>{SaladUI.Lib.formatter.currencyToSymbol('USD')}</strong></p>
+              <p><strong>{SaladUI.Lib.format.currencyToSymbol('USD')}</strong></p>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.formatCurrency</h3>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> format.formatCurrency</h3>
               <pre>
-                {`formatter.formatCurrency(205.12, 'EUR')`}
+                {`format.formatCurrency(205.12, 'EUR')`}
               </pre>
-              <p><strong>{SaladUI.Lib.formatter.formatCurrency(205.12, 'EUR')}</strong></p>
+              <p><strong>{SaladUI.Lib.format.formatCurrency(205.12, 'EUR')}</strong></p>
             </li>
             <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> formatter.render</h3>
+              <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> format.render</h3>
               <pre>
-                {`formatter.render('{greeting}! I am {user.age} years old.', {greeting: 'Hello', user: {age: 32}})`}
+                {`format.render('{greeting}! I am {user.age} years old.', {greeting: 'Hello', user: {age: 32}})`}
               </pre>
-              <p><strong>{SaladUI.Lib.formatter.render('{greeting}! I am {user.age} years old.', {greeting: 'Hello', user: {age: 32}})}</strong></p>
+              <p><strong>{SaladUI.Lib.format.render('{greeting}! I am {user.age} years old.', {greeting: 'Hello', user: {age: 32}})}</strong></p>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>Function</span> tracking</h3>
@@ -469,11 +470,6 @@ Trans.translate('The parrot ate the cake.')`}</pre>
                   </div>
                 ))
               }
-            </li>
-            <li>
-              <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> TimeAndViews</h3>
-              <pre>{'<SaladUI.Util.TimeAndViews time={new Date(\'2010-04-01\')} views={40123}/>'}</pre>
-              <SaladUI.Util.TimeAndViews time={new Date('2016-06-21')} views={40123}/>
             </li>
             <li>
               <h3><span style={{fontStyle: 'italic', opacity: .3}}>React Component</span> TextClamp</h3>
